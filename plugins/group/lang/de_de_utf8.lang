@@ -1,0 +1,10 @@
+
+com_group_name = Gruppen
+com_group_xform_enter_name = Bitte geben Sie den Gruppennamen ein.
+
+com_group_forallgroups = Für alle, egal welche Gruppe
+com_group_inallgroups = Muss in jeder Gruppe sein
+com_group_inonegroup = Muss in einer Gruppe sein
+com_group_nogroups = Hat keine Gruppen
+
+com_group_perm = Gruppenrechte
