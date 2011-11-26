@@ -11,7 +11,9 @@ if (isset($I18N) && is_object($I18N))
 	$I18N->appendFile($REX['INCLUDE_PATH'].'/addons/community/plugins/facebook/lang'); 
 
 ## Checking dependencies
-if($ADDONSsic['status']['facebook_sdk'] && $ADDONSsic['status']['community'] && $ADDONSsic['status']['xform'])
+## http://www.redaxo.org/de/forum/post96341.html#p96341
+## Not working with redaxo5 -> use in r5: OOAddon::isAvailable('facebook_sdk')
+if($ADDONSsic['status']['community'] && $ADDONSsic['status']['xform'])
 {
 	//
 	// Install Database

@@ -10,15 +10,17 @@
 //
 
 // --- DYN
-$REX['ADDON']['community']['plugin_facebook']['appId'] = "";
-$REX['ADDON']['community']['plugin_facebook']['appSecret'] = "";
+$REX['ADDON']['community']['plugin_facebook']['appId'] = "179478962146992";
+$REX['ADDON']['community']['plugin_facebook']['appSecret'] = "299f0a88cec92d7d7097f7f6b835ed8d";
 $REX['ADDON']['community']['plugin_facebook']['appAccess'] = "email";
+$REX['ADDON']['community']['plugin_facebook']['defaultgroups']['0'] = 1;
+$REX['ADDON']['community']['plugin_facebook']['defaultgroups']['1'] = 2;
 // --- /DYN
 
 //
 // Synctranslation
 //
-## login, password status, authsource, facebookid are default fields and already set - dont add!
+## login, password status, authsource, facebookid are default fields and already set - don't add!
 ## For Available facebook fields see: http://developers.facebook.com/docs/reference/api/
 $REX['ADDON']['community']['plugin_facebook']['synctranslation'] = array(
 ##	'rex_com_user field' => 'facebook field'
@@ -45,24 +47,23 @@ if (isset($I18N) && is_object($I18N))
 ## Include xform classes
 $REX['ADDON']['community']['xform_path']['value'][] = $REX["INCLUDE_PATH"]."/addons/community/plugins/facebook/xform/value/";
 
-## Facebook-API if Available
-## http://www.redaxo.org/de/forum/post96341.html#p96341
-## Not working with redaxo5 -> use in r5: OOAddon::isAvailable('facebook_sdk')
-if($ADDONSsic['status']['facebook_sdk'])
+## Register extension to create facebook object
+rex_register_extension('ADDONS_INCLUDED', 'rex_com_facebookobj');
+function rex_com_facebookobj()
 {
-	## Register extension to create facebook object
-	rex_register_extension('ADDONS_INCLUDED', 'rex_com_facebookobj');
-	function rex_com_facebookobj()
-	{
-		global $REX;
-		$REX['ADDON']['community']['plugin_facebook']['facebook'] = new Facebook($REX['ADDON']['community']['plugin_facebook']['facebook_conf']);	
-	}
-
-	$REX['ADDON']['community']['plugin_facebook']['facebook_conf'] = array(
-		'appId'=>$REX['ADDON']['community']['plugin_facebook']['appId'],
-		'secret'=>$REX['ADDON']['community']['plugin_facebook']['appSecret']
-		);
+	global $REX;
+	## Loading Facebook API
+	if(!class_exists('Facebook')) {
+		echo "true";
+		include $REX["INCLUDE_PATH"]."/addons/community/plugins/facebook/api/facebook.php";}
+	
+	$REX['ADDON']['community']['plugin_facebook']['facebook'] = new Facebook($REX['ADDON']['community']['plugin_facebook']['facebook_conf']);	
 }
+
+$REX['ADDON']['community']['plugin_facebook']['facebook_conf'] = array(
+	'appId'=>$REX['ADDON']['community']['plugin_facebook']['appId'],
+	'secret'=>$REX['ADDON']['community']['plugin_facebook']['appSecret']
+	);
 
 if($REX["REDAXO"])
 {

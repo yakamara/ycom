@@ -19,4 +19,4 @@ com_facebook_help_login_hl = Facebook-Login auf der Website einbinden
 com_facebook_help_login = Durch das Hinzufügen des xform Feldes <b>com_facebook_loginbutton|lable</b> z.B. beim Loginformular wird der Facebook-Connect Link ausgegeben.
 
 com_facebook_info_installfinish = Das AddOn kann jetzt im Community AddOn kunfiguriert werden!
-com_facebook_error_missingaddons = Bitte überprüfen Sie ob folgende AddOns vorhanden sind: community, xforms, facebook_sdk
+com_facebook_error_missingaddons = Bitte überprüfen Sie ob folgende AddOns vorhanden sind: community, xforms
