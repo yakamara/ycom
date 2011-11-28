@@ -13,7 +13,6 @@
 $REX['ADDON']['community']['plugin_facebook']['appId'] = "";
 $REX['ADDON']['community']['plugin_facebook']['appSecret'] = "";
 $REX['ADDON']['community']['plugin_facebook']['appAccess'] = "email";
-
 // --- /DYN
 
 //
