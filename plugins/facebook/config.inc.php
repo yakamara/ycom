@@ -10,11 +10,9 @@
 //
 
 // --- DYN
-$REX['ADDON']['community']['plugin_facebook']['appId'] = "179478962146992";
-$REX['ADDON']['community']['plugin_facebook']['appSecret'] = "299f0a88cec92d7d7097f7f6b835ed8d";
+$REX['ADDON']['community']['plugin_facebook']['appId'] = "";
+$REX['ADDON']['community']['plugin_facebook']['appSecret'] = "";
 $REX['ADDON']['community']['plugin_facebook']['appAccess'] = "email";
-$REX['ADDON']['community']['plugin_facebook']['defaultgroups']['0'] = 1;
-$REX['ADDON']['community']['plugin_facebook']['defaultgroups']['1'] = 2;
 // --- /DYN
 
 //
