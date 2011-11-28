@@ -9,5 +9,5 @@
 // Database column wasn't removed in case of other plugins used it.
 //
 
-$REX['ADDON']['install']['facebook'] = 0;
+$REX['ADDON']['install']['auth_facebook'] = 0;
 ?>
