@@ -13,7 +13,7 @@ $a = rex_sql::factory();
 $a->setTable("rex_62_params");
 $a->setValue("title","translate:com_permtype");
 $a->setValue("name","art_com_permtype");
-$a->setValue("prior","11");
+$a->setValue("prior","100");
 $a->setValue("type","3");
 $a->setValue("params","0:translate:com_perm_all|1:translate:com_perm_only_logged_in|2:translate:com_perm_only_not_logged_in");
 $a->setValue("validate",NULL);
@@ -32,6 +32,9 @@ $g->setQuery('show columns from rex_article like "art_com_permtype"');
 if ($g->getRows()==0) {
 	$a->setQuery("ALTER TABLE `rex_article` ADD `art_com_permtype` VARCHAR( 255 ) NOT NULL"); 
 }
+
+## Prio neu sortieren // Metainfo
+rex_organize_priorities($REX['TABLE_PREFIX']. '62_params', 'prior', 'name LIKE "art_%"', 'prior, updatedate', 'field_id');
 
 // ************************************************************** CACHE LOESCHEN
 
