@@ -1,0 +1,22 @@
+com_facebook = Facebook
+com_facebook_facebookid = Facebook ID
+
+com_facebook_settings = Einstellungen
+com_facebook_settings_description = Der Zugriff auf Facebook erfordert eine vorhergegangene Registrierung einer Facebook-App bei <a href="http://developers.facebook.com">Facebook Developers</a>. Nachfolgend müssen die dort von Facebook vorgebenen Daten hier konfiguriert werden.
+com_facebook_settings_facebook = Facebook App Einstellungen
+com_facebook_settings_appId = AppID
+com_facebook_settings_appSecret = Zugrifsschlüssel
+com_facebook_settings_appAccess = Zugrifssrechte auf Facebookprofil
+com_facebook_settings_appAccess_description = Gibt an welche Daten und Rechte des Users an das Plugin übergeben werden darf. Die Freigabe der Rechte wird beim Login auf Facebook beim User angefragt und müssen von diesem freigegeben werden. 
+com_facebook_settings_newuser = Standardeinstellungen für neue Facebook-User
+com_facebook_settings_memberof = Gruppenmitgliedschaften
+com_facebook_settings_none = keine
+com_facebook_settings_update = Die Änderungen wurden übernommen
+com_facebook_settings_failupdate = Die Änderungen konnten leider nicht übernommen werden. Prüfen Sie die Dateiberechtigungen
+
+com_facebook_help_appAccess = Hier werden die Rechte eingegeben welche der Facebookuser diesem Plugin gewährt. Mehrere Rechte müssen durch Komma getrennt werden. Eine Vollständige Dokumenation aller verfügbaren Berechtigungen gibt es <a href="http://developers.facebook.com/docs/reference/api/permissions/">auf der Facebook Developer Site</a> allerdings ist für den Login "email" ausreichend.
+com_facebook_help_login_hl = Facebook-Login auf der Website einbinden
+com_facebook_help_login = Durch das Hinzufügen des xform Feldes <b>com_facebook_loginbutton|lable</b> z.B. beim Loginformular wird der Facebook-Connect Link ausgegeben.
+
+com_facebook_info_installfinish = Das AddOn kann jetzt im Community AddOn kunfiguriert werden!
+com_facebook_error_missingaddons = Bitte überprüfen Sie ob folgende AddOns vorhanden sind: community, xforms
