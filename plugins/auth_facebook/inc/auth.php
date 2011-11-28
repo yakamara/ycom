@@ -6,10 +6,10 @@ $fbcode = rex_get("code","string");
 ## Execute only if parameters given
 if($fbstate != '' && $fbcode != '')
 {
-	if($REX['ADDON']['community']['plugin_facebook']['facebook']->getUser())
+	if($REX['ADDON']['community']['plugin_auth_facebook']['facebook']->getUser())
 	{
 		## Get User Array
-		$fbuser = $REX['ADDON']['community']['plugin_facebook']['facebook']->api('/me','GET');
+		$fbuser = $REX['ADDON']['community']['plugin_auth_facebook']['facebook']->api('/me','GET');
 		
 		## Check if User Exists in Database
 		$sql = new rex_sql();
@@ -19,26 +19,25 @@ if($fbstate != '' && $fbcode != '')
 		{
 			//
 			// Sync facebook user to database
-			//
-			
+			//			
 			$fields = ''; $values = '';
 			## Translate datafields
-			foreach($REX['ADDON']['community']['plugin_facebook']['synctranslation'] as $key => $value)
+			foreach($REX['ADDON']['community']['plugin_auth_facebook']['synctranslation'] as $key => $value)
 			{
 				$fields .= "$key, ";
 				$values .= "'".$fbuser[$value]."', ";
 			}
 			
 			## Adding defaultgroups
-			if(isset($REX['ADDON']['community']['plugin_facebook']['defaultgroups']))
+			if(isset($REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']))
 			{
 				$fields .= "rex_com_group, ";
-				$values .= "'".implode(',' , $REX['ADDON']['community']['plugin_facebook']['defaultgroups'])."',";
+				$values .= "'".implode(',' , $REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups'])."',";
 			}
 			
 			//$sql->debugsql = true;
 			## Create new database user
-			$sql->setQuery("INSERT INTO rex_com_user (".$fields." login, password, status, authsource, facebookid) VALUES (".$values." '".$fbuser['first_name'].".".$fbuser['last_name'].".fb.".$fbuser['id']."', '".rex_com_facebook::generatePassword('32')."', '1', 'facebook', '".$fbuser['id']."')");
+			$sql->setQuery("INSERT INTO rex_com_user (".$fields." login, password, status, authsource, facebookid) VALUES (".$values." '".$fbuser['first_name'].".".$fbuser['last_name'].".fb.".$fbuser['id']."', '".rex_com_auth_facebook::generatePassword('32')."', '1', 'facebook', '".$fbuser['id']."')");
 			//echo $sql->error;
 		}
 		
@@ -58,9 +57,7 @@ if($fbstate != '' && $fbcode != '')
 			rex_redirect($REX['ADDON']['community']['plugin_auth']['article_login_ok']);
 	}
 	
-	if(!$REX['ADDON']['community']['plugin_facebook']['facebook']->getUser() || !$REX['COM_USER']->checkLogin())
-	{
+	if(!$REX['ADDON']['community']['plugin_auth_facebook']['facebook']->getUser() || !$REX['COM_USER']->checkLogin())
 		rex_redirect($REX['ADDON']['community']['plugin_auth']['article_login_failed'],'',array('rex_com_auth_info'=>'2'));
-	}
 }
 ?>

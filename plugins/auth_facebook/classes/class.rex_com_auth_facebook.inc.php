@@ -1,10 +1,10 @@
 <?php
-class rex_com_facebook
+class rex_com_auth_facebook
 {
 	public function getLoginUrl()
 	{
 		global $REX;
-		return $REX['ADDON']['community']['plugin_facebook']['facebook']->getLoginUrl(array("scope" => $REX['ADDON']['community']['plugin_facebook']['appAccess']));
+		return $REX['ADDON']['community']['plugin_auth_facebook']['facebook']->getLoginUrl(array("scope" => $REX['ADDON']['community']['plugin_auth_facebook']['appAccess']));
 	}
 	
 	public function getCurrentUri() {
