@@ -6,6 +6,7 @@
  */
 
 $REX['ADDON']['install']['auth_facebook'] = 1;
+$REX['ADDON']['installmsg']['auth_facebook'] = '';
 
 if (isset($I18N) && is_object($I18N))
 	$I18N->appendFile($REX['INCLUDE_PATH'].'/addons/community/plugins/auth_facebook/lang'); 
@@ -26,7 +27,7 @@ if($ADDONSsic['status']['community'] && $ADDONSsic['status']['xform'])
 	
 	if(!$sql->getRows() && $REX['ADDON']['installmsg']['auth_facebook'] == '')
 	{
-		$sql->setQuery("INSERT INTO rex_xform_field (id, table_name, prio, type_id, type_name, f1, f2, list_hidden, search) VALUES (NULL, 'rex_com_user', '100', 'value', 'text', 'authsource', 'translate:com_auth_auth_authsource', '1', '0')");
+		$sql->setQuery("INSERT INTO rex_xform_field (id, table_name, prio, type_id, type_name, f1, f2, list_hidden, search) VALUES (NULL, 'rex_com_user', '100', 'value', 'text', 'authsource', 'translate:com_auth_authsource', '1', '0')");
 		$REX['ADDON']['installmsg']['auth_facebook'] = $sql->getError();
 
 		if($REX['ADDON']['installmsg']['auth_facebook'] == '')
