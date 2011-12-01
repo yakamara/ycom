@@ -35,7 +35,7 @@ function rex_newsletter_sendmail($userinfo, $mail_from_email, $mail_from_name, $
   $mail->Subject = $mail_subject;
   
   ## Adding attachments
-  if($mail_attachments != null)
+  if($mail_attachments)
   {
 	$mail_attachments = explode(",",$mail_attachments);
     foreach($mail_attachments as $attachment)
