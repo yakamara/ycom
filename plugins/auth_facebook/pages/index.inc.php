@@ -84,7 +84,7 @@ echo '
 								</div>
 
 							</div>
-						</fieldset>';
+						</fieldset><fieldset class="rex-form-col-1">';
 
 //
 // Generating Selectbox for User-Groups
@@ -106,8 +106,7 @@ if(OOPlugin::isAvailable('community','group'))
 	$groupselect->setSelected($REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']);
 
 
-				echo '	<fieldset class="rex-form-col-1">
-							<legend>'.$I18N->msg("com_facebook_settings_newuser").'</legend>
+				echo '	<legend>'.$I18N->msg("com_auth_facebook_settings_newuser").'</legend>
 							<div class="rex-form-wrapper">
 								<div class="rex-form-row">
 									<p class="rex-form-col-a rex-form-checkbox">
@@ -115,14 +114,17 @@ if(OOPlugin::isAvailable('community','group'))
 										'.$groupselect->get().'
 									</p>
 								</div>
-								<div class="rex-form-row">
+							</div>';
+}
+
+echo '					<div class="rex-form-wrapper">
+							<div class="rex-form-row">
 									<p class="rex-form-col-a rex-form-submit">
 										<input type="submit" class="rex-form-submit" name="sendit" value="'.$I18N->msg("specials_update").'"'. rex_accesskey($I18N->msg('specials_update'), $REX['ACKEY']['SAVE']) .' />
 									</p>
 								</div>
 							</div>
 						</fieldset>';
-}
 
 echo'					</div> <!-- Ende rex-area-content //-->					
 				</div> <!-- Ende rex-area-col-b //-->
