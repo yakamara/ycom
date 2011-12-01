@@ -7,8 +7,6 @@
 
 $error = "";
 
-
-
 $method = rex_request("method","string");
 $method_all = rex_request("method_all","string","");
 
@@ -22,7 +20,7 @@ $nl_filter_status = rex_request("nl_filter_status","int",1);
 if($nl_filter_status != 1)
   $nl_filter_status = 0;
 
-
+$nl_groups = rex_request("nl_groups" ,"array");
 
   
 // -------- E-Mail Typ / ob REDAXO oder XFORM
@@ -149,10 +147,6 @@ if($method != "")
 
 }
 
-
-
-
-
 // ---------- Testversand
 
 if($method == "start" && $method_all != "all" && count($error) == 0 && $send)
@@ -173,16 +167,26 @@ if($method == "start" && $method_all != "all" && count($error) == 0 && $send)
   }
 }
 
-
-
-
-
 // ---------- Versand an alle
 if($method == "start" && $method_all == "all" && count($error) == 0 && $send)
 {
+	## Query für gruppen bauen
+	$qry_groups = '';
+	if(count($nl_groups) > 0)
+	{
+		$qry_groups = array();
+		foreach($nl_groups as $group)
+		{
+			$qry_groups[] = 'FIND_IN_SET('.$group.',rex_com_group) > 0';
+		}
+		$qry_groups = 'AND ( '. implode(' OR ', $qry_groups) .')';
+	}
+	
+	//echo 'select * from rex_com_user where (newsletter_last_id <> "'.$nl_id.'" OR newsletter_last_id IS NULL) '.$qry_groups.' and email<>"" and email IS NOT NULL and newsletter=1 and status='.$nl_filter_status.' LIMIT 50';
+
     $nl = new rex_sql;
     // $nl->debugsql = 1;
-    $nl->setQuery('select * from rex_com_user where (newsletter_last_id <> "'.$nl_id.'" OR newsletter_last_id IS NULL) and email<>"" and email IS NOT NULL and newsletter=1 and status='.$nl_filter_status.' LIMIT 50');
+    $nl->setQuery('select * from rex_com_user where (newsletter_last_id <> "'.$nl_id.'" OR newsletter_last_id IS NULL) '.$qry_groups.' and email<>"" and email IS NOT NULL and newsletter=1 and status='.$nl_filter_status.' LIMIT 50');
     
     if($nl->getRows()>0)
     {
@@ -206,13 +210,9 @@ if($method == "start" && $method_all == "all" && count($error) == 0 && $send)
     }else
     {
       $info[] = "Alle eMails wurden verschickt";
-    }
+    } 
 
 }
-
-
-
-
 
 // ---------- Fehlermeldungen
 
@@ -292,6 +292,35 @@ if (count($info)>0)
      <br />[ wird nur an User geschickt, die diese ID noch nicht gesetzt haben
      <br />Diese Newsletter ID wird bei jedem Versand an den entsprechenden User gesetzt ]</td>
   </tr>
+  
+<?php 
+//
+// Generating Selectbox for User-Groups
+//
+if(OOPlugin::isAvailable('community','group'))
+{
+	$sql = new rex_sql();
+	$sql->setQuery('SELECT id,name FROM rex_com_group');
+
+	$groupselect = new rex_select();
+	$groupselect->setName('nl_groups[]');
+	$groupselect->setSize(6);
+	$groupselect->setMultiple(true);
+	foreach($sql->getArray() as $group) {
+		$groupselect->addOption($group['name'].' ['.$group['id'].']',$group['id']);
+	}
+
+	$groupselect->setSelected($nl_groups);
+
+echo '
+<tr>
+ <td class=rex-icon>&nbsp;</td>
+ <td>Mitglied der Gruppe(n):</td>
+ <td>'.$groupselect->get().'<p>wenn keine Gruppe ausgewählt, dann alle User</td>
+</tr>';
+}
+
+?>
   
   <tr>
     <td class="rex-icon"></td>
