@@ -19,11 +19,10 @@ $REX["ADDON"]["community"]["ff"][] = "last_newsletterid";
 
 // ---------- Funktion fuer den Newsletter-Versand
 
-function rex_newsletter_sendmail($userinfo, $mail_from_email, $mail_from_name, $mail_subject, $mail_body_text, $mail_body_html)
+function rex_newsletter_sendmail($userinfo, $mail_from_email, $mail_from_name, $mail_subject, $mail_body_text, $mail_body_html, $mail_attachments = null)
 {
 
   global $REX;
-
 
   if(trim($userinfo["email"]) == "")
     return FALSE;
@@ -34,6 +33,16 @@ function rex_newsletter_sendmail($userinfo, $mail_from_email, $mail_from_name, $
   $mail->FromName = $mail_from_name;
 
   $mail->Subject = $mail_subject;
+  
+  ## Adding attachments
+  if($mail_attachments != null)
+  {
+	$mail_attachments = explode(",",$mail_attachments);
+    foreach($mail_attachments as $attachment)
+    {
+    	$mail->AddAttachment($REX["INCLUDE_PATH"].'/../../files/'.$attachment, $attachment);
+    }  
+  }
 
   if(trim($mail_body_html) != "")
   {
@@ -68,10 +77,7 @@ function rex_newsletter_sendmail($userinfo, $mail_from_email, $mail_from_name, $
       $mail->Subject = str_replace( "+++".$k."+++",urlencode($v),$mail->Subject);
       $mail->Subject = str_replace( "+++".strtoupper($k)."+++",urlencode($v),$mail->Subject);
     }
-  
-  
   } 
 
   return $mail->Send();
-
 }
