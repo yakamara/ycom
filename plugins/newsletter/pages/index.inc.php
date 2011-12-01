@@ -102,6 +102,7 @@ if($method != "")
       $nl_from_name = $xform_nl_tpl['mail_from_name'];
       $nl_subject = $xform_nl_tpl['subject'];
       $nl_body_text = $xform_nl_tpl['body'];
+      $nl_attachments = $xform_nl_tpl['attachments'];
       $nl_body_html = "";
       $send = TRUE;
     }else
@@ -160,7 +161,7 @@ if($method == "start" && $method_all != "all" && count($error) == 0 && $send)
     $error[] = "User existiert nicht";
   }else
   {
-    if(rex_newsletter_sendmail($test_user, $nl_from_email, $nl_from_name, $nl_subject, $nl_body_text, $nl_body_html))
+    if(rex_newsletter_sendmail($test_user, $nl_from_email, $nl_from_name, $nl_subject, $nl_body_text, $nl_body_html, $nl_attachments))
     {
       $info[] = "Testmail wurde rausgeschickt. <br />Bitte überprüfen Sie ob die E-Mail ankommt und alles passt und schicken dann den kompletten Newsletter raus.";
     }else
@@ -196,7 +197,7 @@ if($method == "start" && $method_all == "all" && count($error) == 0 && $send)
       {
         $i .= ", ".$userinfo["email"];
         $up->setQuery('update rex_com_user set newsletter_last_id="'.mysql_real_escape_string($nl_id).'" where id='.$userinfo["id"]);
-        $r = rex_newsletter_sendmail($userinfo, $nl_from_email, $nl_from_name, $nl_subject, $nl_body_text, $nl_body_html);
+        $r = rex_newsletter_sendmail($userinfo, $nl_from_email, $nl_from_name, $nl_subject, $nl_body_text, $nl_body_html, $nl_attachments);
         $nl->next();  
       }
 
