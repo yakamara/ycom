@@ -102,8 +102,8 @@ if($method != "")
       $nl_from_name = $xform_nl_tpl['mail_from_name'];
       $nl_subject = $xform_nl_tpl['subject'];
       $nl_body_text = $xform_nl_tpl['body'];
+      $nl_body_html = $xform_nl_tpl['body_html'];
       $nl_attachments = $xform_nl_tpl['attachments'];
-      $nl_body_html = "";
       $send = TRUE;
     }else
     {
@@ -116,6 +116,7 @@ if($method != "")
     $nl_from_email = $redaxo_nl_from_email;
     $nl_from_name = $redaxo_nl_from_name;
     $nl_subject = $redaxo_nl_subject;
+    $nl_attachments = '';
 
     if($nl_from_email == "" || $nl_from_name == "" || $nl_subject == "" || $redaxo_nl_article_id == 0)
     {
