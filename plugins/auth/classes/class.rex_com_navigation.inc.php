@@ -69,7 +69,9 @@ class rex_com_navigation extends rex_navigation
     
     foreach($path as $pathItem)
     {
-      if($cat = OOCategory::getCategoryById($pathItem) && $this->_check($cat,$i))
+      $cat = OOCategory::getCategoryById($pathItem);
+      
+      if($this->_check($cat,$i))
       {
         $lis .= '<li class="rex-lvl'. $i .'"><a href="'. $cat->getUrl() .'">'. htmlspecialchars($cat->getName()) .'</a></li>';
         $i++;
@@ -78,7 +80,9 @@ class rex_com_navigation extends rex_navigation
   
     if($includeCurrent)
     {
-      if($art = OOArticle::getArticleById($this->current_article_id) && $this->_check($art,$i))
+      $art = OOArticle::getArticleById($this->current_article_id);
+      
+      if($this->_check($art,$i))
         if(!$art->isStartpage())
         {
           $lis .= '<li class="rex-lvl'. $i .'">'. htmlspecialchars($art->getName()) .'</li>';
@@ -92,11 +96,7 @@ class rex_com_navigation extends rex_navigation
     return '<ul class="rex-breadcrumb">'. $lis .'</ul>';
   }
 
-  
-  
-  
-  
-  
+    
   /*protected*/ function _getNavigation($category_id,$ignore_offlines = TRUE)
   {
   
@@ -112,7 +112,7 @@ class rex_com_navigation extends rex_navigation
     
     foreach($nav_obj as $nav)
     {
-      // Filter und Rechte prŸfen
+      // Filter und Rechte prï¿½fen
       if($this->_check($nav,$depth))
       {
         $nav_real[] = $nav;
@@ -207,7 +207,6 @@ class rex_com_navigation extends rex_navigation
 
     if(!$this->_checkPerm($nav,$level)) 
       return FALSE;
-
     return TRUE;
   }
   
