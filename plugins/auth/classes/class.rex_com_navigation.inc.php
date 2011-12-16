@@ -73,7 +73,6 @@ class rex_com_navigation extends rex_navigation
       
       if($this->_check($cat,$i))
       {
-        echo 'haha';
         $lis .= '<li class="rex-lvl'. $i .'"><a href="'. $cat->getUrl() .'">'. htmlspecialchars($cat->getName()) .'</a></li>';
         $i++;
       }
