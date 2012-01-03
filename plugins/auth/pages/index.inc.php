@@ -15,11 +15,12 @@ if(rex_request("func","string")=="update")
 
 	$REX['ADDON']['community']['plugin_auth']['auth_active'] = rex_request("auth_active","int");
 	$REX['ADDON']['community']['plugin_auth']['stay_active'] = rex_request("stay_active","int");
-	$REX['ADDON']['community']['plugin_auth']['article_login_ok'] = rex_request("article_login_ok","int");;
-	$REX['ADDON']['community']['plugin_auth']['article_login_failed'] = rex_request("article_login_failed","int");;
-	$REX['ADDON']['community']['plugin_auth']['article_logout'] = rex_request("article_logout","int");;
-	$REX['ADDON']['community']['plugin_auth']['article_withoutperm'] = rex_request("article_withoutperm","int");;
-
+	$REX['ADDON']['community']['plugin_auth']['article_login_ok'] = rex_request("article_login_ok","int");
+	$REX['ADDON']['community']['plugin_auth']['article_login_failed'] = rex_request("article_login_failed","int");
+	$REX['ADDON']['community']['plugin_auth']['article_logout'] = rex_request("article_logout","int");
+	$REX['ADDON']['community']['plugin_auth']['article_withoutperm'] = rex_request("article_withoutperm","int");
+	$REX['ADDON']['community']['plugin_auth']['passwd_hashed'] = rex_request("passwd_hashed","boolean");
+	
 	$REX['ADDON']['community']['plugin_auth']['login_field'] = stripslashes(str_replace('"','',rex_request("login_field","string")));
 	if(!array_key_exists($REX['ADDON']['community']['plugin_auth']['login_field'],$xform_user_fields)) {
 		$REX['ADDON']['community']['plugin_auth']['login_field'] = "login";
@@ -35,6 +36,7 @@ $REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'article_login_failed\'] = '.$R
 $REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'article_logout\'] = '.$REX['ADDON']['community']['plugin_auth']['article_logout'].';
 $REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'article_withoutperm\'] = '.$REX['ADDON']['community']['plugin_auth']['article_withoutperm'].';
 $REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'login_field\'] = "'.$REX['ADDON']['community']['plugin_auth']['login_field'].'";
+$REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'passwd_hashed\'] = "'.$REX['ADDON']['community']['plugin_auth']['passwd_hashed'].'";
 ';
 
 	if(rex_replace_dynamic_contents($config_file, $content) !== false)
@@ -147,7 +149,7 @@ gespeichert werden.</p>
 							
 								<div class="rex-form-row">
 									<p class="rex-form-col-a rex-form-checkbox">
-										<label for="rex-form-auth">Authentifizierung aktiviert</label>
+										<label for="rex-form-auth">'.$I18N->msg("com_auth_status_authactive").'</label>
 										<input class="rex-form-text" type="checkbox" id="rex-form-auth" name="auth_active" value="1" ';
 								if($REX['ADDON']['community']['plugin_auth']['auth_active']=="1") echo 'checked="checked"';
 								echo ' />
@@ -156,7 +158,7 @@ gespeichert werden.</p>
 
 								<div class="rex-form-row">
 									<p class="rex-form-col-a rex-form-checkbox">
-										<label for="rex-form-stay">"Angemeldet bleiben" aktiviert</label>
+										<label for="rex-form-stay">'.$I18N->msg("com_auth_status_stayactive").'</label>
 										<input class="rex-form-text" type="checkbox" id="rex-form-stay" name="stay_active" value="1" ';
 								if($REX['ADDON']['community']['plugin_auth']['stay_active']=="1") echo 'checked="checked"';
 								echo ' />
@@ -166,7 +168,21 @@ gespeichert werden.</p>
 							</div>
 						</fieldset>
 
-
+						<fieldset class="rex-form-col-1">
+							<legend>'.$I18N->msg("com_auth_security").'</legend>
+							
+							<div class="rex-form-wrapper">
+								<div class="rex-form-row">
+									<p class="rex-form-col-a rex-form-checkbox">
+										<label for="rex-form-passwd">'.$I18N->msg("com_auth_security_hashedpasswd").'</label>
+										<input class="rex-form-text" type="checkbox" id="rex-form-passwd" name="passwd_hashed" value="1" ';
+								if($REX['ADDON']['community']['plugin_auth']['passwd_hashed']=="1") echo 'checked="checked"';
+								echo ' />
+									</p>
+								</div>
+							</div>
+						</fieldset>						
+						
 						<fieldset class="rex-form-col-1">
 							<legend>'.$I18N->msg("com_forwarder").'</legend>
 							
@@ -216,7 +232,8 @@ gespeichert werden.</p>
 						</fieldset>
 					</div> <!-- Ende rex-area-content //-->';
 
-echo '					
+## Not used yet		
+/* echo '					
 					<h3 class="rex-hl2">'.$I18N->msg("setup").'</h3>
 					<div class="rex-area-content">
 					';
@@ -235,17 +252,12 @@ foreach($modules as $module)
 	}
 
 }
-			
-					
-					
-					
-					
 					
 echo '					
-					</div>
+					</div>'; */
 					
 					
-				</div> <!-- Ende rex-area-col-b //-->
+echo '			</div> <!-- Ende rex-area-col-b //-->
 			</div> <!-- Ende rex-area-col-2 //-->
 			
 		</form>
