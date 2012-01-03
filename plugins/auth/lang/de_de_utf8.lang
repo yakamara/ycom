@@ -1,6 +1,10 @@
 
 com_auth_settings = Einstellungen
 com_forwarder = Weiterleitungen
+com_auth_status_authactive = Authentifizierung aktiviert
+com_auth_status_stayactive = "Angemeldet bleiben" aktiviert
+com_auth_security = Sicherheit
+com_auth_security_hashedpasswd = Verschlüsselte Passwörter
 com_auth_info_id_jump_ok = Sprung zu diesem Artikel wenn erfolgreich eingeloggt
 com_auth_info_id_jump_not_ok = Sprung zu diesem Artikel wenn nicht erfolgreich eingeloggt
 com_auth_info_id_jump_logout = Sprung zu diesem Artikel nach dem Ausloggen
