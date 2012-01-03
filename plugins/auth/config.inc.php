@@ -9,11 +9,12 @@
 include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/classes/class.rex_com_navigation.inc.php";
 include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/classes/class.rex_com_auth.inc.php";
 
+## Register extension points
 rex_register_extension('REX_NAVI_CLASSNAME', create_function('','return "rex_com_navigation";'));
+rex_register_extension('REXSEO_SITEMAP_ARRAY_CREATED', 'rex_com_auth::rexseo_removeSitemapArticles');
 
-if (isset($I18N) && is_object($I18N)) {
+if(isset($I18N) && is_object($I18N))
   $I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/lang');
-}
 
 // --- DYN
 $REX['ADDON']['community']['plugin_auth']['auth_active'] = "1";
@@ -23,7 +24,10 @@ $REX['ADDON']['community']['plugin_auth']['article_login_failed'] = 12;
 $REX['ADDON']['community']['plugin_auth']['article_logout'] = 1;
 $REX['ADDON']['community']['plugin_auth']['article_withoutperm'] = 16;
 $REX['ADDON']['community']['plugin_auth']['login_field'] = "email";
+$REX['ADDON']['community']['plugin_auth']['passwd_hashed'] = "";
 // --- /DYN
+
+$REX['ADDON']['community']['plugin_auth']['passwd_algorithmus'] = "sha1"; // see: hash_algos();
 
 $REX['ADDON']['community']['plugin_auth']['request'] = array();
 $REX['ADDON']['community']['plugin_auth']['request']['name'] = "rex_com_auth_name";
@@ -49,7 +53,7 @@ if ($REX["REDAXO"])
 
 	// nur im Frontend..
 	rex_register_extension('ADDONS_INCLUDED', create_function('','
-		global $REX,$I18N;
+		global $REX, $I18N;
 		include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
 	'));
 }
