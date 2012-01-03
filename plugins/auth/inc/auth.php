@@ -41,7 +41,10 @@ if (
   or ($REX['ADDON']['community']['plugin_auth']['stay_active'] == "1" and $sk != '')
 )
 {
-
+  ## Hash password if required
+  if($REX['ADDON']['community']['plugin_auth']['passwd_hashed'])
+    $rex_com_auth_login_psw = hash($REX['ADDON']['community']['plugin_auth']['passwd_algorithmus'],$rex_com_auth_login_psw);
+  
   $rex_com_auth_logout = rex_request("rex_com_auth_logout","int");
   $REX['COM_USER'] = new rex_login();
   $REX['COM_USER']->setSqlDb(1);
@@ -167,9 +170,9 @@ if (
 if($REX['ADDON']['community']['plugin_auth']['stay_active'] == "1")
 {
   if($sk == "") {
-    setcookie($login_key, "", time() -1 , "/" );  /* verfŠllt in 14 Tagen */
+    setcookie($login_key, "", time() -1 , "/" );  /* verfï¿½llt in 14 Tagen */
   } else {
-    setcookie($login_key, $sk, time() + (3600*24*14), "/" );  /* verfŠllt in 14 Tagen */
+    setcookie($login_key, $sk, time() + (3600*24*14), "/" );  /* verfï¿½llt in 14 Tagen */
   }
   
   $_COOKIE[$login_key] = $sk;
