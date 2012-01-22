@@ -7,31 +7,36 @@ class rex_xform_com_auth_form_info extends rex_xform_abstract
   {
     global $REX;
 
-    $messages = array();
-    $messages[0] = $this->getElement(2);
-    $messages[1] = $this->getElement(3);
-    $messages[2] = $this->getElement(4);
-    $messages[3] = $this->getElement(5);
-    
-	$info = rex_request('rex_com_auth_info',"string");
-	if(!isset($messages[$info])) {
-		$info = 0;
+    ## Setting up info - errors first
+	if(isset($REX['ADDON']['community']['plugin_auth']['errormsg']))
+	{
+	  $info = $REX['ADDON']['community']['plugin_auth']['errormsg'];
+	  $class = "form_warning";
 	}
-    $message = $messages[$info];
-    $class = "form_info";
-    if($info == 2) $class = "form_warning";
-    
-    if($message != "") {
-      $this->params["form_output"][$this->getId()] = '<ul class="formcom_auth_form_info '.$class.' formlabel-'.$this->getName().'" id="'.$this->getHTMLId().'"><li>'.$message.'</li></ul>';
+	else
+	{
+	  if(isset($REX['ADDON']['community']['plugin_auth']['infomsg']))
+	    $info = $REX['ADDON']['community']['plugin_auth']['infomsg'];
+	  elseif($this->getElement(2))
+	    $info = array($this->getElement(2));
+	  $class = "form_info";
+	}
+	
+	## Building output
+	if(isset($info) && is_array($info))
+    {
+      $this->params["form_output"][$this->getId()] = '<ul class="formcom_auth_form_info '.$class.' formlabel-'.$this->getName().'" id="'.$this->getHTMLId().'">';
+      
+      foreach($info as $message)
+        $this->params["form_output"][$this->getId()] .= '<li>'.$message.'</li>';
+      
+      $this->params["form_output"][$this->getId()] .= '</ul>';
     }
-
-    return;
-
   }
 
   function getDescription()
   {
-    return "com_auth_form_info [0 - nichts / 1 - logout / 2 - failed login / 3 - logged in] -> Beispiel: com_auth_form_info|label|msg_login|msg_logged_out|msg_failed|msg_logged_in|";
+    return "com_auth_form_info -> Beispiel: com_auth_form_info|label|[defaultmessage]";
   }
 
 }
