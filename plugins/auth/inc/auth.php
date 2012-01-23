@@ -121,9 +121,7 @@ if(($login_name && $login_psw) || !empty($user_session['UID']) || $session_key)
     unset($REX['COM_USER']);
     
     //TODO: Adding EP COM_AUTH_LOGINFAILED
-
-    ## Setting message
-    $REX['ADDON']['community']['plugin_auth']['errormsg'][] = $I18N->msg('com_auth_login_fail');    
+    
   }
 }
 
@@ -141,16 +139,13 @@ if($logout && isset($REX['COM_USER']))
   unset($_SESSION[$login_key]);
   unset($_COOKIE[$login_key]);
   setcookie($login_key, $session_key, time() - 3600, "/");
-  
-  ## Setting message
-  $REX['ADDON']['community']['plugin_auth']['infomsg'][] = $I18N->msg('com_auth_login_logout');
 }
 
 /*
  * Checking page permissions
  */
 if($article = OOArticle::getArticleById($REX["ARTICLE_ID"]))
-  if(!rex_com_auth::checkperm($article) && !$redirect)
+  if(!rex_com_auth::checkperm($article) && !$redirect  && $REX['ADDON']['community']['plugin_auth']['article_withoutperm'] != $REX['ARTICLE_ID'])
     $redirect = rex_getUrl($REX['ADDON']['community']['plugin_auth']['article_withoutperm'],'',array($REX['ADDON']['community']['plugin_auth']['request']['ref'] => urlencode($_SERVER['REQUEST_URI'])),'&');
   
 /*
