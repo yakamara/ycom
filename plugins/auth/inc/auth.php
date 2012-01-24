@@ -146,7 +146,15 @@ if($logout && isset($REX['COM_USER']))
  */
 if($article = OOArticle::getArticleById($REX["ARTICLE_ID"]))
   if(!rex_com_auth::checkperm($article) && !$redirect  && $REX['ADDON']['community']['plugin_auth']['article_withoutperm'] != $REX['ARTICLE_ID'])
-    $redirect = rex_getUrl($REX['ADDON']['community']['plugin_auth']['article_withoutperm'],'',array($REX['ADDON']['community']['plugin_auth']['request']['ref'] => urlencode($_SERVER['REQUEST_URI'])),'&');
+  {
+    $params = null;
+    
+    ## Adding referer only if target is not login_ok Article
+    if($REX['ADDON']['community']['plugin_auth']['article_login_ok'] != $REX['ARTICLE_ID'])
+      $params = array($REX['ADDON']['community']['plugin_auth']['request']['ref'] => urlencode($_SERVER['REQUEST_URI']));
+    
+    $redirect = rex_getUrl($REX['ADDON']['community']['plugin_auth']['article_withoutperm'],'',$params,'&');
+  }
   
 /*
  * Handle redirects if required
