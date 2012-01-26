@@ -135,10 +135,7 @@ if($logout && isset($REX['COM_USER']))
   rex_register_extension_point('COM_AUTH_LOGOUT',$REX['COM_USER'],array('id' => $REX['COM_USER']->getValue('id'), 'login' => $REX['COM_USER']->getValue($REX['ADDON']['community']['plugin_auth']['login_field'])));
   
   ## Unset Sessions
-  unset($REX['COM_USER']);
-  unset($_SESSION[$login_key]);
-  unset($_COOKIE[$login_key]);
-  setcookie($login_key, $session_key, time() - 3600, "/");
+  rex_com_auth::clearUserSession();
 }
 
 /*
