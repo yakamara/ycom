@@ -13,13 +13,10 @@ class rex_com_auth
       
       foreach($tree as $cat)
         if(!self::checkArticlePerm($cat))
-        {
           return false;
-          break;
-        }
         
       return true;
-    }  
+    } 
     
     /*
      * return Article rights non rekursive
@@ -134,7 +131,8 @@ class rex_com_auth
 	/*
 	 * reutrns Login-Key used for Sessions and Cookies
 	 */
-	function getLoginKey() {
+	function getLoginKey()
+	{
 		return 'comrex';
 	}
 
