@@ -1,29 +1,28 @@
 <?php
 
-class rex_com_auth {
-
-
-	function urlencode($url)
+class rex_com_auth
+{
+  
+    /*
+     * return Article right rekursive
+     */
+    function checkPerm(&$obj)
+    {
+      $cat = OOCategory::getCategoryById($obj->getValue('category_id'));
+      $tree = $cat->getParentTree();
+      
+      foreach($tree as $cat)
+        if(!self::checkArticlePerm($cat))
+          return false;
+        
+      return true;
+    } 
+    
+    /*
+     * return Article rights non rekursive
+     */
+	function checkArticlePerm(&$obj)
 	{
-		$url = base64_encode($url);
-		$url = str_replace("/","_",$url);
-		$url = str_replace("+","-",$url);
-		return $url;
-	}
-	
-	
-	function urldecode($url)
-	{
-		$url = str_replace("_","/",$url);
-		$url = str_replace("-","+",$url);
-		$url = base64_decode($url);
-		return $url;
-	}
-
-	
-	function checkperm(&$obj)
-	{
-		
 		global $REX;
 	
 		// Authentifizierung ist ausgeschaltet
@@ -44,9 +43,6 @@ class rex_com_auth {
 				return TRUE;
 			else
 				return FALSE;
-
-
-
 	
 		if($obj->getValue('art_com_permtype') == 1 && (!isset($REX["COM_USER"]) || !is_object($REX["COM_USER"])))
 		{
@@ -98,13 +94,15 @@ class rex_com_auth {
 		}
 		
 		return FALSE;
-	
 	}
 
 
-	function deleteUser($id) {
-	
-		$delete = TRUE;
+	/*
+	 * Removing article from com_user Database
+	 */
+	function deleteUser($id)
+	{
+	    $delete = TRUE;
 		$delete = rex_register_extension_point("COM_AUTH_USER_DELETE", $delete, $id);
 		if(!$delete) { return FALSE; }
 		
@@ -115,17 +113,26 @@ class rex_com_auth {
 		rex_register_extension_point("COM_AUTH_USER_DELETED", "", $id);
 
 		return TRUE;
-	
 	}
 
-	function clearUserSession() {
+	/*
+	 * Clears User Session
+	 */
+	function clearUserSession()
+	{
 		global $REX;
+		
 		unset($REX["COM_USER"]);
-		unset($_SESSION[rex_com_auth::getLoginKey()]);
-		unset($_COOKIE[rex_com_auth::getLoginKey()]);
+		unset($_SESSION[self::getLoginKey()]);
+		unset($_COOKIE[self::getLoginKey()]);
+		setcookie(self::getLoginKey(), '0', time() - 3600, "/");
 	}
 
-	function getLoginKey() {
+	/*
+	 * reutrns Login-Key used for Sessions and Cookies
+	 */
+	function getLoginKey()
+	{
 		return 'comrex';
 	}
 
