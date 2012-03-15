@@ -2,17 +2,21 @@
 
 class rex_com_auth
 {
-  
+ 
     /*
      * return Article right rekursive
      */
     function checkPerm(&$obj)
     {
-      $cat = OOCategory::getCategoryById($obj->getValue('category_id'));
-      $tree = $cat->getParentTree();
+      if($obj->getValue('art_com_permtype'))
+        return self::checkArticlePerm($obj);
       
-      foreach($tree as $cat)
-        if(!self::checkArticlePerm($cat))
+      if(!$obj->isStartArticle())
+        $obj = $obj->getCategory();
+   
+      $tree = $obj->getParentTree();
+      foreach($tree as $obj)
+        if(!self::checkArticlePerm($obj))
           return false;
         
       return true;
