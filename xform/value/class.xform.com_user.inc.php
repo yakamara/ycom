@@ -33,8 +33,8 @@ class rex_xform_com_user extends rex_xform_abstract
         </p>';
     }
 
-    $this->params["value_pool"]["email"][$this->getLabel()] = stripslashes($this->getValue());
-    if ($this->getElement(5) != "no_db") { $this->params["value_pool"]["sql"][$this->getLabel()] = $this->getValue(); }
+    $this->params["value_pool"]["email"][$this->getElement(1)] = stripslashes($this->getValue());
+    if ($this->getElement(5) != "no_db") { $this->params["value_pool"]["sql"][$this->getElement(1)] = $this->getValue(); }
 
   }
 
