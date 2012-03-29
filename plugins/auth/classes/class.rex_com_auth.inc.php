@@ -8,7 +8,7 @@ class rex_com_auth
      */
     function checkPerm(&$obj)
     {
-      if($obj->getValue('art_com_permtype'))
+      if($obj->getValue('art_com_permtype') || !$obj->getCategoryId())
         return self::checkArticlePerm($obj);
       
       if(!$obj->isStartArticle())
