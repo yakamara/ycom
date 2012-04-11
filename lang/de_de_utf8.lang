@@ -6,6 +6,8 @@ com_overview = Übersicht
 com_user_management = User Verwaltung
 com_field_management = Felder anpassen
 
+com_user = Community User
+
 email = E-Mail
 status = Status
 firstname = Vorname

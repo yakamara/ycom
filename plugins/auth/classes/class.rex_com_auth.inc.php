@@ -5,57 +5,45 @@ class rex_com_auth
  
     /*
      * return Article right rekursive
+     * 0:translate:com_perm_extends|1:translate:com_perm_only_logged_in|2:translate:com_perm_only_not_logged_in|3:translate:com_perm_all
      */
-    function checkPerm(&$obj)
-    {
-      if($obj->getValue('art_com_permtype') || !$obj->getCategoryId())
-        return self::checkArticlePerm($obj);
-      
-      if(!$obj->isStartArticle())
-        $obj = $obj->getCategory();
-   
-      $tree = $obj->getParentTree();
-      foreach($tree as $obj)
-        if(!self::checkArticlePerm($obj))
-          return false;
-        
-      return true;
-    } 
-    
-    /*
-     * return Article rights non rekursive
-     */
-	function checkArticlePerm(&$obj)
+	function checkPerm(&$obj)
 	{
 		global $REX;
-	
-		// Authentifizierung ist ausgeschaltet
+    	
+		// auth inactive
 		if($REX['ADDON']['community']['plugin_auth']['auth_active'] != "1")
 			return TRUE;
-	
-		// echo "<br />*".$obj->getValue('art_com_permtype');
-		// echo " -- ".$obj->getValue('art_com_groups');
-		// if(isset($REX["COM_USER"])) echo " ## ".$REX["COM_USER"]->getValue("group");
 		
-		// ---- Wenn für alle freigegeben
-		if($obj->getValue('art_com_permtype') == 0 || $obj->getValue('art_com_permtype') == "")
+		$permtype = (int) $obj->getValue('art_com_permtype');
+		
+		if($permtype == 3)
 			return TRUE;
-	
+
+		if($permtype != 1 && $permtype != 2)
+		{
+			// perm extends
+			if ($o = $obj->getParent())
+				return self::checkPerm($o);
+			
+			// no parent, no perm set -> for all accessable
+			return true;
+		}
+
 		// ---- nur für nicht eingeloggte freigegeben
-		if($obj->getValue('art_com_permtype') == 2)
+		if($permtype == 2)
 			if(!isset($REX["COM_USER"]) || !is_object($REX["COM_USER"]))
 				return TRUE;
 			else
 				return FALSE;
 	
-		if($obj->getValue('art_com_permtype') == 1 && (!isset($REX["COM_USER"]) || !is_object($REX["COM_USER"])))
+		if($permtype == 1 && (!isset($REX["COM_USER"]) || !is_object($REX["COM_USER"])))
 		{
 			return FALSE;
 		}
-	
-		// ---------- ab hier nur für eingeloggte -> permtype = 1
 
-	
+		// permtype = 1 / group check
+
 		// ----- wenn für alle gruppen freigegeben
 		if($obj->getValue('art_com_grouptype') == 0 || $obj->getValue('art_com_grouptype') == "")
 			return TRUE;
@@ -98,8 +86,9 @@ class rex_com_auth
 		}
 		
 		return FALSE;
-	}
-
+	  
+    } 
+    
 
 	/*
 	 * Removing article from com_user Database
@@ -148,7 +137,7 @@ class rex_com_auth
 	  foreach($params['subject'] as $id => $item)
 	  {
 	    $article = OOArticle::getArticleById($id);
-	    if(!rex_com_auth::checkperm($article))
+	    if(!rex_com_auth::checkPerm($article))
 	      unset($params['subject'][$id]);
 	  }
 	

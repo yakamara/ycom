@@ -29,8 +29,8 @@ if(rex_request("func","string")=="update")
 	$config_file = $REX['INCLUDE_PATH'].'/addons/community/plugins/auth/config.inc.php';
 
 	$content = '
-$REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'auth_active\'] = "'.$REX['ADDON']['community']['plugin_auth']['auth_active'].'";
-$REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'stay_active\'] = "'.$REX['ADDON']['community']['plugin_auth']['stay_active'].'";
+$REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'auth_active\'] = '.$REX['ADDON']['community']['plugin_auth']['auth_active'].';
+$REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'stay_active\'] = '.$REX['ADDON']['community']['plugin_auth']['stay_active'].';
 $REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'article_login_ok\'] = '.$REX['ADDON']['community']['plugin_auth']['article_login_ok'].';
 $REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'article_login_failed\'] = '.$REX['ADDON']['community']['plugin_auth']['article_login_failed'].';
 $REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'article_logout\'] = '.$REX['ADDON']['community']['plugin_auth']['article_logout'].';
@@ -46,40 +46,6 @@ $REX[\'ADDON\'][\'community\'][\'plugin_auth\'][\'passwd_hashed\'] = "'.$REX['AD
 
 	if(!is_writable($config_file))
 	  echo rex_warning($I18N->msg('imanager_config_not_writable', $config_file));
-
-}elseif(rex_request("func","string")=="add_module")
-{
-	$module = rex_request("module","string");
-	if(array_key_exists($module,$modules))
-	{
-		$module = $modules[$module];
-
-		$in = rex_get_file_contents($REX["INCLUDE_PATH"]."/addons/community/plugins/auth/modules/module_".$module["key"].".in.inc");
-		$out = rex_get_file_contents($REX["INCLUDE_PATH"]."/addons/community/plugins/auth/modules/module_".$module["key"].".out.inc");
-	
-		$mi = rex_sql::factory();
-		// $mi->debugsql = 1;
-		$mi->setTable("rex_module");
-		$mi->setValue("eingabe",addslashes($in));
-		$mi->setValue("ausgabe",addslashes($out));
-	
-		if (rex_request("module_id","string") != "")
-		{
-			$module_id = rex_request("module_id","int");
-			$mi->setWhere('id="'.$module_id.'"');
-			$mi->update();
-			echo rex_info($I18N->msg("com_module_updated",$module["name"]));
-	
-		}else
-		{
-			$mi->setValue("name",$module["name"]);
-			$mi->insert();
-			$module_id = (int) $mi->getLastId();
-			echo rex_info($I18N->msg("com_module_installed",$module["name"]));
-			
-		}
-		$info = rex_generateAll();
-	}
 
 }
 
@@ -132,6 +98,9 @@ Userverwaltung das Feld <b>session_key</b> vorhanden sein, in welchem die entspr
 gespeichert werden.</p>
 
 <p class="rex-tx1">Über <b>rex_com_auth_jump</b> kann man übergeben, wohin man nach einem erfolgreichen Login springen soll.</p>
+
+<p class="rex-tx1"><b>Sicherheit</b><br />Passwörter können auch verschlüsselt verwendet werden. Dazu die Verschlüsselung recht oben selektieren und in der Registrierung und beim Passwort ändern folgendes mit einfügen - sofern nicht bereits vorhanden.
+<br /><br />com_auth_password_hash|password_hash|password|</p>
 		
 					</div>
 				</div>
@@ -174,7 +143,7 @@ gespeichert werden.</p>
 							<div class="rex-form-wrapper">
 								<div class="rex-form-row">
 									<p class="rex-form-col-a rex-form-checkbox">
-										<label for="rex-form-passwd">'.$I18N->msg("com_auth_security_hashedpasswd").'</label>
+										<label for="rex-form-passwd">'.$I18N->msg("com_auth_security_hashedpasswd",$REX["ADDON"]["community"]["plugin_auth"]["passwd_algorithmus"]).'</label>
 										<input class="rex-form-text" type="checkbox" id="rex-form-passwd" name="passwd_hashed" value="1" ';
 								if($REX['ADDON']['community']['plugin_auth']['passwd_hashed']=="1") echo 'checked="checked"';
 								echo ' />

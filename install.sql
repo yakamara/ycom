@@ -1,6 +1,6 @@
 
 DELETE FROM `rex_xform_table` where `table_name`='rex_com_user';
-INSERT INTO `rex_xform_table` (`status`, `table_name`, `name`, `description`, `list_amount`, `prio`, `search`, `hidden`, `export`, `import`) VALUES (1, 'rex_com_user', 'community user', 'communityuser', 100, 100, 1, 0, 1, 1);
+INSERT INTO `rex_xform_table` (`status`, `table_name`, `name`, `description`, `list_amount`, `prio`, `search`, `hidden`, `export`, `import`) VALUES (1, 'rex_com_user', 'translate:com_user', 'communityuser', 100, 100, 1, 0, 1, 1);
 
 DELETE FROM `rex_xform_field` where `table_name`='rex_com_user';
 INSERT INTO `rex_xform_field` (`table_name`, `prio`, `type_id`, `type_name`, `f1`, `f2`, `f3`, `f4`, `f5`, `f6`, `f7`, `f8`, `f9`, `list_hidden`, `search`) VALUES ('rex_com_user', 10, 'value', 'text', 'login', 'translate:login', '', '0', '', '', '', '', '', 0, 1);

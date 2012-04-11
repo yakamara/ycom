@@ -13,9 +13,9 @@ $a = rex_sql::factory();
 $a->setTable("rex_62_params");
 $a->setValue("title","translate:com_permtype");
 $a->setValue("name","art_com_permtype");
-$a->setValue("prior","100");
+$a->setValue("prior","1");
 $a->setValue("type","3");
-$a->setValue("params","0:translate:com_perm_all|1:translate:com_perm_only_logged_in|2:translate:com_perm_only_not_logged_in");
+$a->setValue("params","0:translate:com_perm_extends|1:translate:com_perm_only_logged_in|2:translate:com_perm_only_not_logged_in|3:translate:com_perm_all");
 $a->setValue("validate",NULL);
 $a->addGlobalCreateFields();
 $g = rex_sql::factory();
@@ -48,7 +48,11 @@ if($error != "") {
 	
 }else
 {
-
+	function rex_com_auth_install() {
+		$r = new rex_xform_manager;
+		$r->generateAll();
+	}
+	rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_install');
 
 }
 

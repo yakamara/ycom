@@ -16,8 +16,20 @@
 $error = '';
 
 if ($error != '')
+{
   $REX['ADDON']['installmsg']['newsletter'] = $error;
-else
+  
+}else
+{
   $REX['ADDON']['install']['newsletter'] = true;
+
+	// xform refresh
+	function rex_com_newsletter_install() {
+		$r = new rex_xform_manager;
+		$r->generateAll();
+	}
+	rex_register_extension('ADDONS_INCLUDED', 'rex_com_newsletter_install');
+
+}
 
 ?>

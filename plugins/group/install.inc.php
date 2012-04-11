@@ -68,6 +68,14 @@ rex_organize_priorities($REX['TABLE_PREFIX']. '62_params', 'prior', 'name LIKE "
 
 $REX['ADDON']['installmsg']['group'] = ""; // $I18N->msg('community_group_install','2.8');
 
-$info = rex_generateAll(); // quasi kill cache ..	
+$info = rex_generateAll(); // quasi kill cache ..
+
+function rex_com_group_install() {
+	$r = new rex_xform_manager;
+	$r->generateAll();
+}
+rex_register_extension('ADDONS_INCLUDED', 'rex_com_group_install');
+
+
 
 ?>

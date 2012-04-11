@@ -67,9 +67,10 @@ if(($login_name && $login_psw) || !empty($user_session['UID']) || $session_key)
               // else -> use auth function
                   // on success -> sync to community dbase and do login
     
-    ## Hash password if required
-    if($REX['ADDON']['community']['plugin_auth']['passwd_hashed'])
-      $REX['COM_USER']->setPasswordFunction($REX['ADDON']['community']['plugin_auth']['passwd_algorithmus']);
+    ## Hash password if required and not already hashed (javascript
+    $hash_func = $REX['ADDON']['community']['plugin_auth']['passwd_algorithmus'];
+    if($REX['ADDON']['community']['plugin_auth']['passwd_hashed'] && strlen($login_psw) != strlen(hash($hash_func,"xyz")))
+      $REX['COM_USER']->setPasswordFunction($hash_func);
     
     $REX['COM_USER']->setLogin($login_name,$login_psw);
     $REX['COM_USER']->setLoginquery('select * from rex_com_user where `'.$REX['ADDON']['community']['plugin_auth']['login_field'].'`="USR_LOGIN" and password="USR_PSW" and status>0');

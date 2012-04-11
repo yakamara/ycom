@@ -14,9 +14,9 @@ $REX['ADDON']['name'][$mypage] = "Community";   // name
 $REX['ADDON']['perm'][$mypage] = "community[]"; // benoetigte mindest permission
 $REX['ADDON']['navigation'][$mypage] = array('block'=>'community');
 
-$REX['ADDON']['version'][$mypage] = '2.8.1';
+$REX['ADDON']['version'][$mypage] = '2.8.2';
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
-$REX['ADDON']['supportpage'][$mypage] = 'forum.redaxo.de';
+$REX['ADDON']['supportpage'][$mypage] = 'www.redaxo.org/de/forum';
 $REX['PERM'][] = "community[]";
 
 
@@ -42,7 +42,6 @@ $REX['ADDON']['community']['xform_path']['action'] = array();
 
 $REX['ADDON']['community']['xform_path']['value'][] = $REX["INCLUDE_PATH"]."/addons/community/xform/value/";
 
-rex_register_extension('ADDONS_INCLUDED', 'rex_com_xform_add');
 function rex_com_xform_add($params){
 	global $REX;
 	foreach($REX['ADDON']['community']['xform_path']['value'] as $value) { 
@@ -56,3 +55,5 @@ function rex_com_xform_add($params){
 	}
 
 }
+
+rex_register_extension('ADDONS_INCLUDED', 'rex_com_xform_add');
