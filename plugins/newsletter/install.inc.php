@@ -28,7 +28,7 @@ if ($error != '')
 		$r = new rex_xform_manager;
 		$r->generateAll();
 	}
-	rex_register_extension('ADDONS_INCLUDED', 'rex_com_newsletter_install');
+	rex_register_extension('OUTPUT_FILTER', 'rex_com_newsletter_install');
 
 }
 

@@ -4,17 +4,24 @@ $mypage = "community"; // only for this file
 
 // ---------- Allgemeine AddOn Config
 
-if (isset($I18N) && is_object($I18N))
-  $I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/' . $mypage . '/lang');
+// TODO:
+// Unterscheidung der Sprachen anhand REX_CUR_CLANG.
+
+if($REX["CUR_CLANG"] == 1)
+	$REX['LANG'] = "en_en_utf8";
+
+if (!isset($I18N) && !is_object($I18N))
+	$I18N = rex_create_lang($REX['LANG']);
+
+$I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/' . $mypage . '/lang');
 
 include $REX["INCLUDE_PATH"]."/addons/community/classes/class.rex_com.inc.php";
-
 
 $REX['ADDON']['name'][$mypage] = "Community";   // name
 $REX['ADDON']['perm'][$mypage] = "community[]"; // benoetigte mindest permission
 $REX['ADDON']['navigation'][$mypage] = array('block'=>'community');
 
-$REX['ADDON']['version'][$mypage] = '2.8.2';
+$REX['ADDON']['version'][$mypage] = '2.9';
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
 $REX['ADDON']['supportpage'][$mypage] = 'www.redaxo.org/de/forum';
 $REX['PERM'][] = "community[]";

@@ -6,6 +6,11 @@
  * @author <a href="http://www.yakamara.de">www.yakamara.de</a>
  */
 
+$mypage = "auth";
+$REX['ADDON']['version'][$mypage] = '2.9';
+$REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
+$REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
+
 include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/classes/class.rex_com_navigation.inc.php";
 include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/classes/class.rex_com_auth.inc.php";
 

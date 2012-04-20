@@ -114,6 +114,10 @@ if(($login_name && $login_psw) || !empty($user_session['UID']) || $session_key)
         $redirect = rex_getUrl($REX['ADDON']['community']['plugin_auth']['article_login_ok']);
     }
     
+    // track last_action_time
+    $u = rex_sql::factory();
+    $u->setQuery('update rex_com_user set last_action_time="'.date("U").'" where id="'.$REX['COM_USER']->getValue('id').'"');
+    
     // Success Authentification -> Do Nothing
     
   }

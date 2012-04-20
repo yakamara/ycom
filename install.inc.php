@@ -17,17 +17,17 @@ if($I18N->msg("htmlcharset") != "utf-8") {
 	$REX['ADDON']['install']['community'] = 0;
 	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_phpmailer_version_problem','2.8');
 
-}elseif(OOAddon::isAvailable('xform') != 1 || OOAddon::getVersion('xform') < "2.8") {
+}elseif(OOAddon::isAvailable('xform') != 1 || OOAddon::getVersion('xform') < "2.9") {
 	$REX['ADDON']['install']['community'] = 0;
-	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_version_problem','2.8');
+	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_version_problem','2.9');
 
-}elseif(OOPlugin::isAvailable('xform','manager') != 1 || OOPlugin::getVersion("xform", "manager") < "2.8") {
+}elseif(OOPlugin::isAvailable('xform','manager') != 1 || OOPlugin::getVersion("xform", "manager") < "2.9") {
 	$REX['ADDON']['install']['community'] = 0;
-	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_manager_version_problem','2.8');
+	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_manager_version_problem','2.9');
 
-}elseif(OOPlugin::isAvailable('xform','email') != 1 || OOPlugin::getVersion("xform", "email") < "2.8") {
+}elseif(OOPlugin::isAvailable('xform','email') != 1 || OOPlugin::getVersion("xform", "email") < "2.9") {
 	$REX['ADDON']['install']['community'] = 0;
-	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_email_version_problem','2.8');
+	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_email_version_problem','2.9');
 
 }else
 {
@@ -37,7 +37,7 @@ if($I18N->msg("htmlcharset") != "utf-8") {
 		$r = new rex_xform_manager;
 		$r->generateAll();
 	}
-	rex_register_extension('ADDONS_INCLUDED', 'rex_com_install');
+	rex_register_extension('OUTPUT_FILTER', 'rex_com_install');
 
 }
 

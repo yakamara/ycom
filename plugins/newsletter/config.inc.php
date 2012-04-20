@@ -6,6 +6,11 @@
  * @version 1.0
  */ 
 
+$mypage = "newsletter";
+$REX['ADDON']['version'][$mypage] = '2.9';
+$REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
+$REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
+
 if ($REX["REDAXO"] && $REX['USER'] && $REX['USER']->isAdmin("rights","admin[]"))
 {
   $REX['ADDON']['community']['SUBPAGES'][] = array('plugin.newsletter','Newsletter');
