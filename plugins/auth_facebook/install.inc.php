@@ -21,22 +21,6 @@ if($ADDONSsic['status']['community'] && $ADDONSsic['status']['xform'])
 	//
 	$sql = new rex_sql();
 	
-	## Field: authsource
-	$sql->setQuery("SHOW COLUMNS FROM rex_com_user WHERE Field='authsource'");
-	$REX['ADDON']['installmsg']['facebook'] = $sql->getError();
-	
-	if(!$sql->getRows() && $REX['ADDON']['installmsg']['auth_facebook'] == '')
-	{
-		$sql->setQuery("INSERT INTO rex_xform_field (id, table_name, prio, type_id, type_name, f1, f2, list_hidden, search) VALUES (NULL, 'rex_com_user', '100', 'value', 'text', 'authsource', 'translate:com_auth_authsource', '1', '0')");
-		$REX['ADDON']['installmsg']['auth_facebook'] = $sql->getError();
-
-		if($REX['ADDON']['installmsg']['auth_facebook'] == '')
-		{
-			$sql->setQuery("ALTER TABLE rex_com_user ADD authsource TEXT NOT NULL");
-			$REX['ADDON']['installmsg']['auth_facebook'] = $sql->getError();
-		}
-	}
-	
 	## Field: facebookid
 	$sql->setQuery("SHOW COLUMNS FROM rex_com_user WHERE Field='facebookid'");
 	$REX['ADDON']['installmsg']['auth_facebook'] = $sql->getError();
@@ -51,6 +35,15 @@ if($ADDONSsic['status']['community'] && $ADDONSsic['status']['xform'])
 			$sql->setQuery("ALTER TABLE rex_com_user ADD facebookid TEXT NOT NULL");
 			$REX['ADDON']['installmsg']['auth_facebook'] = $sql->getError();
 		}
+		
+		## regenerate table-manager
+		function rex_com_auth_facebook_install()
+		{
+		  $table_manager = new rex_xform_manager;
+		  $table_manager->generateAll();
+		}
+		
+		rex_register_extension('OUTPUT_FILTER', 'rex_com_auth_facebook_install');
 	}
 }
 else
