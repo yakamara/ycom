@@ -10,64 +10,91 @@ if($fbstate != '' && $fbcode != '')
 	{
 		if(rex_com_auth_facebook::checkRequiredPerms())
 		{
-			## Get User Array
+			// -------------------------- Get User Array
 			$fbuser = $REX['ADDON']['community']['plugin_auth_facebook']['facebook']->api('/me','GET');
 			
-			## Check if User Exists in Database
+			// -------------------------- Check if User Exists in Database
 			$sql = new rex_sql();
 			$sql->setQuery('SELECT facebookid FROM rex_com_user WHERE facebookid = '.$fbuser['id'].'');
 			
 			if($sql->getRows() == 0)
 			{
-				//
-				// Sync facebook user to database
-				//
-							
-				$fields = ''; $values = '';
-				
-				## Translate datafields
-				foreach($REX['ADDON']['community']['plugin_auth_facebook']['synctranslation'] as $key => $value)
-				{
-					$fields .= "$key, ";
-					$values .= "'".$fbuser[$value]."', ";
-				}
-				
-				## Adding defaultgroups
-				if(isset($REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']))
-				{
-					$fields .= "rex_com_group, ";
-					$values .= "'".implode(',' , $REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups'])."',";
-				}
-								
-				## Create new database user
-				$sql->setQuery("INSERT INTO rex_com_user (".$fields." login, password, status, authsource, facebookid) VALUES (".$values." '".$fbuser['first_name'].".".$fbuser['last_name'].".fb.".$fbuser['id']."', '".rex_com_auth_facebook::generatePassword('32')."', '1', 'facebook', '".$fbuser['id']."')");
 			
-				//TODO: UPDATE RELATION TABLE
+				// -------------------------- Sync facebook user to database
+				
+				$login = $fbuser['username'].".fb.".$fbuser['id'];
+				
+				$iu = rex_sql::factory();
+				$iu->setTable("rex_com_user");
+
+				$iu->setValue("status",1);
+        $iu->setValue("authsource","facebook");
+        $iu->setValue("facebookid",$fbuser['id']);
+
+        // -------------------------- Check if User Exists in Database
+        $gu = rex_sql::factory();
+        // $gu->debugsql = 1;
+        if(array_key_exists("email", $REX['ADDON']['community']['plugin_auth_facebook']['synctranslation']))
+        {
+          $email = $fbuser["email"];
+          $gu->setQuery('SELECT * FROM rex_com_user WHERE email="'.mysql_real_escape_string($email).'" LIMIT 1');
+
+        }else 
+        {
+          $gu->setQuery('SELECT * FROM rex_com_user WHERE login="'.mysql_real_escape_string($login).'" LIMIT 1');
+
+        }
+        
+        if($gu->getRows() == 0)
+        {
+          // -------------------------- User does not exist
+          
+          $iu->setValue("login",$fbuser['last_name'].".fb.".$fbuser['id']);
+          $iu->setValue("password",rex_com_auth_facebook::generatePassword('16'));
+          
+          ## Adding defaultgroups
+          if(isset($REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']))
+          {
+            $iu->setValue("rex_com_group",implode(',' , $REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']));
+          }
+          
+          ## Translate datafields
+          foreach($REX['ADDON']['community']['plugin_auth_facebook']['synctranslation'] as $key => $value)
+          {
+            $iu->setValue($key,$fbuser[$value]);
+          }
+        
+          $iu->insert();
+
+          rex_com_user::triggerUserCreated($iu->getLastId()); // TODO: params as array()
+          
+        }else {
+
+          // -------------------------- User exists -> only update
+          
+          $iu->setWhere('id='.$gu->getValue("id"));
+          $iu->update();
+          
+          rex_com_user::triggerUserUpdated($gu->getValue("id")); // TODO: params as array()
+          
+        }
+			
 			}
 			
-			// TODO: Bestimte Felder auf wunsch bei jedem Login erneut Syncronisieren.
+			// TODO: 
+			// Bestimte Felder auf wunsch bei jedem Login erneut Syncronisieren.
 	
-			## Set Login
-			$REX['COM_USER'] = new rex_login();
-			$REX['COM_USER']->setSqlDb(1);
-			$REX['COM_USER']->setSysID(rex_com_auth::getLoginKey());
-			$REX['COM_USER']->setSessiontime(7200);
-			$REX['COM_USER']->setUserquery('select * from rex_com_user where facebookid='.$fbuser['id'].' and status>0');
-			$REX['COM_USER']->setLogin('Dummy','Dummy'); //Setting dummys for Login
-			$REX['COM_USER']->setLoginquery('select * from rex_com_user where facebookid='.$fbuser['id'].' and status>0');
+	    $params = array("facebookid" => $fbuser['id'], "status" => 1);
+	    rex_com_auth::loginWithParams($params);
 			
-			$referer = rex_request($REX['ADDON']['community']['plugin_auth']['request']['ref'],'string');
-			
-			if($REX['COM_USER']->checkLogin())
-				if($referer)
-			      header('Location:'.urldecode($referer));
-				else  
-			      rex_redirect($REX['ADDON']['community']['plugin_auth']['article_login_ok']);
+			if(rex_com_auth::getUser() && $REX['ADDON']['community']['plugin_auth_facebook']['redirect'])		
+			  rex_redirect($REX['ADDON']['community']['plugin_auth']['article_login_ok']);
 		}
 	}
 	
-	//if(!$REX['ADDON']['community']['plugin_auth_facebook']['facebook']->getUser() || !(isset($REX["COM_USER"]) && is_object($REX["COM_USER"])))
-	//	$REX['ADDON']['community']['plugin_auth']['errormsg'][] = 'translate:com_auth_facebook_loginfail';
-	
+	if(!$REX['ADDON']['community']['plugin_auth_facebook']['facebook']->getUser() || !(rex_com_auth::getUser()) && $REX['ADDON']['community']['plugin_auth_facebook']['redirect'])
+		rex_redirect($REX['ADDON']['community']['plugin_auth']['article_login_failed'],'',array('rex_com_auth_info'=>'2'));
+
 }
+
 ?>

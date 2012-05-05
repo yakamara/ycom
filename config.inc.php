@@ -16,6 +16,7 @@ if (!isset($I18N) && !is_object($I18N))
 $I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/' . $mypage . '/lang');
 
 include $REX["INCLUDE_PATH"]."/addons/community/classes/class.rex_com.inc.php";
+include $REX["INCLUDE_PATH"]."/addons/community/classes/class.rex_com_user.inc.php";
 
 $REX['ADDON']['name'][$mypage] = "Community";   // name
 $REX['ADDON']['perm'][$mypage] = "community[]"; // benoetigte mindest permission

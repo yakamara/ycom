@@ -22,14 +22,14 @@ if(isset($I18N) && is_object($I18N))
   $I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/lang');
 
 // --- DYN
-$REX['ADDON']['community']['plugin_auth']['auth_active'] = "1";
-$REX['ADDON']['community']['plugin_auth']['stay_active'] = "1";
+$REX['ADDON']['community']['plugin_auth']['auth_active'] = 1;
+$REX['ADDON']['community']['plugin_auth']['stay_active'] = 1;
 $REX['ADDON']['community']['plugin_auth']['article_login_ok'] = 1;
 $REX['ADDON']['community']['plugin_auth']['article_login_failed'] = 12;
 $REX['ADDON']['community']['plugin_auth']['article_logout'] = 12;
 $REX['ADDON']['community']['plugin_auth']['article_withoutperm'] = 24;
-$REX['ADDON']['community']['plugin_auth']['login_field'] = "email";
-$REX['ADDON']['community']['plugin_auth']['passwd_hashed'] = "1";
+$REX['ADDON']['community']['plugin_auth']['login_field'] = "login";
+$REX['ADDON']['community']['plugin_auth']['passwd_hashed'] = "";
 // --- /DYN
 
 $REX['ADDON']['community']['plugin_auth']['cookie_ttl'] = 14; // Cookie time to life - in days

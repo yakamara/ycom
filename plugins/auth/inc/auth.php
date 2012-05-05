@@ -1,21 +1,6 @@
 <?php
-//TODO: write own user-class
 
 global $REX, $I18N;
-
-if(!isset($_SESSION))
-  @session_start();
-
-unset($REX['COM_USER']);
-
-/*
-* Init
-*/
-## local
-$login_key = rex_com_auth::getLoginKey();
-$session_key = '';
-$user_session = '';
-$redirect = '';
 
 ## Request variables
 $login_name = stripslashes(rex_request($REX['ADDON']['community']['plugin_auth']['request']['name'],"string"));
@@ -23,124 +8,25 @@ $login_psw = stripslashes(rex_request($REX['ADDON']['community']['plugin_auth'][
 $login_stay = rex_request($REX['ADDON']['community']['plugin_auth']['request']['stay'],"string");
 $referer = rex_request($REX['ADDON']['community']['plugin_auth']['request']['ref'],"string");
 $logout = rex_request($REX['ADDON']['community']['plugin_auth']['request']['logout'],"int");
-
-## Sessions
-if(isset($_SESSION[$login_key]))
-  $user_session = $_SESSION[$login_key];
-
-## Checking for existing Cookie
-if($REX['ADDON']['community']['plugin_auth']['stay_active'])
-  if(isset($_COOKIE[$login_key]))
-    $session_key = rex_cookie($login_key,'string');
+$redirect = '';
 
 /*
-* Authentification
+  login_status
+  0: not logged in
+  1: logged in
+  2: has logged in
+  3: has logged out
+  4: login failed
 */
-## if newlogin or Sessions available setting up User-Object
-if(($login_name && $login_psw) || !empty($user_session['UID']) || $session_key)
+$login_status = rex_com_auth::login($login_name, $login_psw, $login_stay, $logout);
+
+## set redirect
+if($login_status == 2)
 {
-  $login_success = false;
-  
-  // -> EP COM_REGISTER_AUTHTYPE
-  $authtypes = array(/* typename => array('function' => , 'passwdsource' => , 'fields' => array()) */);
-  $authtypes = rex_register_extension_point('COM_REGISTER_AUTHTYPE',$authtypes);
-
-  ## User object
-  $REX['COM_USER'] = new rex_login();
-  $REX['COM_USER']->setSqlDb(1);
-  $REX['COM_USER']->setSysID($login_key);
-  $REX['COM_USER']->setSessiontime(7200);
-  $REX['COM_USER']->setUserID("rex_com_user.id");
-  $REX['COM_USER']->setUserquery("select * from rex_com_user where id='USR_UID' and status>0");
-  
-  ## --- NEW LOGIN ---
-  if($login_name)
-  {
-    
-    ## TODO:
-    // if user existing in community dbase
-          // get authtype und use auth function
-              // on success -> do login
-    // if not
-          // looping all registered authtypes
-              // if no user -> login fail
-              // else -> use auth function
-                  // on success -> sync to community dbase and do login
-    
-    ## Hash password if required and not already hashed (javascript
-    $hash_func = $REX['ADDON']['community']['plugin_auth']['passwd_algorithmus'];
-    if($REX['ADDON']['community']['plugin_auth']['passwd_hashed'] && strlen($login_psw) != strlen(hash($hash_func,"xyz")))
-      $REX['COM_USER']->setPasswordFunction($hash_func);
-    
-    $REX['COM_USER']->setLogin($login_name,$login_psw);
-    $REX['COM_USER']->setLoginquery('select * from rex_com_user where `'.$REX['ADDON']['community']['plugin_auth']['login_field'].'`="USR_LOGIN" and password="USR_PSW" and status>0');
-  }
-  elseif($session_key && !isset($_SESSION[$login_key])) //if cookie available
-  {
-    $REX['COM_USER']->setLogin('dummy','dummy');
-    $REX['COM_USER']->setLoginquery('select * from rex_com_user where session_key="'.$session_key.'" and session_key not "" and status>0');
-  }
-
-  ## --- CHECK LOGIN ---
-  $login_success = $REX['COM_USER']->checkLogin();
-
-  if($login_success)
-  {
-    ## Remember User-Session?
-    if($REX['ADDON']['community']['plugin_auth']['stay_active'])
-    {
-      if($login_stay)
-      {
-        ## creating new Session-Key and write to dbase
-        $session_key = sha1($REX['COM_USER']->getValue('id').$REX['COM_USER']->getValue('firstname').$REX['COM_USER']->getValue('name').time().rand(0,1000));
-        $sql = rex_sql::factory();
-        $sql->setQuery('update rex_com_user set session_key="'.$session_key.'" where id='.$REX['COM_USER']->getValue('id'));
-      }
-
-      ## Update cookie
-      setcookie($login_key, $session_key, time() + (3600*24*$REX['ADDON']['community']['plugin_auth']['cookie_ttl']), "/" );  
-    }
-    
-    if($login_name)
-    {
-      // -> EP COM_AUTH_LOGIN
-      // Manipulate USER Object oder execute functions on positiv login
-      $REX['COM_USER'] = rex_register_extension_point('COM_AUTH_LOGIN', $REX['COM_USER'], array('id' => $REX['COM_USER']->getValue('id'), 'login' => $REX['COM_USER']->getValue($REX['ADDON']['community']['plugin_auth']['login_field'])));
-      
-      ## set redirect     
-      if($referer)
-        $redirect = urldecode($referer);
-      else 
-        $redirect = rex_getUrl($REX['ADDON']['community']['plugin_auth']['article_login_ok']);
-    }
-    
-    // track last_action_time
-    $u = rex_sql::factory();
-    $u->setQuery('update rex_com_user set last_action_time="'.date("U").'" where id="'.$REX['COM_USER']->getValue('id').'"');
-    
-    // Success Authentification -> Do Nothing
-    
-  }
-  else
-  {
-    unset($REX['COM_USER']);
-    
-    //TODO: Adding EP COM_AUTH_LOGINFAILED
-    
-  }
-}
-
-/*
- * Logout process
- */
-if($logout && isset($REX['COM_USER']))
-{
-  // -> EP COM_USER_LOGOUT
-  // Use USER Object or execute functions when user logs out.
-  rex_register_extension_point('COM_AUTH_LOGOUT',$REX['COM_USER'],array('id' => $REX['COM_USER']->getValue('id'), 'login' => $REX['COM_USER']->getValue($REX['ADDON']['community']['plugin_auth']['login_field'])));
-  
-  ## Unset Sessions
-  rex_com_auth::clearUserSession();
+  if($referer)
+    $redirect = urldecode($referer);
+  else 
+    $redirect = rex_getUrl($REX['ADDON']['community']['plugin_auth']['article_login_ok']);
 }
 
 /*

@@ -103,7 +103,8 @@ if(OOPlugin::isAvailable('community','group'))
 		$groupselect->addOption($group['name'].' ['.$group['id'].']',$group['id']);
 	}
 	
-	$groupselect->setSelected($REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']);
+	if(isset($REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']))
+  	$groupselect->setSelected($REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']);
 
 
 				echo '	<legend>'.$I18N->msg("com_auth_facebook_settings_newuser").'</legend>

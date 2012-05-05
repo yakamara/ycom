@@ -1,4 +1,5 @@
 <?php
+
 class rex_com_auth_facebook
 {
 	//
