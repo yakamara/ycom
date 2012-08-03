@@ -1,0 +1,15 @@
+com_auth_media_settings = Einstellungen
+com_auth_media_settings_config = Plugin Konfiguration
+com_auth_media_settings_unsecure_fileext = Ungeschützte Dateiendungen
+com_auth_media_help_unsecure_fileext = Dateien mit bestimmten Dateiendungen können vom Downloadschutz ausgenommen werden (etwa um die perfomance nicht unnötig zu belasten). Tragen Sie hier Dateiendungen durch Komma getrent, ohne führenden Punkt, ein.
+com_auth_media_settings_description = Dieses Plugin schützt Dateien im Medienpool. Die Sicherheitseinstellungen können für jede Datei einzeln im Medienpool eingestellt werden.
+com_auth_media_settings_xsendfile = XSendFile
+com_auth_media_help_xsendfile = Diese Einstellung aktiviert die Unterstützung für XSendFile (z.B. mod_xsendfile für Apache). Aktivieren sie diese Option, wenn ihr Server dies unterstützt und Sie mit der Funktionsweise vertraut sind. Beachten Sie, dass XSendFile normalerweiße nicht zur Verfügung steht und eine Aktivierung dieser Option in diesem Fall die Auslieferungen von Dateien auf ihrer Seite verhindert. 
+
+com_auth_media_settings_update = Einstellungen wurden erfolgreich aktuallisiert
+com_auth_media_htaccess_failupdate = Die .htaccess (/files/.htaccess) konnte nicht aktuallisiert werden. Prüfen Sie ob diese vorhanden und beschreibar ist
+com_auth_media_settings_failupdate = Einstellungen konnten nicht aktuallisert werden. Prüfen sie die Schreibrechte der config.inc.php
+
+com_auth_media_legend = Dateisicherheit (ungeschützt, wenn nichts ausgewählt)
+com_auth_media_legend_groupname = Erlaubte Gruppen
+com_auth_media_comusers = Alle eingeloggten User
