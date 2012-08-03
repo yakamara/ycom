@@ -27,9 +27,9 @@ $REX['ADDON']['community']['plugin_auth']['stay_active'] = 1;
 $REX['ADDON']['community']['plugin_auth']['article_login_ok'] = 1;
 $REX['ADDON']['community']['plugin_auth']['article_login_failed'] = 12;
 $REX['ADDON']['community']['plugin_auth']['article_logout'] = 12;
-$REX['ADDON']['community']['plugin_auth']['article_withoutperm'] = 24;
+$REX['ADDON']['community']['plugin_auth']['article_withoutperm'] = 1;
 $REX['ADDON']['community']['plugin_auth']['login_field'] = "login";
-$REX['ADDON']['community']['plugin_auth']['passwd_hashed'] = "";
+$REX['ADDON']['community']['plugin_auth']['passwd_hashed'] = "1";
 // --- /DYN
 
 $REX['ADDON']['community']['plugin_auth']['cookie_ttl'] = 14; // Cookie time to life - in days

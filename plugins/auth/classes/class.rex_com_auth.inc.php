@@ -265,9 +265,10 @@ class rex_com_auth
         if($login_name)
         {
           $login_status = 4; // login failed
-          
-          $REX['COM_USER'] = rex_register_extension_point('COM_AUTH_LOGIN_FAILED', "", array('login' => $login_name));
         }
+        
+        $login_status = rex_register_extension_point('COM_AUTH_LOGIN_FAILED', $login_status, array(
+            'login_name' => $login_name, 'login_psw' => $login_psw, 'login_stay' => $login_stay, 'logout' => $logout, 'query_extras' => $query_extras));
         
       }
     }
