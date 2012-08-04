@@ -40,6 +40,8 @@ if($I18N->msg("htmlcharset") != "utf-8")
 
   $msg = "";
 
+  /*
+
   // AUTOINSTALL THESE PLUGINS
   $autoinstall = array('auth','group');
   
@@ -71,6 +73,7 @@ if($I18N->msg("htmlcharset") != "utf-8")
     }
   }
   
+  */
 
   if ($msg != '')
   {

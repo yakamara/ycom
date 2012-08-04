@@ -48,12 +48,13 @@ if($error != "") {
 	
 }else
 {
+  /*
 	function rex_com_auth_install() {
 		$r = new rex_xform_manager;
 		$r->generateAll();
 	}
 	rex_register_extension('OUTPUT_FILTER', 'rex_com_auth_install');
-
+  */
 }
 
 ?>

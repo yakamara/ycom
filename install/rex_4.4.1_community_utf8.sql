@@ -75,9 +75,9 @@ INSERT INTO `rex_62_params` VALUES
   (5,'translate:description','art_description',4,'',2,'','','','','admin',1189345025,'admin',1189345025),
   (6,'translate:keywords','art_keywords',5,'',2,'','','','','admin',1189345068,'admin',1189345068),
   (7,'translate:metadata_image','art_file',6,'',6,'','','','','admin',1189345109,'admin',1189345109),
-  (14,'translate:com_group_name','art_com_groups',15,'multiple=multiple',3,'','select name as label,id from rex_com_group order by label','','','admin',1341486246,'',0),
-  (10,'translate:com_permtype','art_com_permtype',1,'',3,'','0:translate:com_perm_extends|1:translate:com_perm_only_logged_in|2:translate:com_perm_only_not_logged_in|3:translate:com_perm_all','','','admin',1341501553,'',0),
-  (13,'translate:com_group_perm','art_com_grouptype',14,'',3,'','0:translate:com_group_forallgroups|1:translate:com_group_inallgroups|2:translate:com_group_inonegroup|3:translate:com_group_nogroups','','','admin',1341486246,'admin',1320955573),
+  (14,'translate:com_group_name','art_com_groups',15,'multiple=multiple',3,'','select name as label,id from rex_com_group order by label','','','admin',1344110669,'',0),
+  (10,'translate:com_permtype','art_com_permtype',1,'',3,'','0:translate:com_perm_extends|1:translate:com_perm_only_logged_in|2:translate:com_perm_only_not_logged_in|3:translate:com_perm_all','','','admin',1344114649,'',0),
+  (13,'translate:com_group_perm','art_com_grouptype',14,'',3,'','0:translate:com_group_forallgroups|1:translate:com_group_inallgroups|2:translate:com_group_inonegroup|3:translate:com_group_nogroups','','','admin',1344110669,'admin',1320955573),
   (15,'RexSEO Einstellungen','art_rexseo_legend',9,'',12,'','','','','admin',1320744271,'admin',1320744271),
   (16,'Manuelle URL','art_rexseo_url',10,'',1,'','','','','admin',1320744271,'admin',1320744271),
   (17,'Manuelle Canonical URL','art_rexseo_canonicalurl',11,'',1,'','','','','admin',1320744271,'admin',1320744271),
@@ -231,13 +231,13 @@ INSERT INTO `rex_article` VALUES
   (3,3,0,'Interner Bereich','Interner Bereich',3,'',1,1,'|',1,1318676335,1321026791,1,0,'admin','admin',0,'','','','','bild_sardinien_2.jpg','1','','||','','','','','','',''),
   (4,4,17,'Registrierung','Registrierung',2,'',1,1,'|17|',1,1318676343,1342793381,1,0,'admin','admin',0,'','','','','bild_sardinien_2.jpg','2','','||','','','','','','',''),
   (5,5,17,'Mein Profil','Mein Profil',5,'',1,1,'|17|',1,1318676344,1341504929,1,0,'admin','admin',0,'','','','','','1','','','','','','','','',''),
-  (6,6,17,'Mein Passwort ändern','Mein Passwort ändern',6,'',1,1,'|17|',1,1318676345,1320966012,1,0,'admin','admin',0,'','','','','','1','','','','','','','','',''),
+  (6,6,17,'Mein Passwort ändern','Mein Passwort ändern',6,'',1,1,'|17|',1,1318676345,1344114026,1,0,'admin','admin',0,'','','','','','1','','','','','','','','',''),
   (8,8,0,'----------','----------',4,'',1,1,'|',0,1318675862,1318675862,1,0,'admin','admin',0,'','','','','','','','','','','','','','',''),
   (9,9,0,'Gruppe A','Gruppe A',6,'',1,1,'|',1,1318676347,1321026084,1,0,'admin','admin',0,'','','','','bild_venedig.jpg','1','2','|1|','','','','','','',''),
   (10,10,0,'Gruppe A oder B','Gruppe A oder B',7,'',1,1,'|',1,1318676349,1321026105,1,0,'admin','admin',0,'','','','','bild_venedig.jpg','1','2','|1|2|','','','','','','',''),
   (11,11,0,'Gruppe B','Gruppe B',8,'',1,1,'|',1,1318676349,1321026124,1,0,'admin','admin',0,'','','','','bild_sardinien.jpg','1','2','|2|','','','','','','',''),
   (12,12,17,'Login','Login',1,'',1,1,'|17|',1,1318676342,1320966811,1,0,'admin','admin',0,'','','','','','2','','','','','','','','',''),
-  (13,13,21,'Impressum','Impressum',3,'',1,1,'|21|',1,1320936449,1321028782,1,0,'admin','admin',0,'','','','','','','','','','','','','','',''),
+  (13,13,21,'Impressum','Impressum',3,'',1,1,'|21|',1,1320936449,1344111323,1,0,'admin','admin',0,'','','','','','','','','','','','','','',''),
   (14,14,17,'Passwort vergessen','Passwort vergessen',3,'',1,1,'|17|',1,1318680928,1343993557,1,0,'admin','admin',0,'','','','','','2','','','','','','','','',''),
   (15,15,4,'Registrierungsbestätigung','Registrierung',0,'',0,2,'|17|4|',1,1318683387,1342795047,1,0,'admin','admin',0,'','','','','','','','','','','','','','',''),
   (16,16,22,'Gesperrter Bereich','Gesperrter Bereich',2,'',1,1,'|22|',1,1320836953,1321027445,1,0,'admin','admin',0,'','','','','','','','','','','','','','',''),
@@ -353,7 +353,7 @@ INSERT INTO `rex_article_slice` VALUES
   (12,0,1,6,'','','com_auth_load_user|userinfo|email,firstname,name\r\nobjparams|form_showformafterupdate|1\r\nshowvalue|email|E-Mail / Login:\r\ntext|firstname|Vorname:\r\nvalidate|empty|firstname|Bitte geben Sie Ihren Vornamen ein.\r\ntext|name|Nachname:\r\nvalidate|empty|name|Bitte geben Sie Ihren Namen ein.\r\naction|com_auth_db','','','Ihre Daten wurden aktualisiert','0','','','','2','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',5,3,1318683332,1341504929,'admin','admin',0,0),
   (10,0,1,11,'','','text|email|E-Mail-Adresse*|\r\n\r\ncaptcha|Bitte geben Sie den entsprechenden Sicherheitscode ein. Sollten Sie den Code nicht lesen können klicken Sie bitte auf die Grafik, um einen neuen Code zu generieren.|Sie haben den Sicherheitscode falsch eingegeben. \r\n\r\nvalidate|notEmpty|email|Bitte geben Sie eine E-Mail ein\r\nvalidate|existintable|email|rex_com_user|email|Diese E-Mail-Adresse ist nicht bei uns registriert.\r\n\r\naction|readtable|rex_com_user|email|email\r\naction|db2email|send_password_de|email','','','Vielen Dank. Ihnen wird Ihr Passwort nun zugeschickt','0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',14,3,1318680945,1343993557,'admin','admin',0,0),
   (11,0,1,0,'Passwort vergessen','h1','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',14,1,1318680951,1320909570,'admin','admin',0,0),
-  (13,0,1,2,'','','password|password|Neues Passwort:\r\npassword|password_2|Passwort wiederholen:||no_db\r\nvalidate|empty|password|Bitte geben Sie ein Passwort ein.\r\nvalidate|compare|password|password_2|Bitte geben Sie zweimal das gleiche Passwort ein\r\naction|showtext||<div class=\"xform\"><ul class=\"form_info\"><li>Ihre Daten wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.</li></ul></div>||1\r\naction|com_auth_db','','','','0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',6,3,1318683363,1320966012,'admin','admin',0,0),
+  (13,0,1,2,'','','password|password|Neues Passwort:\r\npassword|password_2|Passwort wiederholen:||no_db\r\nvalidate|empty|password|Bitte geben Sie ein Passwort ein.\r\nvalidate|compare|password|password_2|Bitte geben Sie zweimal das gleiche Passwort ein\r\naction|showtext||<div class=\"xform\"><ul class=\"form_info\"><li>Ihre Daten wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.</li></ul></div>||1\r\ncom_auth_password_hash|password|password|\r\naction|com_auth_db','','','','0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',6,3,1318683363,1344114026,'admin','admin',0,0),
   (14,0,1,0,'','','hidden|status|1\r\nobjparams|submit_btn_show|0\r\nobjparams|send|1\r\n\r\nvalidate|com_auth_login|activation_key=rex_com_activation_key,email=rex_com_email|status=0|Zugang wurde bereits bestätigt oder ist schon fehlgeschlagen|status\r\n\r\naction|com_auth_db|update\r\naction|html|<b>Vielen Dank, Sie sind nun eingeloggt und haben Ihre E-Mail bestätigt</b>','','','','0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',15,3,1318683393,1342795047,'admin','admin',0,0),
   (15,0,1,0,'Gesperrter Bereich','h1','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',16,1,1318684185,1321027445,'admin','admin',0,0),
   (54,0,1,0,'Kontakt','h1','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',25,1,1320954013,1320954013,'admin','admin',0,0),
@@ -388,11 +388,11 @@ INSERT INTO `rex_article_slice` VALUES
   (55,0,1,54,'','','text|name|Name\r\ntext|email|E-Mail\r\nvalidate|empty|email|Bitte geben Sie die E-Mail ein\r\nvalidate|email|email|Ihr E-Mail ist nicht korrekt\r\ntextarea|comment|Kommentar\r\ncaptcha|Bitte geben Sie den entsprechenden Sicherheitscode ein. Sollten Sie den Code nicht lesen können klicken Sie bitte auf die Grafik, um einen neuen Code zu generieren.|Sie haben den Sicherheitscode falsch eingegeben. \r\n\r\naction|db2email|contact_de|','','','h3. Vielen Dank für Ihren Kommentar.','0','','','','2','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',25,3,1320954106,1320966446,'admin','admin',0,0),
   (56,0,1,0,'Gruppe A oder B','h1','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',10,1,1320957507,1320957917,'admin','admin',0,0),
   (62,0,1,0,'Gruppe B','h1','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',11,1,1320957933,1320957933,'admin','admin',0,0),
-  (59,0,1,48,'h2. redaxo c/o - Yakamara Media GmbH & Co. KG\r\n\r\nAnsprechpartner: Jan Kristinus\r\nKaiserstrasse 69\r\n60329 Frankfurt\r\n\r\nTel.: +49 (0)69 900.20.60.30\r\n\r\nE-Mail: info[at]redaxo.org','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',13,4,1320957626,1320964857,'admin','admin',0,0),
+  (59,0,1,48,'h2. redaxo c/o - Yakamara Media GmbH & Co. KG\r\n\r\nAnsprechpartner: Jan Kristinus\r\nKaiserstrasse 69\r\n60329 Frankfurt\r\n\r\nTel.: +49 (0)69 900.20.60.30\r\n\r\nE-Mail: info[at]redaxo.org\r\nwww: \"http://www.redaxo.org\":http://www.redaxo.org\r\n','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',13,4,1320957626,1344111002,'admin','admin',0,0),
   (69,0,1,59,'','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',13,5,1320964603,1320964603,'admin','admin',0,0),
-  (70,0,1,69,'h2. Community Paket\r\n\r\n* Jan Kristinus / Umsetzung\r\n* Oliver Kreischer / Design / Umsetzung\r\n* Peter Bickel / Texte','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',13,4,1320964620,1321028782,'admin','admin',0,0),
+  (70,0,1,69,'h2. Community Paket\r\n\r\n* Jan Kristinus / Umsetzung / \"Yakamara Media GmbH & Co. KG\":http://www.yakamara.de\r\n* Oliver Kreischer / Design / Umsetzung / \"Oliver Kreischer\":http://www.kreischer.de\r\n* Peter Bickel / Texte / \"Polarpixel\":http://www.polarpixel.de','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',13,4,1320964620,1344110969,'admin','admin',0,0),
   (71,0,1,70,'','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',13,5,1320964624,1320964624,'admin','admin',0,0),
-  (72,0,1,71,'h2. AddOns\r\n\r\n* Xform AddOn / J.Kristinus\r\n* Community AddOn / J.Kristinus\r\n* RexSEO / M.Staab, W.Huttegger, D.Holloway, J.Kristinus, J.Camrda\r\n* Markitup / J.Salvat, R.Nitschke, D.Holloway\r\n','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',13,4,1320964636,1320964808,'admin','admin',0,0),
+  (72,0,1,71,'h2. AddOns\r\n\r\n* Xform AddOn / Jan Kristinus, \"Yakamara Media GmbH & Co. KG\":http://www.yakamara.de\r\n* Community AddOn\r\n** Jan Kristinus \"Yakamara Media GmbH & Co. KG\":http://www.yakamara.de\r\n** Markus Lorch \"IT-Kult\":http://www.it-kult.de','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',13,4,1320964636,1344111323,'admin','admin',0,0),
   (74,0,1,61,'Diese Seite bekommt man zu sehen, wenn man der Gruppe A zugewiesen ist.','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',9,4,1321026084,1321026084,'admin','admin',0,0),
   (75,0,1,56,'Diese Seite bekommt man zu sehen, wenn man der Gruppe A oder B zugewiesen ist.','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',10,4,1321026105,1321026105,'admin','admin',0,0),
   (76,0,1,62,'Diese Seite bekommt man zu sehen, wenn man der Gruppe B zugewiesen ist.','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',11,4,1321026124,1321026124,'admin','admin',0,0),
@@ -450,8 +450,9 @@ CREATE TABLE `rex_com_user` (
   `newsletter_last_id` text,
   `newsletter` varchar(255) DEFAULT NULL,
   `password_hash` text NOT NULL,
+  `last_action_time` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `rex_file`;
 CREATE TABLE `rex_file` (
   `file_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -617,29 +618,29 @@ CREATE TABLE `rex_xform_field` (
   `list_hidden` tinyint(4) NOT NULL,
   `search` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=178 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=205 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `rex_xform_field` WRITE;
 /*!40000 ALTER TABLE `rex_xform_field` DISABLE KEYS */;
 INSERT INTO `rex_xform_field` VALUES 
-  (170,'rex_com_user',140,'value','text','session_key','translate:session_key','','0','','','','','',1,1),
-  (169,'rex_com_user',130,'value','text','activation_key','translate:activation_key','','0','','','','','',1,1),
-  (168,'rex_com_user',120,'value','text','name','translate:name','','0','','','','','',0,1),
-  (167,'rex_com_user',110,'value','text','firstname','translate:firstname','','0','','','','','',0,1),
-  (166,'rex_com_user',100,'value','select','status','translate:status','translate:com_account_requested=0,translate:com_account_active=1,translate:com_account_inactive=-1','0','-1','0','','','',0,1),
-  (165,'rex_com_user',90,'validate','unique','email','translate:com_this_email_exists_already','','','','','','','',1,0),
-  (175,'rex_com_group',20,'validate','empty','name','translate:com_group_xform_enter_name','','','','','','','',1,0),
-  (164,'rex_com_user',80,'validate','email','email','translate:com_please_enter_email','','','','','','','',1,0),
-  (163,'rex_com_user',70,'validate','empty','email','translate:com_please_enter_email','','','','','','','',1,0),
-  (174,'rex_com_group',10,'value','text','name','translate:name','','0','','','','','',0,0),
-  (162,'rex_com_user',60,'value','text','email','translate:email','','0','','','','','',0,1),
-  (161,'rex_com_user',50,'validate','empty','password','translate:com_please_enter_password','','','','','','','',1,0),
-  (160,'rex_com_user',40,'value','text','password','translate:password','','0','','','','','',1,1),
-  (159,'rex_com_user',30,'validate','unique','login','translate:com_this_login_exists_already','rex_com_user','','','','','','',1,0),
-  (158,'rex_com_user',20,'validate','empty','login','translate:com_please_enter_login','','','','','','','',1,0),
-  (157,'rex_com_user',10,'value','text','login','translate:login','','0','','','','','',0,1),
-  (176,'rex_com_user',150,'value','be_manager_relation','rex_com_group','translate:com_group_name','rex_com_group','name','1','1','','','',1,0),
-  (177,'rex_com_user',55,'value','com_auth_password_hash','password_hash','password','','','','','','','',1,0);
+  (195,'rex_com_user',140,'value','text','session_key','translate:session_key','','0','','','','','',1,1),
+  (194,'rex_com_user',130,'value','text','activation_key','translate:activation_key','','0','','','','','',1,1),
+  (193,'rex_com_user',120,'value','text','name','translate:name','','0','','','','','',0,1),
+  (192,'rex_com_user',110,'value','text','firstname','translate:firstname','','0','','','','','',0,1),
+  (191,'rex_com_user',100,'value','select','status','translate:status','translate:com_account_requested=0,translate:com_account_active=1,translate:com_account_inactive=-1','0','-1','0','','','',0,1),
+  (190,'rex_com_user',90,'validate','unique','email','translate:com_this_email_exists_already','','','','','','','',1,0),
+  (180,'rex_com_group',20,'validate','empty','name','translate:com_group_xform_enter_name','','','','','','','',1,0),
+  (189,'rex_com_user',80,'validate','email','email','translate:com_please_enter_email','','','','','','','',1,0),
+  (188,'rex_com_user',70,'validate','empty','email','translate:com_please_enter_email','','','','','','','',1,0),
+  (179,'rex_com_group',10,'value','text','name','translate:name','','0','','','','','',0,0),
+  (187,'rex_com_user',60,'value','text','email','translate:email','','0','','','','','',0,1),
+  (186,'rex_com_user',50,'validate','empty','password','translate:com_please_enter_password','','','','','','','',1,0),
+  (185,'rex_com_user',40,'value','text','password','translate:password','','0','','','','','',1,1),
+  (184,'rex_com_user',30,'validate','unique','login','translate:com_this_login_exists_already','rex_com_user','','','','','','',1,0),
+  (183,'rex_com_user',20,'validate','empty','login','translate:com_please_enter_login','','','','','','','',1,0),
+  (182,'rex_com_user',10,'value','text','login','translate:login','','0','','','','','',0,1),
+  (196,'rex_com_user',150,'value','datestamp','last_action_time','U','0','1','','','','','',1,1),
+  (204,'rex_com_user',55,'value','com_auth_password_hash','password_hash','password','','','','','','','',1,0);
 /*!40000 ALTER TABLE `rex_xform_field` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -682,13 +683,13 @@ CREATE TABLE `rex_xform_table` (
   `import` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `table_name` (`table_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `rex_xform_table` WRITE;
 /*!40000 ALTER TABLE `rex_xform_table` DISABLE KEYS */;
 INSERT INTO `rex_xform_table` VALUES 
-  (18,1,'rex_com_user','translate:com_user','',100,100,1,0,1,1),
-  (20,1,'rex_com_group','translate:com_group_name','',50,110,0,0,0,0);
+  (22,1,'rex_com_user','translate:com_user','communityuser',100,100,1,0,1,1),
+  (21,1,'rex_com_group','translate:com_group_name','',50,110,0,0,0,0);
 /*!40000 ALTER TABLE `rex_xform_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
