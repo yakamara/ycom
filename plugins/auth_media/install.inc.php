@@ -6,7 +6,6 @@
 */
 
 $install_success = true;
-$install_source_path = $REX['INCLUDE_PATH'].'/addons/community/plugins/auth_media/install/';
 
 /*
  * Starte installation
@@ -67,14 +66,6 @@ if($install_success)
   if(is_array($purge_files) && count($purge_files)>0)
     foreach ($purge_files as $file)
       unlink($file);
-}
-
-## Copy .htacces file
-if($install_success)
-{
-  require_once $REX['INCLUDE_PATH'].'/addons/community/plugins/auth_media/classes/class.rex_com_auth_media.inc.php';
-  rex_com_auth_media::updateHtaccess();
-  
 }
 
 ## finish

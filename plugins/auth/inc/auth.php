@@ -41,7 +41,7 @@ if($article = OOArticle::getArticleById($REX["ARTICLE_ID"]))
     if($REX['ADDON']['community']['plugin_auth']['article_login_ok'] != $REX['ARTICLE_ID'])
       $params = array($REX['ADDON']['community']['plugin_auth']['request']['ref'] => urlencode($_SERVER['REQUEST_URI']));
     
-    $redirect = rex_getUrl($REX['ADDON']['community']['plugin_auth']['article_withoutperm'],'',$params,'&');
+    $redirect = rex_getUrl($REX['ADDON']['community']['plugin_auth']['article_withoutperm'], '', $params, '&');
   }
   
 /*

@@ -2,7 +2,7 @@
 
 $info = '';
 $warning = '';
-$xsendfile_checked = '';
+$auth_active_checked = '';
 
 /*
  * Update config.inc.php
@@ -10,22 +10,24 @@ $xsendfile_checked = '';
 if(rex_request("func","string")=="update")
 {
   ## get request parameters
-  if(rex_request("xsendfile","boolean"))
-    $REX['ADDON']['community']['plugin_auth_media']['xsendfile'] = 1;
+  if(rex_request("auth_active","boolean"))
+    $REX['ADDON']['community']['plugin_auth_media']['auth_active'] = 1;
   else
-    $REX['ADDON']['community']['plugin_auth_media']['xsendfile'] = 0;
+    $REX['ADDON']['community']['plugin_auth_media']['auth_active'] = 0;
     
   $REX['ADDON']['community']['plugin_auth_media']['unsecure_fileext'] = rex_request("unsecure_fileext","string");
-
+  $REX['ADDON']['community']['plugin_auth_media']['error_article_id'] = rex_request("error_article_id","int");
+  
   ## build new config content
   $content = '
-$REX[\'ADDON\'][\'community\'][\'plugin_auth_media\'][\'xsendfile\'] = '.$REX['ADDON']['community']['plugin_auth_media']['xsendfile'].';
+$REX[\'ADDON\'][\'community\'][\'plugin_auth_media\'][\'auth_active\'] = '.$REX['ADDON']['community']['plugin_auth_media']['auth_active'].';
 $REX[\'ADDON\'][\'community\'][\'plugin_auth_media\'][\'unsecure_fileext\'] = "'.$REX['ADDON']['community']['plugin_auth_media']['unsecure_fileext'].'";
+$REX[\'ADDON\'][\'community\'][\'plugin_auth_media\'][\'error_article_id\'] = '.$REX['ADDON']['community']['plugin_auth_media']['error_article_id'].';
 ';
 
   ## update files
   if(rex_replace_dynamic_contents($REX['INCLUDE_PATH'].'/addons/community/plugins/auth_media/config.inc.php', $content) !== false)
-    if(rex_com_auth_media::updateHtaccess())
+    if(rex_com_auth_media::createHtaccess())
       echo rex_info($I18N->msg('com_auth_media_settings_update'));
     else
       echo rex_warning($I18N->msg('com_auth_media_htaccess_failupdate'));      
@@ -36,8 +38,10 @@ $REX[\'ADDON\'][\'community\'][\'plugin_auth_media\'][\'unsecure_fileext\'] = "'
 /*
  * Formular output
  */
-if($REX['ADDON']['community']['plugin_auth_media']['xsendfile'])
-  $xsendfile_checked = 'checked="checked"';
+if($REX['ADDON']['community']['plugin_auth_media']['auth_active'])
+  $auth_active_checked = 'checked="checked"';
+
+
 
 echo '
 	<div class="rex-form" id="rex-form-system-setup">
@@ -55,8 +59,6 @@ echo '
             <p class="rex-tx1">'.$I18N->msg("com_auth_media_settings_description").'</p>
             <h3 class="rex-hl3">'.$I18N->msg("com_auth_media_settings_unsecure_fileext").'</h3>
             <p class="rex-tx1">'.$I18N->msg("com_auth_media_help_unsecure_fileext").'</p>
-            <h3 class="rex-hl3">'.$I18N->msg("com_auth_media_settings_xsendfile").'</h3>
-            <p class="rex-tx1">'.$I18N->msg("com_auth_media_help_xsendfile").'</p>
 					</div>
 				</div>
 			
@@ -73,16 +75,25 @@ echo '
 							
 								<div class="rex-form-row">
 									<p class="rex-form-col-a rex-form-checkbox">
-										<label for="rex-form-appId">'.$I18N->msg("com_auth_media_settings_unsecure_fileext").'</label>
+										<label for="rex-form-auth_active">'.$I18N->msg("com_auth_media_settings_auth_active").'</label>
+										<input class="rex-form-checkbox" type="checkbox" id="rex-form-auth_active" name="auth_active" value="true" '.$auth_active_checked.' />
+									</p>
+								</div>
+
+								<div class="rex-form-row">
+									<p class="rex-form-col-a rex-form-checkbox">
+										<label for="rex-form-unsecure_fileext">'.$I18N->msg("com_auth_media_settings_unsecure_fileext").'</label>
 										<input class="rex-form-text" type="input" id="rex-form-unsecure_fileext" name="unsecure_fileext" value="'.$REX['ADDON']['community']['plugin_auth_media']['unsecure_fileext'].'" />
 									</p>
 								</div>
-								<div class="rex-form-row">
-									<p class="rex-form-col-a rex-form-checkbox">
-										<label for="rex-form-appSecret">'.$I18N->msg("com_auth_media_settings_xsendfile").'</label>
-										<input class="rex-form-checkbox" type="checkbox" id="rex-form-xsendfile" name="xsendfile" value="true" '.$xsendfile_checked.' />
+      
+                <div class="rex-form-row">
+									<p class="rex-form-col-a rex-form-widget">
+										<label for="rex-form-error_article_id">'.$I18N->msg("com_auth_media_settings_error_article_id").'</label>
+										'. rex_var_link::_getLinkButton('error_article_id', 1, stripslashes($REX['ADDON']['community']['plugin_auth_media']['error_article_id'])) .'
 									</p>
 								</div>
+
 
 							</div>
 							<div class="rex-form-wrapper">
