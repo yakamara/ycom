@@ -58,7 +58,8 @@ if($REX["REDAXO"])
 
 if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1)
 {
-  include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
+  if(!$REX["REDAXO"])
+    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
 
   /*
 	function rex_com_auth_config() {
