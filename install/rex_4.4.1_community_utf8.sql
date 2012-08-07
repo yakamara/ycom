@@ -2,49 +2,6 @@
 ## Prefix rex_
 ## charset utf-8
 
-DROP TABLE IF EXISTS `rex_420_xoutputfilter`;
-CREATE TABLE `rex_420_xoutputfilter` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `typ` tinyint(1) NOT NULL DEFAULT '0',
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `description` varchar(255) NOT NULL DEFAULT '',
-  `lang` int(11) NOT NULL DEFAULT '0',
-  `marker` text NOT NULL,
-  `html` text NOT NULL,
-  `allcats` tinyint(1) NOT NULL DEFAULT '0',
-  `subcats` tinyint(1) NOT NULL DEFAULT '0',
-  `once` tinyint(1) NOT NULL DEFAULT '0',
-  `categories` text NOT NULL,
-  `insertbefore` tinyint(1) NOT NULL DEFAULT '0',
-  `excludeids` text NOT NULL,
-  `useragent` text NOT NULL,
-  `dataarea` text NOT NULL,
-  `validfrom` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `validto` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
-
-LOCK TABLES `rex_420_xoutputfilter` WRITE;
-/*!40000 ALTER TABLE `rex_420_xoutputfilter` DISABLE KEYS */;
-INSERT INTO `rex_420_xoutputfilter` VALUES 
-  (1,4,1,'Beispiel_001','Umpersand durch benanntes Zeichen ersetzen (& -> &amp;)',0,'/&(?!(?i:\\#((x([\\dA-F]){1,5})\r\n|(104857[0-5]\r\n|10485[0-6]\\d\r\n|1048[0-4]\\d\\d\r\n|104[0-7]\\d{3}\r\n|10[0-3]\\d{4}\r\n|0?\\d{1,6}))\r\n|([A-Za-z\\d.]{2,31}));)/x','&amp;',1,1,0,'',3,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (2,4,0,'Beispiel_002','HTML-Kommentare entfernen',0,'/<!--(.|\\s)*?-->/\r\n','',1,1,0,'',3,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (3,4,0,'Beispiel_003','Alle HTML-Kommentare entfernen - ausser Conditional Comments für IE',0,'/<!--[^\\[](.|\\s)*?[^\\]]-->/','',1,1,0,'',3,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (4,4,0,'Beispiel_004','JavaScript entfernen',0,'/<script(.|\\s)*?<\\/script>/','',1,1,0,'',3,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (5,4,1,'Beispiel_005','Ungeschlossene Tags schliessen (<br>, <hr>, <img>, <input>, <meta>, <base>, <basefont>, <param>, <link>, <area>)',0,'/\r\n<(br|hr|img|input|meta|base|basefont|param|link|area)\r\n+\r\n((\\s+[a-zA-Z-]+\\s*=\\s*(\"([^\"]*)\"|\'([^\']*)\'|([a-zA-Z0-9]*)))*\\s*)>\r\n/ix','<$1$2 />',1,1,0,'',3,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (6,4,1,'Beispiel_006','Leere HTML-Tags entfernen (<p>, <span>, <strong>, <b>, <em>, <h1>, <h2>, <h3>, <h4>, <h5>, <h6>)',0,'/<(p|span|strong|b|em|h1|h2|h3|h4|h5|h6)>(\\s|\\b)*<\\/\\1>/','',1,1,0,'',3,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (7,4,1,'Beispiel_007','Fehlende alt-Attribute bei <img>-Tags einfügen',0,'/(?!<img[^>]*\\salt[^=>]*=[^>]*>)<img[^>](.*)(>)/','<img alt=\"\" $1>',1,1,0,'',3,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (8,4,1,'Beispiel_008','Zeichen und Tags ersetzen / entfernen',0,'<head>','<?php\r\n/**\r\n * Zeichen und Tags ersetzen / entfernen\r\n */\r\nglobal $REX;\r\n\r\n  $xoutputfilter_codereplace = array(\r\n  \'<b>\' => \'<strong>\' ,\r\n  \'</b>\' => \'</strong>\' ,\r\n  \'<i>\' => \'<em>\' ,\r\n  \'</i>\' => \'</em>\' ,\r\n  \'ä\' => \'&auml;\' ,\r\n  \'ö\' => \'&ouml;\' ,\r\n  \'ü\' => \'&uuml;\' ,\r\n  \'Ä\' => \'&Auml;\' ,\r\n  \'Ö\' => \'&Ouml;\' ,\r\n  \'Ü\' => \'&Uuml;\' ,\r\n  \'ß\' => \'&szlig;\',\r\n  \'(c)\' => \'&copy;\',\r\n  \' ismap=\"ismap\"\' => \'\',\r\n  \' ismap=\"true\"\' => \'\',\r\n  \' target=\"_self\"\' => \'\',\r\n  \' target=\"_blank\"\' => \' onclick=\"window.open(this.href); return false;\"\',\r\n  \'<div align=\"center\">\' => \'<div style=\"text-align:center;\">\',\r\n  \'<hr width=\"100%\" size=\"2\" />\' => \'<hr />\'\r\n  );\r\n\r\n  $search = array();\r\n  $replace = array();\r\n  foreach ($xoutputfilter_codereplace as $key => $value)\r\n  {\r\n    $search[] = $key;\r\n    $replace[] = $value;\r\n  }\r\n  $REX[\'xoutputfilter\'][\'content\'] = str_replace($search, $replace, $REX[\'xoutputfilter\'][\'content\']);\r\n?>',1,1,1,'',4,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (9,4,1,'Beispiel_009','HTML-Attribute in Anführungszeichen, HTML-Tags in Kleinbuchstaben',0,'<head>','<?php\r\n/**\r\n * HTML-Attribute in Anführungszeichen, HTML-Tags in Kleinbuchstaben\r\n */\r\nglobal $REX;\r\n\r\n  // HTML-Tags in Kleinbuchstaben\r\n  $REX[\'xoutputfilter\'][\'content\'] = preg_replace(\"#<(/?)([A-Z]+)([^>]+)?(/?)>#ies\", \'\"<$1\".strtolower(\"$2\").\"$3$4>\"\', $REX[\'xoutputfilter\'][\'content\']);\r\n\r\n  // HTML-Attribute in Anführungszeichen\r\n  $mtchs = array();\r\n  $attrs = array();\r\n\r\n  preg_match_all(\'/(<(link|a|body|div|span|p|br|hr|img|table|tr|td|ul|li|dl|dt)[^<>]+>)/is\', $REX[\'xoutputfilter\'][\'content\'], $mtchs);\r\n\r\n  foreach ($mtchs[0] as $mtch)\r\n  {\r\n    preg_match_all(\'/([\\w]+)=(.*?)(?:\\s|>)/is\', $mtch, $attrs);\r\n    $c = count ($attrs[0]);\r\n    if ($c <> 0)\r\n    {\r\n      for ($i = 0; $i < $c; $i++)\r\n      {\r\n        if (($attrs[2][$i]{0} != \'\"\') )//and ($attrs[2][$i]{0} != \'\\\'\')\r\n        {\r\n          $srch[] = $attrs[1][$i].\'=\'.$attrs[2][$i];\r\n          $rplc[] = strtolower($attrs[1][$i]).\'=\"\'.str_replace(\'\\\\\\\'\',\'\',$attrs[2][$i]).\'\"\';\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  if (isset($srch) and is_array($srch))\r\n  {\r\n    $REX[\'xoutputfilter\'][\'content\'] = str_replace($srch, $rplc, $REX[\'xoutputfilter\'][\'content\']);\r\n  }\r\n?>',1,1,1,'',4,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (10,4,1,'Beispiel_010','E-Mail-Adressen mit Klasse email versehen und verschlüsseln',0,'mailto:','<?php\r\n/**\r\n * E-Mail Adressen verschlüsseln\r\n */\r\nglobal $REX;\r\n\r\n  // hier via regEx alle absoluten, externen Linkadressen heraussuchen\r\n  preg_match_all(\"/<a[^>]*(href\\s*=\\s*(\\\"|\')(mailto)(?=:).*?(\\\"|\'))[^>]*>(.*?)<\\/a>/ims\", $REX[\'xoutputfilter\'][\'content\'], $matches);\r\n\r\n  // hier jetzt alle gefundenen durchgehen und um klasse erweitern\r\n  if ( isset ($matches[0][0]) and $matches[0][0] != \'\')\r\n  {\r\n    for ($m = 0; $m < count ($matches[0]); $m++)\r\n    {\r\n      $msearch = $matches[0][$m];\r\n      if (strstr($matches[0][$m], \'class=\'))\r\n      {\r\n        $mreplace = $matches[0][$m];\r\n      }\r\n      else\r\n      {\r\n        $mreplace = str_replace(\'href=\', \'class=\"email\" href=\', $matches[0][$m]);\r\n      }\r\n      $REX[\'xoutputfilter\'][\'content\'] = str_replace($msearch, $mreplace, $REX[\'xoutputfilter\'][\'content\']);\r\n    }\r\n  }\r\n\r\n  // hier jetzt alle gefundenen durchgehen und crypt\r\n  if ( isset ($matches[1][0]) and $matches[1][0] != \'\')\r\n  {\r\n    for ($m = 0; $m < count ($matches[1]); $m++)\r\n    {\r\n      $va = explode(\'mailto:\', $matches[1][$m]);\r\n      $originalemail = str_replace(\'\"\', \'\', $va[1]);\r\n\r\n      $encryptedemail = \'\';\r\n      for ($i=0; $i < strlen($originalemail); $i++) {\r\n        $encryptedemail .= \'&#\'.ord(substr($originalemail, $i, 1)).\';\';\r\n      }\r\n\r\n      $msearch = \'mailto:\'.$originalemail;\r\n      $mreplace = \'mailto:\'.str_replace(\'&#64;\', \'%40\', $encryptedemail);\r\n      $REX[\'xoutputfilter\'][\'content\'] = str_replace($msearch, $mreplace, $REX[\'xoutputfilter\'][\'content\']);\r\n\r\n      $msearch = $originalemail;\r\n      $mreplace = $encryptedemail;\r\n      $REX[\'xoutputfilter\'][\'content\'] = str_replace($msearch, $mreplace, $REX[\'xoutputfilter\'][\'content\']);\r\n    }\r\n  }\r\n?>',1,1,1,'',4,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (11,4,0,'Beispiel_011','Unverlinkte Domains verlinken',0,'<head>','<?php\r\n/**\r\n * Unverlinkte Domains verlinken\r\n */\r\nglobal $REX;\r\n\r\n  $regex = array();\r\n  $regex[] = \"{ \\\\b(?<![\\\">])((https?|ftp):[\\\\w/\\\\#~:.?+=&%@!\\\\-]+?)(?=[.:?\\\\-]*(?:[^\\\\w/\\\\#~:.?+=&%@!\\\\-]|$)) }x\";\r\n  $regex[] = \"{ (?<![\\\">])(>|\\\\s)+\\\\b((www)[\\\\w/\\\\#~:.?+=&%@!\\\\-]+?)(?=[.:?\\\\-]*(?:[^\\\\w/\\\\#~:.?+=&%@!\\\\-]|$)) }x\";\r\n\r\n  $replace = array();\r\n  $replace[] = \"<a href=\\\"$1\\\">$1</a>\";\r\n  $replace[] = \"$1<a href=\\\"http://$2\\\">$2</a>\";\r\n\r\n  $REX[\'xoutputfilter\'][\'content\'] = preg_replace($regex, $replace, $REX[\'xoutputfilter\'][\'content\']);\r\n?>',1,1,1,'',4,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (12,4,1,'Beispiel_012','Externe Links mit Klasse extern versehen',0,'href=\"http:','<?php\r\n/**\r\n * Kennzeichnung externe Links mit Ausnahme\r\n */\r\nglobal $REX;\r\n\r\n  //$content = $REX[\'xoutputfilter\'][\'content\'];\r\n\r\n  // Von der Ersetzung ausgeschlossen:\r\n  $excl = array();\r\n  $excl[] = \'href=\"\' . $REX[\'SERVER\'];\r\n  $excl[] = \'href=\"http://\' . $_SERVER[\'HTTP_HOST\'];\r\n  $excl[] = \'href=\"https://\' . $_SERVER[\'HTTP_HOST\'];\r\n  $excl[] = \'#top\';\r\n  $excl[] = \'#nav\';\r\n  $excl[] = \'#mainnav\';\r\n  $excl[] = \'#hauptnavigation\';\r\n  $excl[] = \'#content\';\r\n  $excl[] = \'href=\"http://www.facebook.com/\';\r\n  $excl[] = \'href=\"http://twitter.com/\';\r\n\r\n  // hier via regEx alle absoluten, externen Linkadressen heraussuchen\r\n  preg_match_all(\"/<a[^>]*(href\\s*=\\s*(\\\"|\')(http(s)?|ftp(s)?|telnet|irc)(?=:\\/\\/).*?(\\\"|\'))[^>]*>(.*?)<\\/a>/ims\", $REX[\'xoutputfilter\'][\'content\'], $matches);\r\n\r\n  if ( isset ($matches[0][0]) and $matches[0][0] != \'\')\r\n  {\r\n    $srch = $repl = array();\r\n    for ($m = 0; $m < count ($matches[0]); $m++)\r\n    {\r\n      $msearch = $matches[0][$m];\r\n      if (strstr($matches[0][$m], \'class=\'))\r\n      {\r\n        $mreplace = $matches[0][$m];\r\n      }\r\n      else\r\n      {\r\n        $mreplace = str_replace(\'href=\', \'class=\"extern\" href=\', $matches[0][$m]);\r\n      }\r\n      for ($x = 0; $x < count($excl); $x++)\r\n      {\r\n        if (strstr($matches[1][$m], $excl[$x]))\r\n        {\r\n          $mreplace = $matches[0][$m];\r\n        }\r\n      }\r\n      $srch[] = $msearch;\r\n      $repl[] = $mreplace;\r\n    }\r\n    $REX[\'xoutputfilter\'][\'content\'] = str_replace($srch, $repl, $REX[\'xoutputfilter\'][\'content\']);\r\n  }  \r\n?>',1,1,1,'',4,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (13,4,0,'Beispiel_013','Wartungsarbeiten - Nicht angemeldete Benutzer auf eine Wartungsseite umleiten',0,'<head>','<?php\r\n/**\r\n* Wartungsarbeiten\r\n*/\r\n  global $REX;\r\n\r\n  // Hier die URL angeben auf die weitergeleitet werden soll!\r\n  $offline_url = $REX[\'SERVER\'] . \'wartungsarbeiten.html\';\r\n\r\n  // evtl. Weiterleitung\r\n  @session_start();\r\n  $islogon = false;\r\n  \r\n  if (isset($_SESSION[$REX[\'INSTNAME\']]) and isset($_SESSION[$REX[\'INSTNAME\']][\'UID\']) and $_SESSION[$REX[\'INSTNAME\']][\'UID\']<>\'\')\r\n  {\r\n    $islogon = true;\r\n  }\r\n\r\n  if (!$islogon) \r\n  {\r\n    if ( !strstr($_SERVER[\"REQUEST_URI\"], \'&maintenance\') )\r\n    {\r\n      $trash = ob_get_contents();\r\n      ob_end_clean();\r\n      if (strstr($offline_url, \'?\'))\r\n      {\r\n        header(\'Location: \' . $offline_url . \'&maintenance\');\r\n      }\r\n      else\r\n      {\r\n        header(\'Location: \' . $offline_url);\r\n      }\r\n      \r\n    }\r\n  }\r\n?>',1,1,1,'',4,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-  (14,1,1,'','',0,'###footerinfos links###','&copy;  by REDAXO, yakamara.de\r\n\r\n ',0,0,0,'',0,'','','','0000-00-00 00:00:00','0000-00-00 00:00:00');
-/*!40000 ALTER TABLE `rex_420_xoutputfilter` ENABLE KEYS */;
-UNLOCK TABLES;
-
 DROP TABLE IF EXISTS `rex_62_params`;
 CREATE TABLE `rex_62_params` (
   `field_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -75,19 +32,9 @@ INSERT INTO `rex_62_params` VALUES
   (5,'translate:description','art_description',4,'',2,'','','','','admin',1189345025,'admin',1189345025),
   (6,'translate:keywords','art_keywords',5,'',2,'','','','','admin',1189345068,'admin',1189345068),
   (7,'translate:metadata_image','art_file',6,'',6,'','','','','admin',1189345109,'admin',1189345109),
-  (14,'translate:com_group_name','art_com_groups',15,'multiple=multiple',3,'','select name as label,id from rex_com_group order by label','','','admin',1344110669,'',0),
-  (10,'translate:com_permtype','art_com_permtype',1,'',3,'','0:translate:com_perm_extends|1:translate:com_perm_only_logged_in|2:translate:com_perm_only_not_logged_in|3:translate:com_perm_all','','','admin',1344114649,'',0),
-  (13,'translate:com_group_perm','art_com_grouptype',14,'',3,'','0:translate:com_group_forallgroups|1:translate:com_group_inallgroups|2:translate:com_group_inonegroup|3:translate:com_group_nogroups','','','admin',1344110669,'admin',1320955573),
-  (15,'RexSEO Einstellungen','art_rexseo_legend',9,'',12,'','','','','admin',1320744271,'admin',1320744271),
-  (16,'Manuelle URL','art_rexseo_url',10,'',1,'','','','','admin',1320744271,'admin',1320744271),
-  (17,'Manuelle Canonical URL','art_rexseo_canonicalurl',11,'',1,'','','','','admin',1320744271,'admin',1320744271),
-  (18,'Page Title','art_rexseo_title',12,'',1,'','','','','admin',1320744271,'admin',1320744271),
-  (19,'Google Sitemap Priority','art_rexseo_priority',13,'',3,'',':Automatisch berechnen|1.00:1.00|0.80:0.80|0.64:0.64|0.51:0.51|0.33:0.33|0.00:0.00','','','admin',1320744271,'admin',1320744271),
-  (20,'Headline 1','art_headline1',7,'',1,'','','','','admin',1320873807,'admin',1320873807),
-  (21,'Headline 2','art_headline2',8,'',1,'','','','','admin',1320873824,'admin',1320873906),
-  (22,'translate:com_auth_media_legend','med_com_auth_media_legend',3,'',12,'','','','','admin',1342801873,'',0),
-  (23,'translate:com_auth_media_comusers','med_com_auth_media_comusers',4,'',5,'','1','','','admin',1342801873,'',0),
-  (24,'translate:com_auth_media_legend_groupname','med_com_groups',5,'multiple=multiple',3,'','select name as label,id from rex_com_group order by label','','','admin',1342801873,'',0);
+  (9,'translate:com_group_name','art_com_groups',110,'multiple=multiple',3,'','select name as label,id from rex_com_group order by label','','','admin',1344110669,'',0),
+  (8,'translate:com_permtype','art_com_permtype',100,'',3,'','0:translate:com_perm_extends|1:translate:com_perm_only_logged_in|2:translate:com_perm_only_not_logged_in|3:translate:com_perm_all','','','admin',1344114649,'',0),
+  (10,'translate:com_group_perm','art_com_grouptype',111,'',3,'','0:translate:com_group_forallgroups|1:translate:com_group_inallgroups|2:translate:com_group_inonegroup|3:translate:com_group_nogroups','','','admin',1344110669,'admin',1320955573);
 /*!40000 ALTER TABLE `rex_62_params` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,7 +371,7 @@ CREATE TABLE `rex_com_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 LOCK TABLES `rex_com_group` WRITE;
 /*!40000 ALTER TABLE `rex_com_group` DISABLE KEYS */;
@@ -452,7 +399,7 @@ CREATE TABLE `rex_com_user` (
   `password_hash` text NOT NULL,
   `last_action_time` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `rex_file`;
 CREATE TABLE `rex_file` (
   `file_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -479,7 +426,7 @@ CREATE TABLE `rex_file` (
   PRIMARY KEY (`file_id`),
   KEY `re_file_id` (`re_file_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 LOCK TABLES `rex_file` WRITE;
 /*!40000 ALTER TABLE `rex_file` DISABLE KEYS */;
