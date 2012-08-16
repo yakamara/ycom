@@ -1,67 +1,78 @@
 <?php
 
-$mypage = "community"; // only for this file
 
-// ---------- Allgemeine AddOn Config
+/**
+ * Plugin Auth
+ * @author jan.kristinus[at]redaxo[dot]de Jan Kristinus
+ * @author <a href="http://www.yakamara.de">www.yakamara.de</a>
+ */
 
-// TODO:
-// Unterscheidung der Sprachen anhand REX_CUR_CLANG.
-
-if($REX["CUR_CLANG"] == 1)
-	$REX['LANG'] = "en_en_utf8";
-
-if (!isset($I18N) && !is_object($I18N))
-	$I18N = rex_create_lang($REX['LANG']);
-
-$I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/' . $mypage . '/lang');
-
-include $REX["INCLUDE_PATH"]."/addons/community/classes/class.rex_com.inc.php";
-include $REX["INCLUDE_PATH"]."/addons/community/classes/class.rex_com_user.inc.php";
-
-$REX['ADDON']['name'][$mypage] = "Community";   // name
-$REX['ADDON']['perm'][$mypage] = "community[]"; // benoetigte mindest permission
-$REX['ADDON']['navigation'][$mypage] = array('block'=>'community');
-
+$mypage = "auth";
 $REX['ADDON']['version'][$mypage] = '2.9';
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
-$REX['ADDON']['supportpage'][$mypage] = 'www.redaxo.org/de/forum';
-$REX['PERM'][] = "community[]";
+$REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
 
+include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/classes/class.rex_com_navigation.inc.php";
+include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/classes/class.rex_com_auth.inc.php";
 
-// ---------- Backend, Perms, Subpages etc.
-if ($REX["REDAXO"] && $REX['USER'])
+## Register extension points
+rex_register_extension('REX_NAVI_CLASSNAME', create_function('','return "rex_com_navigation";'));
+rex_register_extension('REXSEO_SITEMAP_ARRAY_CREATED', 'rex_com_auth::rexseo_removeSitemapArticles');
+
+if(isset($I18N) && is_object($I18N))
+  $I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/lang');
+
+// --- DYN
+$REX['ADDON']['community']['plugin_auth']['auth_active'] = 1;
+$REX['ADDON']['community']['plugin_auth']['stay_active'] = 1;
+$REX['ADDON']['community']['plugin_auth']['article_login_ok'] = 1;
+$REX['ADDON']['community']['plugin_auth']['article_login_failed'] = 12;
+$REX['ADDON']['community']['plugin_auth']['article_logout'] = 12;
+$REX['ADDON']['community']['plugin_auth']['article_withoutperm'] = 12;
+$REX['ADDON']['community']['plugin_auth']['login_field'] = "login";
+$REX['ADDON']['community']['plugin_auth']['passwd_hashed'] = "1";
+// --- /DYN
+
+$REX['ADDON']['community']['plugin_auth']['cookie_ttl'] = 14; // Cookie time to life - in days
+$REX['ADDON']['community']['plugin_auth']['passwd_algorithmus'] = "sha1"; // see: hash_algos();
+
+$REX['ADDON']['community']['plugin_auth']['request'] = array();
+$REX['ADDON']['community']['plugin_auth']['request']['name'] = "rex_com_auth_name";
+$REX['ADDON']['community']['plugin_auth']['request']['psw'] = "rex_com_auth_psw";
+$REX['ADDON']['community']['plugin_auth']['request']['stay'] = "rex_com_auth_stay";
+$REX['ADDON']['community']['plugin_auth']['request']['activationkey'] = "rex_com_auth_activationkey";
+$REX['ADDON']['community']['plugin_auth']['request']['id'] = "rex_com_auth_id";
+$REX['ADDON']['community']['plugin_auth']['request']['logout'] = "rex_com_auth_logout";
+$REX['ADDON']['community']['plugin_auth']['request']['ref'] = "rex_com_auth_ref";
+
+$REX['ADDON']['community']['xform_path']['value'][] = $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/xform/value/";
+$REX['ADDON']['community']['xform_path']['validate'][] = $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/xform/validate/";
+$REX['ADDON']['community']['xform_path']['action'][] = $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/xform/action/";
+
+if($REX["REDAXO"])
 {
-	$REX['EXTRAPERM'][] = "community[]";
-	
-	$REX['ADDON'][$mypage]['SUBPAGES'] = array();
-	$REX['ADDON'][$mypage]['SUBPAGES'][] = array( '' , $I18N->msg("com_overview"));
-	
-	// if ($REX['USER']->isAdmin() || $REX['USER']->hasPerm("community[users]")) 
-	// $REX['ADDON'][$mypage]['SUBPAGES'][] = array ('user' , $I18N->msg('com_user_management'));
-	
-}
-
-
-// ---------- XForm values/action/validations einbinden
-
-$REX['ADDON']['community']['xform_path']['value'] = array();
-$REX['ADDON']['community']['xform_path']['validate'] = array();
-$REX['ADDON']['community']['xform_path']['action'] = array();
-
-$REX['ADDON']['community']['xform_path']['value'][] = $REX["INCLUDE_PATH"]."/addons/community/xform/value/";
-
-function rex_com_xform_add($params){
-	global $REX;
-	foreach($REX['ADDON']['community']['xform_path']['value'] as $value) { 
-		$REX['ADDON']['xform']['classpaths']['value'][] = $value;
-	}
-	foreach($REX['ADDON']['community']['xform_path']['validate'] as $validate) {
-		$REX['ADDON']['xform']['classpaths']['validate'][] = $validate;
-	}
-	foreach($REX['ADDON']['community']['xform_path']['action'] as $action) {
-		$REX['ADDON']['xform']['classpaths']['action'][] = $action;
-	}
+  if($REX['USER'] && ($REX['USER']->isAdmin() || $REX['USER']->hasPerm("community[auth]")))
+    $REX['ADDON']['community']['SUBPAGES'][] = array('plugin.auth','Authentifizierung');
 
 }
 
-rex_register_extension('ADDONS_INCLUDED', 'rex_com_xform_add');
+if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1)
+{
+  if(!$REX["REDAXO"])
+  {
+    function rex_com_auth_config()
+    {
+	  global $REX, $I18N;
+	  include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
+	}
+	
+	if(isset($ADDONSsic['status']['rexseo']) && $ADDONSsic['status']['rexseo'])
+	  rex_register_extension('REXSEO_POST_INIT', 'rex_com_auth_config');
+	else
+	  rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config');
+	
+  }
+  
+}
+
+?>
