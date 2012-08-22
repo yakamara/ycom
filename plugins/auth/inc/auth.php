@@ -3,8 +3,8 @@
 global $REX, $I18N;
 
 ## Request variables
-$login_name = stripslashes(rex_request($REX['ADDON']['community']['plugin_auth']['request']['name'],"string"));
-$login_psw = stripslashes(rex_request($REX['ADDON']['community']['plugin_auth']['request']['psw'],"string"));
+$login_name = rex_request($REX['ADDON']['community']['plugin_auth']['request']['name'],"string");
+$login_psw = rex_request($REX['ADDON']['community']['plugin_auth']['request']['psw'],"string");
 $login_stay = rex_request($REX['ADDON']['community']['plugin_auth']['request']['stay'],"string");
 $referer = rex_request($REX['ADDON']['community']['plugin_auth']['request']['ref'],"string");
 $logout = rex_request($REX['ADDON']['community']['plugin_auth']['request']['logout'],"int");

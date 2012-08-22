@@ -50,11 +50,8 @@ $REX['ADDON']['community']['xform_path']['validate'][] = $REX["INCLUDE_PATH"]."/
 $REX['ADDON']['community']['xform_path']['action'][] = $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/xform/action/";
 
 if($REX["REDAXO"])
-{
   if($REX['USER'] && ($REX['USER']->isAdmin() || $REX['USER']->hasPerm("community[auth]")))
     $REX['ADDON']['community']['SUBPAGES'][] = array('plugin.auth','Authentifizierung');
-
-}
 
 if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1)
 {
@@ -66,13 +63,15 @@ if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1)
 	  include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
 	}
 	
-	if(isset($ADDONSsic['status']['rexseo']) && $ADDONSsic['status']['rexseo'])
-	  rex_register_extension('REXSEO_POST_INIT', 'rex_com_auth_config');
-	else
-	  rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config');
+	rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config');
 	
+	/*
+	 if(isset($ADDONSsic['status']['rexseo']) && $ADDONSsic['status']['rexseo'])
+	  rex_register_extension('REXSEO_POST_INIT', 'rex_com_auth_config');
+	 else
+	  rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config');
+	 */
   }
-  
 }
 
 ?>
