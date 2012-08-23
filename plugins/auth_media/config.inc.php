@@ -16,8 +16,8 @@ $REX['ADDON']['community']['plugin_auth_media']['xsendfile'] = 0;
 
 // --- DYN
 $REX['ADDON']['community']['plugin_auth_media']['auth_active'] = 1;
-$REX['ADDON']['community']['plugin_auth_media']['unsecure_fileext'] = "png,gif,ico,css,js,swf";
-$REX['ADDON']['community']['plugin_auth_media']['error_article_id'] = "1";
+$REX['ADDON']['community']['plugin_auth_media']['unsecure_fileext'] = "png,jpg,jpeg,gif,ico,css,js,swf";
+$REX['ADDON']['community']['plugin_auth_media']['error_article_id'] = 1;
 // --- /DYN
 
 ## Loading Plugin
@@ -30,40 +30,31 @@ if($REX["REDAXO"] && $REX['USER'])
 
   $REX['ADDON']['community']['SUBPAGES'][] = array('plugin.auth_media',$I18N->msg('com_auth_media'));
 
-}else
-{
-  
 }
 
 if($REX['ADDON']['community']['plugin_auth_media']['auth_active'])
 {
 
   if(rex_request("rex_com_auth_media_filename","string") != "")
-  {
-    ## Register extension Point for rex_com_auth_media function
-    function rex_com_auth_media_get_media($params)
-    {
-      return rex_com_auth_media::getMedia($params); 
-    }
-    rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_media_get_media');
-  }
+    rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_media::getMedia');
 
   // ----- image_manager hack
   $rex_img_file = rex_get('rex_img_file', 'string');
   $rex_img_type = rex_get('rex_img_type', 'string');
   if($rex_img_file != '' && $rex_img_type != '')
   {
+    $REX['ADDON']['community']['plugin_auth'] = $ADDONSsic['community']['plugin_auth'];
+    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
+    
     if( ($media = OOMedia::getMediaByFileName($rex_img_file)) && rex_com_auth_media::checkPerm($media) )
     {
 
-    }else 
+    }
+    else 
     {
       rex_com_auth_media::forwardErrorPage();
-
     }
-    
   }
-
 
 }
 
