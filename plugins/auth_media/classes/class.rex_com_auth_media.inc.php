@@ -55,14 +55,14 @@ class rex_com_auth_media
     if(session_id() == '')
       session_start();
     
-    if($_SESSION[$REX['INSTNAME']]['UID'] > 0)
+    if(isset($_SESSION[$REX['INSTNAME']]['UID']) && $_SESSION[$REX['INSTNAME']]['UID'] > 0)
       return true;
-
+    
     ## if no access rule - grant access
     if($media->getValue('med_com_auth_media_comusers') == '' || $media->getValue('med_com_auth_media_comusers') == '||')
       if($media->getValue('med_com_groups') == '' || $media->getValue('med_com_groups') == '||')
         return true;
-
+    
     ## true if user is in one or more required groups
     $me = rex_com_auth::getUser();
     if($me)
@@ -92,7 +92,8 @@ class rex_com_auth_media
       if( ($media = OOMedia::getMediaByFileName($filename)) && rex_com_auth_media::checkPerm($media) )
       {
         rex_com_auth_media::send($media);
-      }else
+      }
+      else
       {
         rex_com_auth_media::forwardErrorPage();
       }
@@ -104,7 +105,7 @@ class rex_com_auth_media
   {
     global $REX;
     
-    header('Location: /'.rex_getUrl($REX['ADDON']['community']['plugin_auth_media']['error_article_id'],'',array($REX['ADDON']['community']['plugin_auth']['request']['ref'] => urlencode($_SERVER['REQUEST_URI'])),'&'));
+    header('Location: ../'.rex_getUrl($REX['ADDON']['community']['plugin_auth_media']['error_article_id'],'',array($REX['ADDON']['community']['plugin_auth']['request']['ref'] => urlencode($_SERVER['REQUEST_URI'])),'&'));
   
     exit;
   }
