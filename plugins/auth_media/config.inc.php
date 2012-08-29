@@ -45,8 +45,6 @@ if($REX['ADDON']['community']['plugin_auth_media']['auth_active'])
       rex_com_auth_media::getMedia();
     elseif($params['extension_point'] == 'REXSEO_POST_INIT')
       rex_com_auth_media::getMedia(); 
-
-    echo $params['extension_point'];
   }
   
   ## register EPs (only if required)
