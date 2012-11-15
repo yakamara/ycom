@@ -23,22 +23,38 @@ $REX['ADDON']['community']['plugin_auth_media']['error_article_id'] = 1;
 ## Loading Plugin
 include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth_media/classes/class.rex_com_auth_media.inc.php";
 
+## Loading backend files
 if($REX["REDAXO"] && $REX['USER'])
 {
   if(isset($I18N) && is_object($I18N))
     $I18N->appendFile($REX['INCLUDE_PATH'].'/addons/community/plugins/auth_media/lang');
 
   $REX['ADDON']['community']['SUBPAGES'][] = array('plugin.auth_media',$I18N->msg('com_auth_media'));
-
 }
 
+## Loading frontend
 if($REX['ADDON']['community']['plugin_auth_media']['auth_active'])
 {
+  ## init auth media
+  function rex_com_auth_media_init($params)
+  {
+    global $REX, $I18N;
 
+    ## hack for rexseo >= 1.5
+    if(!OOAddon::isAvailable('rexseo') || version_compare(OOAddon::getVersion('rexseo'), '1.5', '<'))
+      rex_com_auth_media::getMedia();
+    elseif($params['extension_point'] == 'REXSEO_POST_INIT')
+      rex_com_auth_media::getMedia(); 
+  }
+  
+  ## register EPs (only if required)
   if(rex_request("rex_com_auth_media_filename","string") != "")
-    rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_media::getMedia');
+  {
+    rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_media_init');
+    rex_register_extension('REXSEO_POST_INIT', 'rex_com_auth_media_init');
+  }
 
-  // ----- image_manager hack
+  ## image_manager hack
   $rex_img_file = rex_get('rex_img_file', 'string');
   $rex_img_type = rex_get('rex_img_type', 'string');
   if($rex_img_file != '' && $rex_img_type != '')
