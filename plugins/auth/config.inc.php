@@ -8,7 +8,7 @@
  */
 
 $mypage = "auth";
-$REX['ADDON']['version'][$mypage] = '2.9.1';
+$REX['ADDON']['version'][$mypage] = '2.9.5';
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
 $REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
 
@@ -49,28 +49,19 @@ $REX['ADDON']['community']['xform_path']['value'][] = $REX["INCLUDE_PATH"]."/add
 $REX['ADDON']['community']['xform_path']['validate'][] = $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/xform/validate/";
 $REX['ADDON']['community']['xform_path']['action'][] = $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/xform/action/";
 
-if($REX["REDAXO"])
-  if($REX['USER'] && ($REX['USER']->isAdmin() || $REX['USER']->hasPerm("community[auth]")))
+if($REX["REDAXO"]) {
+  if($REX['USER'] && ($REX['USER']->isAdmin() || $REX['USER']->hasPerm("community[auth]"))) {
     $REX['ADDON']['community']['SUBPAGES'][] = array('plugin.auth','Authentifizierung');
+  }
+}
 
-if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1)
-{
-  if(!$REX["REDAXO"])
-  {
-    function rex_com_auth_config()
-    {
-	  global $REX, $I18N;
-	  include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
-	}
-	
-	rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config');
-	
-	/*
-	 if(isset($ADDONSsic['status']['rexseo']) && $ADDONSsic['status']['rexseo'])
-	  rex_register_extension('REXSEO_POST_INIT', 'rex_com_auth_config');
-	 else
+if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1) {
+  if(!$REX["REDAXO"]) {
+    function rex_com_auth_config() {
+	    global $REX, $I18N;
+	    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
+	  }
 	  rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config');
-	 */
   }
 }
 
