@@ -19,8 +19,9 @@ include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/classes/class.rex_c
 rex_register_extension('REX_NAVI_CLASSNAME', create_function('','return "rex_com_navigation";'));
 rex_register_extension('REXSEO_SITEMAP_ARRAY_CREATED', 'rex_com_auth::rexseo_removeSitemapArticles');
 
-if(isset($I18N) && is_object($I18N))
+if(isset($I18N) && is_object($I18N)) {
   $I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/lang');
+}
 
 // --- DYN
 $REX['ADDON']['community']['plugin_auth']['auth_active'] = 1;
@@ -57,11 +58,20 @@ if($REX["REDAXO"]) {
 
 if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1) {
   if(!$REX["REDAXO"]) {
-    function rex_com_auth_config() {
-	    global $REX, $I18N;
-	    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
-	  }
-	  rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config');
+       
+    rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config');
+    rex_register_extension('REXSEO_INCLUDED', 'rex_com_auth_config');
+    
+    function rex_com_auth_config($params) {
+  	  global $REX, $I18N;
+  	  
+  	  if(!OOAddon::isAvailable('rexseo') || version_compare(OOAddon::getVersion('rexseo'), '1.5.2', '<')) {
+  	    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
+  	  } elseif($params['extension_point'] == 'REXSEO_INCLUDED') {
+  	    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
+  	  }
+  	}
+    
   }
 }
 
