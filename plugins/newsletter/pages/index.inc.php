@@ -92,9 +92,10 @@ foreach($xform_nl_tpls as $tpl) {
 
 // -------- Testuser ID
 
-$test_user_id = 0;
-if (rex_request("test_user_id","int",0) > 0) {
+$test_user_id = rex_request("test_user_id","int",0);
+if ($test_user_id > 0) {
   $gu = new rex_sql();
+  // $gu->debugsql = 1;
   $gu->setQuery('select * from `'.$table.'` where id='.$test_user_id);
   $test_users = $gu->getArray();
   if(count($test_users) == 1) {

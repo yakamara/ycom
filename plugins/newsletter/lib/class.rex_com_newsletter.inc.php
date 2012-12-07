@@ -65,14 +65,14 @@ class rex_com_newsletter
     $this->newsletter_body_text = $text;
   }
   
-  public function setBody($attachments) 
+  public function setAttachment($attachments) 
   {
     $this->newsletter_attachments = $attachments;
   }
 
-  public function setReplace($search, $replace)
+  public function setReplace( $sr = array() )
   {
-    $this->newsletter_replace[$search] = $replace;
+    $this->newsletter_replace = $this->newsletter_replace + $sr;
   }
 
   public function getReplaceArray()
