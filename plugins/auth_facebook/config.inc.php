@@ -10,7 +10,7 @@
 //
 
 $mypage = "auth_facebook";
-$REX['ADDON']['version'][$mypage] = '2.9.5';
+$REX['ADDON']['version'][$mypage] = '2.9.6';
 
 // --- DYN
 $REX['ADDON']['community']['plugin_auth_facebook']['appId'] = "";
