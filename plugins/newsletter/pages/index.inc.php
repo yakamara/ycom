@@ -243,7 +243,7 @@ if($method == "start" && $method_all == "all" && count($error) == 0 && $send) {
 
     foreach($users->getArray() as $user) {
 
-      if($nl->sendToUser($test_user)) {
+      if($nl->sendToUser($user)) {
       } else {
       }
 
