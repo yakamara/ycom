@@ -61,8 +61,10 @@ if($nl_type != "xform") {
 
 $redaxo_nl_article_id = rex_request("redaxo_nl_article_id","int");
 $redaxo_nl_article_name = "";
+$redaxo_nl_article_link = "";
 if($redaxo_nl_article_id > 0 && $m = OOArticle::getArticleById($redaxo_nl_article_id)) {
   $redaxo_nl_article_name = $m->getName();
+  $redaxo_nl_article_link = rex_getUrl($redaxo_nl_article_id);
 } else {
   $redaxo_nl_article_id = 0;  
 }
@@ -192,7 +194,7 @@ if($method == "start" && $method_all != "all" && count($error) == 0 && $send)
     $nl->setHTMLBody($nl_body_html);
     $nl->setTextBody($nl_body_text);
     $nl->setAttachment($nl_attachments);
-    $nl->setReplace(array("newsletter_table" => $table));
+    $nl->setReplace(array("newsletter_table" => $table, 'article_id' => $redaxo_nl_article_id, 'article_name' => $redaxo_nl_article_name, 'article_link' => $redaxo_nl_article_link));
     
     if($nl->sendToUser($test_user)) {
       $info[] = $I18N->msg("com_newsletter_info_testmail_ok");
@@ -239,7 +241,7 @@ if($method == "start" && $method_all == "all" && count($error) == 0 && $send) {
     $nl->setHTMLBody($nl_body_html);
     $nl->setTextBody($nl_body_text);
     $nl->setAttachment($nl_attachments);
-    $nl->setReplace(array("newsletter_table" => $table));
+    $nl->setReplace(array("newsletter_table" => $table, 'article_id' => $redaxo_nl_article_id, 'article_name' => $redaxo_nl_article_name, 'article_link' => $redaxo_nl_article_link));
 
     foreach($users->getArray() as $user) {
 
