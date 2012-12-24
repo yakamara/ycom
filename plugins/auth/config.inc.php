@@ -56,25 +56,6 @@ if($REX["REDAXO"]) {
   }
 }
 
-<<<<<<< HEAD
-if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1)
-{
-  if(!$REX["REDAXO"])
-  {
-       
-    rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config');
-    rex_register_extension('REXSEO_POST_INIT', 'rex_com_auth_config');
-    
-    function rex_com_auth_config($params)
-    {
-	  global $REX, $I18N;
-	  
-	  if(!OOAddon::isAvailable('rexseo') || version_compare(OOAddon::getVersion('rexseo'), '1.5', '<'))
-	    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
-	  elseif($params['extension_point'] == 'REXSEO_POST_INIT')
-	    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
-	}
-=======
 if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1) {
   if(!$REX["REDAXO"]) {
        
@@ -90,7 +71,6 @@ if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1) {
   	    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
   	  }
   	}
->>>>>>> 3d0e8b9e3c20620086ba475ea71ec53b626a7fdf
     
   }
 }

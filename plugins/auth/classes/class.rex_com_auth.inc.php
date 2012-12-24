@@ -162,10 +162,10 @@ class rex_com_auth
     if(isset($_SESSION[$login_key]))
       $user_session = $_SESSION[$login_key];
 
-    if($REX['ADDON']['community']['plugin_auth']['stay_active'])
+    if($REX['ADDON']['community']['plugin_auth']['stay_active'])    
       if(isset($_COOKIE[$login_key]))
         $session_key = rex_cookie($login_key,'string');
-    
+
     /*
     * Authentification
     */
@@ -208,10 +208,11 @@ class rex_com_auth
         $REX['COM_USER']->setLogin($login_name,$login_psw);
         $REX['COM_USER']->setLoginquery('select * from rex_com_user where `'.$REX['ADDON']['community']['plugin_auth']['login_field'].'`="USR_LOGIN" and password="USR_PSW" '.$query_extras);
 
-      }elseif($session_key && !isset($_SESSION[$login_key])) //if cookie available
+      }
+      elseif($session_key && !isset($_SESSION[$login_key])) //if cookie available
       {
         $REX['COM_USER']->setLogin('dummy','dummy');
-        $REX['COM_USER']->setLoginquery('select * from rex_com_user where session_key="'.$session_key.'" and session_key not "" '.$query_extras);
+        $REX['COM_USER']->setLoginquery('select * from rex_com_user where session_key="'.$session_key.'" and session_key != "" '.$query_extras);
       }
     
       ## --- CHECK LOGIN ---
