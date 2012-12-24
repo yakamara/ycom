@@ -8,11 +8,7 @@
  */
 
 $mypage = "auth";
-<<<<<<< HEAD
-$REX['ADDON']['version'][$mypage] = '2.9.1';
-=======
 $REX['ADDON']['version'][$mypage] = '2.9.6';
->>>>>>> 3d0e8b9e3c20620086ba475ea71ec53b626a7fdf
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
 $REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
 

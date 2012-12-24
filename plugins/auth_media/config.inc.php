@@ -9,11 +9,7 @@
 */
 
 $mypage = "auth_media";
-<<<<<<< HEAD
-$REX['ADDON']['version'][$mypage] = '2.9.1';
-=======
 $REX['ADDON']['version'][$mypage] = '2.9.6';
->>>>>>> 3d0e8b9e3c20620086ba475ea71ec53b626a7fdf
 $REX['ADDON']['author'][$mypage] = 'Markus Lorch, Jan Kristinus';
 $REX['ADDON']['supportpage'][$mypage] = 'www.it-kult.de';
 $REX['ADDON']['community']['plugin_auth_media']['xsendfile'] = 0;
@@ -28,14 +24,8 @@ $REX['ADDON']['community']['plugin_auth_media']['error_article_id'] = 1;
 include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth_media/classes/class.rex_com_auth_media.inc.php";
 
 ## Loading backend files
-<<<<<<< HEAD
-if($REX["REDAXO"] && $REX['USER'])
-{
-  if(isset($I18N) && is_object($I18N))
-=======
 if($REX["REDAXO"] && $REX['USER']) {
   if(isset($I18N) && is_object($I18N)) {
->>>>>>> 3d0e8b9e3c20620086ba475ea71ec53b626a7fdf
     $I18N->appendFile($REX['INCLUDE_PATH'].'/addons/community/plugins/auth_media/lang');
   }
 
@@ -43,27 +33,6 @@ if($REX["REDAXO"] && $REX['USER']) {
 }
 
 ## Loading frontend
-<<<<<<< HEAD
-if($REX['ADDON']['community']['plugin_auth_media']['auth_active'])
-{
-  ## init auth media
-  function rex_com_auth_media_init($params)
-  {
-    global $REX, $I18N;
-
-    ## hack for rexseo >= 1.5
-    if(!OOAddon::isAvailable('rexseo') || version_compare(OOAddon::getVersion('rexseo'), '1.5', '<'))
-      rex_com_auth_media::getMedia();
-    elseif($params['extension_point'] == 'REXSEO_POST_INIT')
-      rex_com_auth_media::getMedia(); 
-  }
-  
-  ## register EPs (only if required)
-  if(rex_request("rex_com_auth_media_filename","string") != "")
-  {
-    rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_media_init');
-    rex_register_extension('REXSEO_POST_INIT', 'rex_com_auth_media_init');
-=======
 if($REX['ADDON']['community']['plugin_auth_media']['auth_active']) {
   ## init auth media
   function rex_com_auth_media_init($params) {
@@ -82,7 +51,6 @@ if($REX['ADDON']['community']['plugin_auth_media']['auth_active']) {
   if(rex_request("rex_com_auth_media_filename","string") != "") {
     rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_media_init');
     rex_register_extension('REXSEO_INCLUDED', 'rex_com_auth_media_init');
->>>>>>> 3d0e8b9e3c20620086ba475ea71ec53b626a7fdf
   }
 
   ## image_manager hack
