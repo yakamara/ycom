@@ -212,7 +212,7 @@ class rex_com_auth
       elseif($session_key && !isset($_SESSION[$login_key])) //if cookie available
       {
         $REX['COM_USER']->setLogin('dummy','dummy');
-        $REX['COM_USER']->setLoginquery('select * from rex_com_user where session_key="'.$session_key.'" and session_key != "" '.$query_extras);
+        $REX['COM_USER']->setLoginquery('select * from rex_com_user where session_key="'.$session_key.'" and session_key is not null '.$query_extras);
       }
     
       ## --- CHECK LOGIN ---
