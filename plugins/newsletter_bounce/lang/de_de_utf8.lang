@@ -1,0 +1,30 @@
+com_newsletter_bounce = Newsletter Bounce
+
+com_newsletter_bounce_config_success = Daten wurden aktualisiert.
+com_newsletter_bounce_config_fail = Fehler beim Schreiben des Configfiles 
+com_newsletter_bounce_config_unwritable = Configfile nicht beschreibar 
+
+com_newsletter_bounce_handler = Bounce Mail Handler
+com_newsletter_bounce_settings = Einstellungen
+
+com_newsletter_bounce_info_msg = Dieses Plugin ermöglicht es in einer Mailbox gebouncte Mails zu analysieren. Die Analyse erfolgt unter den Regeln in der "rules.inc.php" im "lib" Verzechnis dieses Plugins. Wenn eine Email anhand dieser Regeln als "remove" eingestuft wurde, wird sie automatisch vom Server gelöscht und der Bounce Counter der entsprechenden Email wird um 1 erhöht.
+com_newsletter_bounce_start_msg = Klicken Sie auf den Button um gebouncte Emails zu analysieren:
+com_newsletter_bounce_start_button = Starten
+
+com_newsletter_bounce_mailserver = Mailserver
+com_newsletter_bounce_mailserver_host = Mailhost
+com_newsletter_bounce_mailserver_mailbox_user = Mailbox User
+com_newsletter_bounce_mailserver_mailbox_password = Mailbox Passwort
+com_newsletter_bounce_mailserver_port = Port
+com_newsletter_bounce_mailserver_service = Service
+com_newsletter_bounce_mailserver_service_option = Service Option
+com_newsletter_bounce_mailserver_mailbox_name = Mailbox Name
+
+com_newsletter_bounce_mailserver_table = Tabelle
+com_newsletter_bounce_mailserver_table_user_table = User Tabelle
+com_newsletter_bounce_mailserver_email_field = Email Feld
+com_newsletter_bounce_mailserver_bounce_counter_field = Bounce Counter Feld
+
+com_newsletter_bounce_mailserver_misc = Sonstiges
+com_newsletter_bounce_mailserver_misc_test_mode = Test Modus
+

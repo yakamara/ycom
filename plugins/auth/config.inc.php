@@ -8,7 +8,11 @@
  */
 
 $mypage = "auth";
+<<<<<<< HEAD
 $REX['ADDON']['version'][$mypage] = '2.9.1';
+=======
+$REX['ADDON']['version'][$mypage] = '2.9.6';
+>>>>>>> 3d0e8b9e3c20620086ba475ea71ec53b626a7fdf
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
 $REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
 
@@ -19,8 +23,9 @@ include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/classes/class.rex_c
 rex_register_extension('REX_NAVI_CLASSNAME', create_function('','return "rex_com_navigation";'));
 rex_register_extension('REXSEO_SITEMAP_ARRAY_CREATED', 'rex_com_auth::rexseo_removeSitemapArticles');
 
-if(isset($I18N) && is_object($I18N))
+if(isset($I18N) && is_object($I18N)) {
   $I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/lang');
+}
 
 // --- DYN
 $REX['ADDON']['community']['plugin_auth']['auth_active'] = 1;
@@ -49,10 +54,13 @@ $REX['ADDON']['community']['xform_path']['value'][] = $REX["INCLUDE_PATH"]."/add
 $REX['ADDON']['community']['xform_path']['validate'][] = $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/xform/validate/";
 $REX['ADDON']['community']['xform_path']['action'][] = $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/xform/action/";
 
-if($REX["REDAXO"])
-  if($REX['USER'] && ($REX['USER']->isAdmin() || $REX['USER']->hasPerm("community[auth]")))
+if($REX["REDAXO"]) {
+  if($REX['USER'] && ($REX['USER']->isAdmin() || $REX['USER']->hasPerm("community[auth]"))) {
     $REX['ADDON']['community']['SUBPAGES'][] = array('plugin.auth','Authentifizierung');
+  }
+}
 
+<<<<<<< HEAD
 if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1)
 {
   if(!$REX["REDAXO"])
@@ -70,6 +78,23 @@ if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1)
 	  elseif($params['extension_point'] == 'REXSEO_POST_INIT')
 	    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
 	}
+=======
+if($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1) {
+  if(!$REX["REDAXO"]) {
+       
+    rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config');
+    rex_register_extension('REXSEO_INCLUDED', 'rex_com_auth_config');
+    
+    function rex_com_auth_config($params) {
+  	  global $REX, $I18N;
+  	  
+  	  if(!OOAddon::isAvailable('rexseo') || version_compare(OOAddon::getVersion('rexseo'), '1.5.2', '<')) {
+  	    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
+  	  } elseif($params['extension_point'] == 'REXSEO_INCLUDED') {
+  	    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
+  	  }
+  	}
+>>>>>>> 3d0e8b9e3c20620086ba475ea71ec53b626a7fdf
     
   }
 }
