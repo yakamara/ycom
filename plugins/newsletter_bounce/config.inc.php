@@ -5,7 +5,7 @@ $REX['ADDON']['author']['newsletter_bounce'] = 'Yakamara/WebDevOne';
 $REX['ADDON']['supportpage']['newsletter_bounce'] = 'www.redaxo.org';
 
 // add sub page
-if ($REX["REDAXO"] && $REX['USER'] && $REX['USER']->isAdmin("rights","admin[]")) {
+if ($REX["REDAXO"] && $REX['USER'] && ($REX['USER']->isAdmin() || $REX['USER']->hasPerm("community[newsletter]")) ) {
 	$REX['ADDON']['community']['SUBPAGES'][] = array('plugin.newsletter_bounce', 'Newsletter Bounce');
 }
 

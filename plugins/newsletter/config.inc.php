@@ -13,7 +13,7 @@ $REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
 $REX['PERM'][] = "community[newsletter]";
 
 
-if ($REX["REDAXO"] && $REX['USER'] && ( $REX['USER']->isAdmin("rights","admin[]") || $REX['USER']->isAdmin("rights","community[newsletter]") ) ) {
+if ($REX["REDAXO"] && $REX['USER'] && ( $REX['USER']->isAdmin() || $REX['USER']->hasPerm("community[newsletter]") ) ) {
   $REX['ADDON']['community']['SUBPAGES'][] = array('plugin.newsletter','Newsletter');
 }
 
