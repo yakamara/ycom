@@ -7,7 +7,7 @@ class rex_com_auth
      * return Article right rekursive
      * 0:translate:com_perm_extends|1:translate:com_perm_only_logged_in|2:translate:com_perm_only_not_logged_in|3:translate:com_perm_all
      */
-	function checkPerm(&$obj)
+	static function checkPerm(&$obj)
 	{
 		global $REX;
     	
@@ -111,7 +111,7 @@ class rex_com_auth
 	/*
 	 * Clears User Session
 	 */
-	function clearUserSession()
+	static function clearUserSession()
 	{
 		global $REX;
 		
@@ -124,7 +124,7 @@ class rex_com_auth
 	/*
 	 * reutrns Login-Key used for Sessions and Cookies
 	 */
-	function getLoginKey()
+	static function getLoginKey()
 	{
 		return 'comrex';
 	}
