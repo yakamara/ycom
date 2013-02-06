@@ -10,30 +10,25 @@ $addonname = "community";
 
 $I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/community/lang');
 
-if($I18N->msg("htmlcharset") != "utf-8") 
-{
-	$REX['ADDON']['install']['community'] = 0;
-	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_only_utf8');
-
-}elseif (OOAddon::isAvailable('phpmailer') != 1 || version_compare(OOAddon::getVersion('phpmailer'),"2.8",'<')) 
+if (OOAddon::isAvailable('phpmailer') != 1 || version_compare(OOAddon::getVersion('phpmailer'),"2.8",'<')) 
 {
 	$REX['ADDON']['install']['community'] = 0;
 	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_phpmailer_version_problem','2.8');
 
-}elseif(OOAddon::isAvailable('xform') != 1 || version_compare(OOAddon::getVersion('xform'), "2.9.2", '<')) 
+}elseif(OOAddon::isAvailable('xform') != 1 || version_compare(OOAddon::getVersion('xform'), "4.5", '<')) 
 {
 	$REX['ADDON']['install']['community'] = 0;
-	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_version_problem','2.9.2');
+	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_version_problem','4.5');
 
-}elseif(OOPlugin::isAvailable('xform','manager') != 1 || version_compare(OOPlugin::getVersion("xform", "manager"),"2.9.2",'<')) 
+}elseif(OOPlugin::isAvailable('xform','manager') != 1 || version_compare(OOPlugin::getVersion("xform", "manager"),"4.5",'<')) 
 {
 	$REX['ADDON']['install']['community'] = 0;
-	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_manager_version_problem','2.9.2');
+	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_manager_version_problem','4.5');
 
-}elseif(OOPlugin::isAvailable('xform','email') != 1 || version_compare(OOPlugin::getVersion("xform", "email"),"2.9.2",'<')) 
+}elseif(OOPlugin::isAvailable('xform','email') != 1 || version_compare(OOPlugin::getVersion("xform", "email"),"4.5",'<')) 
 {
 	$REX['ADDON']['install']['community'] = 0;
-	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_email_version_problem','2.9.2');
+	$REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_email_version_problem','4.5');
 
 }else
 {
@@ -91,8 +86,17 @@ if($I18N->msg("htmlcharset") != "utf-8")
   	}
   	rex_register_extension('OUTPUT_FILTER', 'rex_com_install');
   
-    $c_file = $REX['INCLUDE_PATH'] . '/addons/community/install/rex_4.4.1_community_utf8';
-    $ie_file = $REX['INCLUDE_PATH'] . '/addons/import_export/backup/rex_4.4.1_community_utf8';
+    $c_file = $REX['INCLUDE_PATH'] . '/addons/community/install/rex_4.5_community';
+    $ie_file = $REX['INCLUDE_PATH'] . '/addons/import_export/backup/rex_4.5_community';
+  
+    copy ( $c_file.'.sql' , $ie_file.'.sql' );
+    copy ( $c_file.'.tar.gz' , $ie_file.'.tar.gz' );
+
+  }
+
+}
+
+?>  $ie_file = $REX['INCLUDE_PATH'] . '/addons/import_export/backup/rex_4.4.1_community_utf8';
   
     copy ( $c_file.'.sql' , $ie_file.'.sql' );
     copy ( $c_file.'.tar.gz' , $ie_file.'.tar.gz' );
