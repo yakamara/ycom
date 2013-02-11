@@ -95,14 +95,3 @@ if (OOAddon::isAvailable('phpmailer') != 1 || version_compare(OOAddon::getVersio
   }
 
 }
-
-?>  $ie_file = $REX['INCLUDE_PATH'] . '/addons/import_export/backup/rex_4.4.1_community_utf8';
-  
-    copy ( $c_file.'.sql' , $ie_file.'.sql' );
-    copy ( $c_file.'.tar.gz' , $ie_file.'.tar.gz' );
-
-  }
-
-}
-
-?>
