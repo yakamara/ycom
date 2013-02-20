@@ -50,7 +50,14 @@ if($fbstate != '' && $fbcode != '')
           // -------------------------- User does not exist
           
           $iu->setValue("login",$fbuser['last_name'].".fb.".$fbuser['id']);
-          $iu->setValue("password",rex_com_auth_facebook::generatePassword('16'));
+          
+          $hash_func = $REX['ADDON']['community']['plugin_auth']['passwd_algorithmus'];
+          $password = rex_com_auth_facebook::generatePassword('16');
+          if($REX['ADDON']['community']['plugin_auth']['passwd_hashed']) {
+            $password = hash($hash_func, $password);
+          }
+          
+          $iu->setValue("password", $password);
           
           ## Adding defaultgroups
           if(isset($REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']))
@@ -83,12 +90,12 @@ if($fbstate != '' && $fbcode != '')
 			
 			// TODO: 
 			// Bestimte Felder auf wunsch bei jedem Login erneut Syncronisieren.
-	
 	    $params = array("facebookid" => $fbuser['id'], "status" => 1);
 	    rex_com_auth::loginWithParams($params);
 			
-			if(rex_com_auth::getUser() && $REX['ADDON']['community']['plugin_auth_facebook']['redirect'])		
+			if(rex_com_auth::getUser() && $REX['ADDON']['community']['plugin_auth_facebook']['redirect'])	 {	
 			  rex_redirect($REX['ADDON']['community']['plugin_auth']['article_login_ok']);
+			}
 		}
 	}
 	
