@@ -185,7 +185,7 @@ class rex_com_auth
       $REX['COM_USER']->setSessiontime(7200);
       $REX['COM_USER']->setUserID("rex_com_user.id");
       $REX['COM_USER']->setUserquery("select * from rex_com_user where id='USR_UID' ".$query_extras);
-      
+
       ## --- NEW LOGIN ---
       if($login_name)
       {
@@ -328,21 +328,5 @@ class rex_com_auth
     return rex_com_auth::getUser();
   
   }
-
-
-	/*
-	 * Removes locked articles from rexSeo XML-Sitemap
-	 */
-	function rexseo_removeSitemapArticles($params)
-	{
-	  foreach($params['subject'] as $id => $item)
-	  {
-	    $article = OOArticle::getArticleById($id);
-	    if(!rex_com_auth::checkPerm($article))
-	      unset($params['subject'][$id]);
-	  }
-	
-	  return $params['subject'];
-	}
 
 }
