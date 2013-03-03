@@ -66,31 +66,6 @@ INSERT INTO `rex_62_type` VALUES
 /*!40000 ALTER TABLE `rex_62_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
-DROP TABLE IF EXISTS `rex_630_cronjobs`;
-CREATE TABLE `rex_630_cronjobs` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `parameters` text,
-  `interval` varchar(255) DEFAULT NULL,
-  `nexttime` int(11) DEFAULT '0',
-  `environment` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `createdate` int(11) NOT NULL,
-  `createuser` varchar(255) NOT NULL,
-  `updatedate` int(11) NOT NULL,
-  `updateuser` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
-LOCK TABLES `rex_630_cronjobs` WRITE;
-/*!40000 ALTER TABLE `rex_630_cronjobs` DISABLE KEYS */;
-INSERT INTO `rex_630_cronjobs` VALUES 
-  (1,'Artikel-Status','rex_cronjob_article_status','','|1|d|',0,'|0|1|',0,1359759307,'admin',1359759307,'admin'),
-  (2,'Tabellen-Optimierung','rex_cronjob_optimize_tables','','|1|d|',0,'|0|1|',0,1359759310,'admin',1359759310,'admin');
-/*!40000 ALTER TABLE `rex_630_cronjobs` ENABLE KEYS */;
-UNLOCK TABLES;
-
 DROP TABLE IF EXISTS `rex_679_type_effects`;
 CREATE TABLE `rex_679_type_effects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
