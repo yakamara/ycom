@@ -66,6 +66,31 @@ INSERT INTO `rex_62_type` VALUES
 /*!40000 ALTER TABLE `rex_62_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `rex_630_cronjobs`;
+CREATE TABLE `rex_630_cronjobs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `parameters` text,
+  `interval` varchar(255) DEFAULT NULL,
+  `nexttime` int(11) DEFAULT '0',
+  `environment` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `createdate` int(11) NOT NULL,
+  `createuser` varchar(255) NOT NULL,
+  `updatedate` int(11) NOT NULL,
+  `updateuser` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `rex_630_cronjobs` WRITE;
+/*!40000 ALTER TABLE `rex_630_cronjobs` DISABLE KEYS */;
+INSERT INTO `rex_630_cronjobs` VALUES 
+  (1,'Artikel-Status','rex_cronjob_article_status','','|1|d|',0,'|0|1|',0,1359759307,'admin',1359759307,'admin'),
+  (2,'Tabellen-Optimierung','rex_cronjob_optimize_tables','','|1|d|',0,'|0|1|',0,1359759310,'admin',1359759310,'admin');
+/*!40000 ALTER TABLE `rex_630_cronjobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
 DROP TABLE IF EXISTS `rex_679_type_effects`;
 CREATE TABLE `rex_679_type_effects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -371,7 +396,7 @@ CREATE TABLE `rex_com_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `rex_com_group` WRITE;
 /*!40000 ALTER TABLE `rex_com_group` DISABLE KEYS */;
@@ -399,7 +424,7 @@ CREATE TABLE `rex_com_user` (
   `password_hash` text NOT NULL,
   `last_action_time` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `rex_file`;
 CREATE TABLE `rex_file` (
   `file_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -426,7 +451,7 @@ CREATE TABLE `rex_file` (
   PRIMARY KEY (`file_id`),
   KEY `re_file_id` (`re_file_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `rex_file` WRITE;
 /*!40000 ALTER TABLE `rex_file` DISABLE KEYS */;
@@ -517,7 +542,7 @@ CREATE TABLE `rex_template` (
 LOCK TABLES `rex_template` WRITE;
 /*!40000 ALTER TABLE `rex_template` DISABLE KEYS */;
 INSERT INTO `rex_template` VALUES 
-  (1,'','01 . Template','REX_TEMPLATE[4]REX_TEMPLATE[2]<!DOCTYPE HTML>\r\n<html>\r\n\r\n<head>\r\n	<base href=\"<?php echo $REX[\'SERVER\']; ?>\" />\r\n	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\r\n	<title><?php echo $REX[\'SERVERNAME\']; ?></title>\r\n	<meta name=\"robots\" content=\"index,follow\" />\r\n\r\n	<link rel=\"icon\" href=\"/layout/css/fav.ico\" />\r\n	<link href=\"/layout/css/main.css\" type=\"text/css\" media=\"screen\" rel=\"stylesheet\" />\r\n	<!--[if IE 7]>\r\n	<link href=\"/layout/css/ie7.css\" type=\"text/css\" media=\"screen\" rel=\"stylesheet\" />\r\n	<![endif]-->\r\n\r\n</head>\r\n\r\n<?php\r\n\r\n// ----- Startseite wird \"markiert\", damit das CSS entsprechend reagieren kann\r\nif ($REX[\'START_ARTICLE_ID\'] == REX_ARTICLE_ID) {\r\n	echo \'<body id=\"homepage\">\';\r\n} else {\r\n	echo \'<body id=\"other\">\';\r\n}\r\n\r\n// ----- Headerbild wird von oberster Ebene vererbt\r\n$metafile = \"\";\r\n$path = explode(\"|\",substr($this->getValue(\"path\").$this->getValue(\"article_id\"),1));\r\nforeach($path as $p)\r\n{\r\n  if($a = OOArticle::getArticleById($p)) {\r\n    if($a->getValue(\"art_file\") != \"\")\r\n      $metafile = $a->getValue(\"art_file\");\r\n  }\r\n}\r\n\r\n?>\r\n\r\n<div id=\"header\">\r\n\r\n<?php // Meta-Navigation\r\n	echo \'<div class=\"metanavi\">\';\r\n	$nav = rex_navigation::factory();\r\n	echo $nav->get(17,1,TRUE,TRUE); \r\n	echo \'</div>\';\r\n?>\r\n\r\n	<div class=\"userinfo\">REX_TEMPLATE[3]</div>\r\n\r\n</div><!-- header -->\r\n\r\n<div id=\"wrapper\">\r\n	<div id=\"logo\">\r\n		<a href=\"/\" title=\"<?php echo $REX[\"SERVERNAME\"]; ?> - Startseite\" >Zur Startseite</a>\r\n	</div> <!-- logo -->\r\n\r\n<?php // Navigation\r\n	echo \'<div id=\"mainnavi\">\'.\"\\r\\n\";\r\n	$nav = rex_navigation::factory();\r\n	echo $nav->get(0,1,TRUE,TRUE); \r\n	echo \"\\r\\n\";\r\n	echo \'</div>\'.\"\\r\\n\";\r\n?>\r\n\r\n	<?php\r\n		// Startseite\r\n		\r\n		if ($REX[\'START_ARTICLE_ID\'] == REX_ARTICLE_ID) {\r\n			\r\n			echo \'<div class=\"imageHome\">\';\r\n			if($metafile != \"\")\r\n				echo  \'<img src=\"/files/\'.$metafile.\'\" alt=\"\" width=\"930\" height=\"230\" />\';\r\n			echo \'</div>\';\r\n			echo \'<div class=\"imageHomeShadow\"></div>\'.\"\\r\\n\";\r\n\r\n			$headline1 = $this->getValue(\"art_headline1\");\r\n			$headline2 = $this->getValue(\"art_headline2\");\r\n\r\n			echo \'<div class=\"headlines\">\'.\"\\r\\n\";\r\n			echo \'<h1>\'.$headline1.\'</h1>\'.\"\\r\\n\";\r\n			echo \'<h2>\'.$headline2.\'</h2>\'.\"\\r\\n\";\r\n			echo \'</div><!-- headlines -->\'.\"\\r\\n\";\r\n			\r\n		} else {\r\n\r\n			echo \'<div class=\"imageOther\">\'.\"\\r\\n\";\r\n			if($metafile != \"\")\r\n				echo \'<img src=\"/files/\'.$metafile.\'\" width=\"930\" height=\"170\" alt=\"\" />\'.\"\\r\\n\";\r\n			echo \'</div>\'.\"\\r\\n\";\r\n			echo \'<div class=\"imageOtherShadow\"></div>\'.\"\\r\\n\";\r\n		}\r\n	?>\r\n\r\n<div id=\"content\">\r\n\r\n	<div id=\"left\">\r\n		REX_ARTICLE[ctype=1]\r\n	</div>\r\n\r\n	<div id=\"right\">\r\n		\r\n	<?php // Navigation\r\n		if ($REX[\'START_ARTICLE_ID\'] != REX_ARTICLE_ID) {\r\n			$P = explode(\"|\",$this->getValue(\"path\").$this->getValue(\"article_id\").\"|\");\r\n			$rexnav2 = rex_navigation::factory();\r\n			echo \'<div id=\"subnavi\">\';	\r\n			echo $rexnav2->get($P[1],3,TRUE,TRUE);\r\n			echo \'</div>\';\r\n		}\r\n\r\n	?>\r\n		REX_ARTICLE[ctype=2]\r\n	</div>\r\n\r\n</div> <!-- content -->\r\n\r\n</div><!-- /wrapper -->\r\n<div id=\"footer\">\r\n	<div class=\"footerleft\">\r\n	<p>&copy;  by <a href=\"http://www.redaxo.org\">www.redaxo.org</a>, <a href=\"http://www.yakamara.de\">www.yakamara.de</a></p></div>\r\n	<div class=\"footerright\">\r\n\r\n<?php // Meta-Navigation\r\n	echo \'<div class=\"metanavi\">\';\r\n	$nav = rex_navigation::factory();\r\n	echo $nav->get(21,1,TRUE,TRUE); \r\n	echo \'</div>\';\r\n?>\r\n\r\n	</div>\r\n</div><!-- footer -->\r\n\r\n</body>\r\n</html>',1,'admin','admin',1341499116,1341499116,'a:3:{s:10:\"categories\";a:1:{s:3:\"all\";s:1:\"1\";}s:5:\"ctype\";a:2:{i:1;s:6:\"Inhalt\";i:2;s:13:\"rechte Spalte\";}s:7:\"modules\";a:3:{i:1;a:1:{s:3:\"all\";s:1:\"1\";}i:2;a:1:{s:3:\"all\";s:1:\"1\";}i:3;a:1:{s:3:\"all\";s:1:\"1\";}}}',0),
+  (1,'','01 . Template','REX_TEMPLATE[4]REX_TEMPLATE[2]<!DOCTYPE HTML>\r\n<html>\r\n\r\n<head>\r\n	<base href=\"<?php echo $REX[\'SERVER\']; ?>\" />\r\n	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\r\n	<title><?php echo $REX[\'SERVERNAME\']; ?></title>\r\n	<meta name=\"robots\" content=\"index,follow\" />\r\n\r\n	<link rel=\"icon\" href=\"<?php echo $REX[\"HTDOCS_PATH\"]; ?>layout/css/fav.ico\" />\r\n	<link href=\"<?php echo $REX[\"HTDOCS_PATH\"]; ?>layout/css/main.css\" type=\"text/css\" media=\"screen\" rel=\"stylesheet\" />\r\n</head>\r\n\r\n<?php\r\n\r\n// ----- Startseite wird \"markiert\", damit das CSS entsprechend reagieren kann\r\nif ($REX[\'START_ARTICLE_ID\'] == REX_ARTICLE_ID) {\r\n	echo \'<body id=\"homepage\">\';\r\n} else {\r\n	echo \'<body id=\"other\">\';\r\n}\r\n\r\n// ----- Headerbild wird von oberster Ebene vererbt\r\n$metafile = \"\";\r\n$path = explode(\"|\",substr($this->getValue(\"path\").$this->getValue(\"article_id\"),1));\r\nforeach($path as $p)\r\n{\r\n  if($a = OOArticle::getArticleById($p)) {\r\n    if($a->getValue(\"art_file\") != \"\")\r\n      $metafile = $a->getValue(\"art_file\");\r\n  }\r\n}\r\n\r\n?>\r\n\r\n<div id=\"header\">\r\n\r\n<?php // Meta-Navigation\r\n	echo \'<div class=\"metanavi\">\';\r\n	$nav = rex_navigation::factory();\r\n	echo $nav->get(17,1,TRUE,TRUE); \r\n	echo \'</div>\';\r\n?>\r\n\r\n	<div class=\"userinfo\">REX_TEMPLATE[3]</div>\r\n\r\n</div><!-- header -->\r\n\r\n<div id=\"wrapper\">\r\n	<div id=\"logo\">\r\n		<a href=\"/\" title=\"<?php echo $REX[\"SERVERNAME\"]; ?> - Startseite\" >Zur Startseite</a>\r\n	</div> <!-- logo -->\r\n\r\n<?php // Navigation\r\n	echo \'<div id=\"mainnavi\">\'.\"\\r\\n\";\r\n	$nav = rex_navigation::factory();\r\n	echo $nav->get(0,1,TRUE,TRUE); \r\n	echo \"\\r\\n\";\r\n	echo \'</div>\'.\"\\r\\n\";\r\n?>\r\n\r\n	<?php\r\n		// Startseite\r\n		\r\n		if ($REX[\'START_ARTICLE_ID\'] == REX_ARTICLE_ID) {\r\n			\r\n			echo \'<div class=\"imageHome\">\';\r\n			if($metafile != \"\")\r\n				echo  \'<img src=\"\'.$REX[\"HTDOCS_PATH\"].\'files/\'.$metafile.\'\" alt=\"\" width=\"930\" height=\"230\" />\';\r\n			echo \'</div>\';\r\n			echo \'<div class=\"imageHomeShadow\"></div>\'.\"\\r\\n\";\r\n\r\n			$headline1 = $this->getValue(\"art_headline1\");\r\n			$headline2 = $this->getValue(\"art_headline2\");\r\n\r\n			echo \'<div class=\"headlines\">\'.\"\\r\\n\";\r\n			echo \'<h1>\'.$headline1.\'</h1>\'.\"\\r\\n\";\r\n			echo \'<h2>\'.$headline2.\'</h2>\'.\"\\r\\n\";\r\n			echo \'</div><!-- headlines -->\'.\"\\r\\n\";\r\n			\r\n		} else {\r\n\r\n			echo \'<div class=\"imageOther\">\'.\"\\r\\n\";\r\n			if($metafile != \"\")\r\n				echo \'<img src=\"\'.$REX[\"HTDOCS_PATH\"].\'files/\'.$metafile.\'\" width=\"930\" height=\"170\" alt=\"\" />\'.\"\\r\\n\";\r\n			echo \'</div>\'.\"\\r\\n\";\r\n			echo \'<div class=\"imageOtherShadow\"></div>\'.\"\\r\\n\";\r\n		}\r\n	?>\r\n\r\n<div id=\"content\">\r\n\r\n	<div id=\"left\">\r\n		REX_ARTICLE[ctype=1]\r\n	</div>\r\n\r\n	<div id=\"right\">\r\n		\r\n	<?php // Navigation\r\n		if ($REX[\'START_ARTICLE_ID\'] != REX_ARTICLE_ID) {\r\n			$P = explode(\"|\",$this->getValue(\"path\").$this->getValue(\"article_id\").\"|\");\r\n			$rexnav2 = rex_navigation::factory();\r\n			echo \'<div id=\"subnavi\">\';	\r\n			echo $rexnav2->get($P[1],3,TRUE,TRUE);\r\n			echo \'</div>\';\r\n		}\r\n\r\n	?>\r\n		REX_ARTICLE[ctype=2]\r\n	</div>\r\n\r\n</div> <!-- content -->\r\n\r\n</div><!-- /wrapper -->\r\n<div id=\"footer\">\r\n	<div class=\"footerleft\">\r\n	<p>&copy;  by <a href=\"http://www.redaxo.org\">www.redaxo.org</a>, <a href=\"http://www.yakamara.de\">www.yakamara.de</a></p></div>\r\n	<div class=\"footerright\">\r\n\r\n<?php // Meta-Navigation\r\n	echo \'<div class=\"metanavi\">\';\r\n	$nav = rex_navigation::factory();\r\n	echo $nav->get(21,1,TRUE,TRUE); \r\n	echo \'</div>\';\r\n?>\r\n\r\n	</div>\r\n</div><!-- footer -->\r\n\r\n</body>\r\n</html>',1,'admin','admin',1362350583,1362350583,'a:3:{s:10:\"categories\";a:1:{s:3:\"all\";s:1:\"1\";}s:5:\"ctype\";a:2:{i:1;s:6:\"Inhalt\";i:2;s:13:\"rechte Spalte\";}s:7:\"modules\";a:3:{i:1;a:1:{s:3:\"all\";s:1:\"1\";}i:2;a:1:{s:3:\"all\";s:1:\"1\";}i:3;a:1:{s:3:\"all\";s:1:\"1\";}}}',0),
   (2,'','02 - Header','<?php\r\n\r\nheader(\'Content-Type: text/html; charset=utf-8\');\r\n\r\n/**\r\n * Artikel/Kategorie online? Wenn nein dann auf die Startseite\r\n */\r\n\r\nif ($this->getValue(\'status\') == 0)\r\n{\r\n  // Weiterleitung für Artikel\r\n  header (\'HTTP/1.0 404 Not Found\');\r\n  header(\'Location: \'.$REX[\'SERVER\'].rex_getUrl($REX[\'NOTFOUND_ARTICLE_ID\']));\r\n  exit;\r\n}\r\n\r\n?>',0,'admin','admin',1321029300,1321029300,'a:3:{s:10:\"categories\";a:1:{s:3:\"all\";s:1:\"1\";}s:5:\"ctype\";a:0:{}s:7:\"modules\";a:1:{i:1;a:1:{s:3:\"all\";s:1:\"1\";}}}',0),
   (3,'','03 - Userinfo','<?php\r\n\r\nif(rex_com_auth::getUser()) {\r\n\r\n  echo \'Sie sind eingeloggt als: \';\r\n\r\n  $name = rex_com_auth::getUser()->getValue(\"firstname\");\r\n  $name .= \" \".rex_com_auth::getUser()->getValue(\"name\");\r\n  echo \'<strong>\'.htmlspecialchars($name).\'</strong>\';\r\n\r\n}else {\r\n\r\n  echo \'Sie sind nicht eingeloggt.\';\r\n\r\n}\r\n\r\n?>',0,'admin','admin',1341503406,1341503406,'a:3:{s:10:\"categories\";a:1:{s:3:\"all\";s:1:\"1\";}s:5:\"ctype\";a:0:{}s:7:\"modules\";a:1:{i:1;a:1:{s:3:\"all\";s:1:\"1\";}}}',0),
   (4,'','04 . Community-Installationshilfe','<?php\r\n\r\n$err = TRUE;\r\n\r\n$addons = array(\r\n		\"textile\" => array(), \r\n		\"phpmailer\" => array(), \r\n		\"xform\" => array(\"email\", \"manager\", \"setup\"),\r\n//		\"rexseo\" => array(),\r\n		\"community\" => array(\"auth\",\"group\")\r\n	);\r\n\r\n$m = array();\r\nforeach($addons as $addon => $plugins) {\r\n  if(!OOAddon::isAvailable($addon)) {\r\n    $m[] = \'Bitte im REDAXO das `\'.$addon.\'` AddOn installieren UND aktivieren\';\r\n  }elseif(count($plugins)>0)\r\n  {\r\n  	 foreach($plugins as $plugin) {\r\n      if(!OOPlugin::isAvailable($addon,$plugin)) {\r\n        $m[] = \'Bitte in REDAXO das `\'.$plugin.\'` Plugin [\'.$addon.\'] installieren UND aktivieren\';\r\n      }\r\n  	 }\r\n  }\r\n}\r\n\r\nif(count($m)>0) {\r\n  echo implode(\"<br />\",$m);\r\n  exit;\r\n}\r\n\r\n?>',0,'admin','admin',1341487064,1341487064,'a:3:{s:10:\"categories\";a:1:{s:3:\"all\";s:1:\"1\";}s:5:\"ctype\";a:0:{}s:7:\"modules\";a:1:{i:1;a:1:{s:3:\"all\";s:1:\"1\";}}}',0);
