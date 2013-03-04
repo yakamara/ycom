@@ -5,7 +5,9 @@
 * @author m.lorch[at]it-kult[dot]de Markus Lorch, Jan kristinus
 * @author <a href="http://www.it-kult.de">www.it-kult.de</a>
 * @version 1.0
-* 
+*
+* Aufruf - wenn Download erzwungen werden soll: files/dateiname.jpg?media_download=1
+*
 */
 
 $mypage = "auth_media";
@@ -16,7 +18,7 @@ $REX['ADDON']['community']['plugin_auth_media']['xsendfile'] = 0;
 
 // --- DYN
 $REX['ADDON']['community']['plugin_auth_media']['auth_active'] = 1;
-$REX['ADDON']['community']['plugin_auth_media']['unsecure_fileext'] = "png,jpg,jpeg,gif,ico,css,js,swf";
+$REX['ADDON']['community']['plugin_auth_media']['unsecure_fileext'] = "png,gif,ico,css,js,swf";
 $REX['ADDON']['community']['plugin_auth_media']['error_article_id'] = 1;
 // --- /DYN
 
@@ -53,20 +55,18 @@ if($REX['ADDON']['community']['plugin_auth_media']['auth_active']) {
     rex_register_extension('REXSEO_INCLUDED', 'rex_com_auth_media_init');
   }
 
-  ## image_manager hack
-  $rex_img_file = rex_get('rex_img_file', 'string');
-  $rex_img_type = rex_get('rex_img_type', 'string');
-  if($rex_img_file != '' && $rex_img_type != '') {
+  // image_manager
+  function rex_com_auth_media_im($params) {
 
-    $REX['ADDON']['community']['plugin_auth'] = $ADDONSsic['community']['plugin_auth'];
-    include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth/inc/auth.php";
-    
-    if( ($media = OOMedia::getMediaByFileName($rex_img_file)) && rex_com_auth_media::checkPerm($media) ) {
-
-    } else {
-      rex_com_auth_media::forwardErrorPage();
+    if($params["subject"]["rex_img_init"]) {
+      if( ($media = OOMedia::getMediaByFileName($params["subject"]["rex_img_file"])) && rex_com_auth_media::checkPerm($media) ) {
+      } else {
+        rex_com_auth_media::forwardErrorPage();
+      }
     }
+
   }
+  rex_register_extension('IMAGE_MANAGER_INIT', 'rex_com_auth_media_im');
 
 }
 

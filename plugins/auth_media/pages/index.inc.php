@@ -27,7 +27,7 @@ $REX[\'ADDON\'][\'community\'][\'plugin_auth_media\'][\'error_article_id\'] = '.
 
   ## update files
   if(rex_replace_dynamic_contents($REX['INCLUDE_PATH'].'/addons/community/plugins/auth_media/config.inc.php', $content) !== false)
-    if(rex_com_auth_media::createHtaccess())
+    if(rex_com_auth_media::createHtaccess($REX['ADDON']['community']['plugin_auth_media']['auth_active'],$REX['ADDON']['community']['plugin_auth_media']['unsecure_fileext']))
       echo rex_info($I18N->msg('com_auth_media_settings_update'));
     else
       echo rex_warning($I18N->msg('com_auth_media_htaccess_failupdate'));      

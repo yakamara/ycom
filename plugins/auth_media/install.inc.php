@@ -66,6 +66,9 @@ if($install_success)
   if(is_array($purge_files) && count($purge_files)>0)
     foreach ($purge_files as $file)
       unlink($file);
+
+  rex_com_auth_media::createHtaccess($ADDONSsic['community']["plugin_auth_media"]["auth_active"],$ADDONSsic['community']["plugin_auth_media"]["unsecure_fileext"]);
+
 }
 
 ## finish
