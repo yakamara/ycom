@@ -23,7 +23,7 @@ $REX['ADDON']['community']['plugin_auth_media']['error_article_id'] = 1;
 // --- /DYN
 
 ## Loading Plugin
-include $REX["INCLUDE_PATH"]."/addons/community/plugins/auth_media/classes/class.rex_com_auth_media.inc.php";
+include_once $REX["INCLUDE_PATH"]."/addons/community/plugins/auth_media/classes/class.rex_com_auth_media.inc.php";
 
 ## Loading backend files
 if($REX["REDAXO"] && $REX['USER']) {

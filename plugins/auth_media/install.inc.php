@@ -67,7 +67,8 @@ if($install_success)
     foreach ($purge_files as $file)
       unlink($file);
 
-  rex_com_auth_media::createHtaccess($ADDONSsic['community']["plugin_auth_media"]["auth_active"],$ADDONSsic['community']["plugin_auth_media"]["unsecure_fileext"]);
+  include_once $REX["INCLUDE_PATH"]."/addons/community/plugins/auth_media/classes/class.rex_com_auth_media.inc.php";
+  rex_com_auth_media::createHtaccess(true,"png,gif,ico,css,js,swf");
 
 }
 
