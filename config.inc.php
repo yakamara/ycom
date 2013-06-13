@@ -2,6 +2,8 @@
 
 $mypage = "community"; // only for this file
 
+session_start();
+
 // ---------- Allgemeine AddOn Config
 
 // TODO:

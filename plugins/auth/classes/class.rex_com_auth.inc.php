@@ -304,8 +304,7 @@ class rex_com_auth
     global $REX;
     
     $s = array();
-    foreach($params as $l => $v)
-    {
+    foreach($params as $l => $v) {
       $s[] = ' `'.mysql_real_escape_string($l).'` = "'.mysql_real_escape_string($v).'" ';
     }
     
