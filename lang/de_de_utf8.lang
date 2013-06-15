@@ -29,4 +29,5 @@ community_install_xform_version_problem = Bitte installieren Sie das XForm Addon
 community_install_xform_manager_version_problem = Bitte installieren Sie das XForm Manager Plugin in Version {0} 
 community_install_xform_email_version_problem = Bitte installieren Sie das XForm Email Plugin in Version {0} 
 community_install_only_utf8 = Community kann nur installiert werden, wenn der Zeichensatz UTF 8 verwenden wird.
-community_install_redaxo_version_problem = Die REDAXO Version reicht nicht aus. Es wird mindestens Version {0} gebraucht.
+community_install_redaxo_version_problem = Die REDAXO Version reicht nicht aus. Es wird mindestens Version {0} gebraucht. Sie haben Version {1}
+community_install_php_version_problem = Die PHP Version reicht nicht aus. Es wird mindestens Version {0} gebraucht. Sie haben Version {1}

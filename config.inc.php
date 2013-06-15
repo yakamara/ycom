@@ -2,7 +2,9 @@
 
 $mypage = "community"; // only for this file
 
-session_start();
+if(!isset($_SESSION)) {
+  session_start();
+}
 
 // ---------- Allgemeine AddOn Config
 
@@ -10,7 +12,7 @@ session_start();
 // Unterscheidung der Sprachen anhand REX_CUR_CLANG.
 
 if($REX["CUR_CLANG"] == 1) {
-	$REX['LANG'] = "en_en_utf8";
+	$REX['LANG'] = "en_gb_utf8";
 }
 
 if (!isset($I18N) && !is_object($I18N)) {
@@ -63,4 +65,3 @@ function rex_com_xform_add($params) {
 }
 
 rex_register_extension('ADDONS_INCLUDED', 'rex_com_xform_add');
-;

@@ -12,7 +12,7 @@ $I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/community/lang');
 
 if ($REX['VERSION'] != '4' || $REX['SUBVERSION'] < '5') {
   $REX['ADDON']['install']['community'] = 0;
-  $REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_redaxo_version_problem', '4.5');
+  $REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_redaxo_version_problem', $REX['VERSION'].".".$REX['SUBVERSION'], '4.5');
 
 } elseif (OOAddon::isAvailable('phpmailer') != 1 || version_compare(OOAddon::getVersion('phpmailer'), '2.8', '<')) {
   $REX['ADDON']['install']['community'] = 0;
@@ -30,9 +30,9 @@ if ($REX['VERSION'] != '4' || $REX['SUBVERSION'] < '5') {
   $REX['ADDON']['install']['community'] = 0;
   $REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_email_version_problem', '4.5');
 
-} elseif (version_compare(PHP_VERSION, '5.4.0', '<')) {
+} elseif (version_compare(PHP_VERSION, '5.3.0', '<')) {
   $REX['ADDON']['install']['community'] = 0;
-  $REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_redaxo_version_problem', PHP_VERSION);
+  $REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_php_version_problem', "5.3.0", PHP_VERSION);
 
 } else {
 
