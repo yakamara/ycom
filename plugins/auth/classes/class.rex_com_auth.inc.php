@@ -96,14 +96,14 @@ class rex_com_auth
 	function deleteUser($id)
 	{
 	    $delete = TRUE;
-		$delete = rex_register_extension_point("COM_AUTH_USER_DELETE", $delete, $id);
+		$delete = rex_register_extension_point("COM_AUTH_USER_DELETE", $delete, array($id));
 		if(!$delete) { return FALSE; }
 		
 		$id = (int) $id;
 		$gu = rex_sql::factory();
 		$gu->setQuery('delete from rex_com_user where id='.$id);
 
-		rex_register_extension_point("COM_AUTH_USER_DELETED", "", $id);
+		rex_register_extension_point("COM_AUTH_USER_DELETED", "", array($id));
 
 		return TRUE;
 	}
