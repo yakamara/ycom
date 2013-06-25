@@ -146,7 +146,7 @@ class rex_com_comments {
 		}
 
 		if($comments_view != "")
-			$comments_view = '<ol class="commentlist">'.$comments_view.'</ol>';	
+			$comments_view = '<ol id="commentList">'.$comments_view.'</ol>';	
 		
 
 		// Out
