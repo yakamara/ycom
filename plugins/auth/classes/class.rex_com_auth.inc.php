@@ -328,4 +328,20 @@ class rex_com_auth
   
   }
 
+
+  /*
+   * Removes locked articles from rexSeo XML-Sitemap
+   */
+  function rexseo_removeSitemapArticles($params)
+  {
+    foreach($params['subject'] as $id => $item)
+    {
+      $article = OOArticle::getArticleById($id);
+      if(!rex_com_auth::checkPerm($article))
+        unset($params['subject'][$id]);
+    }
+
+    return $params['subject'];
+  }
+
 }
