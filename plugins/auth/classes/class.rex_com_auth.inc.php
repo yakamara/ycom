@@ -288,6 +288,8 @@ class rex_com_auth
       rex_com_auth::clearUserSession();
     }
   
+    rex_register_extension_point('COM_AUTH_LOGIN_PROCESS_END','','');
+
     return $login_status;
   
   }

@@ -40,19 +40,14 @@ if($REX['ADDON']['community']['plugin_auth_media']['auth_active']) {
   function rex_com_auth_media_init($params) {
     global $REX, $I18N;
 
-    ## hack for rexseo >= 1.5
-    if(!OOAddon::isAvailable('rexseo') || version_compare(OOAddon::getVersion('rexseo'), '1.5.2', '<')) {
-      rex_com_auth_media::getMedia();
-    } elseif($params['extension_point'] == 'REXSEO_INCLUDED') {
-      rex_com_auth_media::getMedia(); 
-    }
+    rex_com_auth_media::getMedia();
 
   }
-  
+
   ## register EPs (only if required)
   if(rex_request("rex_com_auth_media_filename","string") != "") {
-    rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_media_init');
-    rex_register_extension('REXSEO_INCLUDED', 'rex_com_auth_media_init');
+    rex_register_extension('COM_AUTH_LOGIN_PROCESS_END', 'rex_com_auth_media_init');
+
   }
 
   // image_manager
