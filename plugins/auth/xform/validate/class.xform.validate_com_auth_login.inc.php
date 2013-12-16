@@ -13,8 +13,7 @@ class rex_xform_validate_com_auth_login extends rex_xform_validate_abstract
 		
 		$e = explode(",",$this->getElement(2));
 		$s = array();
-		foreach($e as $v)
-		{
+		foreach($e as $v) {
 			$w = explode("=",$v);
 			$label = $w[0];
 			$value = trim(rex_request($w[1],"string",""));
@@ -27,24 +26,25 @@ class rex_xform_validate_com_auth_login extends rex_xform_validate_abstract
 
     rex_com_auth::loginWithParams($vars,$query_extras);
 
-    if(!rex_com_auth::getUser())
-    {
+    if(!rex_com_auth::getUser()) {
       $this->params["warning"][] = 1;
       $this->params["warning_messages"][] = rex_translate($this->getElement(4));
       rex_com_auth::clearUserSession();
       
-    }
+    } else {
     
-    // TODO .load fields
-    /*
-    $fields = explode(",",$fields);
-    foreach($fields as $field)
-    {
-      $this->params["value_pool"]["email"][$field] = $REX["COM_USER"]->getValue($field);
-      if ($this->getElement(6) != "no_db") 
-        $this->params["value_pool"]["sql"][$field] = $REX["COM_USER"]->getValue($field);
+      // Load fields for eMail or DB
+      $fields = $this->getElement(5);
+      if ($fields != "") {
+        $fields = explode(",",$fields);
+        foreach($fields as $field) {
+          $this->params["value_pool"]["email"][$field] = $REX["COM_USER"]->getValue($field);
+          if ($this->getElement(6) != "no_db") 
+            $this->params["value_pool"]["sql"][$field] = $REX["COM_USER"]->getValue($field);
+        }
+      }
+  
     }
-    */
     
   	return;
 
