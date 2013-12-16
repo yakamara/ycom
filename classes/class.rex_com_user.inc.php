@@ -2,7 +2,7 @@
 
 class rex_com_user {
 
-
+  static $users = array();
   private $user = array();
 
   // ----------------
@@ -11,11 +11,26 @@ class rex_com_user {
     $this->user = $user;
   }
 
+  static function getMe() {
+    global $REX;
+    if (isset($REX['COM_USER'])) {
+      return rex_com_user::getById($REX["COM_USER"]->USER->getValue('id'));
+    } else {
+      return false;
+    }
+  }
+
   static function getById($id) {
+  
+    if(isset(self::$users[$id])) {
+      return self::$users[$id];
+    }
+  
     $usql = rex_sql::factory();
     $us = $usql->getArray('select * from rex_com_user where id='.intval($id)); 
     if(count($us) == 1) {
       $r = new rex_com_user($us[0]);
+      self::$users[$us[0]["id"]] = $r;
       return $r;
     } else {
       return false;
