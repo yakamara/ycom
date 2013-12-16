@@ -100,7 +100,7 @@ class rex_com_auth_media
   {
     global $REX;
 
-    header('Location: /' . rex_getUrl($REX['ADDON']['community']['plugin_auth_media']['error_article_id'], '', array($REX['ADDON']['community']['plugin_auth']['request']['ref'] => urlencode($_SERVER['REQUEST_URI'])), '&'));
+    header('Location: ' . rex_getUrl($REX['ADDON']['community']['plugin_auth_media']['error_article_id'], '', array($REX['ADDON']['community']['plugin_auth']['request']['ref'] => urlencode($_SERVER['REQUEST_URI'])), '&'));
 
     exit;
   }
