@@ -8,12 +8,11 @@ class rex_xform_validate_com_auth_login extends rex_xform_validate_abstract
 		global $REX;
 		
 		$error = TRUE;
-		
 		$vars = array();
 		
 		$e = explode(",",$this->getElement(2));
 		$s = array();
-		foreach($e as $v) {
+		foreach ($e as $v) {
 			$w = explode("=",$v);
 			$label = $w[0];
 			$value = trim(rex_request($w[1],"string",""));
@@ -21,18 +20,18 @@ class rex_xform_validate_com_auth_login extends rex_xform_validate_abstract
 		}
 
     $query_extras = "";
-    if($this->getElement(3) != "")
+    if ($this->getElement(3) != "") {
       $query_extras = ' and ('.$this->getElement(3).')';
+    }
 
     rex_com_auth::loginWithParams($vars,$query_extras);
 
-    if(!rex_com_auth::getUser()) {
+    if (!rex_com_auth::getUser()) {
       $this->params["warning"][] = 1;
       $this->params["warning_messages"][] = rex_translate($this->getElement(4));
       rex_com_auth::clearUserSession();
       
     } else {
-    
       // Load fields for eMail or DB
       $fields = $this->getElement(5);
       if ($fields != "") {
@@ -47,7 +46,6 @@ class rex_xform_validate_com_auth_login extends rex_xform_validate_abstract
     }
     
   	return;
-
 	}
 	
 	function getDescription()
