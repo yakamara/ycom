@@ -63,6 +63,18 @@ class rex_com_user {
     return $this->user;
   }
 
+  public function isAdmin() {
+    if($this->user["admin"] == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  public function getValue($val) {
+    return (@$this->user[$val]);
+  }
+
   // ----------------
 
 	static function triggerUserCreated($id, $params = array())
