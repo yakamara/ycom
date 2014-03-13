@@ -289,7 +289,7 @@ class rex_com_auth
     return $userobject || false
   */
 
-  function loginWithParams($params, $query_extras = "")
+  static function loginWithParams($params, $query_extras = "")
   {
   
     global $REX;
