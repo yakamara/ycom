@@ -20,9 +20,16 @@ OR
 Last Changes
 -------
 
+### Version 4.7.1 // xxx
+
+#### Bugs
+
+* Usertabelle wurde bei der Installation nicht automatisch aktiviert.
+
+
 ### Version 4.7 // 25. Juli 2014
 
-#### Neu
+#### Info
 
 * Läuft nur mit XForm ab Version 4.7
 
