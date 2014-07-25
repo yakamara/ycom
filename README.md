@@ -22,7 +22,7 @@ Last Changes
 
 ### Version 4.7 // 25. Juli 2014
 
-#### Inof
+#### Neu
 
 * Läuft nur mit XForm ab Version 4.7
 
@@ -31,8 +31,3 @@ Last Changes
 * XForm Manager Api eingesetzt, so dass sich die Felder richtig erstellen und nur KOrrekturen übernommen werden.
 * Facebookt Auth: Sessionstarted geprüft
 * Community Demo aktualisiert. Profil hatte nicht funktioniert.
-
-#### Bugs
-
-* Manager: Beim Löschen von Datensätzen bleibt man nun auf der entsprechenden Seite
-
