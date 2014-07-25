@@ -27,14 +27,14 @@ LOCK TABLES `rex_62_params` WRITE;
 INSERT INTO `rex_62_params` VALUES 
   (1,'translate:pool_file_description','med_description',1,'',2,'','','','','admin',1189343866,'admin',1189344596),
   (2,'translate:pool_file_copyright','med_copyright',2,'',1,'','','','','admin',1189343877,'admin',1189344617),
-  (3,'translate:online_from','art_online_from',2,'',10,'','','','','admin',1189344934,'admin',1189344934),
-  (4,'translate:online_to','art_online_to',3,'',10,'','','','','admin',1189344947,'admin',1189344947),
-  (5,'translate:description','art_description',4,'',2,'','','','','admin',1189345025,'admin',1189345025),
-  (6,'translate:keywords','art_keywords',5,'',2,'','','','','admin',1189345068,'admin',1189345068),
-  (7,'translate:metadata_image','art_file',6,'',6,'','','','','admin',1189345109,'admin',1189345109),
-  (9,'translate:com_group_name','art_com_groups',110,'multiple=multiple',3,'','select name as label,id from rex_com_group order by label','','','admin',1344110669,'',0),
-  (8,'translate:com_permtype','art_com_permtype',100,'',3,'','0:translate:com_perm_extends|1:translate:com_perm_only_logged_in|2:translate:com_perm_only_not_logged_in|3:translate:com_perm_all','','','admin',1344114649,'',0),
-  (10,'translate:com_group_perm','art_com_grouptype',111,'',3,'','0:translate:com_group_forallgroups|1:translate:com_group_inallgroups|2:translate:com_group_inonegroup|3:translate:com_group_nogroups','','','admin',1344110669,'admin',1320955573);
+  (3,'translate:online_from','art_online_from',1,'',10,'','','','','admin',1189344934,'admin',1189344934),
+  (4,'translate:online_to','art_online_to',2,'',10,'','','','','admin',1189344947,'admin',1189344947),
+  (5,'translate:description','art_description',3,'',2,'','','','','admin',1189345025,'admin',1189345025),
+  (6,'translate:keywords','art_keywords',4,'',2,'','','','','admin',1189345068,'admin',1189345068),
+  (7,'translate:metadata_image','art_file',5,'',6,'','','','','admin',1189345109,'admin',1189345109),
+  (9,'translate:com_group_name','art_com_groups',8,'multiple=multiple',3,'','select name as label,id from rex_com_group order by label','','','admin',1406292454,'',0),
+  (8,'translate:com_permtype','art_com_permtype',6,'',3,'','0:translate:com_perm_extends|1:translate:com_perm_only_logged_in|2:translate:com_perm_only_not_logged_in|3:translate:com_perm_all','','','admin',1406292454,'',0),
+  (10,'translate:com_group_perm','art_com_grouptype',7,'',3,'','0:translate:com_group_forallgroups|1:translate:com_group_inallgroups|2:translate:com_group_inonegroup|3:translate:com_group_nogroups','','','admin',1406292454,'admin',1320955573);
 /*!40000 ALTER TABLE `rex_62_params` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,6 +366,30 @@ INSERT INTO `rex_clang` VALUES
 /*!40000 ALTER TABLE `rex_clang` ENABLE KEYS */;
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `rex_com_comment`;
+CREATE TABLE `rex_com_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ukey` text NOT NULL,
+  `reply_to` text NOT NULL,
+  `info_email` varchar(255) NOT NULL,
+  `ckey` text NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `update_datetime` varchar(255) NOT NULL,
+  `create_datetime` varchar(255) NOT NULL,
+  `www` text NOT NULL,
+  `user_id` text NOT NULL,
+  `email` text NOT NULL,
+  `comment` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `rex_com_comment` WRITE;
+/*!40000 ALTER TABLE `rex_com_comment` DISABLE KEYS */;
+INSERT INTO `rex_com_comment` VALUES 
+  (1,'8fb9546c40d688fb9ca1d5644731ce1e8c4cca41','','0','','0','2014-07-25 13:47:38','2014-07-25 13:47:38','','1','','dsdsd');
+/*!40000 ALTER TABLE `rex_com_comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
 DROP TABLE IF EXISTS `rex_com_group`;
 CREATE TABLE `rex_com_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -399,7 +423,15 @@ CREATE TABLE `rex_com_user` (
   `password_hash` text NOT NULL,
   `last_action_time` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `rex_com_user` WRITE;
+/*!40000 ALTER TABLE `rex_com_user` DISABLE KEYS */;
+INSERT INTO `rex_com_user` VALUES 
+  (2,'jan.kristinus@yakamara.de','d819b82566e9b601d87e168d0dffe31cee1a9229','jan.kristinus@yakamara.de','1','Jan','Kristinus','ea3d6de54e3ae692963d8b2982b516f5','','1','','0','','1406293224');
+/*!40000 ALTER TABLE `rex_com_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
 DROP TABLE IF EXISTS `rex_file`;
 CREATE TABLE `rex_file` (
   `file_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -549,94 +581,87 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `rex_xform_field`;
 CREATE TABLE `rex_xform_field` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `table_name` varchar(255) NOT NULL,
+  `table_name` varchar(100) NOT NULL,
   `prio` int(11) NOT NULL,
-  `type_id` varchar(255) NOT NULL,
-  `type_name` varchar(255) NOT NULL,
-  `f1` text NOT NULL,
-  `f2` text NOT NULL,
-  `f3` text NOT NULL,
-  `f4` text NOT NULL,
-  `f5` text NOT NULL,
-  `f6` text NOT NULL,
-  `f7` text NOT NULL,
-  `f8` text NOT NULL,
-  `f9` text NOT NULL,
-  `list_hidden` tinyint(4) NOT NULL,
-  `search` tinyint(4) NOT NULL,
+  `type_id` varchar(100) NOT NULL,
+  `type_name` varchar(100) NOT NULL,
+  `list_hidden` tinyint(1) NOT NULL,
+  `search` tinyint(1) NOT NULL,
+  `name` text NOT NULL,
+  `label` text NOT NULL,
+  `options` text NOT NULL,
+  `multiple` text NOT NULL,
+  `default` text NOT NULL,
+  `size` text NOT NULL,
+  `only_empty` text NOT NULL,
+  `message` text NOT NULL,
+  `table` text NOT NULL,
+  `hashname` text NOT NULL,
+  `field` text NOT NULL,
+  `type` text NOT NULL,
+  `empty_option` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=205 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `rex_xform_field` WRITE;
 /*!40000 ALTER TABLE `rex_xform_field` DISABLE KEYS */;
 INSERT INTO `rex_xform_field` VALUES 
-  (195,'rex_com_user',140,'value','text','session_key','translate:session_key','','0','','','','','',1,1),
-  (194,'rex_com_user',130,'value','text','activation_key','translate:activation_key','','0','','','','','',1,1),
-  (193,'rex_com_user',120,'value','text','name','translate:name','','0','','','','','',0,1),
-  (192,'rex_com_user',110,'value','text','firstname','translate:firstname','','0','','','','','',0,1),
-  (191,'rex_com_user',100,'value','select','status','translate:status','translate:com_account_requested=0,translate:com_account_active=1,translate:com_account_inactive=-1','0','-1','0','','','',0,1),
-  (190,'rex_com_user',90,'validate','unique','email','translate:com_this_email_exists_already','','','','','','','',1,0),
-  (180,'rex_com_group',20,'validate','empty','name','translate:com_group_xform_enter_name','','','','','','','',1,0),
-  (189,'rex_com_user',80,'validate','email','email','translate:com_please_enter_email','','','','','','','',1,0),
-  (188,'rex_com_user',70,'validate','empty','email','translate:com_please_enter_email','','','','','','','',1,0),
-  (179,'rex_com_group',10,'value','text','name','translate:name','','0','','','','','',0,0),
-  (187,'rex_com_user',60,'value','text','email','translate:email','','0','','','','','',0,1),
-  (186,'rex_com_user',50,'validate','empty','password','translate:com_please_enter_password','','','','','','','',1,0),
-  (185,'rex_com_user',40,'value','text','password','translate:password','','0','','','','','',1,1),
-  (184,'rex_com_user',30,'validate','unique','login','translate:com_this_login_exists_already','rex_com_user','','','','','','',1,0),
-  (183,'rex_com_user',20,'validate','empty','login','translate:com_please_enter_login','','','','','','','',1,0),
-  (182,'rex_com_user',10,'value','text','login','translate:login','','0','','','','','',0,1),
-  (196,'rex_com_user',150,'value','datestamp','last_action_time','U','0','1','','','','','',1,1),
-  (204,'rex_com_user',55,'value','com_auth_password_hash','password_hash','password','','','','','','','',1,0);
+  (1,'rex_com_user',100,'value','text',0,1,'login','translate:login','','','','','','','','','','',''),
+  (2,'rex_com_user',200,'value','text',1,0,'password','translate:password','','','','','','','','','','',''),
+  (3,'rex_com_user',300,'value','text',0,1,'email','translate:email','','','','','','','','','','',''),
+  (4,'rex_com_user',400,'value','select',0,1,'status','translate:status','translate:com_account_requested=0,translate:com_account_active=1,translate:com_account_inactive=-1','0','-1','1','','','','','','',''),
+  (5,'rex_com_user',500,'value','text',0,1,'firstname','translate:firstname','','','','','','','','','','',''),
+  (6,'rex_com_user',600,'value','text',0,1,'name','translate:name','','','','','','','','','','',''),
+  (7,'rex_com_user',700,'value','text',1,1,'activation_key','translate:activation_key','','','','','','','','','','',''),
+  (8,'rex_com_user',800,'value','text',1,1,'session_key','translate:session_key','','','','','','','','','','',''),
+  (9,'rex_com_user',900,'value','datestamp',1,1,'last_action_time','U','','','','','0','','','','','',''),
+  (10,'rex_com_user',110,'validate','empty',1,0,'login','','','','','','','translate:com_please_enter_login','','','','',''),
+  (11,'rex_com_user',120,'validate','unique',1,0,'login','','','','','','','translate:com_this_login_exists_already','rex_com_user','','','',''),
+  (12,'rex_com_user',210,'validate','empty',1,0,'password','','','','','','','translate:com_please_enter_password','','','','',''),
+  (13,'rex_com_user',310,'validate','empty',1,0,'email','','','','','','','translate:com_please_enter_email','','','','',''),
+  (14,'rex_com_user',320,'validate','email',1,0,'email','','','','','','','translate:com_please_enter_email','','','','',''),
+  (15,'rex_com_user',330,'validate','unique',1,0,'email','','','','','','','translate:com_this_email_exists_already','rex_com_user','','','',''),
+  (16,'rex_com_user',250,'value','com_auth_password_hash',0,1,'password_hash','','','','','','','','','password','','',''),
+  (17,'rex_com_group',100,'value','text',0,0,'name','translate:name','','','','','','','','','','',''),
+  (18,'rex_com_group',110,'validate','empty',1,0,'name','','','','','','','translate:com_group_xform_enter_name','','','','',''),
+  (19,'rex_com_user',50,'value','be_manager_relation',1,0,'rex_com_group','translate:rex_com_group','','','','5','','','rex_com_group','','name','1','1'),
+  (20,'rex_com_user',1500,'value','text',1,1,'newsletter_last_id','translate:newsletter_last_id','','','','','','','','','','',''),
+  (21,'rex_com_user',1510,'value','checkbox',1,1,'newsletter','translate:newsletter','','','0','','','','','','','','');
 /*!40000 ALTER TABLE `rex_xform_field` ENABLE KEYS */;
 UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rex_xform_relation`;
 CREATE TABLE `rex_xform_relation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `source_table` varchar(255) NOT NULL,
-  `source_name` varchar(255) NOT NULL,
+  `source_table` varchar(100) NOT NULL,
+  `source_name` varchar(100) NOT NULL,
   `source_id` int(11) NOT NULL,
-  `target_table` varchar(255) NOT NULL,
+  `target_table` varchar(100) NOT NULL,
   `target_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
-
-LOCK TABLES `rex_xform_relation` WRITE;
-/*!40000 ALTER TABLE `rex_xform_relation` DISABLE KEYS */;
-INSERT INTO `rex_xform_relation` VALUES 
-  (35,'rex_com_user','rex_com_group',7,'rex_com_group',1),
-  (27,'rex_com_user','rex_com_group',5,'rex_com_group',3),
-  (26,'rex_com_user','rex_com_group',5,'rex_com_group',1),
-  (39,'rex_com_user','rex_com_group',2,'rex_com_group',3),
-  (38,'rex_com_user','rex_com_group',2,'rex_com_group',1),
-  (36,'rex_com_user','rex_com_group',7,'rex_com_group',2),
-  (37,'rex_com_user','rex_com_group',7,'rex_com_group',3);
-/*!40000 ALTER TABLE `rex_xform_relation` ENABLE KEYS */;
-UNLOCK TABLES;
-
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `rex_xform_table`;
 CREATE TABLE `rex_xform_table` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` tinyint(4) NOT NULL,
-  `table_name` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `table_name` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `list_amount` tinyint(3) unsigned NOT NULL DEFAULT '50',
   `prio` int(11) NOT NULL,
-  `search` tinyint(4) NOT NULL,
-  `hidden` tinyint(4) NOT NULL,
-  `export` tinyint(4) NOT NULL,
-  `import` tinyint(4) NOT NULL,
+  `search` tinyint(1) NOT NULL,
+  `hidden` tinyint(1) NOT NULL,
+  `export` tinyint(1) NOT NULL,
+  `import` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `table_name` (`table_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `rex_xform_table` WRITE;
 /*!40000 ALTER TABLE `rex_xform_table` DISABLE KEYS */;
 INSERT INTO `rex_xform_table` VALUES 
-  (22,1,'rex_com_user','translate:com_user','communityuser',100,100,1,0,1,1),
-  (21,1,'rex_com_group','translate:com_group_name','',50,110,0,0,0,0);
+  (1,1,'rex_com_user','translate:com_user','',100,0,0,0,1,1),
+  (2,1,'rex_com_group','translate:com_group_name','',50,0,0,0,1,1);
 /*!40000 ALTER TABLE `rex_xform_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
