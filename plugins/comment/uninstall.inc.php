@@ -7,7 +7,10 @@
  */
 
 $REX['ADDON']['install']['comment'] = 0;
-// $REX['ADDON']['installmsg']['comment'] = 'Fehler!';
+
+$i = rex_sql::factory();
+$i->setQuery("DELETE FROM `rex_xform_table` where `table_name`='rex_com_comment';");
+$i->setQuery("DELETE FROM `rex_xform_field` where `table_name`='rex_com_comment';");
 
 $info = rex_generateAll(); // quasi kill cache ..
 

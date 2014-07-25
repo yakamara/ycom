@@ -6,30 +6,38 @@
  * @author <a href="http://www.yakamara.de">www.yakamara.de</a>
  */
 
-/*
-	UserFelder hinzufŸgen
-	- newsletter, bool
-	- newsletter_last_id, varchar
-  + Felder abgleichen
-*/
+rex_register_extension('OUTPUT_FILTER', function () {
 
-$error = '';
+    $field = array(
+      'table_name' => 'rex_com_user',
+      'prio' => 1500,
+      'type_id' => 'value',
+      'type_name' => 'text',
+      'name' => 'newsletter_last_id',
+      'label' => 'translate:newsletter_last_id',
+      'list_hidden' => 1,
+      'search' => 1
+    );
 
-if ($error != '')
-{
-  $REX['ADDON']['installmsg']['newsletter'] = $error;
-  
-}else
-{
-  $REX['ADDON']['install']['newsletter'] = true;
+    rex_xform_manager_table_api::setTableField('rex_com_user', $field);
 
-	// xform refresh
-	function rex_com_newsletter_install() {
-		$r = new rex_xform_manager;
-		$r->generateAll();
-	}
-	rex_register_extension('OUTPUT_FILTER', 'rex_com_newsletter_install');
+    $field = array(
+      'table_name' => 'rex_com_user',
+      'prio' => 1510,
+      'type_id' => 'value',
+      'type_name' => 'checkbox',
+      'name' => 'newsletter',
+      'label' => 'translate:newsletter',
+      'default' => 0,
+      'list_hidden' => 1,
+      'search' => 1
+    );
 
-}
+    rex_xform_manager_table_api::setTableField('rex_com_user', $field);
 
-?>
+    rex_xform_manager_table_api::generateTablesAndFields();
+
+  }, array(), REX_EXTENSION_LATE);
+
+
+$REX['ADDON']['install']['newsletter'] = true;

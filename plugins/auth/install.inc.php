@@ -6,8 +6,6 @@
  * @author <a href="http://www.yakamara.de">www.yakamara.de</a>
  */
 
-$error = '';
-
 // --- metainfo
 $a = rex_sql::factory();
 $a->setTable("rex_62_params");
@@ -36,25 +34,28 @@ if ($g->getRows()==0) {
 ## Prio neu sortieren // Metainfo
 rex_organize_priorities($REX['TABLE_PREFIX']. '62_params', 'prior', 'name LIKE "art_%"', 'prior, updatedate', 'field_id');
 
-// ************************************************************** CACHE LOESCHEN
 
-$info = rex_generateAll(); // quasi kill cache .. 
+
+rex_register_extension('OUTPUT_FILTER', function () {
+
+    $field = array(
+      'table_name' => 'rex_com_user',
+      'prio' => 250,
+      'type_id' => 'value',
+      'type_name' => 'com_auth_password_hash',
+      'name' => 'password_hash',
+      'hashname' => 'password',
+      'list_hidden' => 0,
+      'search' => 1
+    );
+
+    rex_xform_manager_table_api::setTableField('rex_com_user', $field);
+
+    rex_xform_manager_table_api::generateTablesAndFields();
+
+    $info = rex_generateAll(); // kill cache
+
+  }, array(), REX_EXTENSION_LATE);
+
 
 $REX['ADDON']['install']['auth'] = 1;
-if($error != "") {
-
-	$REX['ADDON']['install']['auth'] = 0;
-	$REX['ADDON']['installmsg']['auth'] = $error;
-	
-}else
-{
-  /*
-	function rex_com_auth_install() {
-		$r = new rex_xform_manager;
-		$r->generateAll();
-	}
-	rex_register_extension('OUTPUT_FILTER', 'rex_com_auth_install');
-  */
-}
-
-?>
