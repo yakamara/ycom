@@ -3,7 +3,9 @@
 $fbstate = rex_get("state","string");
 $fbcode = rex_get("code","string");
 
-session_start();
+if(session_id() == '') {
+  session_start();
+}
 
 ## Execute only if parameters given
 if( ($fbstate != '' && $fbcode != '') || rex_request("fb_create_account","int") == 1)
