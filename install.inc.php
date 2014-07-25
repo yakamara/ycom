@@ -30,6 +30,7 @@ if ($REX['VERSION'] != '4' || $REX['SUBVERSION'] < '6') {
     'table_name' => 'rex_com_user',
     'name' => 'translate:com_user',
     'list_amount' => 100,
+    'status' => 1,
     'export' => 1,
     'import' => 1,
 
