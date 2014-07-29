@@ -20,7 +20,11 @@ OR
 Last Changes
 -------
 
-### Version 4.7.1 // xxx
+### Version 4.7.1 // 29. Juli 2014
+
+#### Info
+
+* Wenn man ein Update über den Installer macht, werden die Konfigurationen überschrieben.
 
 #### Bugs
 

@@ -8,7 +8,7 @@
  */
 
 $mypage = 'auth';
-$REX['ADDON']['version'][$mypage] = '4.7';
+$REX['ADDON']['version'][$mypage] = '4.7.1';
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
 $REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
 
@@ -26,9 +26,9 @@ if (isset($I18N) && is_object($I18N)) {
 $REX['ADDON']['community']['plugin_auth']['auth_active'] = 1;
 $REX['ADDON']['community']['plugin_auth']['stay_active'] = 1;
 $REX['ADDON']['community']['plugin_auth']['article_login_ok'] = 1;
-$REX['ADDON']['community']['plugin_auth']['article_login_failed'] = 12;
-$REX['ADDON']['community']['plugin_auth']['article_logout'] = 12;
-$REX['ADDON']['community']['plugin_auth']['article_withoutperm'] = 12;
+$REX['ADDON']['community']['plugin_auth']['article_login_failed'] = 1;
+$REX['ADDON']['community']['plugin_auth']['article_logout'] = 1;
+$REX['ADDON']['community']['plugin_auth']['article_withoutperm'] = 1;
 $REX['ADDON']['community']['plugin_auth']['login_field'] = 'login';
 $REX['ADDON']['community']['plugin_auth']['passwd_hashed'] = '1';
 // --- /DYN

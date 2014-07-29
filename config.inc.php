@@ -28,7 +28,7 @@ $REX['ADDON']['name'][$mypage] = "Community";   // name
 $REX['ADDON']['perm'][$mypage] = "community[]"; // benoetigte mindest permission
 $REX['ADDON']['navigation'][$mypage] = array('block'=>'community');
 
-$REX['ADDON']['version'][$mypage] = '4.7';
+$REX['ADDON']['version'][$mypage] = '4.7.1';
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
 $REX['ADDON']['supportpage'][$mypage] = 'www.redaxo.org/de/forum';
 $REX['PERM'][] = "community[]";

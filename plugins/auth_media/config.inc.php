@@ -11,7 +11,7 @@
 */
 
 $mypage = "auth_media";
-$REX['ADDON']['version'][$mypage] = '4.7';
+$REX['ADDON']['version'][$mypage] = '4.7.1';
 $REX['ADDON']['author'][$mypage] = 'Markus Lorch, Jan Kristinus';
 $REX['ADDON']['supportpage'][$mypage] = 'www.it-kult.de';
 $REX['ADDON']['community']['plugin_auth_media']['xsendfile'] = 0;

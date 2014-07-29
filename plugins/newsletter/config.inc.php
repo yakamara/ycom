@@ -7,7 +7,7 @@
  */ 
 
 $mypage = "newsletter";
-$REX['ADDON']['version'][$mypage] = '4.7';
+$REX['ADDON']['version'][$mypage] = '4.7.1';
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
 $REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
 $REX['PERM'][] = "community[newsletter]";
