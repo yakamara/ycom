@@ -11,14 +11,12 @@ $gm->setQuery('select * from rex_module where ausgabe LIKE "%'.$searchtext.'%"')
 
 $module_id = 0;
 $module_name = "";
-foreach($gm->getArray() as $module)
-{
+foreach ($gm->getArray() as $module) {
 	$module_id = $module["id"];
 	$module_name = $module["name"];
 }
 
-if (isset($_REQUEST["install"]) && $_REQUEST["install"]==1)
-{
+if (isset($_REQUEST["install"]) && $_REQUEST["install"]==1) {
 
 	$xform_module_name = "rex - comment";
 
@@ -33,14 +31,12 @@ if (isset($_REQUEST["install"]) && $_REQUEST["install"]==1)
 	$mi->setValue("ausgabe",addslashes($out));
 
 	// altes Module aktualisieren
-	if (isset($_REQUEST["module_id"]) && $module_id==$_REQUEST["module_id"])
-	{
+	if (isset($_REQUEST["module_id"]) && $module_id==$_REQUEST["module_id"]) {
 		$mi->setWhere('id="'.$module_id.'"');
 		$mi->update();
 		echo rex_info('Kommentarmodul "'.$module_name.'" wurde aktualisiert');
 
-	}else
-	{
+	} else {
 		$mi->setValue("name",$xform_module_name);
 		$mi->insert();
 		$module_id = (int) $mi->getLastId();
@@ -68,10 +64,3 @@ echo '
 	</div>
 </div>';
 
-
-
-
-
-
-
-?>

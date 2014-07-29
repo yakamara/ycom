@@ -73,7 +73,7 @@ rex_register_extension('OUTPUT_FILTER', function () {
       'prio' => 300,
       'type_id' => 'value',
       'type_name' => 'text',
-      'name' => 'email',
+      'name' => 'name',
       'label' => 'translate:name',
       'list_hidden' => 0,
       'search' => 1
@@ -226,5 +226,9 @@ rex_register_extension('OUTPUT_FILTER', function () {
     );
 
     rex_xform_manager_table_api::setTable($table, $fields);
+
+    rex_xform_manager_table_api::generateTablesAndFields();
+
+    $info = rex_generateAll(); // kill cache ..
 
   }, array(), REX_EXTENSION_LATE);

@@ -25,6 +25,9 @@ Last Changes
 #### Bugs
 
 * Usertabelle wurde bei der Installation nicht automatisch aktiviert.
+* Kommentarplugin installierte den Namen nicht richtig. Deswegen konnten keine Infos gespeichert werden.
+* Installationprozess warf Fehler.
+
 
 
 ### Version 4.7 // 25. Juli 2014
