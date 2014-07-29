@@ -45,9 +45,9 @@ $REX['ADDON']['community']['plugin_auth']['request']['id'] = 'rex_com_auth_id';
 $REX['ADDON']['community']['plugin_auth']['request']['logout'] = 'rex_com_auth_logout';
 $REX['ADDON']['community']['plugin_auth']['request']['ref'] = 'rex_com_auth_ref';
 
-$REX['ADDON']['community']['xform_path']['value'][] = $REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/xform/value/';
-$REX['ADDON']['community']['xform_path']['validate'][] = $REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/xform/validate/';
-$REX['ADDON']['community']['xform_path']['action'][] = $REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/xform/action/';
+$REX['ADDON']['xform']['classpaths']['value']['community.auth'] = $REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/xform/value/';
+$REX['ADDON']['xform']['classpaths']['validate']['community.auth'] = $REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/xform/validate/';
+$REX['ADDON']['xform']['classpaths']['action']['community.auth'] = $REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/xform/action/';
 
 if ($REX['REDAXO']) {
   if ($REX['USER'] && ($REX['USER']->isAdmin() || $REX['USER']->hasPerm('community[auth]'))) {

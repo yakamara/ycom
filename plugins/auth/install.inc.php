@@ -22,7 +22,7 @@ if ($g->getRows()==1) {
 	$a->setWhere('name="art_com_permtype"');
 	$a->update();
 
-}else {
+} else {
 	$a->insert();
 }
 $g = new rex_sql;
@@ -34,9 +34,13 @@ if ($g->getRows()==0) {
 ## Prio neu sortieren // Metainfo
 rex_organize_priorities($REX['TABLE_PREFIX']. '62_params', 'prior', 'name LIKE "art_%"', 'prior, updatedate', 'field_id');
 
-
-
 rex_register_extension('OUTPUT_FILTER', function () {
+
+    global $REX;
+
+    $REX['ADDON']['xform']['classpaths']['value']['community.auth'] = $REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/xform/value/';
+    $REX['ADDON']['xform']['classpaths']['validate']['community.auth'] = $REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/xform/validate/';
+    $REX['ADDON']['xform']['classpaths']['action']['community.auth'] = $REX['INCLUDE_PATH'] . '/addons/community/plugins/auth/xform/action/';
 
     $field = array(
       'table_name' => 'rex_com_user',

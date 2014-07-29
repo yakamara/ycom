@@ -8,6 +8,10 @@
 
 rex_register_extension('OUTPUT_FILTER', function () {
 
+    global $REX;
+
+    $REX['ADDON']['xform']['classpaths']['value']['community.newsletter'] = $REX["INCLUDE_PATH"]."/addons/community/plugins/newsletter/xform/validate/";
+
     $field = array(
       'table_name' => 'rex_com_user',
       'prio' => 1500,

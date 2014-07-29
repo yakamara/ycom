@@ -48,8 +48,7 @@ if (isset($I18N) && is_object($I18N)) {
   }
 }
 
-## Include xform classes
-$REX['ADDON']['community']['xform_path']['value'][] = $REX['INCLUDE_PATH'] . '/addons/community/plugins/auth_facebook/xform/value/';
+$REX['ADDON']['xform']['classpaths']['value']['community.auth_facebook'] = $REX['INCLUDE_PATH'] . '/addons/community/plugins/auth_facebook/xform/value/';
 
 $REX['ADDON']['community']['plugin_auth_facebook']['facebook_conf'] = array(
   'appId' => $REX['ADDON']['community']['plugin_auth_facebook']['appId'],

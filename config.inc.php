@@ -41,27 +41,4 @@ if ($REX["REDAXO"] && $REX['USER']) {
     $REX['ADDON'][$mypage]['SUBPAGES'][] = array( '' , $I18N->msg("com_overview"));
 }
 
-
-// ---------- XForm values/action/validations einbinden
-
-$REX['ADDON']['community']['xform_path']['value'] = array();
-$REX['ADDON']['community']['xform_path']['validate'] = array();
-$REX['ADDON']['community']['xform_path']['action'] = array();
-
-$REX['ADDON']['community']['xform_path']['value'][] = $REX["INCLUDE_PATH"]."/addons/community/xform/value/";
-
-function rex_com_xform_add($params) {
-    global $REX;
-    foreach($REX['ADDON']['community']['xform_path']['value'] as $value) {
-        $REX['ADDON']['xform']['classpaths']['value'][] = $value;
-    }
-    foreach($REX['ADDON']['community']['xform_path']['validate'] as $validate) {
-        $REX['ADDON']['xform']['classpaths']['validate'][] = $validate;
-    }
-    foreach($REX['ADDON']['community']['xform_path']['action'] as $action) {
-        $REX['ADDON']['xform']['classpaths']['action'][] = $action;
-    }
-
-}
-
-rex_register_extension('ADDONS_INCLUDED', 'rex_com_xform_add');
+$REX['ADDON']['xform']['classpaths']['value']['community'] = $REX["INCLUDE_PATH"]."/addons/community/xform/value/";
