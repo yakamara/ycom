@@ -53,7 +53,7 @@ if($REX['ADDON']['community']['plugin_auth_media']['auth_active']) {
   // image_manager
   function rex_com_auth_media_im($params) {
 
-    if($params["subject"]["rex_img_init"]) {
+    if(!empty($params["subject"]["rex_img_init"])) {
       if( ($media = OOMedia::getMediaByFileName($params["subject"]["rex_img_file"])) && rex_com_auth_media::checkPerm($media) ) {
       } else {
         rex_com_auth_media::forwardErrorPage();
