@@ -13,12 +13,9 @@ $mypage = 'auth_facebook';
 $REX['ADDON']['version'][$mypage] = '4.7.1';
 
 // --- DYN
-$REX['ADDON']['community']['plugin_auth_facebook']['appId'] = "846251948719908";
-$REX['ADDON']['community']['plugin_auth_facebook']['appSecret'] = "d8ca827d8ec7ea4b207d354836693685";
-$REX['ADDON']['community']['plugin_auth_facebook']['appAccess'] = "public_profile,email";
-$REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']['0'] = 1;
-$REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']['1'] = 2;
-$REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']['2'] = 3;
+$REX['ADDON']['community']['plugin_auth_facebook']['appId'] = '';
+$REX['ADDON']['community']['plugin_auth_facebook']['appSecret'] = '';
+$REX['ADDON']['community']['plugin_auth_facebook']['appAccess'] = 'email';
 // --- /DYN
 
 $REX['ADDON']['community']['plugin_auth_facebook']['redirect'] = true;
