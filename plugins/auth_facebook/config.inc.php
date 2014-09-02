@@ -16,7 +16,6 @@ $REX['ADDON']['version'][$mypage] = '4.7.1';
 $REX['ADDON']['community']['plugin_auth_facebook']['appId'] = '';
 $REX['ADDON']['community']['plugin_auth_facebook']['appSecret'] = '';
 $REX['ADDON']['community']['plugin_auth_facebook']['appAccess'] = 'email';
-$REX['ADDON']['community']['plugin_auth_facebook']['defaultgroups']['0'] = 1;
 // --- /DYN
 
 $REX['ADDON']['community']['plugin_auth_facebook']['redirect'] = true;
