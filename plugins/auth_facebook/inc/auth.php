@@ -28,9 +28,6 @@ if( ($fbstate != '' && $fbcode != '') || rex_request("fb_create_account","int") 
 			if($sql->getRows() == 0)
 			{
 
-
-				print_r($fbuser);
-			
 				// -------------------------- Sync facebook user to database
 				
 				$login = $fbuser['first_name'].".fb.".$fbuser['id'];
