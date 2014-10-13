@@ -23,4 +23,4 @@ if (isset($I18N) && is_object($I18N)) {
 
 include ($REX["INCLUDE_PATH"].'/addons/community/plugins/newsletter/lib/class.rex_com_newsletter.inc.php');
 
-$REX['ADDON']['xform']['classpaths']['value']['community.newsletter'] = $REX["INCLUDE_PATH"]."/addons/community/plugins/newsletter/xform/validate/";
+$REX['ADDON']['xform']['classpaths']['validate']['community.newsletter'] = $REX["INCLUDE_PATH"]."/addons/community/plugins/newsletter/xform/validate/";
