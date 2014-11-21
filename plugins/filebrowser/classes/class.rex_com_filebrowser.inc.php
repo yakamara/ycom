@@ -118,16 +118,8 @@ class rex_com_filebrowser
         $this->currentDirs = array();
         $this->currentFiles = array();
 
-        foreach (rex_finder::factory($this->fullPath)->dirsOnly() as $dir) {
+        foreach (rex_finder::factory($this->fullPath)->dirsOnly()->sort() as $dir) {
             $this->currentDirs[$this->getCurrentPath($dir->getBasename())] = $dir;
-            uasort ( $this->currentDirs , function ($a, $b) {
-                $a_name = basename($a);
-                $b_name = basename($b);
-                if ($a_name == $b_name) {
-                  return 0;
-                }
-                return $a_name < $b_name ? -1 : 1;
-            });
         }
 
         $sort = explode('-', rex_get('sort', 'string') ?: $this->defaultSort);
