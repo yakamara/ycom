@@ -653,6 +653,7 @@ class rex_com_filebrowser
         $return .= '<form class="toolbar" method="GET" action="'.$this->getLink().'">
             <input type="text" name="search" value="' . rex_get('search', 'string') . '"/>
             <input type="submit" value="Suchen"/>
+            <input type="hidden" name="path" value="'.htmlspecialchars($this->getCurrentPath()).'"/>
             '. (rex_get('search', 'string') ? '<input type="button" value="Suche aufheben" onclick="$(\'input[name=search]\').val(\'\');this.form.submit();"/>' :'') . '
             Sortierung: '.$select->get().'
         </form>';
