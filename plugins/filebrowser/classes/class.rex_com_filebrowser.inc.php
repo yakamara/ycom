@@ -53,6 +53,7 @@ class rex_com_filebrowser
         $path = $path ?: rex_path::pluginData('community', 'filebrowser');
         rex_dir::create($path);
         $this->path = rtrim(realpath($path), '/');
+        
         $this->setCurrentPath(rex_request('path', 'string'));
         $this->setCurrentFile(rex_request('file', 'string'));
         rex_login::startSession();
@@ -72,6 +73,7 @@ class rex_com_filebrowser
 
     function setCurrentPath($current_path = '')
     {
+    
         if ($this->isInRealm($current_path)) {
             $this->currentPath = $current_path;
 
@@ -330,9 +332,9 @@ class rex_com_filebrowser
             '<div class="rex-com-filebrowser">' .
             // $this->getStyle() .
             $this->getPathView() .
-            $this->getFoldersView() .
+            $this->getToolbarView() . 
+            (rex_get('search', 'string') ? '' : $this->getFoldersView()) . 
             $this->getFilesView() .
-            $this->getScript() .
             '</div>';
 
     }
@@ -595,6 +597,7 @@ class rex_com_filebrowser
                 $select = new rex_select();
                 $select->setSize(1);
                 $select->setName('target_dir');
+                $select->setStyle('class="functarget"');
                 $iterator = rex_finder::factory($this->path)
                     ->dirsOnly()
                     ->recursive()
@@ -608,8 +611,26 @@ class rex_com_filebrowser
                 $select = str_replace('°', '&nbsp;&nbsp;', $select->get());
                 $elements[] = '<tr>
                     <td class="image"><img src="' . $this->getImage($this->currentPath, $name, $ext) . '" /></td>
-                    <td class="name">' . $func . ' "' . htmlspecialchars($name) . '" to ' . $select . ' <input type="text" size="50" name="target_file" value="' . htmlspecialchars($targetFile ?: substr($fileInfo->getBasename(), 0, -strlen($ext) - 1)) . '" />.' . $ext . '
-                    <br /><span class="time">' . $this->readableTime($fileInfo->getMTime()) . '</span> <span class="size">' . $this->readableFilesize($fileInfo->getSize()) . '</span></td>
+                    <td class="name">
+                        <span class="functext">' . $func . '</span>
+                        <span class="funcfilename">' . htmlspecialchars($name) . '</span>
+                        <span class="functext"> to </span>
+                        ' . $select . '
+                        
+                        <p class="formtext">
+                            <span class="formgroup">
+                                <input type="text" name="target_file" value="' . htmlspecialchars($targetFile ?: substr($fileInfo->getBasename(), 0, -strlen($ext) - 1)) . '" />
+                                <span class="formgroup-addon">
+                                    .' . $ext . '
+                                </span>
+                            </span>
+                        </p>
+                        
+                        <ul class="piped">
+                            <li><span class="time">' . $this->readableTime($fileInfo->getMTime()) . '</span></li>
+                            <li><span class="size">' . $this->readableFilesize($fileInfo->getSize()) . '</span><li>
+                        </ul>
+                    </td>
                     <td class="func"><input type="submit" value="' . ucfirst($func) . '" name="submit_' . $func . '"/></td>
                 </tr>';
             } else {
@@ -623,32 +644,21 @@ class rex_com_filebrowser
                 }
                 $elements[] = '<tr>
                     <td class="image"><a href="' . $download_link . '"><img src="' . $this->getImage($this->currentPath, $name, $ext) . '" /></a></td>
-                    <td class="name">'.$subpath.'<a href="' . $download_link . '">' . htmlspecialchars($fileInfo->getBasename()) . '</a>
-                    <br /><span class="time">' . $this->readableTime($fileInfo->getMTime()) . '</span> <span class="size">' . $this->readableFilesize($fileInfo->getSize()) . '</span></td>
+                    <td class="name">
+                        <p>
+                            '.$subpath.'<a href="' . $download_link . '">' . htmlspecialchars($fileInfo->getBasename()) . '</a>
+                        </p>                        
+                        <ul class="piped">
+                            <li><span class="time">' . $this->readableTime($fileInfo->getMTime()) . '</span></li>
+                            <li><span class="size">' . $this->readableFilesize($fileInfo->getSize()) . '</span><li>
+                        </ul>
+                    </td>
                     <td class="func">' . implode('<br />', $links) . '</td>
                 </tr>';
             }
         }
 
         $return = '<h2>Files</h2>';
-
-        $select = new rex_select();
-        $select->setSize(1);
-        $select->setName('sort');
-        $select->setAttribute('onchange', 'this.form.submit()');
-        $select->addOption('Name aufsteigend', 'name-asc');
-        $select->addOption('Name absteigend', 'name-desc');
-        $select->addOption('Datum aufsteigend', 'date-asc');
-        $select->addOption('Datum absteigend', 'date-desc');
-        $select->setSelected(rex_get('sort'));
-
-        $return .= '<form class="toolbar" method="GET" action="'.$this->getLink().'">
-            <input type="text" name="search" value="' . rex_get('search', 'string') . '"/>
-            <input type="submit" value="Suchen"/>
-            <input type="hidden" name="path" value="'.htmlspecialchars($this->getCurrentPath()).'"/>
-            '. (rex_get('search', 'string') ? '<input type="button" value="Suche aufheben" onclick="$(\'input[name=search]\').val(\'\');this.form.submit();"/>' :'') . '
-            Sortierung: '.$select->get().'
-        </form>';
 
 
         if ($error = self::getMessage('file-error')) {
@@ -668,6 +678,7 @@ class rex_com_filebrowser
         }
 
         $return .= '
+<div class="xform xform-expand xform-clean">
 <form action="' . $this->getLink(array('func' => $func, 'file' => $file, 'search' => $search)) . '" method="post" enctype="multipart/form-data">
     <table>
     <thead>
@@ -681,7 +692,8 @@ class rex_com_filebrowser
       ' . implode('', $elements) . '
     </tbody>
     </table>
-</form';
+</form>
+</div>';
         return '<div class="files">' . $return . '</div>';
     }
 
@@ -698,20 +710,54 @@ class rex_com_filebrowser
 
     }
 
-    public function getScript()
-    {
-        return "
-            <script>
-                $('.rex-com-filebrowser').find('input[type=text]').keypress(function (event) {
-                    if (event.which == 13) {
-                        $(this).closest('tr').find(':submit:first').click();
-                    }
-                    return true;
-                });
-            </script>
-        ";
-    }
 
+
+
+
+    public function getToolbarView()
+    {
+
+        $select = new rex_select();
+        $select->setSize(1);
+        $select->setName('sort');
+        $select->setAttribute('onchange', 'this.form.submit()');
+        $select->addOption('Name aufsteigend', 'name-asc');
+        $select->addOption('Name absteigend', 'name-desc');
+        $select->addOption('Datum aufsteigend', 'date-asc');
+        $select->addOption('Datum absteigend', 'date-desc');
+        $select->setSelected(rex_get('sort'));
+
+
+        $return = '
+        <div class="xform xform-expand toolbar">
+            <form method="GET" action="'.$this->getLink().'">
+                <div class="grid-1-3">
+                    <div>
+                        <p class="formselect">
+                            <label>Sortierung:</label>
+                            '.$select->get().'
+                        </p>
+                    </div>
+                    <div>
+                        <p class="formtext">
+                            <span class="formgroup">
+                                <input type="text" name="search" value="' . rex_get('search', 'string') . '" />
+                                <span class="formgroup-button">
+                                    <input type="submit" value="Suchen" />
+                                </span>
+                            </span>
+
+                            <input type="hidden" name="path" value="'.htmlspecialchars($this->getCurrentPath()).'" />
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        ';
+
+        return $return;
+    }
 
     public function getImage($path, $image, $ext)
     {
