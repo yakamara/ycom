@@ -5,7 +5,7 @@ class rex_com_filebrowser
 
     private $path = '';
     private $file = '';
-    private $admin = true;
+    private $admin = false;
     private $currentPath = '';
     private $fullPath;
     /** @type SplFileInfo[] */
