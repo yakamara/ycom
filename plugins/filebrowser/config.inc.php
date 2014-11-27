@@ -22,12 +22,6 @@ if (isset($I18N) && is_object($I18N)) {
 
 include $REX['INCLUDE_PATH'] . '/addons/community/plugins/filebrowser/classes/class.rex_com_filebrowser.inc.php';
 
-if ($REX['REDAXO'] && !$REX['SETUP']) {
-    if ($REX['USER']) {
-        $REX['ADDON']['community']['SUBPAGES'][] = array('plugin.filebrowser' , $I18N->msg('com_filebrowser'));
-    }
-}
-
 if (rex_request('rex_com_filebrowser_path', 'string') != '' && rex_request('rex_img_type', 'string') != '' && rex_request('rex_img_file', 'string') != '') {
 
     function rex_com_filebrowser_im($params)
