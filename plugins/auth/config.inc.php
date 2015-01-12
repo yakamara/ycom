@@ -57,7 +57,7 @@ if ($REX['REDAXO']) {
 
 if ($REX['ADDON']['community']['plugin_auth']['auth_active'] == 1) {
   if (!$REX['REDAXO']) {
-    rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config');
+    rex_register_extension('ADDONS_INCLUDED', 'rex_com_auth_config', array(), REX_EXTENSION_EARLY);
     function rex_com_auth_config($params)
     {
       global $REX, $I18N;
