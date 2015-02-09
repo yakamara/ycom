@@ -20,6 +20,25 @@ OR
 Last Changes
 -------
 
+### Version 4.7.2 // 9. Februar 2014
+
+### Info
+
+* Braucht nun mindestens die XForm Version 4.6.10
+
+### Neu
+
+* Filebrowser und Verwaltung für geschlossene Bereiche als PlugIn ergänzt. Durch die Installtion des Plugins
+wird das entsprechende Modul installiert.
+
+
+### Bugs
+
+* Debugmeldung bei Facebookauthentifizierung entfernt
+* Durch die XForm 4.6.10 ist die Methode "getXFormFieldsByType" verschwunden
+* Newsletter: XForm Validate Klasse wurde falsch eingebunden
+
+
 ### Version 4.7.1 // 29. Juli 2014
 
 #### Info

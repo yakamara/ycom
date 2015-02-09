@@ -18,7 +18,7 @@ if ($REX['VERSION'] != '4' || $REX['SUBVERSION'] < '6') {
   $REX['ADDON']['install']['community'] = 0;
   $REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_phpmailer_version_problem', '2.8');
 
-} elseif (OOAddon::isAvailable('xform') != 1 || version_compare(OOAddon::getVersion('xform'), '4.7', '<')) {
+} elseif (OOAddon::isAvailable('xform') != 1 || version_compare(OOAddon::getVersion('xform'), '4.6.10', '<')) {
   $REX['ADDON']['install']['community'] = 0;
   $REX['ADDON']['installmsg']['community'] = $I18N->msg('community_install_xform_version_problem', '4.7');
 
