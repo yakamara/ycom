@@ -8,7 +8,8 @@ $modules = array(
 // 		"profilechange"	=> array(	"key" => "profilechange", 	"search" => "module:com_auth_profilechange",	"name" => "com:auth - Profile"),
 	);
 
-$xform_user_fields = rex_xform_manager_table::getXFormFieldsByType("rex_com_user","value");
+$table = rex_xform_manager_table::get("rex_com_user");
+$xform_user_fields = $table->getValueFields();
 
 if(rex_request("func","string")=="update")
 {
