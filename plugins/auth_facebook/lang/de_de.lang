@@ -5,8 +5,8 @@ com_auth_facebook_settings = Einstellungen
 com_auth_facebook_settings_description = Der Zugriff auf Facebook erfordert eine vorhergegangene Registrierung einer Facebook-App bei <a href="http://developers.facebook.com">Facebook Developers</a>. Nachfolgend müssen die dort von Facebook vorgebenen Daten hier konfiguriert werden.
 com_auth_facebook_settings_facebook = Facebook App Einstellungen
 com_auth_facebook_settings_appId = AppID
-com_auth_facebook_settings_appSecret = Zugrifsschlüssel
-com_auth_facebook_settings_appAccess = Zugrifssrechte auf Facebookprofil
+com_auth_facebook_settings_appSecret = Zugriffsschlüssel
+com_auth_facebook_settings_appAccess = Zugriffsrechte auf Facebookprofil
 com_auth_facebook_settings_appAccess_description = Gibt an welche Daten und Rechte des Users an das Plugin übergeben werden darf. Die Freigabe der Rechte wird beim Login auf Facebook beim User angefragt und müssen von diesem freigegeben werden. 
 com_auth_facebook_settings_newuser = Standardeinstellungen für neue Facebook-User
 com_auth_facebook_settings_memberof = Gruppenmitgliedschaften
