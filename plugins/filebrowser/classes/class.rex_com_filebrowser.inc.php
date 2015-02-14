@@ -73,7 +73,7 @@ class rex_com_filebrowser
 
     function setCurrentPath($current_path = '')
     {
-    
+
         if ($this->isInRealm($current_path)) {
             $this->currentPath = $current_path;
 
@@ -163,6 +163,12 @@ class rex_com_filebrowser
         );
         return rex_getUrl('', '', array_merge($defaultParams, $params));
     }
+
+    function getDownloadLink($params = array())
+    {
+        return rex_getUrl('', '', $params);
+    }
+
 
     protected function dirInfo($message, $params = array())
     {
@@ -588,10 +594,13 @@ class rex_com_filebrowser
 
         foreach ($this->currentFiles as $path => $fileInfo) {
 
-            $name = substr($fileInfo->getRealPath(), strlen($this->fullPath) + 1);
+
+            // $name = substr($fileInfo->getRealPath(), strlen($this->fullPath) + 1);
+            $name = $fileInfo->getFilename();
             $subpath = substr($fileInfo->getPath(), strlen($this->fullPath) + 1);
             $subpath .= $subpath ? '/' : '';
             $ext = $fileInfo->getExtension();
+            $imagepath = substr($fileInfo->getPath(), strlen($this->path));
 
             if (in_array($func, array('copy', 'move')) && $file == $name) {
                 $select = new rex_select();
@@ -610,7 +619,7 @@ class rex_com_filebrowser
                 $select->setSelected($targetDir ?: rtrim($this->getCurrentPath($subpath), '/'));
                 $select = str_replace('°', '&nbsp;&nbsp;', $select->get());
                 $elements[] = '<tr>
-                    <td class="image"><img src="' . $this->getImage($this->currentPath, $name, $ext) . '" /></td>
+                    <td class="image"><img src="' . $this->getImage($imagepath, $name, $ext) . '" /></td>
                     <td class="name">
                         <span class="functext">' . $func . '</span>
                         <span class="funcfilename">' . htmlspecialchars($name) . '</span>
@@ -634,7 +643,7 @@ class rex_com_filebrowser
                     <td class="func"><input type="submit" value="' . ucfirst($func) . '" name="submit_' . $func . '"/></td>
                 </tr>';
             } else {
-                $download_link = $this->getLink(array('file' => $name, 'func' => 'download'));
+                $download_link = $this->getDownloadLink(array('file' => $name, 'path' => $imagepath, 'func' => 'download'));
                 $links = array();
                 $links[] = '<a href="' . $download_link . '">download</a>';
                 if ($this->isAdmin()) {
@@ -643,7 +652,7 @@ class rex_com_filebrowser
                     $links[] = '<a href="' . $this->getLink(array('file' => $name, 'func' => 'delete', 'search' => $search)) . '">delete</a>';
                 }
                 $elements[] = '<tr>
-                    <td class="image"><a href="' . $download_link . '"><img src="' . $this->getImage($this->currentPath, $name, $ext) . '" /></a></td>
+                    <td class="image"><a href="' . $download_link . '"><img src="' . $this->getImage($imagepath, $name, $ext) . '" /></a></td>
                     <td class="name">
                         <p>
                             '.$subpath.'<a href="' . $download_link . '">' . htmlspecialchars($fileInfo->getBasename()) . '</a>
