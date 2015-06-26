@@ -1,0 +1,24 @@
+com_board = Board
+com_board_name = Community Board
+
+com_board_title = Titel
+com_board_message = Nachricht
+com_board_attachment = Anhang
+com_board_thread = Thread
+com_board_key = Board-Key
+
+com_board_enter_title = Bitte geben Sie einen Titel ein.
+com_board_enter_message = Bitte geben Sie eine Nachricht ein.
+
+com_board_attachment_error_max_size =
+com_board_attachment_error_type
+com_board_attachment_delete = Lösche
+
+com_board_notifications = Bei neuen Beiträgen benachrichtigen
+com_board_thread_notification = Community Board Benachrichtigungen
+
+com_board_install_modul = Boardmodul installieren
+com_board_install_modul_description = Um das Board nutzen können, muß ein Modul erstellt werden,
+welches das Board in einen Artikel einbindet.
+com_board_install_board_modul = Neues Boardmodul installieren
+com_board_update_following_modul = Folgendes Boardmodul aktualisieren "{0}"
