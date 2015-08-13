@@ -6,10 +6,12 @@ class rex_com_board
     private $key = '';
     private $url = '';
 
+    /** @var rex_pager */
     private $pager;
     private $threadsPerPage = 10;
     private $postsPerPage = 10;
     private $notificationTemplate;
+    private $adminGroup;
 
     public function rex_com_board($key, $name = '')
     {
@@ -62,6 +64,23 @@ class rex_com_board
         $this->notificationTemplate = $notificationTemplate;
     }
 
+    public function setAdminGroup($groupId)
+    {
+        $this->adminGroup = $groupId;
+    }
+
+    public function isBoardAdmin(rex_com_user $user = null)
+    {
+        $user = $user ?: rex_com_user::getMe();
+
+        if (!$user || !$this->adminGroup) {
+            return false;
+        }
+
+        $groups = explode(',', $user->getValue('rex_com_group'));
+        return in_array($this->adminGroup, $groups);
+    }
+
     public function getUrl(array $params = array())
     {
         $url = $this->url;
@@ -100,6 +119,14 @@ class rex_com_board
         }
 
         return sprintf('board-%s-post-%d', $this->getKey(), $post);
+    }
+
+    public function getPostDeleteUrl(rex_com_board_post $post)
+    {
+        return $this->getCurrentUrl(array(
+            'post' => $post->getId(),
+            'function' => 'delete',
+        ));
     }
 
     public function getAttachmentUrl(rex_com_board_post $post)
@@ -175,6 +202,27 @@ class rex_com_board
         return $posts;
     }
 
+    /**
+     * @param int $id
+     * @return null|rex_com_board_post|rex_com_board_thread
+     */
+    public function getPost($id)
+    {
+        $sql = rex_sql::factory();
+        $sql->setQuery('SELECT * FROM rex_com_board_post WHERE status = 1 and id = ' . (int) $id);
+
+        if (!$sql->getRows()) {
+            return null;
+        }
+
+        $data = $sql->getRow();
+        if ($data['thread_id']) {
+            return new rex_com_board_post($data);
+        }
+
+        return new rex_com_board_thread($data);
+    }
+
     public function getView()
     {
         $thread = rex_get('thread', 'int');
@@ -235,6 +283,20 @@ class rex_com_board
             return $this->render('post.create.tpl.php', compact('thread', 'form'));
         }
 
+        if ('delete' === $function && $this->isBoardAdmin() && ($id = rex_get('post', 'int')) && $post = $this->getPost($id)) {
+            $this->deletePost($post);
+
+            $params = array();
+            if (!$post instanceof rex_com_board_thread) {
+                $params = array(
+                    'thread' => rex_get('thread', 'int'),
+                    'start' => rex_get('start', 'int'),
+                );
+            }
+            header('Location: ' . htmlspecialchars_decode($this->getUrl($params)));
+            exit;
+        }
+
         $post = rex_get('post', 'int');
 
         if ($post && 'attachment_download' === $function) {
@@ -245,6 +307,30 @@ class rex_com_board
 
         $posts = $this->getThreadPosts($thread, $post);
         return $this->render('posts.tpl.php', compact('thread', 'posts'));
+    }
+
+    private function deletePost(rex_com_board_post $post)
+    {
+        $sql = rex_sql::factory();
+
+        if (!$post instanceof rex_com_board_thread) {
+            if ($post->hasAttachment()) {
+                $file = rex_path::pluginData('community', 'board', 'attachments/'.$post->getRealAttachment());
+                rex_file::delete($file);
+            }
+
+            $sql->setQuery('DELETE FROM rex_com_board_post WHERE id = '.(int) $post->getId());
+            return;
+        }
+
+        $where = 'id = '.(int) $post->getId().' OR thread_id = '.(int) $post->getId();
+        $attachments = $sql->getArray('SELECT attachment FROM rex_com_board_post WHERE attachment != "" AND ('.$where.')');
+        foreach ($attachments as $attachment) {
+            $file = rex_path::pluginData('community', 'board', 'attachments/'.$attachment['attachment']);
+            rex_file::delete($file);
+        }
+
+        $sql->setQuery('DELETE FROM rex_com_board_post WHERE '.$where);
     }
 
     private function getForm()

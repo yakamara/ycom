@@ -28,6 +28,14 @@
                 <td>
                     <b><?= $post->getUser()->getFullName() ?></b><br><br>
                     <a href="<?= $this->getPostUrl($post) ?>"><?= $post->getCreated('%d.%m.%Y, %H:%M Uhr')?></a>
+                    <?php if ($this->isBoardAdmin()): ?>
+                        <br><br>
+                        <?php if ($post instanceof rex_com_board_thread): ?>
+                            <a href="<?= $this->getPostDeleteUrl($post) ?>" onclick="return confirm('Soll der gesamte Thread wirklich gelöscht werden?')">Thread löschen</a>
+                        <?php else: ?>
+                            <a href="<?= $this->getPostDeleteUrl($post) ?>" onclick="return confirm('Soll der Beitrag wirklich gelöscht werden?')">Beitrag löschen</a>
+                        <?php endif ?>
+                    <?php endif ?>
                 </td>
                 <td>
                     <h2><?= htmlspecialchars($post->getTitle()) ?></h2>
