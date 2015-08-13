@@ -13,7 +13,7 @@ class rex_com_board_post
     public static function get($id)
     {
         $sql = rex_sql::factory();
-        $sql->setQuery('SELECT * FROM rex_com_board_post WHERE id = ' . (int) $id);
+        $sql->setQuery('SELECT * FROM rex_com_board_post WHERE status = 1 and id = ' . (int) $id);
         return new self($sql->getRow());
     }
 
