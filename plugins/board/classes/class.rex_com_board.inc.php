@@ -153,7 +153,7 @@ class rex_com_board
      *
      * @return rex_com_board_post[]
      */
-    public function getThreadPosts(rex_com_board_thread $thread, $findPost = null)
+    public function getThreadPosts(rex_com_board_thread $thread, rex_com_board_post $findPost = null)
     {
         $this->pager = new rex_pager($this->postsPerPage);
 
@@ -164,7 +164,7 @@ class rex_com_board
         );
     }
 
-    public function getPosts($where = '', $order = 'created ASC', $findPost = null)
+    public function getPosts($where = '', $order = 'created ASC', rex_com_board_post $findPost = null)
     {
         $db = rex_sql::factory();
         //$db->debugsql = 1;
@@ -179,12 +179,14 @@ class rex_com_board
         $order = 'ORDER BY '.$order;
 
         if ($findPost) {
-            $db->setQuery('SELECT COUNT(*) as count FROM rex_com_board_post p '.$where.' AND created < (SELECT created FROM rex_com_board_post WHERE id = '.((int) $findPost).')'.$order);
-            $lessCount = $db->getValue('count');
+            $db->setQuery('SELECT COUNT(*) as count FROM rex_com_board_post p '.$where.' AND created < (SELECT created FROM rex_com_board_post WHERE id = '.((int) $findPost->getId()).')'.$order);
+            if ($db->getRows()) {
+                $lessCount = $db->getValue('count');
 
-            $cursor = ((int) ($lessCount / $this->pager->getRowsPerPage())) * $this->pager->getRowsPerPage();
-            $cursor = $this->pager->validateCursor($cursor);
-            $_REQUEST[$this->pager->getCursorName()] = $cursor;
+                $cursor = ((int) ($lessCount / $this->pager->getRowsPerPage())) * $this->pager->getRowsPerPage();
+                $cursor = $this->pager->validateCursor($cursor);
+                $_REQUEST[$this->pager->getCursorName()] = $cursor;
+            }
         }
 
         $limit = ' LIMIT '.$this->pager->getCursor().', '.$this->pager->getRowsPerPage();
@@ -299,14 +301,17 @@ class rex_com_board
             exit;
         }
 
-        $postId = rex_get('post', 'int');
+        $post = null;
+        if ($postId = rex_get('post', 'int')) {
+            $post = rex_com_board_post::get($postId);
+        }
 
-        if ($postId && ('attachment_download' === $function) && ($post = rex_com_board_post::get($postId))) {
+        if ($post && 'attachment_download' === $function) {
             $this->sendAttachment($post);
             exit;
         }
 
-        $posts = $this->getThreadPosts($thread, $postId);
+        $posts = $this->getThreadPosts($thread, $post);
         return $this->render('posts.tpl.php', compact('thread', 'posts'));
     }
 
