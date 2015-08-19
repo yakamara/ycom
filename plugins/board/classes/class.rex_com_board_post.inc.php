@@ -14,6 +14,9 @@ class rex_com_board_post
     {
         $sql = rex_sql::factory();
         $sql->setQuery('SELECT * FROM rex_com_board_post WHERE status = 1 and id = ' . (int) $id);
+        if (!$sql->getRows()) {
+            return null;
+        }
         return new self($sql->getRow());
     }
 

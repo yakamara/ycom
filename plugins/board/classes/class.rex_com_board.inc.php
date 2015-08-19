@@ -228,6 +228,10 @@ class rex_com_board
         $thread = rex_get('thread', 'int');
         $function = rex_get('function', 'string');
 
+        if ($thread) {
+            $thread = rex_com_board_thread::get($thread);
+        }
+
         if (!$thread) {
             if ('create_thread' === $function) {
                 $xform = $this->getForm();
@@ -250,8 +254,6 @@ class rex_com_board
             $threads = $this->getThreads();
             return $this->render('threads.tpl.php', compact('threads'));
         }
-
-        $thread = rex_com_board_thread::get($thread);
 
         if ('enable_notifications' === $function) {
             $thread->addNotificationUser(rex_com_user::getMe());
@@ -299,8 +301,7 @@ class rex_com_board
 
         $post = rex_get('post', 'int');
 
-        if ($post && 'attachment_download' === $function) {
-            $post = rex_com_board_post::get($post);
+        if ($post && ('attachment_download' === $function) && ($post = rex_com_board_post::get($post))) {
             $this->sendAttachment($post);
             exit;
         }
