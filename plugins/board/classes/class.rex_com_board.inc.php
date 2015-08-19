@@ -299,14 +299,14 @@ class rex_com_board
             exit;
         }
 
-        $post = rex_get('post', 'int');
+        $postId = rex_get('post', 'int');
 
-        if ($post && ('attachment_download' === $function) && ($post = rex_com_board_post::get($post))) {
+        if ($postId && ('attachment_download' === $function) && ($post = rex_com_board_post::get($postId))) {
             $this->sendAttachment($post);
             exit;
         }
 
-        $posts = $this->getThreadPosts($thread, $post);
+        $posts = $this->getThreadPosts($thread, $postId);
         return $this->render('posts.tpl.php', compact('thread', 'posts'));
     }
 
