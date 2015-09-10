@@ -1,6 +1,6 @@
 <?php
 
-$REX['ADDON']['version']['newsletter_bounce'] = '4.7.1';
+$REX['ADDON']['version']['newsletter_bounce'] = '4.8';
 $REX['ADDON']['author']['newsletter_bounce'] = 'Yakamara/WebDevOne';
 $REX['ADDON']['supportpage']['newsletter_bounce'] = 'www.redaxo.org';
 

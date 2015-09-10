@@ -12,7 +12,7 @@ TODOS:
 */
 
 $mypage = 'filebrowser';
-$REX['ADDON']['version'][$mypage] = '1.0';
+$REX['ADDON']['version'][$mypage] = '4.8';
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus, Gregor Harlan';
 $REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
 
