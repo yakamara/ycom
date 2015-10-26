@@ -7,7 +7,7 @@
  * @author <a href="http://www.yakamara.de">www.yakamara.de</a>
  */
 $mypage = 'board';
-$REX['ADDON']['version'][$mypage] = '4.8';
+$REX['ADDON']['version'][$mypage] = '4.9';
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus, Gregor Harlan';
 $REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
 

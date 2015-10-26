@@ -20,6 +20,15 @@ OR
 Last Changes
 -------
 
+### Version 4.9 // 26.10.2015
+
+#### Sicherheit
+* Login mit Passworthash korrigiert. Nun nicht mehr möglich.
+
+### Bugs
+* community export aktualisiert. XForm Felder fehlten
+
+
 ### Version 4.8 // 9.9.2015
 
 #### Info

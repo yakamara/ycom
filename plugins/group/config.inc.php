@@ -7,7 +7,7 @@
  */
 
 $mypage = "group";
-$REX['ADDON']['version'][$mypage] = '4.8';
+$REX['ADDON']['version'][$mypage] = '4.9';
 $REX['ADDON']['author'][$mypage] = 'Jan Kristinus';
 $REX['ADDON']['supportpage'][$mypage] = 'www.yakamara.de/tag/redaxo/';
 
