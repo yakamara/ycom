@@ -423,12 +423,12 @@ CREATE TABLE `rex_com_user` (
   `password_hash` text NOT NULL,
   `last_action_time` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `rex_com_user` WRITE;
 /*!40000 ALTER TABLE `rex_com_user` DISABLE KEYS */;
 INSERT INTO `rex_com_user` VALUES 
-  (2,'jan.kristinus@yakamara.de','d819b82566e9b601d87e168d0dffe31cee1a9229','jan.kristinus@yakamara.de','1','Jan','Kristinus','ea3d6de54e3ae692963d8b2982b516f5','','1','','0','','1406293224');
+  (2,'jan.kristinus@yakamara.de','fd4cef7a4e607f1fcc920ad6329a6df2df99a4e8','jan.kristinus@yakamara.de','1','Jan','Kristinus','ea3d6de54e3ae692963d8b2982b516f5','8eb53882b9de350d5663b9e9ed828884246be0b3','1','','0','','1444798877');
 /*!40000 ALTER TABLE `rex_com_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -630,16 +630,6 @@ INSERT INTO `rex_xform_field` VALUES
 /*!40000 ALTER TABLE `rex_xform_field` ENABLE KEYS */;
 UNLOCK TABLES;
 
-DROP TABLE IF EXISTS `rex_xform_relation`;
-CREATE TABLE `rex_xform_relation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `source_table` varchar(100) NOT NULL,
-  `source_name` varchar(100) NOT NULL,
-  `source_id` int(11) NOT NULL,
-  `target_table` varchar(100) NOT NULL,
-  `target_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `rex_xform_table`;
 CREATE TABLE `rex_xform_table` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -648,6 +638,8 @@ CREATE TABLE `rex_xform_table` (
   `name` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `list_amount` tinyint(3) unsigned NOT NULL DEFAULT '50',
+  `list_sortfield` varchar(255) NOT NULL DEFAULT 'id',
+  `list_sortorder` enum('ASC','DESC') NOT NULL DEFAULT 'ASC',
   `prio` int(11) NOT NULL,
   `search` tinyint(1) NOT NULL,
   `hidden` tinyint(1) NOT NULL,
@@ -660,8 +652,8 @@ CREATE TABLE `rex_xform_table` (
 LOCK TABLES `rex_xform_table` WRITE;
 /*!40000 ALTER TABLE `rex_xform_table` DISABLE KEYS */;
 INSERT INTO `rex_xform_table` VALUES 
-  (1,1,'rex_com_user','translate:com_user','',100,0,0,0,1,1),
-  (2,1,'rex_com_group','translate:com_group_name','',50,0,0,0,1,1);
+  (1,1,'rex_com_user','translate:com_user','',100,'login','DESC',1,0,0,1,1),
+  (2,1,'rex_com_group','translate:com_group_name','',50,'id','ASC',2,0,0,1,1);
 /*!40000 ALTER TABLE `rex_xform_table` ENABLE KEYS */;
 UNLOCK TABLES;
 

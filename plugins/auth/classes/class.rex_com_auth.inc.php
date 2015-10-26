@@ -200,7 +200,7 @@ class rex_com_auth
         
         ## Hash password if required and not already hashed (javascript
         $hash_func = $REX['ADDON']['community']['plugin_auth']['passwd_algorithmus'];
-        if($REX['ADDON']['community']['plugin_auth']['passwd_hashed'] && strlen($login_psw) != strlen(hash($hash_func,"xyz")) && !$login_psw_hashed)
+        if($REX['ADDON']['community']['plugin_auth']['passwd_hashed'] && !$login_psw_hashed)
           $REX['COM_USER']->setPasswordFunction($hash_func);
         
         $REX['COM_USER']->setLogin($login_name,$login_psw);
