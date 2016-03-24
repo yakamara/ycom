@@ -16,8 +16,7 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
 			switch($this->getElement(2)){
 
 				case("logout"):
-					rex_ycom_auth::unsetUser();
-					unset($_COOKIE['ycomrex_auth']);
+					rex_ycom_auth::clearUserSession();
 					break;
 
 				case("delete"):

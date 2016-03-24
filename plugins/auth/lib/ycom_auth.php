@@ -337,7 +337,22 @@ class rex_ycom_auth
         setcookie(self::getLoginKey(), '0', time() - 3600, "/");
     }
 
+    function deleteUser($id)
+    {
+        $delete = TRUE;
+        $delete = rex_register_extension_point("YCOM_AUTH_USER_DELETE", $delete, array('id' => $id));
+        if(!$delete) {
+            return FALSE;
+        }
 
+        $id = (int) $id;
+        $gu = rex_sql::factory();
+        $gu->setQuery('delete from '.rex_ycom_user::getTable().' where id = ?', [$id]);
+
+        rex_register_extension_point("YCOM_AUTH_USER_DELETED", "", array('id' => $id));
+
+        return TRUE;
+    }
 
 
 
@@ -369,8 +384,9 @@ class rex_ycom_auth
         }
         $u_array = $u->getArray('select * from '.rex_ycom_user::getTable().' where '.implode(" AND ",$s).' '.$query_extras.' LIMIT 2');
 
-        if(count($u_array) != 1)
+        if(count($u_array) != 1) {
             return false;
+        }
 
         $user = $u_array[0];
 
@@ -382,58 +398,6 @@ class rex_ycom_auth
         return self::getUser();
 
     }
-
-
-    function deleteUser($id)
-    {
-        $delete = TRUE;
-        $delete = rex_register_extension_point("YCOM_AUTH_USER_DELETE", $delete, array('id' => $id));
-        if(!$delete) {
-            return FALSE;
-        }
-
-        $id = (int) $id;
-        $gu = rex_sql::factory();
-        $gu->setQuery('delete from '.rex_ycom_user::getTable().' where id = ?', [$id]);
-
-        rex_register_extension_point("YCOM_AUTH_USER_DELETED", "", array('id' => $id));
-
-        return TRUE;
-    }
-
-	/*
-	 * Removing article from com_user Database
-	 */
-
-
-  function activateUser($activation_key){
-
-      // Activbation_key bereinigen:
-      $activation_lifetime = time()-86400;
-      $activationQuery = 'select * from '.rex_ycom_user::getTable().' where `activation_key`="'.$activation_key.'" and `status`=0 and `last_action_time`>'.$activation_lifetime;
-      $user = rex_sql::factory();
-      if (self::$debug) {
-          $user->setDebug();
-      }
-      $user->setQuery($activationQuery);
-      if ($user->getRows() == 1 ) {
-        self::setUser($user);
-        $sql = rex_sql::factory();
-        $sql->setTable(rex_ycom_user::getTable());
-        $sql->setValue('status',1);
-        $sql->setValue('activation_key','Verwendet am '. date("d.m.Y H:i:s"));
-        $sql->setValue('last_action_time',date("U"));
-        $sql->setWhere('id='.$user->getValue("id").'');
-        $sql->update();
-        return true;
-      }
-      return false;
-  }
-
-
-
-
-
 
 
 }
