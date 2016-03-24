@@ -4,7 +4,7 @@ Am Anfang des Templates sollte stehen:
 
 <pre>
 <code>
-$com_user = rex_ycom_auth::getUser();
+$ycom_user = rex_ycom_auth::getUser();
 </code>
 </pre>
 
@@ -12,7 +12,7 @@ Somit ist es möglich wie folgt die Benutzerberechtigung zu prüfen:
 
 <pre>
 <code>
-if ($com_user) {
+if ($ycom_user) {
 	// Benutzter besitzt die nötige Berechtigung
 } else {
 	// Benutzter besitzt die nötige Berechtigung nicht
@@ -26,6 +26,6 @@ Die Benutzerfelder können wie folgt aus der Tabelle 'rex_ycom_user' ausgelesen 
 
 <pre>
 <code>
-rex_ycom_auth::getUser()->getValue('FELDNAME');
+rex_ycom_auth::getUser()->getValue('name');
 </code>
 </pre>

@@ -10,7 +10,7 @@ validate|empty|firstname|Bitte geben Sie Ihren Vornamen ein.
 text|name|Nachname:*
 validate|empty|name|Bitte geben Sie Ihren Namen ein.
 
-password|password|Ihr Passwort:*|
+ycom_auth_password|password|Ihr Passwort:*|
 password|password_2|Passwort bestätigen:*||no_db
 
 html|required|<p class="form-required">* Pflichtfelder</p>
@@ -23,8 +23,6 @@ validate|empty|email|Bitte geben Sie Ihre e-Mail ein.
 validate|empty|password|Bitte geben Sie ein Passwort ein.
 
 validate|compare|password|password_2||Bitte geben Sie zweimal das gleiche Passwort ein
-
-com_auth_password_hash|password_hash|password|mysalt
 
 action|copy_value|email|login
 action|db|rex_ycom_user
