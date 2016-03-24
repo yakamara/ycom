@@ -1,4 +1,4 @@
-Was apssiert hier:
+Was passiert hier:
 
 * User suchen, 
 * Daten auslesen

@@ -1,13 +1,27 @@
-# addon: community de_de
-navigation_community = Community
+ycom_perm = Community Rechte
 
+ycom_page_perm = Community Seitenrechte
 
-com_overview = Übersicht
-com_user_management = User Verwaltung
-com_field_management = Felder anpassen
+navigation_ycom = Community
+ycom_title = Community: Einstellungen
+ycom_navi_title = Einstellungen
 
-com_user = Community User
-rex_com_user = Community User
+ycom_main_title = Info
+ycom_info = Readme
+ycom_info_title = Nützliche Informationen zur Verwendung des Community Addons
+ycom_manual = Anleitung / Beispiele
+ycom_manual_title = Anleitung / Beispiele
+ycom_changelog = Changelog
+ycom_changelog_title	= Changelog
+ycom_license = Lizenz
+ycom_license_title = Lizenz
+ycom_overview = Übersicht
+ycom_user_management = User Verwaltung
+ycom_field_management = Felder anpassen
+
+ycom_user = Community User
+yform_ycom_user = Community Benutzer
+rex_ycom_user = Community User
 
 email = E-Mail
 status = Status
@@ -15,19 +29,15 @@ firstname = Vorname
 activation_key = Aktivierungsschlüssel
 session_key = Sessionschlüssel
 
-com_account_inactive = Zugang ist inaktiv
-com_account_requested = Zugang wurde angefragt
-com_account_active = Zugang ist aktiv
+ycom_account_inactive = Zugang ist inaktiv
+ycom_account_requested = Zugang wurde angefragt
+ycom_account_active = Zugang ist aktiv
 
-com_status = Status
+ycom_status = Status
 
-newsletter_last_id = Letzte Kennung des Newsletters
-newsletter = Newsletter
+ycom_perm_type = Seitenberechtigungen
 
-community_install_phpmailer_version_problem = Bitte installieren Sie das phpmailer Addon in Version {0} 
-community_install_xform_version_problem = Bitte installieren Sie das XForm Addon in Version {0} 
-community_install_xform_manager_version_problem = Bitte installieren Sie das XForm Manager Plugin in Version {0} 
-community_install_xform_email_version_problem = Bitte installieren Sie das XForm Email Plugin in Version {0} 
-community_install_only_utf8 = Community kann nur installiert werden, wenn der Zeichensatz UTF 8 verwenden wird.
-community_install_redaxo_version_problem = Die REDAXO Version reicht nicht aus. Es wird mindestens Version {0} gebraucht. Sie haben Version {1}
-community_install_php_version_problem = Die PHP Version reicht nicht aus. Es wird mindestens Version {0} gebraucht. Sie haben Version {1}
+ycom_perm_extends = Aus übergeordneter Kategorie übernehmen ansonsten Zugriff für alle User
+ycom_perm_only_logged_in = Zugriff für eingeloggte User
+ycom_perm_only_not_logged_in = Zugriff für alle nicht eingeloggten User
+ycom_perm_all = Zugriff für alle User

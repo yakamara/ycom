@@ -1,0 +1,14 @@
+package: ycom/group
+version: '0.1'
+author: yakamara Media GmbH & Co. KG
+supportpage: www.redaxo.org/de/forum
+title: 'Auth'
+nav_icon: fa-minus
+description: 'translate:ycom_group_plugin'
+umgebung: Backend
+
+page:
+    title: 'translate:ycom_group_title'
+    hidden: false
+    subpages:
+        info: { title: 'translate:ycom_group_info'}

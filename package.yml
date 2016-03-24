@@ -1,0 +1,26 @@
+package: ycom
+version: '0.1'
+author: yakamara Media GmbH & Co. KG, concedra GmbH
+supportpage: www.redaxo.org/de/forum
+
+page:
+    title: 'translate:ycom_navi_title'
+    perm: ycom[]
+    block: ycom
+    icon: rex-icon fa-group
+    subpages:
+        main:
+           title: 'translate:ycom_main_title'
+           perm: 'admin[]'
+           subpages:
+                info: { title: 'translate:ycom_info' }
+                manual: { title: 'translate:ycom_manual' }
+                changelog: { title: 'translate:ycom_changelog' }
+
+requires:
+    packages:
+        yform: '^1.0-beta2'
+        yform/manager: '^1.0-beta2'
+        yform/email: '^1.0-beta2'
+        phpmailer: '^2.0.1'
+    redaxo: '>=5.1.0-dev'
