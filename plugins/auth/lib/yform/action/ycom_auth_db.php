@@ -34,15 +34,7 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
 
 					$sql->setTable("rex_ycom_user");
 					foreach($this->params["value_pool"]["sql"] as $key => $value) {
-						
 						$sql->setValue($key, $value);
-					}
-					$password = $sql->getValue('password');
-					if ($password!=""){
-						$salt_value = $user->getValue('salt');
-						$hash_value = rex_ycom_auth::getHash($password,$salt_value);
-						$sql->setValue('password_hash', $hash_value);
-						$sql->setValue('password',"");
 					}
 					$sql->setWhere('id='.$user->getValue("id").'');
 					$sql->update();
@@ -55,7 +47,7 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
 
 	function getDescription()
 	{
-		return "action|com_auth_db|update(default)/delete/logout";
+		return "action|ycom_auth_db|update(default)/delete/logout";
 	}
 
 }
