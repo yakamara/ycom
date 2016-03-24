@@ -20,3 +20,10 @@
 ** E-Mail Templates ergänzen
 ** Passwort vergessen bauen
 ** Registrierung durchtesten
+
+* yrewrite testen - sitemap xml etc.
+* auth_media
+* facebook
+* board
+* comment
+* filebrowser

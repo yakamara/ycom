@@ -639,8 +639,7 @@ CREATE TABLE `rex_ycom_user` (
 LOCK TABLES `rex_ycom_user` WRITE;
 /*!40000 ALTER TABLE `rex_ycom_user` DISABLE KEYS */;
 INSERT INTO `rex_ycom_user` VALUES 
-  (5,'jan.kristinus@yakamara.de','$2y$10$52fA2adlNvEf0DLEQsWKUuyH3ZKbRm8.MJQ2T27LFkbaRvGEalFVa','jan.kristinus@yakamara.de','1','Jan3','Kristinus3','24b5b7243275cf1ddebeae2445ebc930','','1458859285','$2y$10$QChKbRz.pJafTdmQlwLNIO4OQAtt4y6A1LeKelhpIU3sBadzCFZku','','1458858625','1',''),
-  (6,'jan@kristinus.de','$2y$10$rIa/7IZn5QKkB4aU1H2IuOYF4Ni3sPKooQCl2V9TNypL78h8MDOvW','jan@kristinus.de','0','Jannie','Kristi','a9b2ce0f2342be5195247d33dccf8408','','','','','','','');
+  (1,'jan.kristinus@yakamara.de','$2y$10$52fA2adlNvEf0DLEQsWKUuyH3ZKbRm8.MJQ2T27LFkbaRvGEalFVa','jan.kristinus@yakamara.de','1','Jan3','Kristinus3','24b5b7243275cf1ddebeae2445ebc930','','1458859285','$2y$10$QChKbRz.pJafTdmQlwLNIO4OQAtt4y6A1LeKelhpIU3sBadzCFZku','','1458858625','1','');
 /*!40000 ALTER TABLE `rex_ycom_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
