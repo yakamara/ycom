@@ -40,7 +40,8 @@ class rex_com_auth_media
         header('Content-Type: application/download');
         header('Content-Disposition: attachment; filename=' . $media->getFileName() . ';');
       }
-
+      ob_clean();
+      flush();
       @readfile($media->getFullPath());
     }
 
