@@ -3,7 +3,7 @@
 class rex_ycom_auth
 {
 
-    static $debug = true;
+    static $debug = false;
     static $user = NULL;
     static $perms = [
         '0' => 'translate:ycom_perm_extends',
