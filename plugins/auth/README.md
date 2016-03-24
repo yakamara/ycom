@@ -1,3 +1,0 @@
-Readme
-
-* Group and Auth

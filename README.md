@@ -19,4 +19,4 @@
 * Demo anpassen
 ** E-Mail Templates ergänzen
 ** Passwort vergessen bauen
-**
+** Registrierung durchtesten
