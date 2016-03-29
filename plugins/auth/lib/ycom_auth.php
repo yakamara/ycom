@@ -64,7 +64,7 @@ class rex_ycom_auth
 
     }
 
-    static function login($login_name = "", $login_psw = "", $login_stay = "", $logout = false, $query_extras = ' and status > 0')
+    static function login($login_name = "", $login_psw = "", $login_stay = "", $logout = false, $query_extras = ' and status > 0', $ignore_password = false)
     {
         rex_login::startSession();
 
@@ -94,9 +94,12 @@ class rex_ycom_auth
 
             $user->setQuery('select * from '.rex_ycom_user::getTable().' where '. $user->escapeIdentifier(rex_addon::get('ycom')->getConfig('login_field')).' = '.$user->escape($login_name).' '.$query_extras);
             if ($user->getRows() == 1) {
-                if (self::checkPassword($login_psw, $user->getValue('id'))){
+
+                if ($ignore_password || self::checkPassword($login_psw, $user->getValue('id'))){
                     $login_success = true;
+
                 }
+
             }
 
             // check for session
@@ -355,20 +358,6 @@ class rex_ycom_auth
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     static function loginWithParams($params, $query_extras = "")
     {
 
@@ -398,6 +387,5 @@ class rex_ycom_auth
         return self::getUser();
 
     }
-
 
 }

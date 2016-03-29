@@ -9,7 +9,7 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
 
 		$e = explode(",",$this->getElement(2));
 		foreach ($e as $v) {
-			$w = explode("=",$v);
+			$w = explode("=", $v);
 			$label = $w[0];
 			$value = trim(rex_request($w[1], "string", ""));
 			$vars[$label] = $value;
@@ -19,9 +19,6 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
         if ($this->getElement(3) != "") {
             $query_extras = ' and ('.$this->getElement(3).')';
         }
-
-        var_dump($vars);
-        var_dump($query_extras);
 
         rex_ycom_auth::loginWithParams($vars, $query_extras);
 
