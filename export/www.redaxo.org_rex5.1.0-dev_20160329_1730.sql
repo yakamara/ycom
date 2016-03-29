@@ -77,18 +77,18 @@ INSERT INTO `rex_article` VALUES
   (10,10,0,'-----','-----',10,1,1,'|',0,'2016-03-14 23:17:42','2016-03-14 23:17:42',0,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
   (11,11,0,'Metanavigation für User','Metanavigation für User',11,1,1,'|',0,'2016-03-14 23:17:51','2016-03-14 23:24:23',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
   (12,12,11,'Login','Login',1,1,1,'|11|',1,'2016-03-14 23:29:52','2016-03-24 14:46:51',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','2'),
-  (13,13,11,'Registrierung','Registrierung',2,1,1,'|11|',1,'2016-03-14 23:29:53','2016-03-24 23:16:58',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','2'),
+  (13,13,11,'Registrierung','Registrierung',2,1,1,'|11|',1,'2016-03-14 23:29:53','2016-03-29 16:36:32',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','2'),
   (14,14,11,'Passwort zurücksetzen','Passwort zurücksetzen',3,1,1,'|11|',1,'2016-03-14 23:29:53','2016-03-14 23:47:10',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','2'),
   (15,15,11,'Logout','Logout',4,1,1,'|11|',1,'2016-03-14 23:39:17','2016-03-24 14:48:25',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','1'),
-  (16,16,11,'Mein Profil','Mein Profil',5,1,1,'|11|',1,'2016-03-14 23:39:18','2016-03-24 23:27:29',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','1'),
-  (17,17,11,'Mein Passwort ändern','Mein Passwort ändern',6,1,1,'|11|',1,'2016-03-14 23:39:18','2016-03-24 23:28:32',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','1'),
+  (16,16,11,'Mein Profil','Mein Profil',5,1,1,'|11|',1,'2016-03-14 23:39:18','2016-03-29 15:25:43',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','1'),
+  (17,17,11,'Mein Passwort ändern','Mein Passwort ändern',6,1,1,'|11|',1,'2016-03-14 23:39:18','2016-03-29 15:42:19',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','1'),
   (18,18,0,'Footernavigation','Footernavigation',12,1,1,'|',0,'2016-03-14 23:37:22','2016-03-14 23:37:22',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
   (19,19,18,'Kontakt','Kontakt',1,1,1,'|18|',1,'2016-03-14 23:39:23','2016-03-14 23:37:35',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
   (20,20,18,'Impressum','Impressum',2,1,1,'|18|',1,'2016-03-14 23:39:24','2016-03-14 23:37:55',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
   (21,21,0,'Extras','Extras',13,1,1,'|',0,'2016-03-14 23:38:11','2016-03-14 23:38:11',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
   (22,22,21,'Artikel exististiert nicht','Artikel exististiert nicht',1,1,1,'|21|',1,'2016-03-23 17:08:59','2016-03-14 23:38:22',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
   (23,23,21,'Gesperrter Bereich','Gesperrter Bereich',2,1,1,'|21|',1,'2016-03-23 17:09:00','2016-03-14 23:38:29',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
-  (24,24,13,'Bestätigung','Registrierung',0,0,2,'|11|13|',1,'2016-03-15 01:09:11','2016-03-15 01:25:46',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
+  (24,24,13,'Bestätigung','Registrierung',0,0,2,'|11|13|',1,'2016-03-15 01:09:11','2016-03-29 16:50:22',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
   (25,25,14,'Passwort wurde zurückgesetzt','Passwort zurücksetzen',0,0,2,'|11|14|',0,'2016-03-15 01:31:46','2016-03-15 01:31:46',1,1,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
   (26,1,0,'Home','Home',1,1,1,'|',0,'2016-03-14 23:29:43','2016-03-14 23:23:43',1,2,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
   (27,2,0,'Beispiele','Beispiele',2,1,1,'|',0,'2016-03-14 23:29:44','2016-03-14 23:23:47',1,2,'admin','admin',0,'','','','','','','','','','','','','',0,'0','','0'),
@@ -204,36 +204,26 @@ INSERT INTO `rex_article_slice` VALUES
   (1,1,1,1,'Login','h1','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',12,2,'2016-03-14 23:50:40','2016-03-14 23:50:40','admin','admin',0),
   (2,1,1,2,'','','ycom_auth_form_info|label|Bitte einloggen|Benutzer wurde ausgeloggt|Login ist fehlgeschlagen|Benutzer wurde erfolgreich eingeloggt|\r\nycom_auth_form_login|label|Benutzername / E-Mail:\r\nycom_auth_form_password|label|Passwort:\r\nycom_auth_form_stayactive|auth|eingeloggt bleiben:|0','','','','1','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',12,1,'2016-03-14 23:55:02','2016-03-24 14:46:51','admin','admin',0),
   (3,1,1,1,'Registrierung','h1','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',13,2,'2016-03-15 00:00:43','2016-03-23 17:49:48','admin','admin',0),
-  (4,1,1,2,'','','generate_key|activation_key\r\nhidden|status|0\r\n\r\nfieldset|label|Login-Daten:\r\n\r\ntext|email|E-Mail:*|\r\ntext|firstname|Vorname:*\r\nvalidate|empty|firstname|Bitte geben Sie Ihren Vornamen ein.\r\n\r\ntext|name|Nachname:*\r\nvalidate|empty|name|Bitte geben Sie Ihren Namen ein.\r\n\r\nycom_auth_password|password|Ihr Passwort:*|\r\npassword|password_2|Passwort bestätigen:*||no_db\r\n\r\nhtml|required|<p class=\"form-required\">* Pflichtfelder</p>\r\n\r\ncaptcha|Bitte geben Sie den entsprechenden Sicherheitscode ein. Sollten Sie den Code nicht lesen können klicken Sie bitte auf die Grafik, um einen neuen Code zu generieren.|Sie haben den Sicherheitscode falsch eingegeben. \r\n\r\nvalidate|email|email|Bitte geben Sie die E-Mail ein.\r\nvalidate|unique|email|Diese E-Mail existiert schon|rex_ycom_user\r\nvalidate|empty|email|Bitte geben Sie Ihre e-Mail ein.\r\nvalidate|empty|password|Bitte geben Sie ein Passwort ein.\r\n\r\nvalidate|compare|password|password_2||Bitte geben Sie zweimal das gleiche Passwort ein\r\n\r\naction|copy_value|email|login\r\naction|db|rex_ycom_user\r\naction|tpl2email|access_request_de|email|','','','h1. Vielen Dank für Ihre Anmeldung\r\n\r\nSind bekommen nun eine Mail mit Ihren Daten als Bestätigung','1','','','','2','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',13,1,'2016-03-15 00:01:24','2016-03-24 23:16:58','admin','admin',0),
-  (5,1,1,1,'','','hidden|status|1\r\nobjparams|submit_btn_show|0\r\nobjparams|send|1\r\n\r\nvalidate|com_auth_login|activation_key=rex_com_activation_key,email=rex_com_email|status=0|Zugang wurde bereits bestätigt oder ist schon fehlgeschlagen|status\r\n\r\naction|com_auth_db|update\r\naction|html|<b>Vielen Dank, Sie sind nun eingeloggt und haben Ihre E-Mail bestätigt</b>','','','','1','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',24,1,'2016-03-15 01:09:28','2016-03-15 01:21:24','admin','admin',0),
+  (4,1,1,2,'','','generate_key|activation_key\r\nhidden|status|0\r\n\r\nfieldset|label|Login-Daten:\r\n\r\ntext|email|E-Mail:*|\r\ntext|firstname|Vorname:*\r\nvalidate|empty|firstname|Bitte geben Sie Ihren Vornamen ein.\r\n\r\ntext|name|Nachname:*\r\nvalidate|empty|name|Bitte geben Sie Ihren Namen ein.\r\n\r\nycom_auth_password|password|Ihr Passwort:*|\r\npassword|password_2|Passwort bestätigen:*||no_db\r\n\r\nhtml|required|<p class=\"form-required\">* Pflichtfelder</p>\r\n\r\ncaptcha|Bitte geben Sie den entsprechenden Sicherheitscode ein. Sollten Sie den Code nicht lesen können klicken Sie bitte auf die Grafik, um einen neuen Code zu generieren.|Sie haben den Sicherheitscode falsch eingegeben. \r\n\r\nvalidate|email|email|Bitte geben Sie die E-Mail ein.\r\nvalidate|unique|email|Diese E-Mail existiert schon|rex_ycom_user\r\nvalidate|empty|email|Bitte geben Sie Ihre e-Mail ein.\r\nvalidate|empty|password|Bitte geben Sie ein Passwort ein.\r\n\r\nvalidate|compare|password|password_2||Bitte geben Sie zweimal das gleiche Passwort ein\r\n\r\naction|copy_value|email|login\r\naction|db|rex_ycom_user\r\naction|tpl2email|access_request_de|email|','','','h1. Vielen Dank für Ihre Anmeldung\r\n\r\nSind bekommen nun eine Mail mit Ihren Daten als Bestätigung','0','','','','2','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',13,1,'2016-03-15 00:01:24','2016-03-29 16:36:32','admin','admin',0),
+  (5,1,1,1,'','','hidden|status|1\r\nobjparams|submit_btn_show|0\r\nobjparams|send|1\r\n\r\nvalidate|ycom_auth_login|activation_key=rex_ycom_activation_key,id=rex_ycom_id|status=0|Zugang wurde bereits bestätigt oder ist schon fehlgeschlagen|status\r\n\r\naction|ycom_auth_db|update\r\naction|html|<b>Vielen Dank, Sie sind nun eingeloggt und haben Ihre E-Mail bestätigt</b>','','','','0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',24,1,'2016-03-15 01:09:28','2016-03-29 16:50:22','admin','admin',0),
   (6,1,1,1,'','','ycom_auth_form_logout|label|','','','','0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',15,1,'2016-03-15 08:11:24','2016-03-24 14:48:25','admin','admin',0),
   (7,1,1,1,'Interner Bereich','h1','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',3,2,'2016-03-21 17:34:46','2016-03-21 17:34:46','admin','admin',0),
   (8,2,1,1,'Closed Area','h1','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',3,2,'2016-03-21 17:35:43','2016-03-21 17:35:43','admin','admin',0),
-  (10,1,1,1,'','','ycom_auth_load_user|userinfo|email,firstname,name\r\nobjparams|form_showformafterupdate|1\r\nshowvalue|email|E-Mail / Login:\r\ntext|firstname|Vorname:\r\nvalidate|empty|firstname|Bitte geben Sie Ihren Vornamen ein.\r\ntext|name|Nachname:\r\nvalidate|empty|name|Bitte geben Sie Ihren Namen ein.\r\naction|ycom_auth_db','','','Ihre Daten wurden aktualisiert','0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',16,1,'2016-03-22 11:43:52','2016-03-24 23:27:29','admin','admin',0),
-  (11,1,1,1,'','','ycom_auth_password|password|Neues Passwort:\r\npassword|password_2|Passwort wiederholen:||no_db\r\nvalidate|empty|password|Bitte geben Sie ein Passwort ein.\r\nvalidate|compare|password|password_2|Bitte geben Sie zweimal das gleiche Passwort ein\r\naction|showtext||<div class=\"xform\"><ul class=\"form_info\"><li>Ihre Daten wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.</li></ul></div>||1\r\naction|ycom_auth_db','','','','0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',17,1,'2016-03-22 11:44:37','2016-03-24 23:28:32','admin','admin',0);
+  (10,1,1,1,'','','ycom_auth_load_user|userinfo|email,firstname,name\r\nobjparams|form_showformafterupdate|1\r\nshowvalue|email|E-Mail / Login:\r\ntext|firstname|Vorname:\r\nvalidate|empty|firstname|Bitte geben Sie Ihren Vornamen ein.\r\ntext|name|Nachname:\r\nvalidate|empty|name|Bitte geben Sie Ihren Namen ein.\r\naction|showtext|<div class=\"alert alert-success\">Profildaten wurden aktualisiert</div>|||1\r\naction|ycom_auth_db','','','Ihre Daten wurden aktualisiert','0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',16,1,'2016-03-22 11:43:52','2016-03-29 15:25:43','admin','admin',0),
+  (11,1,1,1,'','','ycom_auth_password|password|Neues Passwort:\r\npassword|password_2|Passwort wiederholen:||no_db\r\nvalidate|empty|password|Bitte geben Sie ein Passwort ein.\r\nvalidate|compare|password|password_2|!=|Bitte geben Sie zweimal das gleiche Passwort ein\r\naction|showtext|<div class=\"alert alert-success\">Ihre Daten wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.</div>|||1\r\naction|ycom_auth_db','','','','0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',17,1,'2016-03-22 11:44:37','2016-03-29 15:42:19','admin','admin',0);
 /*!40000 ALTER TABLE `rex_article_slice` ENABLE KEYS */;
 UNLOCK TABLES;
 
-DROP TABLE IF EXISTS `rex_aufgaben_status`;
-CREATE TABLE `rex_aufgaben_status` (
+DROP TABLE IF EXISTS `rex_assets_sets`;
+CREATE TABLE `rex_assets_sets` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `status` varchar(255) DEFAULT NULL,
-  `icon` varchar(255) DEFAULT NULL,
+  `title` varchar(30) NOT NULL DEFAULT '',
+  `description` varchar(255) NOT NULL DEFAULT '',
+  `files` text NOT NULL,
+  `media_query` varchar(255) NOT NULL DEFAULT '',
+  `settings` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
-LOCK TABLES `rex_aufgaben_status` WRITE;
-/*!40000 ALTER TABLE `rex_aufgaben_status` DISABLE KEYS */;
-INSERT INTO `rex_aufgaben_status` VALUES 
-  (1,'Offen','fa-folder-open-o'),
-  (2,'Wird bearbeitet','fa-gears'),
-  (3,'Frage','fa-question'),
-  (4,'Warten auf etwas','fa-hourglass-start'),
-  (5,'Auf später verschoben','fa-calendar'),
-  (6,'Erledigt','fa-check');
-/*!40000 ALTER TABLE `rex_aufgaben_status` ENABLE KEYS */;
-UNLOCK TABLES;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `rex_clang`;
 CREATE TABLE `rex_clang` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -299,6 +289,36 @@ INSERT INTO `rex_config` VALUES
   (112,'core','package-config','{\"assets\":{\"install\":false,\"status\":false,\"plugins\":{\"cssuglify\":{\"install\":false,\"status\":false},\"jsuglify\":{\"install\":false,\"status\":false},\"lessphp\":{\"install\":false,\"status\":false},\"sassphp\":{\"install\":false,\"status\":false}}},\"aufgaben\":{\"install\":false,\"status\":false},\"awnav\":{\"install\":false,\"status\":false},\"backup\":{\"install\":true,\"status\":true},\"be_style\":{\"install\":true,\"status\":true,\"plugins\":{\"customizer\":{\"install\":false,\"status\":false},\"redaxo\":{\"install\":true,\"status\":true}}},\"cronjob\":{\"install\":false,\"status\":false,\"plugins\":{\"article_status\":{\"install\":false,\"status\":false},\"optimize_tables\":{\"install\":false,\"status\":false}}},\"customelements\":{\"install\":false,\"status\":false},\"debug\":{\"install\":false,\"status\":false},\"demo_base\":{\"install\":false,\"status\":false},\"eloquent\":{\"install\":false,\"status\":false},\"epiceditor\":{\"install\":false,\"status\":false},\"install\":{\"install\":true,\"status\":true},\"media_manager\":{\"install\":true,\"status\":true},\"mediapool\":{\"install\":true,\"status\":true},\"metainfo\":{\"install\":true,\"status\":true},\"phpmailer\":{\"install\":true,\"status\":true},\"rex5_multiupload\":{\"install\":false,\"status\":false},\"rex_markitup\":{\"install\":false,\"status\":false},\"rex_redactor\":{\"install\":false,\"status\":false},\"slice_ui\":{\"install\":false,\"status\":false,\"plugins\":{\"slice_footer\":{\"install\":false,\"status\":false},\"slice_group\":{\"install\":false,\"status\":false},\"slice_json_block\":{\"install\":false,\"status\":false}}},\"structure\":{\"install\":true,\"status\":true,\"plugins\":{\"content\":{\"install\":true,\"status\":true},\"version\":{\"install\":true,\"status\":false}}},\"tests\":{\"install\":false,\"status\":false},\"textile\":{\"install\":true,\"status\":true},\"treestructure\":{\"install\":false,\"status\":false},\"user_agent\":{\"install\":false,\"status\":false},\"users\":{\"install\":true,\"status\":true},\"watson\":{\"install\":false,\"status\":false},\"wildcard\":{\"install\":false,\"status\":false},\"ycom\":{\"install\":true,\"status\":true,\"plugins\":{\"auth\":{\"install\":true,\"status\":true},\"group\":{\"install\":true,\"status\":true}}},\"yform\":{\"install\":true,\"status\":true,\"plugins\":{\"email\":{\"install\":true,\"status\":true},\"geo\":{\"install\":false,\"status\":false},\"manager\":{\"install\":true,\"status\":true}}},\"yrewrite\":{\"install\":true,\"status\":true}}'),
   (113,'core','package-order','[\"be_style\",\"be_style\\/redaxo\",\"users\",\"backup\",\"install\",\"media_manager\",\"mediapool\",\"phpmailer\",\"structure\",\"textile\",\"metainfo\",\"structure\\/content\",\"ycom\",\"ycom\\/auth\",\"ycom\\/group\",\"yform\",\"yform\\/email\",\"yform\\/manager\",\"yrewrite\"]');
 /*!40000 ALTER TABLE `rex_config` ENABLE KEYS */;
+UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `rex_cronjob`;
+CREATE TABLE `rex_cronjob` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `parameters` text,
+  `interval` varchar(255) DEFAULT NULL,
+  `nexttime` datetime NOT NULL,
+  `environment` varchar(255) NOT NULL,
+  `execution_moment` tinyint(1) NOT NULL,
+  `execution_start` datetime NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `createdate` datetime NOT NULL,
+  `createuser` varchar(255) NOT NULL,
+  `updatedate` datetime NOT NULL,
+  `updateuser` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `rex_cronjob` WRITE;
+/*!40000 ALTER TABLE `rex_cronjob` DISABLE KEYS */;
+INSERT INTO `rex_cronjob` VALUES 
+  (1,'test','','rex_cronjob_phpcode','{\"rex_cronjob_phpcode_code\":\"\"}','|1|y|','2016-01-01 00:00:00','|0|1|',0,'0000-00-00 00:00:00',1,'2015-04-24 13:07:45','admin','2015-04-24 14:27:56','admin'),
+  (2,'Artikel-Status','','rex_cronjob_article_status','','|1|d|','0000-00-00 00:00:00','|0|1|',1,'0000-00-00 00:00:00',0,'2015-04-24 14:44:53','admin','2015-04-24 14:44:53','admin'),
+  (3,'Tabellen-Optimierung','','rex_cronjob_optimize_tables','','|1|d|','0000-00-00 00:00:00','|0|1|',0,'0000-00-00 00:00:00',0,'2015-04-24 14:46:29','admin','2015-04-24 14:46:29','admin'),
+  (4,'Update Facebook','Prüft ob neue Facebookeinträge auf den angegebenen Seiten vorhanden sind.','rex_cronjob_phpcallback','{\"rex_cronjob_phpcallback_callback\":\"socialhub_facebook::cron()\"}','|1|h|','0000-00-00 00:00:00','|0|1|',0,'2016-01-12 01:00:00',1,'2016-01-12 23:05:43','admin','2016-01-12 23:05:43','admin');
+/*!40000 ALTER TABLE `rex_cronjob` ENABLE KEYS */;
 UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rex_media`;
@@ -587,6 +607,40 @@ INSERT INTO `rex_template` VALUES
 /*!40000 ALTER TABLE `rex_template` ENABLE KEYS */;
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `rex_user`;
+CREATE TABLE `rex_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `description` text,
+  `login` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `admin` tinyint(1) NOT NULL,
+  `language` varchar(255) NOT NULL,
+  `startpage` varchar(255) NOT NULL,
+  `role` int(10) unsigned NOT NULL,
+  `login_tries` tinyint(4) DEFAULT '0',
+  `createuser` varchar(255) NOT NULL,
+  `updateuser` varchar(255) NOT NULL,
+  `createdate` datetime NOT NULL,
+  `updatedate` datetime NOT NULL,
+  `lasttrydate` datetime NOT NULL,
+  `session_id` varchar(255) DEFAULT NULL,
+  `cookiekey` varchar(255) DEFAULT NULL,
+  `revision` int(10) unsigned NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `lastlogin` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login` (`login`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `rex_user` WRITE;
+/*!40000 ALTER TABLE `rex_user` DISABLE KEYS */;
+INSERT INTO `rex_user` VALUES 
+  (1,'Administrator','','admin','$2y$10$taylvS8a5wkrMWzai8SnHu6GZj8.B0AX0o5NnXZhXyypUU424X5Sm',1,1,'','',0,0,'setup','','2016-03-14 23:16:09','0000-00-00 00:00:00','2016-03-29 15:24:28','484324caac306cc786eabec7b06f68f2','',0,'','2016-03-29 15:24:28');
+/*!40000 ALTER TABLE `rex_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
 DROP TABLE IF EXISTS `rex_user_role`;
 CREATE TABLE `rex_user_role` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -634,12 +688,12 @@ CREATE TABLE `rex_ycom_user` (
   `com_groups` text NOT NULL,
   `ycom_groups` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `rex_ycom_user` WRITE;
 /*!40000 ALTER TABLE `rex_ycom_user` DISABLE KEYS */;
 INSERT INTO `rex_ycom_user` VALUES 
-  (1,'jan.kristinus@yakamara.de','$2y$10$52fA2adlNvEf0DLEQsWKUuyH3ZKbRm8.MJQ2T27LFkbaRvGEalFVa','jan.kristinus@yakamara.de','1','Jan3','Kristinus3','24b5b7243275cf1ddebeae2445ebc930','','1458859285','$2y$10$QChKbRz.pJafTdmQlwLNIO4OQAtt4y6A1LeKelhpIU3sBadzCFZku','','1458858625','1','');
+  (1,'jan.kristinus@yakamara.de','$2y$10$eZODAw36MxZcpbhlgKeRXOJFPttdJi47ui7HWRZTVZ4AyPhGijfKm','jan.kristinus@yakamara.de','1','Jan','Kristinus','24b5b7243275cf1ddebeae2445ebc930','','1459265212','$2y$10$QChKbRz.pJafTdmQlwLNIO4OQAtt4y6A1LeKelhpIU3sBadzCFZku','','1459258241','1','');
 /*!40000 ALTER TABLE `rex_ycom_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -660,7 +714,7 @@ LOCK TABLES `rex_yform_email_template` WRITE;
 /*!40000 ALTER TABLE `rex_yform_email_template` DISABLE KEYS */;
 INSERT INTO `rex_yform_email_template` VALUES 
   (6,'reactivate_account_de','no_replay@domain.de','domain.de','Community Addon: Neues Passwort','http://<?php echo $_SERVER[\'HTTP_HOST\'] ?>/?rex_com_activation_key=REX_YFORM_DATA[field=\"activation_key\"] ','',''),
-  (5,'access_request_de','no_replay@domain.de','domain.de','Community Addon: Registrierungsmail','http://<?php echo $_SERVER[\'HTTP_HOST\'] ?>/?rex_com_activation_key=REX_YFORM_DATA[field=\"activation_key\"] ','','');
+  (5,'access_request_de','no_replay@domain.de','domain.de','Community Addon: Registrierungsmail','<?php \r\n\r\necho rex::getServer().rex_getUrl(24,\'\', \r\n[\r\n  \'rex_ycom_activation_key\' => REX_YFORM_DATA[field=\"activation_key\"],\r\n  \'rex_ycom_id\' => REX_YFORM_DATA[field=\"ID\"]\r\n]); \r\n\r\n?>','','');
 /*!40000 ALTER TABLE `rex_yform_email_template` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -708,7 +762,7 @@ INSERT INTO `rex_yform_field` VALUES
   (23,'rex_ycom_user',10,'value','text',0,1,'firstname','translate:firstname','','','','','','','','','','','','','','','',''),
   (21,'rex_ycom_user',4,'value','text',0,1,'email','translate:email','','','','','','','','','','','','','','','',''),
   (22,'rex_ycom_user',9,'value','select',0,1,'status','translate:status','','translate:ycom_account_requested=0,translate:ycom_account_active=1,translate:ycom_account_inactive=-1','0','-1','1','','','','','','','','','','',''),
-  (19,'rex_ycom_user',1,'value','text',0,1,'login','translate:login','','','','','','','','','','','','','','','',''),
+  (19,'rex_ycom_user',1,'value','text',1,1,'login','translate:login','','','','','','','','','','','','','','','',''),
   (34,'rex_ycom_user',3,'validate','unique',1,0,'login','','','','','','','','translate:ycom_this_login_exists_already','rex_ycom_user','','','','','','','',''),
   (36,'rex_ycom_group',1,'value','text',0,1,'name','translate:name','','','','','','','','','','','','','','','',''),
   (37,'rex_ycom_group',2,'validate','empty',1,0,'name','','','','','','','','translate:ycom_group_yform_enter_name','','','','','','','','',''),
