@@ -10,5 +10,5 @@ rex_sql_table::get(rex::getTable('article'))
     ->alter()
 ;
 
-$content = rex_file::get(rex_path::addon('ycom','install/tablesets/yform_group.json'));
+$content = rex_file::get(rex_path::plugin('ycom', 'group', 'install/tablesets/yform_group.json'));
 rex_yform_manager_table_api::importTablesets($content);
