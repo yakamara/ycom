@@ -607,53 +607,7 @@ INSERT INTO `rex_template` VALUES
 /*!40000 ALTER TABLE `rex_template` ENABLE KEYS */;
 UNLOCK TABLES;
 
-DROP TABLE IF EXISTS `rex_user`;
-CREATE TABLE `rex_user` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` text,
-  `login` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `admin` tinyint(1) NOT NULL,
-  `language` varchar(255) NOT NULL,
-  `startpage` varchar(255) NOT NULL,
-  `role` int(10) unsigned NOT NULL,
-  `login_tries` tinyint(4) DEFAULT '0',
-  `createuser` varchar(255) NOT NULL,
-  `updateuser` varchar(255) NOT NULL,
-  `createdate` datetime NOT NULL,
-  `updatedate` datetime NOT NULL,
-  `lasttrydate` datetime NOT NULL,
-  `session_id` varchar(255) DEFAULT NULL,
-  `cookiekey` varchar(255) DEFAULT NULL,
-  `revision` int(10) unsigned NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `lastlogin` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-LOCK TABLES `rex_user` WRITE;
-/*!40000 ALTER TABLE `rex_user` DISABLE KEYS */;
-INSERT INTO `rex_user` VALUES 
-  (1,'Administrator','','admin','$2y$10$taylvS8a5wkrMWzai8SnHu6GZj8.B0AX0o5NnXZhXyypUU424X5Sm',1,1,'','',0,0,'setup','','2016-03-14 23:16:09','0000-00-00 00:00:00','2016-03-29 15:24:28','484324caac306cc786eabec7b06f68f2','',0,'','2016-03-29 15:24:28');
-/*!40000 ALTER TABLE `rex_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
-DROP TABLE IF EXISTS `rex_user_role`;
-CREATE TABLE `rex_user_role` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` text,
-  `perms` text NOT NULL,
-  `createuser` varchar(255) NOT NULL,
-  `updateuser` varchar(255) NOT NULL,
-  `createdate` datetime NOT NULL,
-  `updatedate` datetime NOT NULL,
-  `revision` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `rex_ycom_group`;
 CREATE TABLE `rex_ycom_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
