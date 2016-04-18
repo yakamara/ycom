@@ -24,3 +24,7 @@ requires:
         yform/email: '>=1.0-beta5'
         phpmailer: '^2.0.1'
     redaxo: '>=5.1.0-dev'
+
+system_plugins:
+    - auth
+    - group
