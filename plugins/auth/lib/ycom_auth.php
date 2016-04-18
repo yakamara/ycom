@@ -48,7 +48,6 @@ class rex_ycom_auth
          */
         $currentId = rex_article::getCurrentId();
         if ($article = rex_article::get($currentId)) {
-
             if(!self::checkPerm($article) && !$redirect  && rex_addon::get('ycom')->getConfig('article_id_jump_denied') != rex_article::getCurrentId()) {
                 $params = null;
 
@@ -58,6 +57,10 @@ class rex_ycom_auth
                 }
                 $redirect = rex_getUrl(rex_addon::get('ycom')->getConfig('article_id_jump_denied'), '', $params, '&');
             }
+        }
+
+        if ($login_status == 3 && $redirect == '') {
+            $redirect = rex_getUrl(rex_addon::get('ycom')->getConfig('article_id_jump_logout'), '', [], '&');
         }
 
         return $redirect;
