@@ -8,17 +8,17 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
 
 		if ($this->params['send']) {
 
-			$placeholder = 'translate:ycom_auth_password_not_updated';
+			$placeholder = rex_i18n::translate('translate:ycom_auth_password_not_updated');
 			if ($this->getValue() != '') {
-				$placeholder = 'translate:ycom_auth_password_updated';
+				$placeholder = rex_i18n::translate('translate:ycom_auth_password_updated');
 
 			}
 
 		} else {
 
-			$placeholder = 'translate:ycom_auth_password_exists';
+			$placeholder = rex_i18n::translate('translate:ycom_auth_password_exists');
 			if ($this->getValue() == '') {
-				$placeholder = 'translate:ycom_auth_password_exists';
+				$placeholder = rex_i18n::translate('translate:ycom_auth_password_isempty');
 
 			}
 

@@ -30,3 +30,7 @@ ycom_auth_perm = Zugriffsrechte
 ycom_auth_update_perm = Aktualisieren
 ycom_auth_perm_updated = Rechte wurde aktualisiert
 
+ycom_auth_password_not_updated = Passwort wurde nicht aktualisiert
+ycom_auth_password_updated = Passwort wurde aktualisiert
+ycom_auth_password_exists = Passwort existiert
+ycom_auth_password_isempty = Passwort ist nicht vorhanden
