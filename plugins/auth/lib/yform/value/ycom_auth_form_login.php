@@ -14,19 +14,12 @@ class rex_yform_value_ycom_auth_form_login extends rex_yform_value_abstract
 
 	function enterObject()
 	{
+    $login = rex_request(rex_config::get('ycom', 'auth_request_name'),"string");
+		$this->setValue($login);
 
-		$l_label = $this->getElement(2);
-		$placeholder = $this->getElement(3);		
-		$login = rex_request(rex_config::get('ycom', 'auth_request_name'),"string");
+		$this->params['form_output'][$this->getId()] = $this->parse('value.text.tpl.php');
 
-		$this->params["form_output"][$this->getId()] = '
-		<p class="formtext form-ycom-auth-login '.$this->getHTMLClass().'" id="'.$this->getHTMLId().'">
-			<label class="text" for="'.$this->getFieldId().'"  >'.$l_label.'</label>
-			<input type="text" class="text" name="'.rex_config::get('ycom', 'auth_request_name').'" id="'.$this->getFieldId().'" value="'.htmlspecialchars(stripslashes($login)).'" placeholder="'.$placeholder.'" />
-		</p>
-		';
-
-		return;
+    $this->params['form_output'][$this->getId()] = str_replace($this->getFieldName(),rex_config::get('ycom', 'auth_request_name'), $this->params['form_output'][$this->getId()]);
 
 	}
 

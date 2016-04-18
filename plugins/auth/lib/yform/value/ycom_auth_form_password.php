@@ -5,18 +5,11 @@ class rex_yform_value_ycom_auth_form_password extends rex_yform_value_abstract
 
 	function enterObject()
 	{
-		$l_label = $this->getElement(2);
-		$placeholder = $this->getElement(3);	
 
-		$this->params["form_output"][$this->getId()] = '
-		<p class="formpassword form-ycom-auth-password formlabel-'.$this->getName().'" id="'.$this->getHTMLId().'">
-			<label class="password " for="'.$this->getFieldId().'" >'.$l_label.'</label>
-			<input type="password" class="password " name="'.rex_config::get('ycom', 'auth_request_psw').'" id="'.$this->getFieldId().'" value="" placeholder="'.$placeholder.'" />
-		</p>
-		';
-
-		return;
-
+    $this->params['form_output'][$this->getId()] = $this->parse(array('value.password.tpl.php', 'value.text.tpl.php'), array('type' => 'password', 'value' => ''));
+        
+    $this->params['form_output'][$this->getId()] = str_replace($this->getFieldName(),rex_config::get('ycom', 'auth_request_psw'), $this->params['form_output'][$this->getId()]);
+        
 	}
 
 	function getDescription()

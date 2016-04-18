@@ -5,25 +5,31 @@ class rex_yform_value_ycom_auth_form_stayactive extends rex_yform_value_abstract
 
 	function enterObject()
 	{
-		if(rex_config::get('ycom', 'auth_request_stay') != 1) {
-            // return;
-        }
+	
 
-		$l_label = $this->getElement(2);
+    $value = rex_request(rex_config::get('ycom', 'auth_request_stay'),"string");
+	  $this->setValue($value);
 
-		$checked = '';
-		if ($this->getElement(3) == 1) $checked = ' checked="checked"';
+    $v = 1; // gecheckt
+    $w = 0; // nicht gecheckt
 
-		$sa = rex_request(rex_config::get('ycom', 'auth_request_stay'), "int");
-		if($sa == 1) $checked = ' checked="checked"';
-		
-		$this->params["form_output"][$this->getId()] = '
-		<p class="formcheckbox form-com-auth-stayactive '.$this->getHTMLClass().'" id="'.$this->getHTMLId().'">
-			<input type="checkbox" class="checkbox " name="'.rex_config::get('ycom', 'auth_request_stay').'" id="'.$this->getFieldId().'" value="1" '.$checked.' />
-			<label class="checkbox " for="'.$this->getFieldId().'" >'.$l_label.'</label>
-		</p>
-		';
+    // first time and default is true -> checked
+    if ($this->params['send'] != 1 && $this->getElement('3') == 1 && $this->getValue() === '') {
+        $this->setValue($v);
 
+    // if check value is given -> checked
+    } elseif ($this->getValue() == $v) {
+        $this->setValue($v);
+
+    // not checked
+    } else {
+        $this->setValue($w);
+    }
+
+    $this->params['form_output'][$this->getId()] = $this->parse('value.checkbox.tpl.php', array('value' => $v));
+
+    $this->params['form_output'][$this->getId()] = str_replace($this->getFieldName(), rex_config::get('ycom', 'auth_request_stay'), $this->params['form_output'][$this->getId()]);
+	
 	}
 
 	function getDescription()
