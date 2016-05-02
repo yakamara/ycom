@@ -46,7 +46,7 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
 
 	function getDescription()
 	{
-		return "ycom_auth_password_hash -> Beispiel: ycom_auth_password_hash|name|label";
+		return "ycom_auth_password -> Beispiel: ycom_auth_password|name|label";
 	}
 
 	function getDefinitions()
