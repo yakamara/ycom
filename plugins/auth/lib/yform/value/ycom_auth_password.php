@@ -24,7 +24,10 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
 
 		}
 
-		$this->setElement('placeholder', $placeholder);
+		if ($this->getElement('placeholder') == "") {
+			$this->setElement('placeholder', $placeholder);
+
+		}
 
 		$this->params['form_output'][$this->getId()] = $this->parse(array('value.password.tpl.php', 'value.text.tpl.php'), array('type' => 'password', 'value' => ''));
 
