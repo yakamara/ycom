@@ -39,7 +39,7 @@ class rex_ycom_auth
             if ($referer) {
                 $redirect = urldecode($referer);
             } else {
-                $redirect = rex_getUrl(rex_addon::get('ycom')->getConfig('article_login_ok'));
+                $redirect = rex_getUrl(rex_addon::get('ycom')->getConfig('article_id_jump_ok'));
             }
         }
 
@@ -52,7 +52,7 @@ class rex_ycom_auth
                 $params = null;
 
                 ## Adding referer only if target is not login_ok Article
-                if(rex_addon::get('ycom')->getConfig('article_login_ok') != rex_article::getCurrentId()) {
+                if(rex_addon::get('ycom')->getConfig('article_id_jump_ok') != rex_article::getCurrentId()) {
                     $params = array(rex_addon::get('ycom')->getConfig('auth_request_ref') => urlencode($_SERVER['REQUEST_URI']));
                 }
                 $redirect = rex_getUrl(rex_addon::get('ycom')->getConfig('article_id_jump_denied'), '', $params, '&');
@@ -61,6 +61,11 @@ class rex_ycom_auth
 
         if ($login_status == 3 && $redirect == '') {
             $redirect = rex_getUrl(rex_addon::get('ycom')->getConfig('article_id_jump_logout'), '', [], '&');
+        }
+
+        if ($login_status == 4 && $redirect == '') {
+            $params = [rex_config::get('ycom', 'auth_request_name') => $login_name, rex_config::get('ycom', 'auth_request_ref') => $referer, rex_config::get('ycom', 'auth_request_stay') => $login_stay];
+            $redirect = rex_getUrl(rex_addon::get('ycom')->getConfig('article_id_jump_not_ok'), '', $params, '&');
         }
 
         return $redirect;
