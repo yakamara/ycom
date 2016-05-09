@@ -49,7 +49,7 @@ class rex_ycom_auth
         $currentId = rex_article::getCurrentId();
         if ($article = rex_article::get($currentId)) {
             if(!self::checkPerm($article) && !$redirect  && rex_addon::get('ycom')->getConfig('article_id_jump_denied') != rex_article::getCurrentId()) {
-                $params = null;
+                $params = [];
 
                 ## Adding referer only if target is not login_ok Article
                 if(rex_addon::get('ycom')->getConfig('article_id_jump_ok') != rex_article::getCurrentId()) {
