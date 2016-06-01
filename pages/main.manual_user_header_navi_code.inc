@@ -7,7 +7,7 @@
 	Im Template muss (vorher) irgendwo $com_user = rex_ycom_auth::getUser(); vorhanden sein.
 	
 */
-	
+
 if ($ycom_user) {
 	echo '
 		<div class="usernavi">
@@ -19,13 +19,13 @@ if ($ycom_user) {
 					<a href="'. rex_getUrl(rex_addon::get("ycom")->getConfig("article_logout")) .'?rex_ycom_auth_logout=1" title="{{ Logout }}"><span>'.rex_ycom_auth::getUser()->getValue('firstname').' '.rex_ycom_auth::getUser()->getValue('name').' - {{ Logout }}</span></a>
 		        </li>
 		    </ul>
-		</div>';		
+		</div>';
 } else {
 	echo '
 		<div class="usernavi">
 			<ul>
 				<li class="login">
-					<a href="'. rex_getUrl(72) .'" title="{{ Login }}"><span>{{ Login }}</span></a> 
+					<a href="'. rex_getUrl(72) .'" title="{{ Login }}"><span>{{ Login }}</span></a>
 				</li>
 		        <li class="registrierung">
 					<a href="'. rex_getUrl(73) .'" title="{{ Registrierung }}"><span>{{ Registrierung }}</span></a>
@@ -33,4 +33,5 @@ if ($ycom_user) {
 		    </ul>
 		</div>';
 }
-}?>
+
+?>
