@@ -1,5 +1,5 @@
 package: ycom
-version: '1.0-beta5'
+version: '1.0'
 author: yakamara Media GmbH & Co. KG, concedra GmbH
 supportpage: www.redaxo.org/de/forum
 
@@ -23,7 +23,7 @@ requires:
         yform/manager: '>=1.0-beta5'
         yform/email: '>=1.0-beta5'
         phpmailer: '^2.0.1'
-    redaxo: '>=5.1.0-dev'
+    redaxo: '>=5.1.0'
 
 system_plugins:
     - auth

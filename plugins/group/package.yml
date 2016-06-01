@@ -1,8 +1,8 @@
 package: ycom/group
-version: '1.0-beta4'
+version: '1.0'
 author: yakamara Media GmbH & Co. KG
 supportpage: www.redaxo.org/de/forum
-title: 'Auth'
+title: 'Group'
 nav_icon: fa-minus
 description: 'translate:ycom_group_plugin'
 umgebung: Backend
