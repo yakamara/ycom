@@ -42,3 +42,5 @@ ycom_perm_extends = Aus übergeordneter Kategorie übernehmen ansonsten Zugriff 
 ycom_perm_only_logged_in = Zugriff für eingeloggte User
 ycom_perm_only_not_logged_in = Zugriff für alle nicht eingeloggten User
 ycom_perm_all = Zugriff für alle User
+
+ycom_this_login_exists_already = Dieser Login existiert bereits
