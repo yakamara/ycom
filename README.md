@@ -1,6 +1,7 @@
 YCom für REDAXO >=5.1
 =============
 
+![Screenshot](https://raw.githubusercontent.com/yakamara/redaxo_ycom/assets/ycom_01.png)
 
 Installation
 -------
