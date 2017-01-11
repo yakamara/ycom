@@ -1,7 +1,8 @@
 
 ycom_group_title = Gruppen
-ycom_group_name = Community Gruppen
+ycom_group_name = Gruppen
 ycom_group_xform_enter_name = Bitte geben Sie den Gruppennamen ein.
+rex_ycom_group = Community Group
 
 ycom_group_forallgroups = Für alle, egal welche Gruppe
 ycom_group_inallgroups = Muss in jeder Gruppe sein
