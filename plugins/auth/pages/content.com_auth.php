@@ -8,7 +8,7 @@ $clang = $params['clang'];
 $ctype = $params['ctype'];
 
 $yform = new rex_yform();
-$yform->setDebug();
+// $yform->setDebug();
 $yform->setObjectparams('form_action', rex_url::backendController(['page' => 'content/edit', 'article_id' => $article_id, 'clang' => $clang, 'ctype' => $ctype], false));
 $yform->setObjectparams('form_id', 'ycom_auth-perm');
 $yform->setObjectparams('form_name', 'ycom_auth-perm');
