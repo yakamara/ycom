@@ -31,7 +31,7 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
 						$sql->debugsql = TRUE;
 					}
 
-					$sql->setTable("rex_ycom_user");
+					$sql->setTable(rex_ycom_user::getTable());
 					foreach($this->params["value_pool"]["sql"] as $key => $value) {
 						$sql->setValue($key, $value);
 					}
