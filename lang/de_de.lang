@@ -29,6 +29,7 @@ firstname = Vorname
 activation_key = Aktivierungsschlüssel
 session_key = Sessionschlüssel
 last_login_time = Letzter Login
+last_action_time = Letzte Aktion
 
 ycom_account_inactive = Zugang ist inaktiv
 ycom_account_requested = Zugang wurde angefragt
@@ -44,3 +45,5 @@ ycom_perm_only_not_logged_in = Zugriff für alle nicht eingeloggten User
 ycom_perm_all = Zugriff für alle User
 
 ycom_this_login_exists_already = Dieser Login existiert bereits
+ycom_please_enter_login = Bitte das Login eingeben
+ycom_please_enter_email = Bitte die E-mail eingeben
