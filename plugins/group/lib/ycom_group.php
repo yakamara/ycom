@@ -1,6 +1,7 @@
 <?php
 
-class rex_ycom_group {
+class rex_ycom_group extends \rex_yform_manager_dataset
+{
 
     static $perms = [
         '0' => 'translate:ycom_group_forallgroups',
@@ -12,18 +13,11 @@ class rex_ycom_group {
     static function getGroups()
     {
         $groups = [];
-        foreach(rex_sql::factory()->getArray('select id,name from '.self::getTable()) as $group) {
-            $groups[$group["id"]] = $group["name"];
+        foreach (self::query()->find() as $group) {
+            $groups[$group->id] = $group->name;
 
         }
-
         return $groups;
-    }
-
-    static function getTable()
-    {
-        return 'rex_ycom_group';
-
     }
 
 }

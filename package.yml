@@ -1,6 +1,6 @@
 package: ycom
-version: '1.0'
-author: yakamara Media GmbH & Co. KG, concedra GmbH
+version: '2.0'
+author: Yakamara Media GmbH & Co. KG, concedra GmbH
 supportpage: www.redaxo.org/de/forum
 
 page:
@@ -19,11 +19,11 @@ page:
 
 requires:
     packages:
-        yform: '>=1.0-beta5'
-        yform/manager: '>=1.0-beta5'
-        yform/email: '>=1.0-beta5'
+        yform: '>=2.1'
+        yform/manager: '>=2.1'
+        yform/email: '>=2.1'
         phpmailer: '^2.0.1'
-    redaxo: '>=5.1.0'
+    redaxo: '>=5.2.0'
 
 system_plugins:
     - auth
