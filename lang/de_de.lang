@@ -30,6 +30,10 @@ activation_key = Aktivierungsschlüssel
 session_key = Sessionschlüssel
 last_login_time = Letzter Login
 last_action_time = Letzte Aktion
+login_failed = Fehlgeschlagene Logins
+login_tries = Login Fehlversuche
+
+ycom_login_tries_info = Ab 10 Fehlversuchen kann sich der User nicht mehr anmelden.
 
 ycom_account_inactive = Zugang ist inaktiv
 ycom_account_requested = Zugang wurde angefragt

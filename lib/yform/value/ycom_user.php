@@ -2,10 +2,8 @@
 
 class rex_yform_value_ycom_user extends rex_yform_value_abstract
 {
-
-    function enterObject()
+    public function enterObject()
     {
-
         $show_label = 'email';
         $show_value = '';
         $show_label = $this->getElement(6);
@@ -33,12 +31,10 @@ class rex_yform_value_ycom_user extends rex_yform_value_abstract
         if ($this->getElement(5) != 'no_db') {
             $this->params['value_pool']['sql'][$this->getElement(1)] = $this->getValue();
         }
-
     }
 
-    function getDescription()
+    public function getDescription()
     {
         return 'ycom_user -> Beispiel: ycom_user|label|dbfield|Fieldlabel|hidden|[no_db]|showlabel';
     }
-
 }

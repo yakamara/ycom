@@ -10,7 +10,7 @@
 class rex_ycom_navigation extends rex_navigation
 {
 
-  function rex_ycom_navigation() {
+  function __construct() {
     $this->addCallback("rex_ycom_navigation::checkPerm");
   }
 

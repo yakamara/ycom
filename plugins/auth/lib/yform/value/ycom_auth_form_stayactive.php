@@ -2,41 +2,34 @@
 
 class rex_yform_value_ycom_auth_form_stayactive extends rex_yform_value_abstract
 {
+    public function enterObject()
+    {
+        $value = rex_request(rex_config::get('ycom', 'auth_request_stay'), 'string');
+        $this->setValue($value);
 
-	function enterObject()
-	{
-	
+        $v = 1;
+        $w = 0;
 
-    $value = rex_request(rex_config::get('ycom', 'auth_request_stay'),"string");
-	  $this->setValue($value);
+        // first time and default is true -> checked
+        if ($this->params['send'] != 1 && $this->getElement('3') == 1 && $this->getValue() === '') {
+            $this->setValue($v);
 
-    $v = 1; // gecheckt
-    $w = 0; // nicht gecheckt
+        // if check value is given -> checked
+        } elseif ($this->getValue() == $v) {
+            $this->setValue($v);
 
-    // first time and default is true -> checked
-    if ($this->params['send'] != 1 && $this->getElement('3') == 1 && $this->getValue() === '') {
-        $this->setValue($v);
+        // not checked
+        } else {
+            $this->setValue($w);
+        }
 
-    // if check value is given -> checked
-    } elseif ($this->getValue() == $v) {
-        $this->setValue($v);
+        $this->params['form_output'][$this->getId()] = $this->parse('value.checkbox.tpl.php', ['value' => $v]);
 
-    // not checked
-    } else {
-        $this->setValue($w);
+        $this->params['form_output'][$this->getId()] = str_replace($this->getFieldName(), rex_config::get('ycom', 'auth_request_stay'), $this->params['form_output'][$this->getId()]);
     }
 
-    $this->params['form_output'][$this->getId()] = $this->parse('value.checkbox.tpl.php', array('value' => $v));
-
-    $this->params['form_output'][$this->getId()] = str_replace($this->getFieldName(), rex_config::get('ycom', 'auth_request_stay'), $this->params['form_output'][$this->getId()]);
-	
-	}
-
-	function getDescription()
-	{
-		return "ycom_auth_form_stayactive -> Beispiel: ycom_auth_form_stayactive|auth|eingeloggt bleiben:|0/1 angeklickt";
-	}
-
+    public function getDescription()
+    {
+        return 'ycom_auth_form_stayactive -> Beispiel: ycom_auth_form_stayactive|auth|eingeloggt bleiben:|0/1 angeklickt';
+    }
 }
-
-?>

@@ -38,6 +38,8 @@ ToDo
 Weitere Plugins in Planung
 -------
 
+* SAML 2.0 EP einbauen
+** Optionen - Neuen Login generieren, Nur gegenprüfen ob Konto vorhanden und damit Passwortprüfung umgehen.
 * auth_media
 * facebook
 * board
@@ -48,6 +50,13 @@ Weitere Plugins in Planung
 
 Last Changes
 -------
+
+### Version 2.0 // 00.00.2017
+
+* Umbau nach Yorm
+* mindestens YForm 2.1
+
+
 
 ### Version 1.0 // 01.06.2016
 

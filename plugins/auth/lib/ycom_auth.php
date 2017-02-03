@@ -2,20 +2,17 @@
 
 class rex_ycom_auth
 {
-
-    static $debug = false;
-    static $me = NULL;
-    static $perms = [
+    public static $debug = false;
+    public static $me = null;
+    public static $perms = [
         '0' => 'translate:ycom_perm_extends',
         '1' => 'translate:ycom_perm_only_logged_in',
         '2' => 'translate:ycom_perm_only_not_logged_in',
-        '3' => 'translate:ycom_perm_all'
+        '3' => 'translate:ycom_perm_all',
     ];
 
-    //
-    static function init()
+    public static function init()
     {
-
         $loginName = rex_request(rex_config::get('ycom', 'auth_request_name'), 'string');
         $loginPassword = rex_request(rex_config::get('ycom', 'auth_request_psw'), 'string');
         $loginStay = rex_request(rex_config::get('ycom', 'auth_request_stay'), 'string');
@@ -24,7 +21,7 @@ class rex_ycom_auth
 
         $redirect = '';
 
-        ## Check for Login / Logout
+        //# Check for Login / Logout
         /*
           login_status
           0: not logged in
@@ -35,7 +32,7 @@ class rex_ycom_auth
         */
         $login_status = self::login($loginName, $loginPassword, $loginStay, $logout);
 
-        ## set redirect after Login
+        //# set redirect after Login
         if ($login_status == 2) {
             if ($referer) {
                 $redirect = urldecode($referer);
@@ -49,12 +46,12 @@ class rex_ycom_auth
          */
         $currentId = rex_article::getCurrentId();
         if ($article = rex_article::get($currentId)) {
-            if (!self::checkPerm($article) && !$redirect  && rex_addon::get('ycom')->getConfig('article_id_jump_denied') != rex_article::getCurrentId()) {
+            if (!self::checkPerm($article) && !$redirect && rex_addon::get('ycom')->getConfig('article_id_jump_denied') != rex_article::getCurrentId()) {
                 $params = [];
 
-                ## Adding referer only if target is not login_ok Article
+                //# Adding referer only if target is not login_ok Article
                 if (rex_addon::get('ycom')->getConfig('article_id_jump_ok') != rex_article::getCurrentId()) {
-                    $params = array(rex_addon::get('ycom')->getConfig('auth_request_ref') => urlencode($_SERVER['REQUEST_URI']));
+                    $params = [rex_addon::get('ycom')->getConfig('auth_request_ref') => urlencode($_SERVER['REQUEST_URI'])];
                 }
                 $redirect = rex_getUrl(rex_addon::get('ycom')->getConfig('article_id_jump_denied'), '', $params, '&');
             }
@@ -70,17 +67,23 @@ class rex_ycom_auth
         }
 
         return $redirect;
-
     }
 
-    static function login($loginName = '', $loginPassword = '', $loginStay = '', $logout = false, $query_extras = ' and status > 0', $ignorePassword = false)
+    public static function login($loginName = '', $loginPassword = '', $loginStay = '', $logout = false, $filter_query = 'status > 0', $ignorePassword = false)
     {
         rex_login::startSession();
 
         $loginStatus = 0; // not logged in
-        $sessionKey = NULL;
-        $sessionUserID = NULL;
-        $me = NULL;
+        $sessionKey = null;
+        $sessionUserID = null;
+        $me = null;
+
+        $filter = null;
+        if ($filter_query != '') {
+            $filter = function (rex_yform_manager_query $query) use ($filter_query) {
+                $query->whereRaw($filter_query);
+            };
+        }
 
         if (isset($_SESSION[self::getLoginKey()])) {
             $sessionUserID = $_SESSION[self::getLoginKey()];
@@ -89,73 +92,74 @@ class rex_ycom_auth
         if (rex_addon::get('ycom')->getConfig('auth_request_stay')) {
             if (isset($_COOKIE[self::getLoginKey()])) {
                 $sessionKey = rex_cookie(self::getLoginKey(), 'string');
-
             }
         }
 
         if (($loginName && $loginPassword) || $sessionUserID || $sessionKey) {
+            $userQuery = rex_ycom_user::query()
+                ->where(rex_addon::get('ycom')->getConfig('login_field'), $loginName);
 
-            // TODO:
-            echo 'noch einarbeiten 1';
-            var_dump($query_extras);
+            if ($filter) {
+                $filter($userQuery);
+            }
 
-            $loginUsers = rex_ycom_user::query()
-                ->where(rex_addon::get('ycom')->getConfig('login_field'), $loginName)
-                ->find();
+            $loginUsers = $userQuery->find();
 
             if (count($loginUsers) == 1) {
+                $user = $loginUsers[0];
 
-                if ($ignorePassword || self::checkPassword($loginPassword, $loginUsers[0]->getValue('id'))) {
-                    $me = $loginUsers[0];
-
+                if ($user->login_tries > 10) {
+                    ++$user->login_tries;
+                    $user->save();
+                } elseif ($ignorePassword || self::checkPassword($loginPassword, $user->id)) {
+                    $me = $user;
+                    $me->setValue('login_tries', 0);
+                } else {
+                    ++$user->login_tries;
+                    $user->save();
                 }
-
             }
 
             if (!$me && $sessionUserID) {
+                $userQuery = rex_ycom_user::query()
+                    ->where('id', $sessionUserID);
 
-                // TODO:
-                echo 'noch einarbeiten 2';
-                var_dump($query_extras);
+                if ($filter) {
+                    $filter($userQuery);
+                }
 
-                $loginUsers = rex_ycom_user::query()
-                    ->where('id', $sessionUserID)
-                    ->find();
+                $loginUsers = $userQuery->find();
 
                 if (count($loginUsers) == 1) {
                     $me = $loginUsers[0];
-
                 }
             }
 
             if ($me) {
-
                 self::setUser($me);
                 $loginStatus = 1; // is logged in
 
                 if (rex_addon::get('ycom')->getProperty('auth_request_stay')) {
                     if ($loginStay == 1) {
-                        $sessionKey = uniqid ('ycom_user', true);
+                        $sessionKey = uniqid('ycom_user', true);
                         $me->setValue('session_key', $sessionKey);
                     }
-                    setcookie(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('cookie_ttl')), '/' );
+                    setcookie(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('cookie_ttl')), '/');
                 }
 
-                $me->setValue('last_action_time', date("Y-m-d H:i:s"));
+                $me->setValue('last_action_time', date('Y-m-d H:i:s'));
 
                 if ($loginName) {
                     $loginStatus = 2; // has just logged in
                     $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN_SUCCESS', $me, []));
-                    $me->setValue('last_login_time', date("Y-m-d H:i:s"));
-
+                    $me->setValue('last_login_time', date('Y-m-d H:i:s'));
                 }
 
                 $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN', $me, []));
 
+                // TODO: Passwort wird überschrieben. FEHLER !
                 $me->save();
-
             } else {
-
                 $loginStatus = 0; // not logged in
 
                 if ($loginName) {
@@ -167,27 +171,22 @@ class rex_ycom_auth
                     'login_psw' => $loginPassword,
                     'login_stay' => $loginStay,
                     'logout' => $logout,
-                    'query_extras' => $query_extras
+                    'filter_query' => $filter_query,
                 ]
                 ));
-
             }
         }
 
-        /*
-         * Logout process
-         */
         if ($logout && isset($me)) {
             $loginStatus = 3;
-            rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGOUT', $me, [] ));
+            rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGOUT', $me, []));
             self::clearUserSession();
         }
 
         return $loginStatus;
-
     }
 
-    static function checkPassword($password, $user_id)
+    public static function checkPassword($password, $user_id)
     {
         if (trim($password) == '') {
             return false;
@@ -195,36 +194,32 @@ class rex_ycom_auth
 
         $user = rex_ycom_user::get($user_id);
         if ($user) {
-            if ( rex_login::passwordVerify($password, $user->password)) {
+            if (rex_login::passwordVerify($password, $user->password)) {
                 return true;
             }
-
         }
 
         return false;
-
     }
 
-    static function setUser($me)
+    public static function setUser($me)
     {
         rex_login::startSession();
         $_SESSION[self::getLoginKey()] = $me->id;
         self::$me = $me;
     }
 
-    static function getUser()
+    public static function getUser()
     {
         return self::$me;
-
     }
 
-    static function checkPerm(&$article)
+    public static function checkPerm(&$article)
     {
         $me = self::getUser();
 
         if (rex_addon::get('ycom')->getConfig('auth_active') != '1') {
             return true;
-
         }
 
         /*
@@ -239,14 +234,12 @@ class rex_ycom_auth
 
         if ($permType == 3) {
             return true;
-
         }
 
         // 0 - parent perms
         if ($permType < 1) {
             if ($o = $article->getParent()) {
                 return self::checkPerm($o);
-
             }
 
             // no parent, no perm set -> for all accessible
@@ -257,14 +250,10 @@ class rex_ycom_auth
         if ($permType == 2) {
             if ($me) {
                 return false;
-
             } else {
                 return true;
-
             }
-
         }
-
 
         // 1 - only if logged in .. further group perms
         if ($permType == 1 && !$me) {
@@ -272,16 +261,13 @@ class rex_ycom_auth
         }
 
         // if logged in perms - check group perms
-
         $article_group_type = (int) $article->getValue('ycom_group_type');
 
         if ($article_group_type < 1) {
             return true;
-
         }
 
         switch ($article_group_type) {
-
             // user in every group
             case 1:
                 $art_groups = explode(',', $article->getValue('ycom_groups'));
@@ -309,7 +295,6 @@ class rex_ycom_auth
                 $user_groups = explode(',', $me->ycom_groups);
                 if (count($user_groups) == 0) {
                     return true;
-
                 }
                 return false;
 
@@ -318,25 +303,24 @@ class rex_ycom_auth
         }
 
         return false;
-
     }
 
     /*
      * returns Login-Key used for Sessions and Cookies
      */
-    static function getLoginKey()
+    public static function getLoginKey()
     {
         return 'rex_ycom';
     }
 
-    static function clearUserSession()
+    public static function clearUserSession()
     {
         unset($_SESSION[self::getLoginKey()]);
         unset($_COOKIE[self::getLoginKey()]);
         setcookie(self::getLoginKey(), '0', time() - 3600, '/');
     }
 
-    function deleteUser($id)
+    public function deleteUser($id)
     {
         $id = (int) $id;
 
@@ -346,24 +330,22 @@ class rex_ycom_auth
             return false;
         }
 
-        rex_ycom_user::query()->where('id',$id)->find()->delete();
+        rex_ycom_user::query()->where('id', $id)->find()->delete();
 
         rex_register_extension_point('YCOM_AUTH_USER_DELETED', '', ['id' => $id]);
 
         return true;
     }
 
-
-    static function loginWithParams($params, $query_extras = '')
+    public static function loginWithParams($params, callable $filter = null)
     {
-
-        // TODO:
-        echo 'noch einarbeiten 4';
-        var_dump($query_extras);
-
         $userQuery = rex_ycom_user::query();
         foreach ($params as $l => $v) {
             $userQuery->where($l, $v);
+        }
+
+        if ($filter) {
+            $filter($userQuery);
         }
 
         $Users = $userQuery->find();
@@ -382,7 +364,5 @@ class rex_ycom_auth
         self::login($loginName, $loginPassword, '', false, '', true);
 
         return self::getUser();
-
     }
-
 }
