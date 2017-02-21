@@ -8,14 +8,17 @@ class rex_yform_value_ycom_auth_form_info extends rex_yform_value_abstract
         $referer = rex_request(rex_config::get('ycom', 'auth_request_ref'), 'string');
         $logout = rex_request(rex_config::get('ycom', 'auth_request_logout'), 'int');
 
+        $state = 'info';
         if ($logout) {
             $msg = $this->getElement(3);
         }
 
         if ($login_name) {
             $msg = $this->getElement(4);
+            $state = 'error';
         } elseif ($referer && rex_ycom_auth::getUser()) {
             $msg = $this->getElement(5);
+            $state = 'error';
         }
 
         if (!isset($msg)) {
@@ -23,6 +26,8 @@ class rex_yform_value_ycom_auth_form_info extends rex_yform_value_abstract
         }
 
         if ($msg) {
+            $parse = $this->parse(['value.ycom_auth_form_info.tpl.php'], ['message' => $msg, 'state' => $state]);
+            $msg = $parse == '' ? $msg : $parse;
             $this->params['form_output'][$this->getId()] = $msg;
         }
     }
