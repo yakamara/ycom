@@ -1,0 +1,36 @@
+ycom_auth_title = Authentication
+
+ycom_auth_settings = Settings
+ycom_auth_description = Explanation
+
+ycom_auth_config 				= Configuration
+ycom_auth_config_save 			= Save configuration
+ycom_auth_config_status 			= Status
+ycom_auth_config_security 		= Security
+ycom_auth_config_forwarder 		= Forward to article
+ycom_auth_config_login_field		= Login field
+
+ycom_auth_config_status_authactive = Authentication active
+ycom_auth_config_status_stayactive = "Stay signed in" active
+ycom_auth_config_security_hashedpasswd = Encrypted passwords (sha1)
+ycom_auth_config_id_jump_ok		= ... when successfully signed in
+ycom_auth_config_id_jump_not_ok	= ... when sign in is unsuccessfull
+ycom_auth_config_id_jump_logout	= ... when signed out
+ycom_auth_config_id_jump_denied	= ... when attempting to access a restricted article
+ycom_auth_config_id_jump_activation_ok = ... when successfully activated
+ycom_auth_config_id_jump_activation_fail = ... when activation was unsuccessfull
+ycom_auth_config_id_jump_newpassword_ok = ... when successfully reset password
+ycom_auth_config_id_jump_newpassword_fail = ... when password reset was unsuccessfull
+
+ycom_auth_settings_updated = Configuration has been saved
+
+ycom_auth_info_title = Explanation
+
+ycom_auth_perm = Permissions
+ycom_auth_update_perm = Update
+ycom_auth_perm_updated = Permissions updated
+
+ycom_auth_password_not_updated = Password was not updated
+ycom_auth_password_updated = Password was updated
+ycom_auth_password_exists = Password exists
+ycom_auth_password_isempty = Password does not exist
