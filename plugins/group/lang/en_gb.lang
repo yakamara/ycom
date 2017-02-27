@@ -1,0 +1,13 @@
+
+ycom_group_title = Groups
+ycom_group_name = Groups
+ycom_group_xform_enter_name = Please enter the group name
+rex_ycom_group = Community Group
+
+ycom_group_forallgroups = For all, independent of group
+ycom_group_inallgroups = Has to be in every group
+ycom_group_inonegroup = Has to be in one group
+ycom_group_nogroups = Has no groups
+
+ycom_group_type = Group permissions
+ycom_groups = Groups

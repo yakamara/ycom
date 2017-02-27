@@ -1,0 +1,53 @@
+ycom_perm = Community permissions
+
+ycom_page_perm = Community page permissions
+
+navigation_ycom = Community
+ycom_title = Community: settings
+ycom_navi_title = Settings
+
+ycom_main_title = Info
+ycom_info = Readme
+ycom_info_title = Useful information working with the Community AddOn
+ycom_manual = Manual / Examples
+ycom_manual_title = Manual / Examples
+ycom_changelog = Change log
+ycom_changelog_title	= Change log
+ycom_license = Licence
+ycom_license_title = Licence
+ycom_overview = Overview
+ycom_user_management = User management
+ycom_field_management = Edit fields
+
+ycom_user = User
+yform_ycom_user = Community user
+rex_ycom_user = Community user
+
+email = E-mail
+status = Status
+firstname = First name
+activation_key = Activation key
+session_key = Session key
+last_login_time = Last sign in
+last_action_time = Last action
+login_failed = Failed sign in attempts
+login_tries = Sign in attempts
+
+ycom_login_tries_info = Failing to sign in 10 times will lead to the user being blocked.
+
+ycom_account_inactive = Access is deactivated
+ycom_account_requested = Access requested
+ycom_account_active = Access is active
+
+ycom_status = Status
+
+ycom_perm_type = Page permissions
+
+ycom_perm_extends = Inherit from parent category otherwise accessible by all users
+ycom_perm_only_logged_in = Access for signed in users
+ycom_perm_only_not_logged_in = Access for all non signed in users
+ycom_perm_all = Access for all users
+
+ycom_this_login_exists_already = This username already exists
+ycom_please_enter_login = Please enter username
+ycom_please_enter_email = Please enter e-mail address
