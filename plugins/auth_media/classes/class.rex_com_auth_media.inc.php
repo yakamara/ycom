@@ -14,6 +14,15 @@ class rex_com_auth_media
   var $xsendfile = false;
   var $MEDIA;
 
+  // this is the new style constructor used by newer php versions.
+  // important: if you change the signatur of this method, change also the signature of rex_com_auth_media()
+  function __construct()
+  {
+    $this->rex_com_auth_media();
+  }
+
+  // this is the deprecated old style constructor kept for compat reasons. 
+  // important: if you change the signatur of this method, change also the signature of __construct()
   function rex_com_auth_media()
   {
   }

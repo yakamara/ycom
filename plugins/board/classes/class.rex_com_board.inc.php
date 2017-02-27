@@ -13,6 +13,15 @@ class rex_com_board
     private $notificationTemplate;
     private $adminGroup;
 
+    // this is the new style constructor used by newer php versions.
+    // important: if you change the signatur of this method, change also the signature of rex_com_board()
+    function __construct($key, $name = '')
+    {
+        $this->rex_com_board($key, $name);
+    }
+
+    // this is the deprecated old style constructor kept for compat reasons. 
+    // important: if you change the signatur of this method, change also the signature of __construct()
     public function rex_com_board($key, $name = '')
     {
         $this->setKey($key);
