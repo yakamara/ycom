@@ -22,10 +22,10 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
                 default:
                     $sql = rex_sql::factory();
                     if ($this->params['debug']) {
-                        $sql->debugsql = true;
+                        $sql->setDebug();
                     }
 
-                    $sql->setTable(rex_ycom_user::getTable());
+                    $sql->setTable(rex_ycom_user::table());
                     foreach ($this->params['value_pool']['sql'] as $key => $value) {
                         $sql->setValue($key, $value);
                     }

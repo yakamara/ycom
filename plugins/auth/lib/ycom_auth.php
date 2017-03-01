@@ -283,6 +283,8 @@ class rex_ycom_auth
         unset($_SESSION[self::getLoginKey()]);
         unset($_COOKIE[self::getLoginKey()]);
         setcookie(self::getLoginKey(), '0', time() - 3600, '/');
+
+        self::$me = null;
     }
 
     public function deleteUser($id)
@@ -313,7 +315,7 @@ class rex_ycom_auth
 
         $loginField = rex_config::get('ycom', 'login_field');
 
-        $loginName = $user->$$loginField;
+        $loginName = $user->$loginField;
         $loginPassword = $user->password;
 
         self::login($loginName, $loginPassword, '', false, '', true);

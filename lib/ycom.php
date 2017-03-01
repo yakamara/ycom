@@ -15,10 +15,6 @@ class rex_ycom
         return self::$tables;
     }
 
-
-
-
-
     public static function parseText($text)
     {
         $text = nl2br(trim($text));
