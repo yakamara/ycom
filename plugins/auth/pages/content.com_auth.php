@@ -8,7 +8,6 @@ $clang = $params['clang'];
 $ctype = $params['ctype'];
 
 $yform = new rex_yform();
-// $yform->setDebug();
 $yform->setObjectparams('form_action', rex_url::backendController(['page' => 'content/edit', 'article_id' => $article_id, 'clang' => $clang, 'ctype' => $ctype], false));
 $yform->setObjectparams('form_id', 'ycom_auth-perm');
 $yform->setObjectparams('form_name', 'ycom_auth-perm');
@@ -22,9 +21,9 @@ $yform->setObjectparams('main_where', 'id = ' . $article_id . ' and clang_id = '
 $yform->setObjectparams('getdata', true);
 
 $yform->setValueField('select', ['ycom_auth_type', $addon->i18n('ycom_auth_perm'), rex_ycom_auth::$perms, '', 0]);
-
-$yform->setValueField('select', ['ycom_group_type', $addon->i18n('ycom_group_type'), rex_ycom_group::$perms, '', 0]);
-$yform->setValueField('select', ['ycom_groups', $addon->i18n('ycom_groups'), rex_ycom_group::getGroups(), '', 0, 'size' => 5, 'multiple' => true]);
+$yform = rex_extension::registerPoint(new rex_extension_point('YCOM_ARTICLE_PERM_SELECT', $yform, [
+    'article_id' => $article_id
+]));
 
 $yform->setActionField('db', [rex::getTable('article'), 'id = ' . $article_id]);
 $yform->setObjectparams('submit_btn_label', $addon->i18n('ycom_auth_update_perm'));

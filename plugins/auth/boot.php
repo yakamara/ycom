@@ -1,16 +1,20 @@
 <?php
 
+rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) {
+    rex_yform::addTemplatePath($this->getPath('ytemplates'));
+});
+
 if (!rex::isBackend()) {
-    rex_extension::register('PACKAGES_INCLUDED', function ($params) {
+    rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) {
         if (($redirect = rex_ycom_auth::init())) {
             rex_response::sendRedirect($redirect);
         }
-    }
-    );
+    });
+
 } else {
     rex_view::addCssFile($this->getAssetsUrl('styles.css'));
 
-    rex_extension::register('PACKAGES_INCLUDED', function ($params) {
+    rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) {
         rex_extension::register('STRUCTURE_CONTENT_SIDEBAR', function (rex_extension_point $ep) {
             $params = $ep->getParams();
             $subject = $ep->getSubject();
@@ -31,3 +35,4 @@ if (!rex::isBackend()) {
         });
     }, rex_extension::EARLY);
 }
+

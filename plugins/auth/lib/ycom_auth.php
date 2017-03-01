@@ -260,49 +260,14 @@ class rex_ycom_auth
             return false;
         }
 
-        // if logged in perms - check group perms
-        $article_group_type = (int) $article->getValue('ycom_group_type');
+        // form here - you are logged in.
+        $xs = true;
+        $xs = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_USER_CHECK', $xs, [
+            'article' => $article,
+            'me' => $me
+        ]));
 
-        if ($article_group_type < 1) {
-            return true;
-        }
-
-        switch ($article_group_type) {
-            // user in every group
-            case 1:
-                $art_groups = explode(',', $article->getValue('ycom_groups'));
-                $user_groups = explode(',', $me->ycom_groups);
-                foreach ($art_groups as $ag) {
-                    if ($ag != '' && !in_array($ag, $user_groups)) {
-                        return false;
-                    }
-                }
-                return true;
-
-            // user in at least one group
-            case 2:
-                $art_groups = explode(',', $article->getValue('ycom_groups'));
-                $user_groups = explode(',', $me->ycom_groups);
-                foreach ($art_groups as $ag) {
-                    if ($ag != '' && in_array($ag, $user_groups)) {
-                        return true;
-                    }
-                }
-                return false;
-
-            // user is not in one of the groups
-            case 3:
-                $user_groups = explode(',', $me->ycom_groups);
-                if (count($user_groups) == 0) {
-                    return true;
-                }
-                return false;
-
-            default:
-                return false;
-        }
-
-        return false;
+        return $xs;
     }
 
     /*
@@ -323,17 +288,7 @@ class rex_ycom_auth
     public function deleteUser($id)
     {
         $id = (int) $id;
-
-        $delete = true;
-        $delete = rex_register_extension_point('YCOM_AUTH_USER_DELETE', $delete, ['id' => $id]);
-        if (!$delete) {
-            return false;
-        }
-
         rex_ycom_user::query()->where('id', $id)->find()->delete();
-
-        rex_register_extension_point('YCOM_AUTH_USER_DELETED', '', ['id' => $id]);
-
         return true;
     }
 
