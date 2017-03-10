@@ -12,4 +12,3 @@ page:
     hidden: false
     subpages:
         settings: { title: 'translate:ycom_auth_settings'}
-        description: { title: 'translate:ycom_auth_description'}

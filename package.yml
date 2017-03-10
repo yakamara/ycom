@@ -15,7 +15,6 @@ page:
            subpages:
                 info: { title: 'translate:ycom_info' }
                 manual: { title: 'translate:ycom_manual' }
-                changelog: { title: 'translate:ycom_changelog' }
 
 requires:
     packages:

@@ -9,10 +9,13 @@ if (rex::isBackend()) {
             $pages = $plugin->getProperty('pages');
             $ycom_tables = rex_ycom::getTables();
 
-            foreach ($pages as $page) {
-                if (in_array($page->getKey(), $ycom_tables)) {
-                    $page->setBlock('ycom');
+            if (isset($pages) && is_array($pages)) {
+                foreach ($pages as $page) {
+                    if (in_array($page->getKey(), $ycom_tables)) {
+                        $page->setBlock('ycom');
+                    }
                 }
+
             }
 
         }

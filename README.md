@@ -26,28 +26,6 @@ Peter Bickel (polarpixel) welche man sich über das Installer AddOn
 installieren und aktivieren kann. Ist eine sehr nette Demo, welche
 auch erklärt wie man mit der YCom sinnvoll umgehen kann.
 
-
-ToDo
--------
-
-* Englische Sprache im Backend noch ergänzen
-* YRewrite testen - Sitemap xml etc.
-* deleteuser noch an den YForm EP dranhängen
-
-
-Weitere Plugins in Planung
--------
-
-* SAML 2.0 EP einbauen
-** Optionen - Neuen Login generieren, Nur gegenprüfen ob Konto vorhanden und damit Passwortprüfung umgehen.
-* auth_media
-* facebook
-* board
-* comment
-* filebrowser
-
-
-
 Last Changes
 -------
 
