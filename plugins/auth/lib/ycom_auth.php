@@ -97,7 +97,7 @@ class rex_ycom_auth
 
         if (($loginName && $loginPassword) || $sessionUserID || $sessionKey) {
             $userQuery = rex_ycom_user::query()
-                ->where(rex_addon::get('ycom')->getConfig('login_field'), $loginName);
+            ->where(rex_addon::get('ycom')->getConfig('login_field'), $loginName);
 
             if ($filter) {
                 $filter($userQuery);
@@ -122,7 +122,7 @@ class rex_ycom_auth
 
             if (!$me && $sessionUserID) {
                 $userQuery = rex_ycom_user::query()
-                    ->where('id', $sessionUserID);
+                ->where('id', $sessionUserID);
 
                 if ($filter) {
                     $filter($userQuery);
@@ -222,6 +222,8 @@ class rex_ycom_auth
             return true;
         }
 
+        unset($xs);
+
         /*
         static $perms = [
             '0' => 'translate:ycom_perm_extends',
@@ -233,35 +235,38 @@ class rex_ycom_auth
         $permType = (int) $article->getValue('ycom_auth_type');
 
         if ($permType == 3) {
-            return true;
+            $xs = true;
         }
 
         // 0 - parent perms
-        if ($permType < 1) {
+        if (!isset($xs) && $permType < 1) {
             if ($o = $article->getParent()) {
                 return self::checkPerm($o);
             }
 
             // no parent, no perm set -> for all accessible
-            return true;
+            $xs = true;
         }
 
         // 2 - only if not logged in
-        if ($permType == 2) {
+        if (!isset($xs) && $permType == 2) {
             if ($me) {
-                return false;
+                $xs = false;
             } else {
-                return true;
+                $xs = true;
             }
         }
 
         // 1 - only if logged in .. further group perms
-        if ($permType == 1 && !$me) {
-            return false;
+        if (!isset($xs) && $permType == 1 && !$me) {
+            $xs = false;
+        }
+
+        if (!isset($xs)) {
+            $xs = true;
         }
 
         // form here - you are logged in.
-        $xs = true;
         $xs = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_USER_CHECK', $xs, [
             'article' => $article,
             'me' => $me
