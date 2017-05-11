@@ -35,6 +35,7 @@ foreach($xform_user_fields as $k => $xf) {
 $sel_userfields->setSelected($this->getConfig('login_field'));
 
 
+
 $content .=	'
 <form action="index.php" method="post" id="ycom_auth_settings">
     <input type="hidden" name="page" value="ycom/auth/settings" />
@@ -119,22 +120,17 @@ $content .= ' />
 				<label for="auth_login_tries_select">' . $this->i18n('ycom_auth_config_login_tries') . '</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">';
-$formElements = [];
-$n = [];
+
 $select = new rex_select();
 $select->setId('login_tries_id');
-$select->setAttribute('class', 'form-control');
 $select->setName('login_tries');
 $select->addOption(5,5);
 $select->addOption(10,10);
 $select->setAttribute('class', 'form-control selectpicker');
 $select->setSelected($this->getConfig('login_tries'));
-$n['field'] = $select->get();
-$formElements[] = $n;
-$fragment = new rex_fragment();
-$fragment->setVar('elements', $formElements, false);
-$content .= $fragment->parse('core/form/container.php').'
-			
+$content .= $select->get();
+
+$content .= '			
 			</div>
 		</div>
 	</fieldset>
@@ -144,8 +140,11 @@ $content .= $fragment->parse('core/form/container.php').'
 			<button class="btn btn-save right" type="submit" name="config-submit" value="1" title="'.$this->i18n('ycom_auth_config_save').'">'.$this->i18n('ycom_auth_config_save').'</button>
 		</div>
 	</div>
+
 	</form>
+
   ';
+
 
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit');
