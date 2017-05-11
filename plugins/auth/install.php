@@ -6,6 +6,7 @@ rex_config::set('ycom', 'auth_request_logout', 'rex_ycom_auth_logout');
 rex_config::set('ycom', 'auth_request_psw', 'rex_ycom_auth_psw');
 rex_config::set('ycom', 'auth_request_id', 'rex_ycom_auth_id');
 rex_config::set('ycom', 'auth_request_stay', 'rex_ycom_auth_stay');
+rex_config::set('ycom/auth', 'login_tries', 11);
 
 rex_config::set('ycom', 'auth_cookie_ttl', '14');
 
