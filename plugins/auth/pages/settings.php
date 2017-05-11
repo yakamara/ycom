@@ -35,11 +35,6 @@ foreach($xform_user_fields as $k => $xf) {
 $sel_userfields->setSelected($this->getConfig('login_field'));
 
 
-
-
-
-
-
 $content .=	'
 <form action="index.php" method="post" id="ycom_auth_settings">
     <input type="hidden" name="page" value="ycom/auth/settings" />
@@ -149,11 +144,8 @@ $content .= $fragment->parse('core/form/container.php').'
 			<button class="btn btn-save right" type="submit" name="config-submit" value="1" title="'.$this->i18n('ycom_auth_config_save').'">'.$this->i18n('ycom_auth_config_save').'</button>
 		</div>
 	</div>
-
 	</form>
-
   ';
-
 
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit');
