@@ -124,6 +124,7 @@ $content .= ' />
 $select = new rex_select();
 $select->setId('login_tries_id');
 $select->setName('login_tries');
+$select->addOption($this->i18n('ycom_auth_config_login_tries_status'),0);
 $select->addOption(5,5);
 $select->addOption(10,10);
 $select->setAttribute('class', 'form-control selectpicker');
