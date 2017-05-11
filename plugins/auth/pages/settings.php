@@ -34,6 +34,14 @@ foreach($xform_user_fields as $k => $xf) {
 }
 $sel_userfields->setSelected($this->getConfig('login_field'));
 
+$sel_logintries = new rex_select();
+$sel_logintries->setId('login_tries_id');
+$sel_logintries->setName('login_tries');
+$sel_logintries->addOption($this->i18n('ycom_auth_config_login_tries_status'),0);
+$sel_logintries->addOption(5,5);
+$sel_logintries->addOption(10,10);
+$sel_logintries->setAttribute('class', 'form-control selectpicker');
+$sel_logintries->setSelected($this->getConfig('login_tries'));
 
 
 $content .=	'
@@ -119,19 +127,8 @@ $content .= ' />
 			<div class="col-xs-12 col-sm-6">
 				<label for="auth_login_tries_select">' . $this->i18n('ycom_auth_config_login_tries') . '</label>
 			</div>
-			<div class="col-xs-12 col-sm-6">';
-
-$select = new rex_select();
-$select->setId('login_tries_id');
-$select->setName('login_tries');
-$select->addOption($this->i18n('ycom_auth_config_login_tries_status'),0);
-$select->addOption(5,5);
-$select->addOption(10,10);
-$select->setAttribute('class', 'form-control selectpicker');
-$select->setSelected($this->getConfig('login_tries'));
-$content .= $select->get();
-
-$content .= '			
+			<div class="col-xs-12 col-sm-6">
+			'.$sel_logintries->get().'
 			</div>
 		</div>
 	</fieldset>
