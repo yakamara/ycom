@@ -9,6 +9,7 @@ ycom_auth_config_status 			= Status
 ycom_auth_config_security 		= Security
 ycom_auth_config_forwarder 		= Forward to article
 ycom_auth_config_login_field		= Login field
+ycom_auth_config_login_tries		= Maximum allowed failed login tries 
 
 ycom_auth_config_status_authactive = Authentication active
 ycom_auth_config_status_stayactive = "Stay signed in" active
