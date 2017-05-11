@@ -19,10 +19,10 @@ if(rex_request("func","string")=="update") {
 	$this->setConfig('article_id_jump_not_ok',rex_request("article_id_jump_not_ok","int"));
 	$this->setConfig('article_id_jump_logout',rex_request("article_id_jump_logout","int"));
 	$this->setConfig('article_id_jump_denied', rex_request("article_id_jump_denied","int"));
+	$this->setConfig('login_tries', rex_request("login_tries","int"));
 	$this->setConfig('login_field',stripslashes(str_replace('"','',rex_request("login_field","string"))));
-
-
-    echo rex_view::success($this->i18n('ycom_auth_settings_updated'));
+	
+	echo rex_view::success($this->i18n('ycom_auth_settings_updated'));
 
 }
 
@@ -34,13 +34,19 @@ foreach($xform_user_fields as $k => $xf) {
 }
 $sel_userfields->setSelected($this->getConfig('login_field'));
 
+
+
+
+
+
+
 $content .=	'
 <form action="index.php" method="post" id="ycom_auth_settings">
     <input type="hidden" name="page" value="ycom/auth/settings" />
-    <input type="hidden" name="func" value="update" />
+    <input type="hidden" name="func" value="update" />';
+    
 
-
-	<fieldset>
+$content .=	'	<fieldset>
 		<legend>'.$this->i18n('ycom_auth_config_status').'</legend>
 
 		<div class="row">
@@ -106,6 +112,34 @@ $content .= ' />
 			 	<div class="select-style">
 	              	'.$sel_userfields->get().'
 			  	</div>
+			</div>
+		</div>
+	</fieldset>
+	
+	<fieldset>
+		<legend>'.$this->i18n('ycom_auth_config_security').'</legend>
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<label for="auth_login_tries_select">' . $this->i18n('ycom_auth_config_login_tries') . '</label>
+			</div>
+			<div class="col-xs-12 col-sm-6">';
+$formElements = [];
+$n = [];
+$select = new rex_select();
+$select->setId('login_tries_id');
+$select->setAttribute('class', 'form-control');
+$select->setName('login_tries');
+$select->addOption(5,5);
+$select->addOption(10,10);
+$select->setAttribute('class', 'form-control selectpicker');
+$select->setSelected($this->getConfig('login_tries'));
+$n['field'] = $select->get();
+$formElements[] = $n;
+$fragment = new rex_fragment();
+$fragment->setVar('elements', $formElements, false);
+$content .= $fragment->parse('core/form/container.php').'
+			
 			</div>
 		</div>
 	</fieldset>
