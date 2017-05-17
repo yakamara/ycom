@@ -1,0 +1,8 @@
+package: ycom/media
+version: '0.1'
+author: Thomas Göllner
+supportpage: www.redaxo.org/de/forum
+title: 'Media'
+nav_icon: fa-minus
+description: 'translate:ycom_media_plugin'
+umgebung: Backend
