@@ -13,6 +13,10 @@ class rex_ycom_media extends \rex_yform_manager_dataset
     const TABLE_FIELD_GROUPS = 'ycom_media_cat_groups';
     const TABLE_FIELD_USERS = 'ycom_media_cat_users';
 
+    const TABLE_USER = 'ycom_user';
+    const TABLE_GROUP = 'ycom_group';
+    const TABLE_GROUPS_USERS = 'ycom_user_group';
+
     static function getCategories()
     {
     	if(!isset(self::$secured_categories))
@@ -23,14 +27,14 @@ class rex_ycom_media extends \rex_yform_manager_dataset
 	        {
 	        	if($category = rex_media_category::get($category->ycom_media_cat))
 	        	{
-	        		self::$secured_categories[$category->getId()] = $category->getName();	
+	        		self::$secured_categories[$category->getId()] = $category->getName();
 	        	}
 	        }
 	        unset($category);
 
 	        asort(self::$secured_categories);
     	}
-        
+
         return self::$secured_categories;
     }
 
@@ -46,8 +50,9 @@ class rex_ycom_media extends \rex_yform_manager_dataset
 
     	foreach (self::query()->where(self::TABLE_FIELD_CAT, $category_id)->find() as $category)
         {
-        	if(!empty($category->$groupfield))
+            if(!empty($category->$groupfield))
         	{
+
         		$return['groups'] = array_merge($return['groups'], explode(',', $category->$groupfield));
         	}
 
@@ -85,7 +90,7 @@ class rex_ycom_media extends \rex_yform_manager_dataset
         	$field = array_filter($field);
         	$field = array_unique($field);
         }
-        
+
         return $return;
     }
 
@@ -101,7 +106,7 @@ class rex_ycom_media extends \rex_yform_manager_dataset
     	{
     		return null;
     	}
-        
+
     	if(!is_object($media))
     	{
     		if( (string) $media === strval((int) $media) )
@@ -111,7 +116,7 @@ class rex_ycom_media extends \rex_yform_manager_dataset
 				$sql->setQuery("SELECT `filename` FROM `" . rex::getTable('media') . "` WHERE `id` = " . strval((int) $media));
 				if($sql->getRows())
 				{
-					return self::getMediaObject($sql);	
+					return self::getMediaObject($sql);
 				}
 			}
 			else
@@ -169,6 +174,8 @@ class rex_ycom_media extends \rex_yform_manager_dataset
 
         $media_categories = $media_category->getPathAsArray();
 
+        $media_categories = array_merge(!empty($media_categories) ? $media_categories : [] , [$media_category_id]);
+
         return array_intersect($secured_categories, $media_categories);
     }
 
@@ -199,9 +206,10 @@ class rex_ycom_media extends \rex_yform_manager_dataset
 	public static function getGroupsForMedia(rex_media &$media, $use_category_defintions = true)
     {
     	$groups = [];
-    	
+
     	if(self::isMediaSecured($media))
     	{
+
     		// die Datei-Gruppen-Zuordnung speichern
     		if($media->hasValue(self::MEDIA_FIELD_GROUPS) && $media->getValue(self::MEDIA_FIELD_GROUPS))
 	    	{
@@ -236,7 +244,7 @@ class rex_ycom_media extends \rex_yform_manager_dataset
 	public static function getUsersForMedia(rex_media &$media, $use_category_defintions = true)
     {
     	$users = [];
-    	
+
     	if(self::isMediaSecured($media))
     	{
     		// die Datei-Gruppen-Zuordnung speichern
@@ -268,6 +276,41 @@ class rex_ycom_media extends \rex_yform_manager_dataset
     	$users = array_filter($users);
 
     	return $users;
+    }
+
+    public static function getGroupsForUser(rex_ycom_auth $user = null)
+    {
+        $groups = [];
+
+        if($user === null)
+        {
+            $user = self::getUser();
+        }
+
+        if(!empty($user))
+        {
+            $sql = rex_sql::factory();
+            $query = 'SELECT GROUP_CONCAT(' . rex::getTable(self::TABLE_GROUP) . '.id SEPARATOR \',\') AS groups ';
+            $query.= 'FROM ' . rex::getTable(self::TABLE_USER) . ' ';
+            $query.= 'JOIN ' . rex::getTable(self::TABLE_GROUPS_USERS) . ' ON ' . rex::getTable(self::TABLE_USER) . '.id = ' . rex::getTable(self::TABLE_GROUPS_USERS) . '.id_ycom_user ';
+            $query.= 'JOIN ' . rex::getTable(self::TABLE_GROUP) . ' ON ' . rex::getTable(self::TABLE_GROUP) . '.id = ' . rex::getTable(self::TABLE_GROUPS_USERS) . '.id_ycom_group ';
+            $query.= 'WHERE ' . rex::getTable(self::TABLE_USER) . '.id = ' . $user->getValue('id') . ' ';
+            $query.= 'GROUP BY ' . rex::getTable(self::TABLE_USER) .'.id';
+            $sql->setQuery($query);
+
+            if((count($rows = $sql->getArray())))
+            {
+                foreach($rows as $row)
+                {
+                    $groups = array_merge($groups, explode(', ', $row['groups']));
+                }
+
+                $groups = array_filter($groups);
+                $groups = array_unique($groups);
+            }
+        }
+
+        return $groups;
     }
 
     public static function checkPerm($media_var)
@@ -304,11 +347,10 @@ class rex_ycom_media extends \rex_yform_manager_dataset
     		if($groups = self::getGroupsForMedia($media))
 	        {
 	        	// wenn die Datei nur für bestimmte Gruppen erlaubt ist, prüfe die Nutzer-Gruppen-Zugehörigkeit
-
-	        	$ycom_user_groups = explode(',', self::getUser()->getValue(MEDIA_FIELD_GROUPS));
+                $ycom_user_groups = self::getGroupsForUser();
 				$ycom_user_groups = array_filter($ycom_user_groups);
 
-				if(count ( array_intersect($ycom_user_groups, $groups) ) > 0)
+                if(count ( array_intersect($ycom_user_groups, $groups) ) > 0)
 				{
 					// Wenn mindestens eine Gruppe übereinstimmt, dann erlauben!
 					return true;
