@@ -1,8 +1,14 @@
 package: ycom/media
-version: '0.1'
+version: '1.0'
 author: Thomas Göllner
 supportpage: www.redaxo.org/de/forum
 title: 'Media'
 nav_icon: fa-minus
 description: 'translate:ycom_media_plugin'
 umgebung: Backend
+
+requires:
+    packages:
+        yform: '^2.3'
+        ycom/auth: '^2.0.1'
+    redaxo: '^5.3.0'
