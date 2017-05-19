@@ -46,6 +46,15 @@ class rex_ycom_auth
          */
         $currentId = rex_article::getCurrentId();
         if ($article = rex_article::get($currentId)) {
+
+            // Wenn die aufgerufene Seite die LOGOUT-Seite ist, abmelden!
+            if(rex_addon::get('ycom')->getPlugin('auth')->getConfig('article_id_jump_logout') == rex_article::getCurrentId()) {
+
+                // let's log out!
+                self::login(null, null, null, 1);
+                return null;
+            }
+
             if (!self::checkPerm($article) && !$redirect && rex_addon::get('ycom')->getPlugin('auth')->getConfig('article_id_jump_denied') != rex_article::getCurrentId()) {
                 $params = [];
 
