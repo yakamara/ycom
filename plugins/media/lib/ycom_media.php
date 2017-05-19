@@ -289,8 +289,10 @@ class rex_ycom_media extends \rex_yform_manager_dataset
 
         if(!empty($user))
         {
+            $div = ',';
+
             $sql = rex_sql::factory();
-            $query = 'SELECT GROUP_CONCAT(' . rex::getTable(self::TABLE_GROUP) . '.id SEPARATOR \',\') AS groups ';
+            $query = 'SELECT GROUP_CONCAT(' . rex::getTable(self::TABLE_GROUP) . '.id SEPARATOR \'' . $div . '\') AS groups ';
             $query.= 'FROM ' . rex::getTable(self::TABLE_USER) . ' ';
             $query.= 'JOIN ' . rex::getTable(self::TABLE_GROUPS_USERS) . ' ON ' . rex::getTable(self::TABLE_USER) . '.id = ' . rex::getTable(self::TABLE_GROUPS_USERS) . '.id_ycom_user ';
             $query.= 'JOIN ' . rex::getTable(self::TABLE_GROUP) . ' ON ' . rex::getTable(self::TABLE_GROUP) . '.id = ' . rex::getTable(self::TABLE_GROUPS_USERS) . '.id_ycom_group ';
@@ -302,12 +304,13 @@ class rex_ycom_media extends \rex_yform_manager_dataset
             {
                 foreach($rows as $row)
                 {
-                    $groups = array_merge($groups, explode(', ', $row['groups']));
+                    $groups = array_merge($groups, explode($div, $row['groups']));
                 }
 
                 $groups = array_filter($groups);
                 $groups = array_unique($groups);
             }
+            unset($div, $sql, $query, $rows);
         }
 
         return $groups;
