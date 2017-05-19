@@ -1,0 +1,15 @@
+ycom_media_title = Media
+
+ycom_media_file_is_secured = File is secured
+ycom_media_allowed_groups = Group access
+ycom_media_empty_for_all_groups = empty for all groups
+ycom_media_allowed_users = User access
+ycom_media_empty_for_all_users = empty for all users
+
+ycom_media_table_name = secured media categories
+ycom_media_cat = secured media category
+ycom_media_cat_groups = Group access
+ycom_media_cat_groups_if_empty = empty for all groups
+ycom_media_cat_users = User access
+ycom_media_cat_users_if_empty = empty for all users
+ycom_media_secured_by_cat_permissions = by category permissions

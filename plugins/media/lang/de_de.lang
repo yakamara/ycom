@@ -1,0 +1,15 @@
+ycom_media_title = Medien
+
+ycom_media_file_is_secured = Datei ist geschützt
+ycom_media_allowed_groups = Zugriff für Gruppen
+ycom_media_empty_for_all_groups = leer für alle Nutzergruppen
+ycom_media_allowed_users = Zugriff für Nutzer
+ycom_media_empty_for_all_users = leer für alle Nutzer
+
+ycom_media_table_name = geschützte Medienkategorien
+ycom_media_cat = zu schützende Medienkategorie
+ycom_media_cat_groups = Zugriff für Gruppen
+ycom_media_cat_groups_if_empty = Wenn leer, dann ist die Kategorie für alle Gruppen erlaubt.
+ycom_media_cat_users = Zugriff für Nutzer
+ycom_media_cat_users_if_empty = Wenn leer, dann ist die Kategorie für alle Nutzer erlaubt.
+ycom_media_secured_by_cat_permissions = durch Kategorie-Zuordnung
