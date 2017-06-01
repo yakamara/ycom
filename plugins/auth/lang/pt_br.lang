@@ -1,0 +1,36 @@
+ycom_auth_title = Autentificação
+
+ycom_auth_settings = Configurações
+ycom_auth_description = Explicação
+
+ycom_auth_config 				= Configuração
+ycom_auth_config_save 			= Salvar configuração
+ycom_auth_config_status 			= Status
+ycom_auth_config_security 		= Segurança
+ycom_auth_config_forwarder 		= Seguir para o produto
+ycom_auth_config_login_field		= Campo para login
+
+ycom_auth_config_status_authactive = Autentificação ativa
+ycom_auth_config_status_stayactive = "Permanecer conectado" ativo
+ycom_auth_config_security_hashedpasswd = Senhas criptografadas  (sha1)
+ycom_auth_config_id_jump_ok		= ... ao conectar-se com sucesso
+ycom_auth_config_id_jump_not_ok	= ... ao não se conectar com sucesso
+ycom_auth_config_id_jump_logout	= ... ao se desconectar
+ycom_auth_config_id_jump_denied	= ... ao tentar acessar um produto restrito
+ycom_auth_config_id_jump_activation_ok = ... ao ativar com sucesso
+ycom_auth_config_id_jump_activation_fail = ... quando a ativação não foi bem sucedida
+ycom_auth_config_id_jump_newpassword_ok = ... ao resetar a senha com sucesso
+ycom_auth_config_id_jump_newpassword_fail = ... ao resetar a senha sem sucesso
+
+ycom_auth_settings_updated = A configuração foi salva
+
+ycom_auth_info_title = Explicação
+
+ycom_auth_perm = Permissões
+ycom_auth_update_perm = Atualizar
+ycom_auth_perm_updated = Permissões foram atualizadas
+
+ycom_auth_password_not_updated = Senha não foi atualizada
+ycom_auth_password_updated = Senha foi atualizada
+ycom_auth_password_exists = A senha já é utilizada
+ycom_auth_password_isempty = A senha ainda não é utilizada

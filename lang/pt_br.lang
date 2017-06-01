@@ -1,0 +1,53 @@
+ycom_perm = Permissões comunitárias
+
+ycom_page_perm = Página de permissões comunitárias
+
+navigation_ycom = Comunidade
+ycom_title = Comunidade: configurações
+ycom_navi_title = Configurações
+
+ycom_main_title = Informações
+ycom_info = Readme
+ycom_info_title = Informações úteis para trabalhar com o AddOn comunidade
+ycom_manual = Manual / Exemplos
+ycom_manual_title = Manual / Exemplos
+ycom_changelog = Mudar log
+ycom_changelog_title	= Mudar log
+ycom_license = Licença
+ycom_license_title = Licença
+ycom_overview = Visão geral
+ycom_user_management = Gestão de usuário
+ycom_field_management = Editar campos
+
+ycom_user = Usuário
+yform_ycom_user = Usuário de comunidade
+rex_ycom_user = Usuário de comunidade
+
+email = E-mail
+status = Status
+firstname = Primeiro Nome
+activation_key = Chave de ativação
+session_key = Chave da seção
+last_login_time = Último acesso
+last_action_time = Última ação
+login_failed = Logins falhos
+login_tries = Tentativas de login
+
+ycom_login_tries_info = 10 tentativas falhas de logon causam o bloqueamente do usuário.
+
+ycom_account_inactive = Acesso desativado
+ycom_account_requested = Acesso requisitado
+ycom_account_active = Acesso ativo
+
+ycom_status = Status
+
+ycom_perm_type = Permissões da página
+
+ycom_perm_extends = Adotar categoria mais ampla, caso contrário acessível a todos os usuários
+ycom_perm_only_logged_in = Acesso para usuários loggados
+ycom_perm_only_not_logged_in = Acesso para todos os usuários não loggados
+ycom_perm_all = Acesso para todos os usuários
+
+ycom_this_login_exists_already = Este nome de usuário já existe
+ycom_please_enter_login = Por favor, insira um nome de usuário
+ycom_please_enter_email = Por favo, insira um endereço de e-mail

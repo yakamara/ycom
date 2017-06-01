@@ -1,0 +1,13 @@
+
+ycom_group_title = Grupos
+ycom_group_name = Grupos
+ycom_group_xform_enter_name = Por favor, insira o nome do grupo
+rex_ycom_group = Grupo comunitário
+
+ycom_group_forallgroups = Para todos, independente do grupo
+ycom_group_inallgroups = Tem que estar em todos os grupos
+ycom_group_inonegroup = Tem que estar em um grupo
+ycom_group_nogroups = Não tem grupos
+
+ycom_group_type = Permissões de grupo
+ycom_groups = Grupos
