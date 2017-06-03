@@ -33,7 +33,7 @@ last_action_time = Last action
 login_failed = Failed sign in attempts
 login_tries = Sign in attempts
 
-ycom_login_tries_info = Failing to sign in 10 times will lead to the user being blocked.
+ycom_login_tries_info =  Please check the maximum allowed failed login tries in the settings .
 
 ycom_account_inactive = Access is deactivated
 ycom_account_requested = Access requested

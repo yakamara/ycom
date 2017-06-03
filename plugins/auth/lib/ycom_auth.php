@@ -108,7 +108,7 @@ class rex_ycom_auth
             if (count($loginUsers) == 1) {
                 $user = $loginUsers[0];
 
-                if ($user->login_tries > 10) {
+                 if ($user->login_tries > rex_config::get('ycom', 'auth_login_tries') && rex_config::get('ycom', 'auth_login_tries')!=0) {
                     ++$user->login_tries;
                     $user->save();
                 } elseif ($ignorePassword || self::checkPassword($loginPassword, $user->id)) {
