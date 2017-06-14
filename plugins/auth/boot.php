@@ -11,6 +11,10 @@ if (!rex::isBackend()) {
         }
     });
 
+    rex_extension::register('YREWRITE_ARTICLE_PERM', function (rex_extension_point $ep) {
+        $params = $ep->getParams();
+        return rex_ycom_auth::checkPerm($params['article']);
+    });
 } else {
     rex_view::addCssFile($this->getAssetsUrl('styles.css'));
 
@@ -35,4 +39,3 @@ if (!rex::isBackend()) {
         });
     }, rex_extension::EARLY);
 }
-
