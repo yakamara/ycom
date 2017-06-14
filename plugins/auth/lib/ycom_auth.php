@@ -108,7 +108,9 @@ class rex_ycom_auth
             if (count($loginUsers) == 1) {
                 $user = $loginUsers[0];
 
-                if ($user->login_tries > 10) {
+                $maximal_login_tries = (int) rex_plugin::get('ycom', 'auth')->getConfig('login_tries');
+
+                if ($maximal_login_tries != 0 && $user->login_tries > $maximal_login_tries) {
                     ++$user->login_tries;
                     $user->save();
                 } elseif ($ignorePassword || self::checkPassword($loginPassword, $user->id)) {
@@ -269,7 +271,7 @@ class rex_ycom_auth
         // form here - you are logged in.
         $xs = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_USER_CHECK', $xs, [
             'article' => $article,
-            'me' => $me
+            'me' => $me,
         ]));
 
         return $xs;

@@ -34,3 +34,7 @@ ycom_auth_password_not_updated = Password was not updated
 ycom_auth_password_updated = Password was updated
 ycom_auth_password_exists = Password exists
 ycom_auth_password_isempty = Password does not exist
+
+ycom_auth_config_login_tries_deactivateafter = User will be deactived after {0} login-tries
+ycom_auth_config_login_tries = Maximum login tries
+ycom_auth_config_login_tries_unlimited = Unlimited tries
