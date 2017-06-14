@@ -8,7 +8,7 @@ ycom_auth_config_save 			= Konfiguration speichern
 ycom_auth_config_status 			= Status
 ycom_auth_config_security 		= Sicherheit
 ycom_auth_config_forwarder 		= Weiterleitungen zu Artikel
-ycom_auth_config_login_field		= Login Feld
+ycom_auth_config_login_field		= Login-Feld
 
 ycom_auth_config_status_authactive = Authentifizierung aktiviert
 ycom_auth_config_status_stayactive = "Angemeldet bleiben" aktiviert
@@ -16,7 +16,7 @@ ycom_auth_config_security_hashedpasswd = Verschlüsselte Passwörter (sha1)
 ycom_auth_config_id_jump_ok		= ... wenn erfolgreich eingeloggt
 ycom_auth_config_id_jump_not_ok	= ... wenn nicht erfolgreich eingeloggt
 ycom_auth_config_id_jump_logout	= ... nach dem Ausloggen
-ycom_auth_config_id_jump_denied	= ... wenn auf einen gesperrtem Artikel zugriffen wird
+ycom_auth_config_id_jump_denied	= ... wenn auf einen gesperrten Artikel zugriffen wird
 ycom_auth_config_id_jump_activation_ok = ... nach erfolgreicher Aktivierung
 ycom_auth_config_id_jump_activation_fail = .. nach fehlgeschlagener Aktivierung
 ycom_auth_config_id_jump_newpassword_ok = ... nach erfolgreicher Passwortrücksetzung
@@ -28,7 +28,7 @@ ycom_auth_info_title = Erklärung
 
 ycom_auth_perm = Zugriffsrechte
 ycom_auth_update_perm = Aktualisieren
-ycom_auth_perm_updated = Rechte wurde aktualisiert
+ycom_auth_perm_updated = Rechte wurden aktualisiert
 
 ycom_auth_password_not_updated = Passwort wurde nicht aktualisiert
 ycom_auth_password_updated = Passwort wurde aktualisiert
