@@ -21,7 +21,7 @@ ycom_field_management = Felder anpassen
 
 ycom_user = User
 yform_ycom_user = Community Benutzer
-rex_ycom_user = Community User
+rex_ycom_user = User
 
 email = E-Mail
 status = Status
