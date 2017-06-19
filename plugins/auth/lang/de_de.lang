@@ -38,3 +38,7 @@ ycom_auth_password_isempty = Passwort ist nicht vorhanden
 ycom_auth_config_login_tries_deactivateafter = User wird nach {0} Login-Versuchen deaktiviert
 ycom_auth_config_login_tries = Maximale Login-Versuche
 ycom_auth_config_login_tries_unlimited = Unendlich viele Versuche
+
+perm_options_ycomArticlePermissions[] = YCom - Seitenrechte einstellen können
+
+no_permission_to_edit = Keine Editierrechte
