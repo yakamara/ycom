@@ -12,6 +12,23 @@ Installation
 Last Changes
 -------
 
+### Version 2.1 // xx.xx.2017
+
+
+### Änderungen / Korrekturen
+
+* Auslesen der Konfig korrigiert.
+* YRewrite Sitemap beachtet nun die YCom Rechte
+* UserGroup Un/Install korrigiert
+* Diverse Textkorrekturen
+
+#### Neu
+
+* Anzahl der Loginversuche kann nun eingestellt werden
+* rex_ycom_user::isInGroup(id) ergänzt
+* Artikelrechte können nun einem User zugewiesen werden.
+ 
+
 ### Version 2.0 // 21.04.2017
 
 * Basiert nun auf YFORM (ORM von YForm)
