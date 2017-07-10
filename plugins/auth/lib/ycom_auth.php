@@ -13,13 +13,13 @@ class rex_ycom_auth
 
     public static function init()
     {
-        $loginName = rex_request(rex_config::get('ycom', 'auth_request_name'), 'string');
-        $loginPassword = rex_request(rex_config::get('ycom', 'auth_request_psw'), 'string');
-        $loginStay = rex_request(rex_config::get('ycom', 'auth_request_stay'), 'string');
-        $referer = rex_request(rex_config::get('ycom', 'auth_request_ref'), 'string');
-        $logout = rex_request(rex_config::get('ycom', 'auth_request_logout'), 'int');
-
-        $redirect = '';
+        $params = [];
+        $params['loginName'] = rex_request(rex_config::get('ycom', 'auth_request_name'), 'string');
+        $params['loginPassword'] = rex_request(rex_config::get('ycom', 'auth_request_psw'), 'string');
+        $params['loginStay'] = rex_request(rex_config::get('ycom', 'auth_request_stay'), 'string');
+        $params['referer'] = rex_request(rex_config::get('ycom', 'auth_request_ref'), 'string');
+        $params['logout'] = rex_request(rex_config::get('ycom', 'auth_request_logout'), 'string');
+        $params['redirect'] = '';
 
         //# Check for Login / Logout
         /*
@@ -30,14 +30,14 @@ class rex_ycom_auth
           3: has logged out
           4: login failed
         */
-        $login_status = self::login($loginName, $loginPassword, $loginStay, $logout);
+        $login_status = self::login($params); // $loginName, $loginPassword, $loginStay, $logout);
 
         //# set redirect after Login
         if ($login_status == 2) {
-            if ($referer) {
-                $redirect = urldecode($referer);
+            if ($params['referer']) {
+                $params['redirect'] = urldecode($params['referer']);
             } else {
-                $redirect = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_ok'));
+                $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_ok'));
             }
         }
 
@@ -46,30 +46,33 @@ class rex_ycom_auth
          */
         $currentId = rex_article::getCurrentId();
         if ($article = rex_article::get($currentId)) {
-            if (!self::checkPerm($article) && !$redirect && rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied') != rex_article::getCurrentId()) {
+            if (!self::checkPerm($article) && !$params['redirect'] && rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied') != rex_article::getCurrentId()) {
                 $params = [];
 
                 //# Adding referer only if target is not login_ok Article
                 if (rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_ok') != rex_article::getCurrentId()) {
                     $params = [rex_addon::get('ycom')->getConfig('auth_request_ref') => urlencode($_SERVER['REQUEST_URI'])];
                 }
-                $redirect = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied'), '', $params, '&');
+                $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied'), '', $params, '&');
             }
         }
 
-        if ($login_status == 3 && $redirect == '') {
-            $redirect = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_logout'), '', [], '&');
+        if ($login_status == 3 && $params['redirect'] == '') {
+            $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_logout'), '', [], '&');
         }
 
-        if ($login_status == 4 && $redirect == '') {
-            $params = [rex_config::get('ycom', 'auth_request_name') => $loginName, rex_config::get('ycom', 'auth_request_ref') => $referer, rex_config::get('ycom', 'auth_request_stay') => $loginStay];
-            $redirect = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_not_ok'), '', $params, '&');
+        if ($login_status == 4 && $params['redirect'] == '') {
+            $status_params = [rex_config::get('ycom', 'auth_request_name') => $params['loginName'], rex_config::get('ycom', 'auth_request_ref') => $params['referer'], rex_config::get('ycom', 'auth_request_stay') => $params['loginStay']];
+            $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_not_ok'), '', $status_params, '&');
         }
 
-        return $redirect;
+        $params['loginStatus'] = $login_status;
+        $params = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_INIT', $params, []));
+
+        return $params['redirect'];
     }
 
-    public static function login($loginName = '', $loginPassword = '', $loginStay = '', $logout = false, $filter_query = 'status > 0', $ignorePassword = false)
+    public static function login($params)
     {
         rex_login::startSession();
 
@@ -79,9 +82,15 @@ class rex_ycom_auth
         $me = null;
 
         $filter = null;
-        if ($filter_query != '') {
-            $filter = function (rex_yform_manager_query $query) use ($filter_query) {
-                $query->whereRaw($filter_query);
+        if (isset($params['filter']) && $params['filter'] != '') {
+            $filter = function (rex_yform_manager_query $query) use ($params) {
+                if (is_array($params['filter'])) {
+                    foreach ($params['filter'] as $filter) {
+                        $query->whereRaw($filter);
+                    }
+                } else {
+                    $query->whereRaw($params['filter']);
+                }
             };
         }
 
@@ -95,9 +104,11 @@ class rex_ycom_auth
             }
         }
 
-        if (($loginName && $loginPassword) || $sessionUserID || $sessionKey) {
-            $userQuery = rex_ycom_user::query()
-            ->where(rex_plugin::get('ycom', 'auth')->getConfig('login_field'), $loginName);
+        if ((!empty($params['loginName']) && ((isset($params['ignorePassword']) && $params['ignorePassword']) || !empty($params['loginPassword']))) || $sessionUserID || $sessionKey) {
+            $userQuery =
+                rex_ycom_user::query()
+                    ->where(rex_plugin::get('ycom', 'auth')
+                        ->getConfig('login_field'), $params['loginName']);
 
             if ($filter) {
                 $filter($userQuery);
@@ -113,7 +124,7 @@ class rex_ycom_auth
                 if ($maximal_login_tries != 0 && $user->login_tries > $maximal_login_tries) {
                     ++$user->login_tries;
                     $user->save();
-                } elseif ($ignorePassword || self::checkPassword($loginPassword, $user->id)) {
+                } elseif ($params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->id)) {
                     $me = $user;
                     $me->setValue('login_tries', 0);
                 } else {
@@ -123,8 +134,9 @@ class rex_ycom_auth
             }
 
             if (!$me && $sessionUserID) {
-                $userQuery = rex_ycom_user::query()
-                ->where('id', $sessionUserID);
+                $userQuery =
+                    rex_ycom_user::query()
+                        ->where('id', $sessionUserID);
 
                 if ($filter) {
                     $filter($userQuery);
@@ -142,44 +154,36 @@ class rex_ycom_auth
                 $loginStatus = 1; // is logged in
 
                 if (rex_addon::get('ycom')->getProperty('auth_request_stay')) {
-                    if ($loginStay == 1) {
+                    if ($params['loginStay']) {
                         $sessionKey = uniqid('ycom_user', true);
                         $me->setValue('session_key', $sessionKey);
                     }
                     setcookie(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('cookie_ttl')), '/');
+                    // TODO: Session verlängern
                 }
 
                 $me->setValue('last_action_time', date('Y-m-d H:i:s'));
 
-                if ($loginName) {
+                if ($params['loginName']) {
                     $loginStatus = 2; // has just logged in
                     $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN_SUCCESS', $me, []));
                     $me->setValue('last_login_time', date('Y-m-d H:i:s'));
                 }
 
                 $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN', $me, []));
-
-                // TODO: Passwort wird überschrieben. FEHLER !
                 $me->save();
             } else {
                 $loginStatus = 0; // not logged in
 
-                if ($loginName) {
+                if ($params['loginName']) {
                     $loginStatus = 4; // login failed
                 }
 
-                $loginStatus = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN_FAILED', $loginStatus, [
-                    'login_name' => $loginName,
-                    'login_psw' => $loginPassword,
-                    'login_stay' => $loginStay,
-                    'logout' => $logout,
-                    'filter_query' => $filter_query,
-                ]
-                ));
+                $loginStatus = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN_FAILED', $loginStatus, $params));
             }
         }
 
-        if ($logout && isset($me)) {
+        if (isset($params['logout']) && $params['logout'] && isset($me)) {
             $loginStatus = 3;
             rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGOUT', $me, []));
             self::clearUserSession();
@@ -322,10 +326,12 @@ class rex_ycom_auth
 
         $loginField = rex_config::get('ycom', 'login_field');
 
-        $loginName = $user->$loginField;
-        $loginPassword = $user->password;
+        $params = [];
+        $params['loginName'] = $user->$loginField;
+        $params['loginPassword'] = $user->password;
+        $params['ignorePassword'] = true;
 
-        self::login($loginName, $loginPassword, '', false, '', true);
+        self::login($params);
 
         return self::getUser();
     }

@@ -6,7 +6,7 @@ class rex_yform_validate_ycom_auths extends rex_yform_validate_abstract
     {
         $login = '';
         $psw = '';
-        $stay = '';
+        $stay = true;
 
         foreach ($this->params['value_pool']['sql'] as $k => $v) {
             if ($k == $this->getElement(2)) {
@@ -14,7 +14,9 @@ class rex_yform_validate_ycom_auths extends rex_yform_validate_abstract
             } elseif ($k == $this->getElement(3)) {
                 $psw = $v;
             } elseif ($k == $this->getElement(4)) {
-                $stay = $v;
+                if ($v == 1) {
+                    $stay = true;
+                }
             }
         }
 
@@ -34,7 +36,12 @@ class rex_yform_validate_ycom_auths extends rex_yform_validate_abstract
           4: login failed
         */
 
-        $status = rex_ycom_auth::login($login, $psw, $stay, false); // no logout
+        $params = [];
+        $params['loginName'] = $login;
+        $params['loginPassword'] = $psw;
+        $params['loginStay'] = $stay;
+
+        $status = rex_ycom_auth::login($params);
 
         if ($status != 2) {
             $this->params['warning'][] = 1;
