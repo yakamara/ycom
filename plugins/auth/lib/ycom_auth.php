@@ -224,7 +224,7 @@ class rex_ycom_auth
     {
         $me = self::getUser();
 
-        if (rex_addon::get('ycom')->getConfig('auth_active') != '1') {
+        if (rex_plugin::get('ycom', 'auth')->getConfig('auth_active') != '1') {
             return true;
         }
 
