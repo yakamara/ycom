@@ -13,10 +13,10 @@ if ($ycom_user) {
 		<div class="usernavi">
 			<ul>
 				<li class="login">
-					<a href="'. rex_getUrl(rex_addon::get("ycom")->getConfig("article_login_ok")) .'" title="{{ Persönlicher Bereich }}" ><span>{{ Persönlicher Bereich }}</span></a>
+					<a href="'. rex_getUrl(rex_addon::get("ycom")->getConfig("article_id_jump_ok")) .'" title="{{ Persönlicher Bereich }}" ><span>{{ Persönlicher Bereich }}</span></a>
 				</li>
 		        <li class="registrierung">
-					<a href="'. rex_getUrl(rex_addon::get("ycom")->getConfig("article_logout")) .'?rex_ycom_auth_logout=1" title="{{ Logout }}"><span>'.rex_ycom_auth::getUser()->getValue('firstname').' '.rex_ycom_auth::getUser()->getValue('name').' - {{ Logout }}</span></a>
+					<a href="'. rex_getUrl(rex_addon::get("ycom")->getConfig("article_id_jump_logout")) .'?rex_ycom_auth_logout=1" title="{{ Logout }}"><span>'.rex_ycom_auth::getUser()->getValue('firstname').' '.rex_ycom_auth::getUser()->getValue('name').' - {{ Logout }}</span></a>
 		        </li>
 		    </ul>
 		</div>';
