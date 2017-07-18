@@ -49,5 +49,6 @@ ycom_perm_only_not_logged_in = Zugriff für alle nicht eingeloggten User
 ycom_perm_all = Zugriff für alle User
 
 ycom_this_login_exists_already = Dieser Login existiert bereits
+ycom_this_email_exists_already = Diese E-Mail existiert bereits
 ycom_please_enter_login = Bitte das Login eingeben
 ycom_please_enter_email = Bitte die E-mail eingeben
