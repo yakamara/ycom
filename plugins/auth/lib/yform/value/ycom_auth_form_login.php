@@ -16,6 +16,10 @@ class rex_yform_value_ycom_auth_form_login extends rex_yform_value_abstract
     {
         $login = rex_request(rex_config::get('ycom', 'auth_request_name'), 'string');
         $this->setValue($login);
+
+        $form_output = $this->parse(['value.ycom_auth_form_login.tpl.php', 'value.text.tpl.php']);
+        $form_output = str_replace('name="'.$this->getFieldName().'"', 'name="'.rex_config::get('ycom', 'auth_request_name').'"', $form_output);
+        $this->params['form_output'][$this->getId()] = $form_output;
     }
 
     public function getDescription()
