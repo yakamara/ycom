@@ -24,8 +24,6 @@ class rex_yform_value_ycom_auth_form_stayactive extends rex_yform_value_abstract
         }
 
         $this->params['form_output'][$this->getId()] = $this->parse('value.checkbox.tpl.php', ['value' => $v]);
-
-        $this->params['form_output'][$this->getId()] = str_replace($this->getFieldName(), rex_config::get('ycom', 'auth_request_stay'), $this->params['form_output'][$this->getId()]);
     }
 
     public function getDescription()
