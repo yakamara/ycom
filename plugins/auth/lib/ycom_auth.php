@@ -18,8 +18,11 @@ class rex_ycom_auth
         $params['loginPassword'] = rex_request(rex_config::get('ycom', 'auth_request_psw'), 'string');
         $params['loginStay'] = rex_request(rex_config::get('ycom', 'auth_request_stay'), 'string');
         $params['referer'] = rex_request(rex_config::get('ycom', 'auth_request_ref'), 'string');
-        $params['logout'] = rex_request(rex_config::get('ycom', 'auth_request_logout'), 'string');
+        $params['logout'] = rex_request(rex_config::get('ycom', 'auth_request_logout'), 'int');
         $params['redirect'] = '';
+
+        $referer_to_logout = strpos($params['referer'], rex_config::get('ycom', 'auth_request_logout'));
+        if ($referer_to_logout === false) {} else { $params['referer'] = ''; }
 
         //# Check for Login / Logout
         /*
