@@ -21,6 +21,11 @@ Last Changes
 * YRewrite Sitemap beachtet nun die YCom Rechte
 * UserGroup Un/Install korrigiert
 * Diverse Textkorrekturen
+* Beispielcode vereinfacht
+* Authentifizierung lief nicht.
+* Class View: Login Info bei korrigiert, Login und Passwort Felder korrigiert
+* Referer vs Login führte zu Fehlern
+
 
 #### Neu
 
