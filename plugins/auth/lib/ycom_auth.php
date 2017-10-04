@@ -327,7 +327,7 @@ class rex_ycom_auth
 
         $user = $Users[0];
 
-        $loginField = rex_config::get('ycom/auth', 'login_field');
+        $loginField = rex_config::get('ycom', 'login_field');
 
         $params = [];
         $params['loginName'] = $user->$loginField;
