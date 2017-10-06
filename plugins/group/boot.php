@@ -34,7 +34,10 @@ rex_extension::register('YCOM_AUTH_USER_CHECK', function (rex_extension_point $e
         // user in every group
         case 1:
             $art_groups = explode(',', $article->getValue('ycom_groups'));
-            $user_groups = explode(',', $me->ycom_groups);
+            $user_groups = [];
+            if (is_object($me)) {
+                $user_groups = explode(',', $me->ycom_groups);
+            }
             foreach ($art_groups as $ag) {
                 if ($ag != '' && !in_array($ag, $user_groups)) {
                     return false;
@@ -45,7 +48,10 @@ rex_extension::register('YCOM_AUTH_USER_CHECK', function (rex_extension_point $e
         // user in at least one group
         case 2:
             $art_groups = explode(',', $article->getValue('ycom_groups'));
-            $user_groups = explode(',', $me->ycom_groups);
+            $user_groups = [];
+            if (is_object($me)) {
+                $user_groups = explode(',', $me->ycom_groups);
+            }
             foreach ($art_groups as $ag) {
                 if ($ag != '' && in_array($ag, $user_groups)) {
                     return true;
@@ -55,7 +61,10 @@ rex_extension::register('YCOM_AUTH_USER_CHECK', function (rex_extension_point $e
 
         // user is not in one of the groups
         case 3:
-            $user_groups = explode(',', $me->ycom_groups);
+            $user_groups = [];
+            if (is_object($me)) {
+                $user_groups = explode(',', $me->ycom_groups);
+            }
             if (count($user_groups) == 0) {
                 return true;
             }
@@ -68,6 +77,5 @@ rex_extension::register('YCOM_AUTH_USER_CHECK', function (rex_extension_point $e
     return true;
 
 });
-
 
 
