@@ -161,7 +161,7 @@ class rex_ycom_auth
                         $sessionKey = uniqid('ycom_user', true);
                         $me->setValue('session_key', $sessionKey);
                     }
-                    setcookie(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('cookie_ttl')), '/');
+                    setcookie(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl')), '/');
                     // TODO: Session verlängern
                 }
 
@@ -327,7 +327,7 @@ class rex_ycom_auth
 
         $user = $Users[0];
 
-        $loginField = rex_config::get('ycom', 'login_field');
+        $loginField = rex_config::get('ycom/auth', 'login_field');
 
         $params = [];
         $params['loginName'] = $user->$loginField;
