@@ -1,14 +1,8 @@
 package: ycom/group
-version: '2.1b'
+version: '2.1-dev'
 author: Yakamara Media GmbH & Co. KG
 supportpage: www.redaxo.org/de/forum
 title: 'Group'
 nav_icon: fa-minus
 description: 'translate:ycom_group_plugin'
-umgebung: Backend
 
-page:
-    title: 'translate:ycom_group_title'
-    hidden: false
-    subpages:
-        info: { title: 'translate:ycom_group_info'}
