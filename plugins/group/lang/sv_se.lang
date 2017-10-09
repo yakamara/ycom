@@ -1,0 +1,13 @@
+
+ycom_group_title = Grupper
+ycom_group_name = Grupper
+ycom_group_xform_enter_name = Var god ange ett gruppnamn
+rex_ycom_group = Community Group
+
+ycom_group_forallgroups = Till alla, oavsett grupp
+ycom_group_inallgroups = Måste vara med i alla grupper
+ycom_group_inonegroup = Måste vara i en grupp
+ycom_group_nogroups = Har inga grupper
+
+ycom_group_type = Gruppbehörigheter
+ycom_groups = Grupper

@@ -1,0 +1,44 @@
+ycom_auth_title = Autentisering
+
+ycom_auth_settings = Inställningar
+ycom_auth_description = Förklaring
+
+ycom_auth_config 				= Konfiguration
+ycom_auth_config_save 			= Spara konfigurationen
+ycom_auth_config_status 			= Status
+ycom_auth_config_security 		= Säkerhet
+ycom_auth_config_forwarder 		= Vidarebefordring till artikeln
+ycom_auth_config_login_field		= Login field
+
+ycom_auth_config_status_authactive = Autentisering aktiverad
+ycom_auth_config_status_stayactive = "Förbli inloggad" aktiv
+ycom_auth_config_security_hashedpasswd = Krypterade lösenord (sha1)
+ycom_auth_config_id_jump_ok		= ... när du är inloggad
+ycom_auth_config_id_jump_not_ok	= ... när du inte är inloggad
+ycom_auth_config_id_jump_logout	= ... när du är utloggad
+ycom_auth_config_id_jump_denied	= ... när du försöker komma åt en spärrad artikel
+ycom_auth_config_id_jump_activation_ok = ... efter framgångsrik aktivering
+ycom_auth_config_id_jump_activation_fail = ... när aktiveringen misslyckades
+ycom_auth_config_id_jump_newpassword_ok = ... när du återställde lösenordet
+ycom_auth_config_id_jump_newpassword_fail = ... när återställning av lösenordet misslyckades
+
+ycom_auth_settings_updated = Konfiguration sparades
+
+ycom_auth_info_title = Förklaring
+
+ycom_auth_perm = Behörigheter
+ycom_auth_update_perm = Aktualisera
+ycom_auth_perm_updated = Behörigheterna aktualiserades
+
+ycom_auth_password_not_updated = Lösenordet har inte aktualiserats
+ycom_auth_password_updated = Lösenordet har aktualiserats
+ycom_auth_password_exists = Lösenordet finns
+ycom_auth_password_isempty = Lösenordet finns inte
+
+ycom_auth_config_login_tries_deactivateafter = Användaren kommer att deaktiveras efter {0} loginförsök
+ycom_auth_config_login_tries = Maximal antal loginförsök
+ycom_auth_config_login_tries_unlimited = Obegränsat många försök
+
+perm_options_ycomArticlePermissions[] = YCom - ställa in sidrättigheter
+
+no_permission_to_edit = Ingen behörighet att redigera

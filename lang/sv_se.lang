@@ -1,0 +1,54 @@
+ycom_perm = Community behörigheter
+
+ycom_page_perm = Community sidbehörigheter
+
+navigation_ycom = Community
+ycom_title = Community: inställningar
+ycom_navi_title = Inställningar
+
+ycom_main_title = Info
+ycom_info = Readme
+ycom_info_title = Nyttig infomation om hur du använder Community AddOn
+ycom_manual = Manual / exempel
+ycom_manual_title = Manual / exempel
+ycom_changelog = Change log
+ycom_changelog_title	= Change log
+ycom_license = Licens
+ycom_license_title = Licens
+ycom_overview = Översikt
+ycom_user_management = Användar förvaltning
+ycom_field_management = Anpassa fälten
+
+ycom_user = Användare
+yform_ycom_user = Community användare
+rex_ycom_user = Community användare
+
+email = E-post
+status = Status
+firstname = Förnamn
+activation_key = Aktiveringsnyckel
+session_key = Session key
+last_login_time = Senaste inloggning
+last_action_time = Senaste aktion
+login_failed = Misslyckade inloggningar
+login_tries = Misslyckade försök att logga in
+
+ycom_login_tries_info = Efter 10 misslyckade försök att logga in kommer användaren att blockeras.
+
+ycom_account_inactive = åtkomst är inaktiverad
+ycom_account_requested = åtkomst begärd
+ycom_account_active = åtkomst är aktiverad
+
+ycom_status = Status
+
+ycom_perm_type = Sidbehörigheter
+
+ycom_perm_extends = Ärva från förälder kategori eller tiilgänglig för alla användare
+ycom_perm_only_logged_in = Tillgång för inloggade användare
+ycom_perm_only_not_logged_in = Tillgång för alla inte inloggade användare
+ycom_perm_all = Tillgång för alla användare
+
+ycom_this_login_exists_already = Användarnamnet finns redan
+ycom_this_email_exists_already = E-postadressen finns redan
+ycom_please_enter_login = Var god ange användarnamnet
+ycom_please_enter_email = Var god ange e-post adressen
