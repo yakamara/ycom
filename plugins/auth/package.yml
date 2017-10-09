@@ -1,11 +1,10 @@
 package: ycom/auth
-version: '2.1b'
+version: '2.1-dev'
 author: Yakamara Media GmbH & Co. KG / concedra GmbH
 supportpage: www.redaxo.org/de/forum
 title: 'Auth'
 nav_icon: fa-minus
 description: 'translate:ycom_auth_plugin'
-umgebung: Backend
 
 page:
     title: 'translate:ycom_auth_title'
