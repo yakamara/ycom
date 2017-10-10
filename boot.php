@@ -2,7 +2,6 @@
 
 if (rex::isBackend()) {
     rex_extension::register('PACKAGES_INCLUDED', function ($params) {
-
         $plugin = rex_plugin::get('yform', 'manager');
 
         if ($plugin) {
@@ -15,11 +14,8 @@ if (rex::isBackend()) {
                         $page->setBlock('ycom');
                     }
                 }
-
             }
-
         }
-
     });
 }
 

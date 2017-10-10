@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 class rex_yform_validate_ycom_auths extends rex_yform_validate_abstract
 {

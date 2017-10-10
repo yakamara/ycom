@@ -5,23 +5,20 @@ rex_ycom::addTable('rex_ycom_group');
 
 if (rex::isBackend()) {
     rex_extension::register('YCOM_ARTICLE_PERM_SELECT', function (rex_extension_point $ep) {
-
         $yform = $ep->getSubject();
         $yform->setValueField('select', ['ycom_group_type', rex_i18n::msg('ycom_group_type'), rex_ycom_group::$perms, '', 0]);
         $yform->setValueField('select', ['ycom_groups', rex_i18n::msg('ycom_groups'), rex_ycom_group::getGroups(), '', 0, 'size' => 5, 'multiple' => true]);
         return $yform;
-
     });
 }
 
 rex_extension::register('YCOM_AUTH_USER_CHECK', function (rex_extension_point $ep) {
-
     if ($ep->getSubject() == false) {
         return false;
     }
 
-    $article = $ep->getParam("article");
-    $me = $ep->getParam("me");
+    $article = $ep->getParam('article');
+    $me = $ep->getParam('me');
 
     // if logged in perms - check group perms
     $article_group_type = (int) $article->getValue('ycom_group_type');
@@ -75,7 +72,4 @@ rex_extension::register('YCOM_AUTH_USER_CHECK', function (rex_extension_point $e
     }
 
     return true;
-
 });
-
-

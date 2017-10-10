@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
 {
@@ -28,7 +28,6 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
             $this->params['warning'][] = 1;
             $this->params['warning_messages'][] = rex_i18n::translate($this->getElement(4));
             rex_ycom_auth::clearUserSession();
-
         } else {
             // Load fields for eMail or DB
             $fields = $this->getElement(5);

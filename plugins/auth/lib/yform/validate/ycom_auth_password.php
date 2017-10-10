@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 class rex_yform_validate_ycom_auth_password extends rex_yform_validate_abstract
 {
@@ -20,9 +20,7 @@ class rex_yform_validate_ycom_auth_password extends rex_yform_validate_abstract
             $this->params['warning'][$Object->getId()] = true;
             $this->params['warning_messages'][$Object->getId()] = $this->getElement(3);
             return;
-
         }
-
     }
 
     public function getDescription()

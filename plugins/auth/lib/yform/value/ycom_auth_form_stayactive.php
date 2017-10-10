@@ -14,11 +14,11 @@ class rex_yform_value_ycom_auth_form_stayactive extends rex_yform_value_abstract
         if ($this->params['send'] != 1 && $this->getElement('3') == 1 && $this->getValue() === '') {
             $this->setValue($v);
 
-        // if check value is given -> checked
+            // if check value is given -> checked
         } elseif ($this->getValue() == $v) {
             $this->setValue($v);
 
-        // not checked
+            // not checked
         } else {
             $this->setValue($w);
         }

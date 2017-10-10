@@ -11,7 +11,6 @@ if (!rex::getUser()->hasPerm('ycomArticlePermissions[]')) {
     $yform = new rex_yform();
     $yform->setObjectparams('submit_btn_show', false);
 
-
     $yform->setValueField('select', ['ycom_auth_type', $addon->i18n('ycom_auth_perm'), rex_ycom_auth::$perms, '', 0]);
     $yform = rex_extension::registerPoint(new rex_extension_point('YCOM_ARTICLE_PERM_SELECT', $yform, [
         'article_id' => $article_id,

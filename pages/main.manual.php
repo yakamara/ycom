@@ -32,9 +32,8 @@ $content .= '<br/>Profil:<br/>';
 $content .= rex_string::highlight($file_form_profile);
 $content .= '<br/>Password ändern:<br/>';
 $content .= rex_string::highlight($file_form_change_password);
- 
+
 $fragment = new rex_fragment();
-$fragment->setVar('title', $this->i18n('ycom_manual_title'),'');
+$fragment->setVar('title', $this->i18n('ycom_manual_title'), '');
 $fragment->setVar('body', $content, false);
 echo $fragment->parse('core/page/section.php');
-

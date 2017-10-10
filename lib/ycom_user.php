@@ -13,7 +13,8 @@ class rex_ycom_user extends \rex_yform_manager_dataset
 
         if ($group_id == '') {
             return true;
-        } elseif ($ycom_groups != '') {
+        }
+        if ($ycom_groups != '') {
             $ycom_groups_array = explode(',', $ycom_groups);
             if (in_array($group_id, $ycom_groups_array)) {
                 return true;
