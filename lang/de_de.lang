@@ -36,6 +36,7 @@ login_tries = Login Fehlversuche
 ycom_login_tries_info = Erlaubte Fehlversuche werden im <a href="index.php?page=ycom/auth/settings">Plugin YCom/Auth</a> definiert.
 
 ycom_account_inactive = Zugang ist inaktiv
+ycom_account_confirm = Zugang wurde bestätigt
 ycom_account_requested = Zugang wurde angefragt
 ycom_account_active = Zugang ist aktiv
 

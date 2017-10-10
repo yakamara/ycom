@@ -36,6 +36,7 @@ login_tries = Sign in attempts
 ycom_login_tries_info = Login faile will be defined here <a href="index.php?page=ycom/auth/settings">Plugin YCom/Auth</a>
 
 ycom_account_inactive = Access is deactivated
+ycom_account_confirm = Access has been confirmned
 ycom_account_requested = Access requested
 ycom_account_active = Access is active
 
