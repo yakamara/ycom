@@ -129,22 +129,18 @@ class rex_ycom_auth
                 if (count($loginUsers) == 1) {
                     $user = $loginUsers[0];
 
-                    $maximal_login_tries = (int) rex_plugin::get('ycom', 'auth')->getConfig('login_tries');
+                    $auth_rules = new rex_ycom_auth_rules();
 
-                    if ($maximal_login_tries != 0 && $user->login_tries > $maximal_login_tries) {
-                        ++$user->login_tries;
-                        $user->save();
-                    } elseif (@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->id)) {
+                    if (!$auth_rules->check($user, rex_config::get('ycom/auth','auth_rule'))) {
+
+                    } elseif ((@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->id))) {
                         $me = $user;
-
+                        $me->setValue('login_tries', 0);
                         if (!$params['loginStay']) {
                             $me->setValue('session_key', '');
                         }
-
                         // session fixation
                         self::regenerateSessionId();
-
-                        $me->setValue('login_tries', 0);
                     } else {
                         ++$user->login_tries;
                         $user->save();

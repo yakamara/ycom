@@ -28,7 +28,7 @@ status = Status
 firstname = Vorname
 activation_key = Aktivierungsschlüssel
 session_key = Sessionschlüssel
-last_login_time = Letzter Login
+last_login_time = Letzter erfolgreicher Login
 last_action_time = Letzte Aktion
 login_failed = Fehlgeschlagene Logins
 login_tries = Login Fehlversuche
@@ -39,6 +39,7 @@ ycom_account_inactive = Zugang ist inaktiv
 ycom_account_confirm = Zugang wurde bestätigt
 ycom_account_requested = Zugang wurde angefragt
 ycom_account_active = Zugang ist aktiv
+ycom_account_inactive_logins = Zugang wurde deaktiviert [Loginfehlversuche]
 
 ycom_status = Status
 

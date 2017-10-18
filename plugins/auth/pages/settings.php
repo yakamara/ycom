@@ -18,7 +18,7 @@ if (rex_request('func', 'string') == 'update') {
     $this->setConfig('article_id_jump_not_ok', rex_request('article_id_jump_not_ok', 'int'));
     $this->setConfig('article_id_jump_logout', rex_request('article_id_jump_logout', 'int'));
     $this->setConfig('article_id_jump_denied', rex_request('article_id_jump_denied', 'int'));
-    $this->setConfig('login_tries', rex_request('login_tries', 'int'));
+    $this->setConfig('auth_rule', rex_request('auth_rule', 'string'));
     $this->setConfig('login_field', stripslashes(str_replace('"', '', rex_request('login_field', 'string'))));
 
     echo rex_view::success($this->i18n('ycom_auth_settings_updated'));
@@ -32,15 +32,16 @@ foreach ($xform_user_fields as $k => $xf) {
 }
 $sel_userfields->setSelected($this->getConfig('login_field'));
 
-$sel_logintries = new rex_select();
-$sel_logintries->setId('login_tries_id');
-$sel_logintries->setName('login_tries');
-$sel_logintries->addOption($this->i18n('ycom_auth_config_login_tries_unlimited'), 0);
-$sel_logintries->addOption($this->i18n('ycom_auth_config_login_tries_deactivateafter', 5), 5);
-$sel_logintries->addOption($this->i18n('ycom_auth_config_login_tries_deactivateafter', 10), 10);
-$sel_logintries->addOption($this->i18n('ycom_auth_config_login_tries_deactivateafter', 20), 20);
-$sel_logintries->setAttribute('class', 'form-control selectpicker');
-$sel_logintries->setSelected($this->getConfig('login_tries'));
+$sel_authrules = new rex_select();
+$sel_authrules->setId('auth-rule');
+$sel_authrules->setName('auth_rule');
+
+$rules = new rex_ycom_auth_rules();
+
+$sel_authrules->addOptions($rules->getOptions());
+
+$sel_authrules->setAttribute('class', 'form-control selectpicker');
+$sel_authrules->setSelected($this->getConfig('auth_rule'));
 
 $content .= '
 <form action="index.php" method="post" id="ycom_auth_settings">
@@ -125,10 +126,10 @@ $content .= ' />
     
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <label for="auth_login_tries_select">' . $this->i18n('ycom_auth_config_login_tries') . '</label>
+                    <label for="auth_rules_select">' . $this->i18n('ycom_auth_config_auth_rules') . '</label>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                '.$sel_logintries->get().'
+                '.$sel_authrules->get().'
             </div>
         </div>
     </fieldset>

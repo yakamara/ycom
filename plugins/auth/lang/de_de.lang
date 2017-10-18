@@ -35,10 +35,15 @@ ycom_auth_password_updated = Passwort wurde aktualisiert
 ycom_auth_password_exists = Passwort existiert
 ycom_auth_password_isempty = Passwort ist nicht vorhanden
 
+ycom_auth_config_auth_rules = Authentifizierungsregel
 ycom_auth_config_login_tries_deactivateafter = User wird nach {0} Login-Versuchen deaktiviert
 ycom_auth_config_login_tries = Maximale Login-Versuche
 ycom_auth_config_login_tries_unlimited = Unendlich viele Versuche
+ycom_auth_config_login_tries_pause = User wird für {1} Minuten nach jeweils {0} Login-Versuchen gesperrt
+ycom_auth_config_login_tries_always_pause = User wird für {1} Minuten nach {0} Login-Versuchen gesperrt
 
 perm_options_ycomArticlePermissions[] = YCom - Seitenrechte einstellen können
 
 no_permission_to_edit = Keine Editierrechte
+
+ycom_validate_error_password_policy = Bitte die Standardregeln beachten mind. 1 Buchstabe groß und klein, mind. 8 Zeichen

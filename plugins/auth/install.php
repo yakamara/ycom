@@ -8,6 +8,7 @@ rex_config::set('ycom', 'auth_request_id', 'rex_ycom_auth_id');
 rex_config::set('ycom', 'auth_request_stay', 'rex_ycom_auth_stay');
 
 rex_config::set('ycom', 'auth_cookie_ttl', '14');
+rex_config::set('ycom/auth', 'auth_rule', 'login_try_5_pause');
 
 rex_sql_table::get(rex::getTable('article'))
     ->ensureColumn(new rex_sql_column('ycom_auth_type', "ENUM('0','1','2','3')", false, '0'))
