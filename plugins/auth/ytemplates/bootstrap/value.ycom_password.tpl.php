@@ -35,6 +35,9 @@ $attributes = [
 $attributes = $this->getAttributeElements($attributes, ['placeholder', 'autocomplete', 'pattern', 'required', 'disabled', 'readonly']);
 
 $span = '';
+$input_group_start = '';
+$input_group_end = '';
+
 if ($script) {
     $funcName = uniqid('rex_ycom_password_create'.$this->getId());
     $span = '<span class="input-group-btn">
@@ -77,13 +80,13 @@ if ($script) {
         function <?= $funcName.'refresh' ?>(input) {
 
             var rules = {
-                    letter:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-                    uppercase:"ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-                    lowercase: "abcdefghijklmnopqrstuvwxyz",
-                    digit: "0123456789",
-                    symbol: "!@#$%^&*()_+{}:\"<>?\|[];',./`~",
-                    all: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}:\"<>?|[];',./`~",
-                };
+                letter:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+                uppercase:"ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                lowercase: "abcdefghijklmnopqrstuvwxyz",
+                digit: "0123456789",
+                symbol: "!@#$%^&*()_+{}:\"<>?\|[];',./`~",
+                all: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}:\"<>?|[];',./`~",
+            };
             rules.letter = rules.uppercase + rules.lowercase;
             rules.all = rules.uppercase + rules.lowercase + rules.digit + rules.symbol;
 
@@ -206,16 +209,19 @@ if ($script) {
             }
         }
     </script><?php
+
+    $input_group_start = '<div class="input-group mif">';
+    $input_group_end = '</div>';
 }
 
 echo '
 <div class="'.$class_group.'" id="'.$this->getHTMLId().'">
 <label class="'.implode(' ', $class_label).'" for="'.$this->getFieldId().'">'.$this->getLabel().'</label>
-<div class="input-group mif">
+' . $input_group_start . '
     <input '.implode(' ', $attributes).' />' .
     $notice .
     $span . '
-</div>
+' . $input_group_end . '
 </div>';
 
 ?>
