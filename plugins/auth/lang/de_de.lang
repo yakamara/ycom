@@ -46,4 +46,6 @@ perm_options_ycomArticlePermissions[] = YCom - Seitenrechte einstellen können
 
 no_permission_to_edit = Keine Editierrechte
 
-ycom_validate_error_password_policy = Bitte die Standardregeln beachten mind. 1 Buchstabe groß und klein, mind. 8 Zeichen
+ycom_validate_password_policy_rules_error = Bitte die Standardregeln beachten mind. 1 Buchstabe groß und klein, mind. 8 Zeichen
+ycom_validate_password_policy_rules = Passwortregeln als JSON
+ycom_validate_password_policy_rules_error_message = Fehlermeldung
