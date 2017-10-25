@@ -17,6 +17,10 @@ Last Changes
 
 ### Änderungen / Korrekturen
 
+* Cookie/Sessionmanagement verbesser. (Sessionfixation, Eingloggt bleiben Cookie)
+* AuthRules um Varianten ergänzt: nach 5/10/20 Login-Fehlversuchen 5/15 Minuten gesperrt
+* Passwortregeln ergänzt. Passwort Policy Rules + automatisch passende Passworterstellung
+* BUG: Statusüberprüfung ging nicht
 * Auslesen der Konfig korrigiert.
 * YRewrite Sitemap beachtet nun die YCom Rechte
 * UserGroup Un/Install korrigiert
@@ -25,14 +29,13 @@ Last Changes
 * Authentifizierung lief nicht.
 * Class View: Login Info bei korrigiert, Login und Passwort Felder korrigiert
 * Referer vs Login führte zu Fehlern
-
-
-#### Neu
-
+* Gruppenpage entfernt da unnötig
 * Anzahl der Loginversuche kann nun eingestellt werden
 * rex_ycom_user::isInGroup(id) ergänzt
 * Artikelrechte können nun einem User zugewiesen werden.
- 
+* schwedisch ergänzt
+* Authplugin wird nun immer mitinstalliert
+
 
 ### Version 2.0 // 21.04.2017
 
