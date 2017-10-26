@@ -17,6 +17,8 @@ Last Changes
 
 ### Änderungen / Korrekturen
 
+Achtung: Demo geht nicht mehr. Status für angefragt ist nun 0.
+
 * Cookie/Sessionmanagement verbesser. (Sessionfixation, Eingloggt bleiben Cookie)
 * AuthRules um Varianten ergänzt: nach 5/10/20 Login-Fehlversuchen 5/15 Minuten gesperrt
 * Passwortregeln ergänzt. Passwort Policy Rules + automatisch passende Passworterstellung
