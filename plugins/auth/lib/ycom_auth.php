@@ -181,7 +181,7 @@ class rex_ycom_auth
                     $sessionKey = uniqid('ycom_user', true);
                     $me->setValue('session_key', $sessionKey);
 
-                    setcookie(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl')), '/');
+                    setcookie(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl')), '', '', false, true);
 
                     // session fixation
                     self::regenerateSessionId();
@@ -197,7 +197,7 @@ class rex_ycom_auth
                 if ($params['loginStay']) {
                     $sessionKey = uniqid('ycom_user', true);
                     $me->setValue('session_key', $sessionKey);
-                    setcookie(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl')), '/');
+                    setcookie(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl')), '', '', false, true);
                 }
 
                 $me->setValue('last_action_time', date('Y-m-d H:i:s'));
@@ -332,8 +332,7 @@ class rex_ycom_auth
     {
         unset($_SESSION[self::getLoginKey()]);
         unset($_COOKIE[self::getLoginKey()]);
-        setcookie(self::getLoginKey(), '0', time() - 3600, '/');
-
+        setcookie(self::getLoginKey(), '0', time() - 3600, '', '', false, true);
         self::$me = null;
     }
 
