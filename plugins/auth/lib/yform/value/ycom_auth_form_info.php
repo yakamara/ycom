@@ -8,6 +8,8 @@ class rex_yform_value_ycom_auth_form_info extends rex_yform_value_abstract
         $referer = rex_request(rex_config::get('ycom', 'auth_request_ref'), 'string');
         $logout = rex_request(rex_config::get('ycom', 'auth_request_logout'), 'int');
 
+        $referer = rex_ycom_auth::cleanReferer($referer);
+
         $state = 'info';
         if ($logout) {
             $msg = $this->getElement(3);

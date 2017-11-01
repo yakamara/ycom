@@ -21,6 +21,8 @@ class rex_ycom_auth
         $params['logout'] = rex_request(rex_config::get('ycom', 'auth_request_logout'), 'int');
         $params['redirect'] = '';
 
+        $params['referer'] = self::cleanReferer($params['referer']);
+
         $referer_to_logout = strpos($params['referer'], rex_config::get('ycom', 'auth_request_logout'));
         if ($referer_to_logout === false) {
         } else {
@@ -131,8 +133,7 @@ class rex_ycom_auth
 
                     $auth_rules = new rex_ycom_auth_rules();
 
-                    if (!$auth_rules->check($user, rex_config::get('ycom/auth','auth_rule'))) {
-
+                    if (!$auth_rules->check($user, rex_config::get('ycom/auth', 'auth_rule'))) {
                     } elseif ((@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->id))) {
                         $me = $user;
                         $me->setValue('login_tries', 0);
@@ -380,5 +381,20 @@ class rex_ycom_auth
             session_regenerate_id(true);
         }
         $_SESSION['REX_SESSID'] = session_id();
+    }
+
+    public static function cleanReferer($url)
+    {
+        $url = parse_url($url);
+        $returnUrl = '';
+
+        if (isset($url['path']) && $url['path'] != '') {
+            $returnUrl .= $url['path'];
+        }
+
+        if (isset($url['query']) && $url['query'] != '') {
+            $returnUrl .= '?'. $url['query'];
+        }
+        return $returnUrl;
     }
 }

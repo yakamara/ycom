@@ -6,6 +6,7 @@ class rex_yform_value_ycom_auth_form_login extends rex_yform_value_abstract
     {
         // adding referer to action for redirects
         $params = [rex_config::get('ycom', 'auth_request_ref') => rex_request(rex_config::get('ycom', 'auth_request_ref'), 'string')];
+        $params[rex_config::get('ycom', 'auth_request_ref')] = rex_ycom_auth::cleanReferer($params[rex_config::get('ycom', 'auth_request_ref')]);
         $this->params['form_action'] = rex_getUrl('', '', $params);
 
         // Show form after sending
