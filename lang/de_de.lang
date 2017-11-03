@@ -30,11 +30,13 @@ activation_key = Aktivierungsschlüssel
 session_key = Sessionschlüssel
 last_login_time = Letzter erfolgreicher Login
 last_action_time = Letzte Aktion
+termination_time = Kündigungszeitpunkt
 login_failed = Fehlgeschlagene Logins
 login_tries = Login Fehlversuche
 
 ycom_login_tries_info = Erlaubte Fehlversuche werden im <a href="index.php?page=ycom/auth/settings">Plugin YCom/Auth</a> definiert.
 
+ycom_account_inactive_termination = Zugang wurde gekündigt
 ycom_account_inactive_logins = Zugang wurde deaktiviert [Loginfehlversuche]
 ycom_account_inactive = Zugang ist inaktiv
 ycom_account_requested = Zugang wurde angefragt
