@@ -37,6 +37,11 @@ Achtung: Demo geht nicht mehr. Status für angefragt ist nun 0.
 * Artikelrechte können nun einem User zugewiesen werden.
 * schwedisch ergänzt
 * Authplugin wird nun immer mitinstalliert
+* Weiterleitung beim Login können nun nur noch auf die aktuelle Seite geleitet werden.
+* EP "REX_YCOM_YFORM_SAVED" ergänzt. in YForm action auth_db.
+* Kündigungsstatus ergänzt, damit ein User sein Konto als gekündigt markieren kann.
+* Seitenrechte wurden nur dem Admin angezeigt.
+
 
 
 ### Version 2.0 // 21.04.2017
