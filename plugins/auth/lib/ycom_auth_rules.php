@@ -65,7 +65,6 @@ class rex_ycom_auth_rules
             case 'none':
                 return true;
             case 'min':
-                echo $rule['tries'] .">". $loginTries; // exit
                 if ($rule['tries'] > $loginTries) {
                     return true;
                 }
