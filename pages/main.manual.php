@@ -9,6 +9,7 @@ $file_userheader_navi_txt = rex_file::get(rex_path::addon('ycom', 'pages/main.ma
 $file_userheader_navi_code = rex_file::get(rex_path::addon('ycom', 'pages/main.manual_user_header_navi_code.inc'));
 
 $file_form_login = rex_file::get(rex_path::addon('ycom', 'pages/main.manual_form_login.inc'));
+$file_form_logout = rex_file::get(rex_path::addon('ycom', 'pages/main.manual_form_logout.inc'));
 $file_form_register = rex_file::get(rex_path::addon('ycom', 'pages/main.manual_form_register.inc'));
 $file_form_register_proof = rex_file::get(rex_path::addon('ycom', 'pages/main.manual_form_register_proof.inc'));
 $file_form_profile = rex_file::get(rex_path::addon('ycom', 'pages/main.manual_form_profile.inc'));
@@ -24,6 +25,8 @@ $content .= '<hr/>';
 $content .= '<h3>Formulare</h3>';
 $content .= '<br/>Login:<br/>';
 $content .= rex_string::highlight($file_form_login);
+$content .= '<br/>Logout:<br/>';
+$content .= rex_string::highlight($file_form_logout);
 $content .= '<br/>Registrierung:<br/>';
 $content .= rex_string::highlight($file_form_register);
 $content .= '<br/>Registrierungsbestätigung:<br/>';
