@@ -7,7 +7,7 @@ $modules = [
 //		"login"		=> array(		"key" => "login", 			"search" => "module:ycom_auth_login",			"name" => "ycom:auth - Login"),
 // 		"pswchange"	=> array(		"key" => "pswchange", 		"search" => "module:ycom_auth_pswchange",		"name" => "ycom:auth - Change Password"),
 // 		"profilechange"	=> array(	"key" => "profilechange", 	"search" => "module:ycom_auth_profilechange",	"name" => "ycom:auth - Profile"),
-    ];
+];
 
 $table = rex_yform_manager_table::get('rex_ycom_user');
 $xform_user_fields = $table->getValueFields();
@@ -18,6 +18,8 @@ if (rex_request('func', 'string') == 'update') {
     $this->setConfig('article_id_jump_not_ok', rex_request('article_id_jump_not_ok', 'int'));
     $this->setConfig('article_id_jump_logout', rex_request('article_id_jump_logout', 'int'));
     $this->setConfig('article_id_jump_denied', rex_request('article_id_jump_denied', 'int'));
+    $this->setConfig('article_id_jump_password', rex_request('article_id_jump_password', 'int'));
+    $this->setConfig('article_id_jump_termofuse', rex_request('article_id_jump_termofuse', 'int'));
     $this->setConfig('auth_rule', rex_request('auth_rule', 'string'));
     $this->setConfig('login_field', stripslashes(str_replace('"', '', rex_request('login_field', 'string'))));
 
@@ -55,9 +57,9 @@ $content .= '
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 col-sm-push-6 abstand">
 				<input class="rex-form-text" type="checkbox" id="rex-form-auth" name="auth_active" value="1" ';
-                if ($this->getConfig('auth_active') == '1') {
-                    $content .= 'checked="checked"';
-                }
+if ($this->getConfig('auth_active') == '1') {
+    $content .= 'checked="checked"';
+}
 $content .= ' />
 				<label for="rex-form-auth">'.$this->i18n('ycom_auth_config_status_authactive').'</label>
 			</div>
@@ -98,10 +100,28 @@ $content .= ' />
 
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_logout">'.$this->i18n('ycom_auth_config_id_jump_denied').'</label>
+				<label for="rex-form-article_denied">'.$this->i18n('ycom_auth_config_id_jump_denied').'</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(8, 'article_id_jump_denied', stripslashes($this->getConfig('article_id_jump_denied'))) .'
+			</div>
+		</div>
+
+		<div class="row abstand">
+			<div class="col-xs-12 col-sm-6">
+				<label for="rex-form-article_password">'.$this->i18n('ycom_auth_config_id_jump_password').'</label>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				'. rex_var_link::getWidget(9, 'article_id_jump_password', stripslashes($this->getConfig('article_id_jump_password'))) .'
+			</div>
+		</div>
+
+		<div class="row abstand">
+			<div class="col-xs-12 col-sm-6">
+				<label for="rex-form-article_termofuse">'.$this->i18n('ycom_auth_config_id_jump_termofuse').'</label>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				'. rex_var_link::getWidget(10, 'article_id_jump_termofuse', stripslashes($this->getConfig('article_id_jump_termofuse'))) .'
 			</div>
 		</div>
 

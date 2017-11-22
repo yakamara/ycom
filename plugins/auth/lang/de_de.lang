@@ -21,6 +21,8 @@ ycom_auth_config_id_jump_activation_ok = ... nach erfolgreicher Aktivierung
 ycom_auth_config_id_jump_activation_fail = .. nach fehlgeschlagener Aktivierung
 ycom_auth_config_id_jump_newpassword_ok = ... nach erfolgreicher Passwortrücksetzung
 ycom_auth_config_id_jump_newpassword_fail = .. nach fehlgeschlagener Passwortrücksetzung
+ycom_auth_config_id_jump_password = ... wenn neues Passwort setzen (new_password_required-Feld) gesetzt ist [optional]
+ycom_auth_config_id_jump_termofuse = ... wenn Nutzungsbedingungen noch nicht bestätigt wurden (termofuse_accepted-Feld nicht gesetzt ist) [optional]
 
 ycom_auth_settings_updated = Konfiguration wurde gespeichert
 

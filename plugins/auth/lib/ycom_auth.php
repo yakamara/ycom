@@ -72,11 +72,30 @@ class rex_ycom_auth
 
         if ($login_status == 4 && $params['redirect'] == '') {
             $status_params = [rex_config::get('ycom', 'auth_request_name') => $params['loginName'], rex_config::get('ycom', 'auth_request_ref') => $params['referer'], rex_config::get('ycom', 'auth_request_stay') => $params['loginStay']];
-            $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_not_ok'), '', $status_params, '&');
+            // $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_not_ok'), '', $status_params, '&');
         }
 
         $params['loginStatus'] = $login_status;
         $params = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_INIT', $params, []));
+
+        if (rex_ycom_auth::getUser()) {
+            $article_id_password = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_password');
+            $article_id_termofuse = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_termofuse');
+
+            // echo "*".rex_article::getCurrentId().'+'.$article_id_termofuse; exit;
+            if ($article_id_password != "" && rex_ycom_auth::getUser()->getValue('new_password_required') == 1) {
+                if ($article_id_password != rex_article::getCurrentId()) {
+                    $params['redirect'] = rex_getUrl($article_id_password, '', [], '&');
+                }
+
+            } else if ($article_id_termofuse != "" && rex_ycom_auth::getUser()->getValue('termofuse_accepted') != 1) {
+                if($article_id_termofuse != rex_article::getCurrentId()) {
+                    $params['redirect'] = rex_getUrl($article_id_termofuse, '', [], '&');
+                }
+            }
+
+        }
+
 
         return $params['redirect'];
     }
