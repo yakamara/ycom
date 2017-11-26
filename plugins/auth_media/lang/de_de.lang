@@ -1,0 +1,6 @@
+ycom_auth_media = Medienzugriff
+
+ycom_auth_media_settings_auth_active = Authentifizierung aktiviert
+ycom_auth_media_settings_config = Plugin Konfiguration
+ycom_auth_media_help_unsecure_fileext = <b>Ungeschützte Dateiendungen:</b> Dateien mit bestimmten Dateiendungen können vom Downloadschutz ausgenommen werden (etwa um die Perfomance nicht unnötig zu belasten). Tragen Sie hier Dateiendungen durch Komma getrennt, ohne führenden Punkt, ein.
+ycom_auth_media_settings_description = Dieses Plugin schützt Dateien im Medienpool. Die Sicherheitseinstellungen können für jede Datei einzeln im Medienpool eingestellt werden.

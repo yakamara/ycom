@@ -1,0 +1,6 @@
+ycom_auth_media = File Access
+
+ycom_auth_media_settings_auth_active = Authentification is active
+ycom_auth_media_settings_config = Plugin Configuration
+ycom_auth_media_help_unsecure_fileext = <b>Unprotected file types:</b> Files with certain file endings can be excluded from download protection (f.e. in order not to slow down performance). Fill in file endings separated by comma, without leading point.
+ycom_auth_media_settings_description = This plugin protects files in the media pool. The security settings for each file can be configured separately in the media pool.
