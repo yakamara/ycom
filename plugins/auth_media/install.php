@@ -42,4 +42,6 @@ if(!$this->hasConfig('unsecure_fileext')) {
 }
 
 // Create .htaccess file
-rex_ycom_auth_media::manageHtaccess(TRUE, explode(',', $this->getConfig('unsecure_fileext')));
+if($this->hasConfig('auth_media_active') && $this->getConfig('auth_media_active') == 'true') {
+	rex_ycom_auth_media::manageHtaccess(TRUE, explode(',', $this->getConfig('unsecure_fileext')));
+}

@@ -1,13 +1,13 @@
 <?php
 if (filter_input(INPUT_POST, "btn_save") == 1) {
 	$form = (array) rex_post('form', 'array', []);
-	$this->setConfig('auth_media_active', array_key_exists('auth_media_active', $form));
-    
-	// Set .htaccess file for unsecure file extensions and its settings
-	if($this->getConfig('unsecure_fileext') != $form['unsecure_fileext']) {
-		$this->setConfig('unsecure_fileext', $form['unsecure_fileext']);
+	if(array_key_exists('auth_media_active', $form)) {
+		$this->setConfig('auth_media_active', array_key_exists('auth_media_active', $form));
+		// Set .htaccess file for unsecure file extensions and its settings
 		rex_ycom_auth_media::manageHtaccess(TRUE, explode(',', $form['unsecure_fileext']));
 	}
+    
+	$this->setConfig('unsecure_fileext', $form['unsecure_fileext']);
 	
     echo rex_view::success($this->i18n('ycom_auth_settings_updated'));
 }
