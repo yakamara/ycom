@@ -11,7 +11,7 @@ $sql = \rex_sql::factory();
 $sql->setQuery("SELECT * FROM ". \rex::getTablePrefix() ."metainfo_field WHERE `name` = 'med_ycom_auth_media_legend'");
 if($sql->getRows() == 0) {
 	$sql->setQuery("INSERT INTO `". \rex::getTablePrefix() ."metainfo_field` (`title`, `name`, `priority`, `attributes`, `type_id`, `default`, `params`, `validate`, `callback`, `restrictions`, `createuser`, `createdate`, `updateuser`, `updatedate`) VALUES
-			('translate:ycom_auth_perm', 'med_ycom_auth_media_legend', (SELECT MAX(priority)+1 FROM ". \rex::getTablePrefix() ."metainfo_field AS meta), '', 12, '', '', NULL, '', NULL, '". rex::getUser()->getValue('login') ."', '". time() ."', '". rex::getUser()->getValue('login') ."', '". time() ."')");
+			('translate:ycom_auth_media_perm', 'med_ycom_auth_media_legend', (SELECT MAX(priority)+1 FROM ". \rex::getTablePrefix() ."metainfo_field AS meta), '', 12, '', '', NULL, '', NULL, '". rex::getUser()->getValue('login') ."', '". time() ."', '". rex::getUser()->getValue('login') ."', '". time() ."')");
 }
 \rex_sql_table::get(\rex::getTable('media'))
     ->ensureColumn(new \rex_sql_column('med_ycom_auth_media_legend', "VARCHAR(255)", TRUE))
@@ -37,11 +37,11 @@ if($sql->getRows() == 0) {
 
 rex_delete_cache();
 
-if(!$this->hasConfig('unsecure_fileext')) {
-	$this->setConfig('unsecure_fileext', 'png,gif,ico,css,js,swf');
+if(!$this->hasConfig('secured_fileext')) {
+	$this->setConfig('secured_fileext', 'arf|doc|docx|mp4|pdf|ppt|pptm|psd|tif|xlsx|zip');
 }
 
 // Create .htaccess file
 if($this->hasConfig('auth_media_active') && $this->getConfig('auth_media_active') == 'true') {
-	rex_ycom_auth_media::manageHtaccess(TRUE, explode(',', $this->getConfig('unsecure_fileext')));
+	rex_ycom_auth_media::manageHtaccess(TRUE, explode(',', $this->getConfig('secured_fileext')));
 }
