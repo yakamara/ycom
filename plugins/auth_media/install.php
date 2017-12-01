@@ -32,7 +32,7 @@ if($sql->getRows() == 0) {
 			('translate:ycom_groups', 'med_ycom_auth_media_groups', (SELECT MAX(priority)+1 FROM ". \rex::getTablePrefix() ."metainfo_field AS meta), 'multiple=multiple', 3, '', 'SELECT name AS label, id from ". \rex::getTablePrefix() ."ycom_group order by label', NULL, '', NULL, '". rex::getUser()->getValue('login') ."', '". time() ."', '". rex::getUser()->getValue('login') ."', '". time() ."')");
 }
 \rex_sql_table::get(\rex::getTable('media'))
-    ->ensureColumn(new \rex_sql_column('med_ycom_auth_media_groups', "ENUM('0','1','2','3')", FALSE, '0'))
+    ->ensureColumn(new \rex_sql_column('med_ycom_auth_media_groups', "VARCHAR(255)", FALSE))
     ->alter();
 
 rex_delete_cache();
