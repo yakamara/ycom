@@ -31,7 +31,7 @@ if(rex::isBackend() && rex_url::currentBackendPage() == "index.php?page=content/
  * @param rex_extension_point $ep Redaxo extension point
  */
 function append_ycom_script(rex_extension_point $ep) {
-	// Insert befor </body> element
+	// Insert before </body> element
 	$insert_body = "<script type='text/javascript'>". PHP_EOL
 	."function change_ycom_fields() {". PHP_EOL
 	."	if($('#yform-ycom_auth-perm-field-0 option:selected').val() != 1) {". PHP_EOL
