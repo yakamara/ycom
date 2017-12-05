@@ -1,6 +1,13 @@
 <?php
 rex_extension::register('PACKAGES_INCLUDED', 'ycom_auth_media_file', rex_extension::LATE);
 
+if(rex::isBackend() && rex_url::currentBackendPage() == "index.php?page=mediapool/media") {
+	rex_extension::register('OUTPUT_FILTER', 'append_ycom_auth_media_script');
+}
+
+/**
+ * Check file permissions.
+ */
 function ycom_auth_media_file() {
 	// Check file download
 	if(rex_config::get('ycom/auth_media', 'auth_media_active') == 'true') {
@@ -25,4 +32,44 @@ function ycom_auth_media_file() {
 			rex_ycom_auth_media::getMedia($requested_filename);
 		}
 	}
+}
+
+/**
+ * Adds JS to media pool, showing goup field only if needed
+ * @param rex_extension_point $ep Redaxo extension point
+ */
+function append_ycom_auth_media_script(rex_extension_point $ep) {
+	// Insert befor </body> element
+	$insert_body = "<script type='text/javascript'>". PHP_EOL
+	."function change_ycom_auth_media_fields() {". PHP_EOL
+	."	if($('#rex-metainfo-med_ycom_auth_media_users option:selected').val() != 2) {". PHP_EOL
+	."		$('#rex-metainfo-med_ycom_auth_media_groups').closest('.rex-form-group').hide();". PHP_EOL
+	."	}". PHP_EOL
+	."	else {". PHP_EOL
+	."		$('#rex-metainfo-med_ycom_auth_media_groups').closest('.rex-form-group').show();". PHP_EOL
+	."	}". PHP_EOL
+	."}". PHP_EOL		
+
+	// This dirty hack is needed due to ajax breaks event listener
+	."function change_ycom_auth_media_fields_rebinder() {". PHP_EOL
+	."	$('#rex-metainfo-med_ycom_auth_media_users').on('change', function() {". PHP_EOL
+	."		change_ycom_fields();". PHP_EOL
+	."	});". PHP_EOL
+	."	change_ycom_auth_media_fields();". PHP_EOL
+	."	setTimeout(change_ycom_auth_media_fields_rebinder, 1000);". PHP_EOL
+	."}". PHP_EOL
+
+	// hide groups if not needed on load
+	."jQuery(document).ready(function($) {". PHP_EOL
+	."	change_ycom_auth_media_fields();". PHP_EOL
+	."	change_ycom_auth_media_fields_rebinder()". PHP_EOL
+	."});". PHP_EOL
+	
+	// hide or show group select if needed / not needed
+	."$('#rex-metainfo-med_ycom_auth_media_users').on('change', function() {". PHP_EOL
+	."	change_ycom_auth_media_fields();". PHP_EOL
+	."});". PHP_EOL
+		
+	."</script>";
+	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }
