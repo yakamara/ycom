@@ -50,26 +50,13 @@ function append_ycom_auth_media_script(rex_extension_point $ep) {
 	."	}". PHP_EOL
 	."}". PHP_EOL		
 
-	// This dirty hack is needed due to ajax breaks event listener
-	."function change_ycom_auth_media_fields_rebinder() {". PHP_EOL
-	."	$('#rex-metainfo-med_ycom_auth_media_users').on('change', function() {". PHP_EOL
-	."		change_ycom_fields();". PHP_EOL
-	."	});". PHP_EOL
-	."	change_ycom_auth_media_fields();". PHP_EOL
-	."	setTimeout(change_ycom_auth_media_fields_rebinder, 1000);". PHP_EOL
-	."}". PHP_EOL
-
 	// hide groups if not needed on load
-	."jQuery(document).ready(function($) {". PHP_EOL
+	."$(document).on('rex:ready', function () {". PHP_EOL
 	."	change_ycom_auth_media_fields();". PHP_EOL
-	."	change_ycom_auth_media_fields_rebinder()". PHP_EOL
+	."	$('#rex-metainfo-med_ycom_auth_media_users').on('change', function() {". PHP_EOL
+	."		change_ycom_auth_media_fields();". PHP_EOL
+	."	});". PHP_EOL
 	."});". PHP_EOL
-	
-	// hide or show group select if needed / not needed
-	."$('#rex-metainfo-med_ycom_auth_media_users').on('change', function() {". PHP_EOL
-	."	change_ycom_auth_media_fields();". PHP_EOL
-	."});". PHP_EOL
-		
 	."</script>";
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }
