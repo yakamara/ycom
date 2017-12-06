@@ -2,7 +2,7 @@
 rex_extension::register('PACKAGES_INCLUDED', 'ycom_auth_media_file', rex_extension::LATE);
 
 if(rex::isBackend() && rex_url::currentBackendPage() == "index.php?page=mediapool/media") {
-	rex_extension::register('OUTPUT_FILTER', 'append_ycom_auth_media_script');
+	rex_view::addJsFile($this->getAssetsUrl('ycom_auth_media_backend.js'));
 }
 
 /**
@@ -32,31 +32,4 @@ function ycom_auth_media_file() {
 			rex_ycom_auth_media::getMedia($requested_filename);
 		}
 	}
-}
-
-/**
- * Adds JS to media pool, showing goup field only if needed
- * @param rex_extension_point $ep Redaxo extension point
- */
-function append_ycom_auth_media_script(rex_extension_point $ep) {
-	// Insert befor </body> element
-	$insert_body = "<script type='text/javascript'>". PHP_EOL
-	."function change_ycom_auth_media_fields() {". PHP_EOL
-	."	if($('#rex-metainfo-med_ycom_auth_media_users option:selected').val() != 2) {". PHP_EOL
-	."		$('#rex-metainfo-med_ycom_auth_media_groups').closest('.rex-form-group').hide();". PHP_EOL
-	."	}". PHP_EOL
-	."	else {". PHP_EOL
-	."		$('#rex-metainfo-med_ycom_auth_media_groups').closest('.rex-form-group').show();". PHP_EOL
-	."	}". PHP_EOL
-	."}". PHP_EOL		
-
-	// hide groups if not needed on load
-	."$(document).on('rex:ready', function () {". PHP_EOL
-	."	change_ycom_auth_media_fields();". PHP_EOL
-	."	$('#rex-metainfo-med_ycom_auth_media_users').on('change', function() {". PHP_EOL
-	."		change_ycom_auth_media_fields();". PHP_EOL
-	."	});". PHP_EOL
-	."});". PHP_EOL
-	."</script>";
-	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }
