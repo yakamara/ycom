@@ -22,6 +22,7 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
             };
         }
 
+        rex_ycom_auth::clearUserSession();
         rex_ycom_auth::loginWithParams($vars, $filter);
 
         if (!rex_ycom_auth::getUser()) {
