@@ -1,7 +1,7 @@
 <?php
 rex_extension::register('PACKAGES_INCLUDED', 'ycom_auth_media_file', rex_extension::LATE);
 
-if(rex::isBackend() && rex_url::currentBackendPage() == "index.php?page=mediapool/media") {
+if(rex::isBackend() && (rex_url::currentBackendPage() == "index.php?page=mediapool/media" || rex_url::currentBackendPage() == "index.php?page=mediapool/sync")) {
 	rex_view::addJsFile($this->getAssetsUrl('ycom_auth_media_backend.js'));
 }
 
