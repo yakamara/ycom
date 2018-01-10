@@ -1,4 +1,4 @@
-### Allgemeines
+<h3>Allgemeines</h3>
 
 Am Anfang des Templates sollte stehen:
 
