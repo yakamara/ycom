@@ -10,7 +10,7 @@ validate|empty|firstname|Bitte geben Sie Ihren Vornamen ein.
 text|name|Nachname:*
 validate|empty|name|Bitte geben Sie Ihren Namen ein.
 
-ycom_auth_password|password|Ihr Passwort:*|{"length":{"min":4},"letter":{"min":1},"lowercase":{"min":0},"uppercase":{"min":0},"digit":{"min":1},"symbol":{"min":0}}|Das Passwort muss mindestens 6 Zeichen lang sein und mindestens eine Ziffer enthalten
+ycom_auth_password|password|Ihr Passwort:*|{"length":{"min":6},"letter":{"min":1},"lowercase":{"min":0},"uppercase":{"min":0},"digit":{"min":1},"symbol":{"min":0}}|Das Passwort muss mindestens 6 Zeichen lang sein und mindestens eine Ziffer enthalten
 password|password_2|Passwort bestätigen:*||no_db
 
 html|required|<p class="form-required">* Pflichtfelder</p>
