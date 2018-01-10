@@ -1,8 +1,9 @@
-/* http://redaxo//bestaetigung/?rex_ycom_activation_key=xxxx&rex_ycom_id=yyyy */
+/* http://redaxo/bestaetigung/?rex_ycom_activation_key=xxxx&rex_ycom_id=yyyy */
 
 hidden|status|1
 objparams|submit_btn_show|0
 objparams|send|1
+objparams|csrf_protection|0
 
 validate|ycom_auth_login|activation_key=rex_ycom_activation_key,id=rex_ycom_id|status=0|Zugang wurde bereits bestätigt oder ist schon fehlgeschlagen|status
 
