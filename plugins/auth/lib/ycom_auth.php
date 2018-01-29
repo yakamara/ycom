@@ -156,7 +156,7 @@ class rex_ycom_auth
                     } elseif ((@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->id))) {
                         $me = $user;
                         $me->setValue('login_tries', 0);
-                        if (!$params['loginStay']) {
+                        if (isset($params['loginStay']) && !$params['loginStay']) {
                             $me->setValue('session_key', '');
                         }
                         // session fixation
@@ -214,7 +214,7 @@ class rex_ycom_auth
                 self::setUser($me);
                 $loginStatus = 1; // is logged in
 
-                if ($params['loginStay']) {
+                if (isset($params['loginStay']) && $params['loginStay']) {
                     $sessionKey = uniqid('ycom_user', true);
                     $me->setValue('session_key', $sessionKey);
                     setcookie(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl')), '/');
