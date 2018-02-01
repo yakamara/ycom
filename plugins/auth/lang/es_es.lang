@@ -1,0 +1,55 @@
+ycom_auth_title = Autenticación
+
+ycom_auth_settings = Ajustes
+ycom_auth_description = Declaración
+
+ycom_auth_config 				= Configuración
+ycom_auth_config_save 			= Guardar configuración
+ycom_auth_config_status 			= Estado
+ycom_auth_config_security 		= Seguridad
+ycom_auth_config_forwarder 		= Redirecciones al artículo
+ycom_auth_config_login_field		= Botón Acceder
+
+ycom_auth_config_status_authactive = Autenticación habilitada
+ycom_auth_config_status_stayactive = "Mantener sesión iniciada" habilitada
+ycom_auth_config_security_hashedpasswd = Contraseñas encriptadas (sha1)
+ycom_auth_config_id_jump_ok		= ... si ha iniciado sesión correctamente
+ycom_auth_config_id_jump_not_ok	= ... si no ha iniciado sesión correctamente
+ycom_auth_config_id_jump_logout	= ... sespués de cerrar la sesión
+ycom_auth_config_id_jump_denied	= ... al acceder a un artículo bloqueado
+ycom_auth_config_id_jump_activation_ok = ... después de una activación exitosa
+ycom_auth_config_id_jump_activation_fail = .. después de la activación fallida
+ycom_auth_config_id_jump_newpassword_ok = ... después del restablecimiento exitoso de la contraseña
+ycom_auth_config_id_jump_newpassword_fail = .. después de restablecer la contraseña fallida
+ycom_auth_config_id_jump_password = ... si establece una nueva contraseña (se ha establecido un campo new_password_required) [opcional]
+ycom_auth_config_id_jump_termofuse = ... si los términos de uso aún no se han confirmado (el campo termofuse_accepted no está establecido) [opcional]
+
+ycom_auth_settings_updated = La configuración se ha guardado
+
+ycom_auth_info_title = Declaración
+
+ycom_auth_perm = Derechos de acceso
+ycom_auth_update_perm = Actualización
+ycom_auth_perm_updated = Derechos han sido actualizados
+
+ycom_auth_password_not_updated = La contraseña no fue actualizada
+ycom_auth_password_updated = La contraseña ha sido actualizada
+ycom_auth_password_exists = La contraseña existe
+ycom_auth_password_isempty = La contraseña no existe
+
+ycom_auth_config_auth_rules = regla de autenticación
+ycom_auth_config_login_tries_deactivateafter = El usuario está desactivado después de {0} intentos de inicio de sesión
+ycom_auth_config_login_tries = Máximos intentos de acceso
+ycom_auth_config_login_tries_unlimited = Infinitos intentos
+ycom_auth_config_login_tries_pause = El usuario está bloqueado durante {1} minutos después de cada intento de inicio de sesión {0}
+ycom_auth_config_login_tries_always_pause = El usuario está bloqueado durante {1} minutos después de los intentos de inicio de sesión {0}
+
+perm_options_ycomArticlePermissions[] = YCom: puede establecer derechos de página
+
+no_permission_to_edit = Sin derechos de edición
+
+ycom_validate_password_policy_rules_error = Por favor, observe las reglas estándar de al menos 1 letra grande y pequeña, al menos 8 caracteres
+ycom_validate_password_policy_rules = Reglas de contraseña como JSON
+ycom_validate_password_policy_rules_error_message = mensaje de error
+
+ycom_validate_password_policy_rules_script = Activate Password Creator
