@@ -1,0 +1,62 @@
+ycom_perm = Derechos de la comunidad
+
+ycom_page_perm = Derechos de página de comunidad
+
+navigation_ycom = Comunidad
+ycom_title = Comunidad: Configuración
+ycom_navi_title = Ajustes
+
+ycom_main_title = Info
+ycom_info = Léame
+ycom_info_title = Información útil sobre el uso del complemento de la comunidad
+ycom_manual = Instrucciones / Ejemplos
+ycom_manual_title = Instrucciones / Ejemplos
+ycom_changelog = Cambios
+ycom_changelog_title = Cambios
+ycom_license = Licencia
+ycom_license_title = Licencia
+ycom_overview = Vista general
+ycom_user_management = Administración de usuario
+ycom_field_management = Personalizar campos
+
+ycom_user = Usuario
+yform_ycom_user = Usuarios de la comunidad
+rex_ycom_user = Usuario
+
+email = E-mail
+status = Estado
+firstname = Primer nombre
+activation_key = Clave de activación
+session_key = Clave de sesión
+last_login_time = Ultimo acceso exitoso
+last_action_time = Última acción
+termination_time = Fecha de terminación
+login_failed = Inicios de sesión fallidos
+login_tries = Inicia sesión intentos fallidos
+
+ycom_login_tries_info = Los errores permitidos se definen en el <a href="index.php?page=ycom/auth/settings">Complemento YCom/Auth</a>.
+
+ycom_account_inactive_termination = El acceso fue terminado
+ycom_account_inactive_logins = El acceso ha sido deshabilitado [Error de inicio de sesión]
+ycom_account_inactive = El acceso esta inactivo
+ycom_account_requested = El acceso fue solicitado
+ycom_account_confirm = El acceso ha sido confirmado y está activo
+ycom_account_active = El acceso está activo
+
+ycom_status = Esado
+
+ycom_perm_type = Permisos página
+
+ycom_perm_extends = Desde una categoría superior, de lo contrario, el acceso está disponible para todos los usuarios
+ycom_perm_only_logged_in = Acceso para usuarios conectados
+ycom_perm_only_not_logged_in = Acceso para todos los usuarios no conectados
+ycom_perm_all = Acceso para todos los usuarios
+
+ycom_this_login_exists_already = Este inicio de sesión ya existe
+ycom_this_email_exists_already = Este correo electrónico ya existe
+ycom_please_enter_login = Por favor ingrese el inicio de sesión
+ycom_please_enter_email = Por favor ingrese el correo electrónico
+
+last_password_time = Último cambio de contraseña
+termofuse_accepted = Términos de uso confirmados
+new_password_required = Se debe establecer una nueva contraseña
