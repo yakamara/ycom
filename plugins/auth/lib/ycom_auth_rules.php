@@ -70,7 +70,7 @@ class rex_ycom_auth_rules
                 }
                 break;
             case 'interval':
-                if ($loginTries % $rule['tries'] != 0) {
+                if ($loginTries ==0 || $loginTries % $rule['tries'] != 0) {
                     return true;
                 }
                 break;
