@@ -58,8 +58,11 @@ class rex_ycom_auth
             if (!self::checkPerm($article) && !$params['redirect'] && rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied') != rex_article::getCurrentId()) {
                 $params = [];
 
-                //# Adding referer only if target is not login_ok Article
-                if (rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_ok') != rex_article::getCurrentId()) {
+                $ignoreRefArticles = [];
+                $ignoreRefArticles[] = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_logout');
+                $ignoreRefArticles[] = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_ok');
+
+                if (!in_array(rex_article::getCurrentId(), $ignoreRefArticles)) {
                     $params = [rex_addon::get('ycom')->getConfig('auth_request_ref') => urlencode($_SERVER['REQUEST_URI'])];
                 }
                 $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied'), '', $params, '&');
