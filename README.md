@@ -27,14 +27,19 @@ Installation
 Last Changes
 -----------
 
-### Version 2.1 // xx.xx.2017
+### Version 2.1 // 05.05.2017
 
+#### Achtung
 
-### Änderungen / Korrekturen
+wenn als Update muss folgendes manuell eingetragen werden.
+in das Feld rex_ycom_user:status
+bei der selectdefiniton: translate:ycom_account_inactive_termination=-3,translate:ycom_account_inactive_logins=-2,translate:ycom_account_inactive=-1,translate:ycom_account_requested=0,translate:ycom_account_confirm=1,translate:ycom_account_active=2
 
 Achtung: Demo geht nicht mehr. Status für angefragt ist nun 0.
 
-* Cookie/Sessionmanagement verbesser. (Sessionfixation, Eingloggt bleiben Cookie)
+#### Änderungen / Korrekturen
+
+* Cookie/Sessionmanagement verbessert. (Sessionfixation, Eingloggt bleiben Cookie)
 * AuthRules um Varianten ergänzt: nach 5/10/20 Login-Fehlversuchen 5/15 Minuten gesperrt
 * Passwortregeln ergänzt. Passwort Policy Rules + automatisch passende Passworterstellung
 * BUG: Statusüberprüfung ging nicht
@@ -56,6 +61,7 @@ Achtung: Demo geht nicht mehr. Status für angefragt ist nun 0.
 * EP "REX_YCOM_YFORM_SAVED" ergänzt. in YForm action auth_db.
 * Kündigungsstatus ergänzt, damit ein User sein Konto als gekündigt markieren kann.
 * Seitenrechte wurden nur dem Admin angezeigt.
+* Beschreibungen verbessert
 
 
 
