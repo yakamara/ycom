@@ -1,5 +1,5 @@
 package: ycom/auth
-version: '2.1-dev'
+version: '2.1'
 author: Yakamara Media GmbH & Co. KG / concedra GmbH
 supportpage: www.redaxo.org/de/forum
 title: 'Auth'
