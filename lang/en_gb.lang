@@ -39,8 +39,8 @@ ycom_login_tries_info = Login faile will be defined here <a href="index.php?page
 ycom_account_inactive_termination = Access terminated
 ycom_account_inactive_logins = Access deactivated [Too many failed Logins]
 ycom_account_inactive = Access is deactivated
-ycom_account_confirm = Access has been confirmned
 ycom_account_requested = Access requested
+ycom_account_confirm = Access has been confirmned
 ycom_account_active = Access is active
 
 ycom_status = Status
@@ -56,3 +56,7 @@ ycom_this_login_exists_already = This username already exists
 ycom_this_email_exists_already = This email already exists
 ycom_please_enter_login = Please enter username
 ycom_please_enter_email = Please enter e-mail address
+
+last_password_time = Last password change
+termofuse_accepted = Confirmed terms of use
+new_password_required = A new password needs to be set
