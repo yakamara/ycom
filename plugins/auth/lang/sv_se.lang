@@ -21,6 +21,8 @@ ycom_auth_config_id_jump_activation_ok = ... efter framgångsrik aktivering
 ycom_auth_config_id_jump_activation_fail = ... när aktiveringen misslyckades
 ycom_auth_config_id_jump_newpassword_ok = ... när du återställde lösenordet
 ycom_auth_config_id_jump_newpassword_fail = ... när återställning av lösenordet misslyckades
+ycom_auth_config_id_jump_password = ... om "välj nytt lösenord" (new_password_required field) är utvald [valfritt]
+ycom_auth_config_id_jump_termofuse = .. om användningsvillkoren ännu inte har bekräftats (termofuse_accepterat fält är inte inställt) [valfritt]
 
 ycom_auth_settings_updated = Konfiguration sparades
 
@@ -35,10 +37,19 @@ ycom_auth_password_updated = Lösenordet har aktualiserats
 ycom_auth_password_exists = Lösenordet finns
 ycom_auth_password_isempty = Lösenordet finns inte
 
+ycom_auth_config_auth_rules = autentiseringsregel
 ycom_auth_config_login_tries_deactivateafter = Användaren kommer att deaktiveras efter {0} loginförsök
 ycom_auth_config_login_tries = Maximal antal loginförsök
 ycom_auth_config_login_tries_unlimited = Obegränsat många försök
+ycom_auth_config_login_tries_pause = Användaren blir spärrat i {1} minuter efter varje {0} inloggningsförsök
+ycom_auth_config_login_tries_always_pause = Användaren blir spärrat i {1} minuter efter {0} inloggningsförsök
 
 perm_options_ycomArticlePermissions[] = YCom - ställa in sidrättigheter
 
 no_permission_to_edit = Ingen behörighet att redigera
+
+ycom_validate_password_policy_rules_error = Vänligen observera standardreglerna minst 1 bokstav stor och liten, minst 8 tecken
+ycom_validate_password_policy_rules = Lösenordregler som JSON
+ycom_validate_password_policy_rules_error_message = Felmeddelande
+
+ycom_validate_password_policy_rules_script = Aktivera Password Creator

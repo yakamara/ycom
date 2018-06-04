@@ -30,13 +30,17 @@ activation_key = Aktiveringsnyckel
 session_key = Session key
 last_login_time = Senaste inloggning
 last_action_time = Senaste aktion
+termination_time = Tidspunkt för uppsägning
 login_failed = Misslyckade inloggningar
 login_tries = Misslyckade försök att logga in
 
 ycom_login_tries_info = Efter 10 misslyckade försök att logga in kommer användaren att blockeras.
 
+ycom_account_inactive_termination = Tillträdet avslutades
+ycom_account_inactive_logins = Åtkomst har inaktiverats [Inloggning misslyckades]
 ycom_account_inactive = åtkomst är inaktiverad
 ycom_account_requested = åtkomst begärd
+ycom_account_confirm = Tillträde har bekräftats
 ycom_account_active = åtkomst är aktiverad
 
 ycom_status = Status
@@ -52,3 +56,7 @@ ycom_this_login_exists_already = Användarnamnet finns redan
 ycom_this_email_exists_already = E-postadressen finns redan
 ycom_please_enter_login = Var god ange användarnamnet
 ycom_please_enter_email = Var god ange e-post adressen
+
+last_password_time = Senaste lösenordbyte
+termofuse_accepted = villkoren bekräftades
+new_password_required = Du måste välja ett nytt lösenord
