@@ -1,67 +1,38 @@
 <?php
 
-// TODO:
-
-return;
-
-$info = '';
-$warning = '';
-$content = '';
-$modules = [
-//		"login"		=> array(		"key" => "login", 			"search" => "module:ycom_auth_login",			"name" => "ycom:auth - Login"),
-// 		"pswchange"	=> array(		"key" => "pswchange", 		"search" => "module:ycom_auth_pswchange",		"name" => "ycom:auth - Change Password"),
-// 		"profilechange"	=> array(	"key" => "profilechange", 	"search" => "module:ycom_auth_profilechange",	"name" => "ycom:auth - Profile"),
-];
-
 $table = rex_yform_manager_table::get('rex_ycom_user');
 $xform_user_fields = $table->getValueFields();
 
 if (rex_request('func', 'string') == 'update') {
-    $this->setConfig('auth_active', rex_request('auth_active', 'int'));
-    $this->setConfig('article_id_jump_ok', rex_request('article_id_jump_ok', 'int'));
-    $this->setConfig('article_id_jump_not_ok', rex_request('article_id_jump_not_ok', 'int'));
-    $this->setConfig('article_id_jump_logout', rex_request('article_id_jump_logout', 'int'));
-    $this->setConfig('article_id_jump_denied', rex_request('article_id_jump_denied', 'int'));
-    $this->setConfig('article_id_jump_password', rex_request('article_id_jump_password', 'int'));
-    $this->setConfig('article_id_jump_termofuse', rex_request('article_id_jump_termofuse', 'int'));
-    $this->setConfig('auth_rule', rex_request('auth_rule', 'string'));
-    $this->setConfig('login_field', stripslashes(str_replace('"', '', rex_request('login_field', 'string'))));
+    $this->setConfig('media_auth_active', rex_request('media_auth_active', 'int'));
+    $this->setConfig('media_auth_rule', rex_request('media_auth_rule', 'string'));
 
-    echo rex_view::success($this->i18n('ycom_auth_settings_updated'));
+    echo rex_view::success($this->i18n('ycom_media_auth_settings_updated'));
 }
-
-$sel_userfields = new rex_select();
-$sel_userfields->setName('login_field');
-$sel_userfields->setSize(1);
-foreach ($xform_user_fields as $k => $xf) {
-    $sel_userfields->addOption($k, $k);
-}
-$sel_userfields->setSelected($this->getConfig('login_field'));
 
 $sel_authrules = new rex_select();
-$sel_authrules->setId('auth-rule');
-$sel_authrules->setName('auth_rule');
+$sel_authrules->setId('media-auth-rule');
+$sel_authrules->setName('media_auth_rule');
 
-$rules = new rex_ycom_auth_rules();
+$rules = new rex_ycom_media_auth_rules();
 
 $sel_authrules->addOptions($rules->getOptions());
 
 $sel_authrules->setAttribute('class', 'form-control selectpicker');
-$sel_authrules->setSelected($this->getConfig('auth_rule'));
+$sel_authrules->setSelected($this->getConfig('media_auth_rule'));
 
-$content .= '
+$content = '
 <form action="index.php" method="post" id="ycom_auth_settings">
-    <input type="hidden" name="page" value="ycom/auth/settings" />
+    <input type="hidden" name="page" value="ycom/media_auth/settings" />
     <input type="hidden" name="func" value="update" />
-
 
 	<fieldset>
 		<legend>'.$this->i18n('ycom_auth_config_status').'</legend>
 
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 col-sm-push-6 abstand">
-				<input class="rex-form-text" type="checkbox" id="rex-form-auth" name="auth_active" value="1" ';
-if ($this->getConfig('auth_active') == '1') {
+				<input class="rex-form-text" type="checkbox" id="rex-form-auth" name="media_auth_active" value="1" ';
+if ($this->getConfig('media_auth_active') == '1') {
     $content .= 'checked="checked"';
 }
 $content .= ' />
@@ -69,93 +40,15 @@ $content .= ' />
 			</div>
 		</div>
 
-
-	</fieldset>
-
-	<fieldset>
-		<legend>'.$this->i18n('ycom_auth_config_forwarder').'</legend>
-
-		<div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_login_ok">'.$this->i18n('ycom_auth_config_id_jump_ok').'</label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(5, 'article_id_jump_ok', stripslashes($this->getConfig('article_id_jump_ok'))) .'
-			</div>
-		</div>
-
-		<div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_login_failed">'.$this->i18n('ycom_auth_config_id_jump_not_ok').'</label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(6, 'article_id_jump_not_ok', stripslashes($this->getConfig('article_id_jump_not_ok'))) .'
-			</div>
-		</div>
-
-		<div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_logout">'.$this->i18n('ycom_auth_config_id_jump_logout').'</label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(7, 'article_id_jump_logout', stripslashes($this->getConfig('article_id_jump_logout'))) .'
-			</div>
-		</div>
-
-		<div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_denied">'.$this->i18n('ycom_auth_config_id_jump_denied').'</label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(8, 'article_id_jump_denied', stripslashes($this->getConfig('article_id_jump_denied'))) .'
-			</div>
-		</div>
-
-		<div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_password">'.$this->i18n('ycom_auth_config_id_jump_password').'</label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(9, 'article_id_jump_password', stripslashes($this->getConfig('article_id_jump_password'))) .'
-			</div>
-		</div>
-
-		<div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_termofuse">'.$this->i18n('ycom_auth_config_id_jump_termofuse').'</label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(10, 'article_id_jump_termofuse', stripslashes($this->getConfig('article_id_jump_termofuse'))) .'
-			</div>
-		</div>
-
-	</fieldset>
-
-	<fieldset>
-		<legend>'.$this->i18n('ycom_auth_config_login_field').'</legend>
-		<div class="row">
-			<div class="col-xs-12 col-sm-6">
-				'.$this->i18n('ycom_auth_config_login_field').'
-			</div>
-			<div class="col-xs-12 col-sm-6">
-			 	<div class="select-style">
-	              	'.$sel_userfields->get().'
-			  	</div>
-			</div>
-		</div>
-	</fieldset>
-
-    <fieldset>
-            <legend>'.$this->i18n('ycom_auth_config_security').'</legend>
-    
-            <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                    <label for="auth_rules_select">' . $this->i18n('ycom_auth_config_auth_rules') . '</label>
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                '.$sel_authrules->get().'
+        <div class="row abstand">
+            <div class="col-xs-12 col-sm-6">
+                <label for="auth_rules_select">' . $this->i18n('ycom_auth_config_media_auth_rules') . '</label>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+            '.$sel_authrules->get().'
             </div>
         </div>
+        
     </fieldset>
 
 	<div class="row">

@@ -1,16 +1,16 @@
-package: ycom/media
+package: ycom/media_auth
 version: '3.0dev'
 author: Yakamara Media GmbH & Co. KG
 supportpage: www.redaxo.org/de/forum
 title: 'MediaAuth'
 nav_icon: fa-minus
-description: 'translate:ycom_media'
+description: 'translate:ycom_media_auth'
 
 page:
-    title: 'translate:ycom_media_title'
+    title: 'translate:ycom_media_auth_title'
     hidden: false
     subpages:
-        settings: { title: 'translate:ycom_media_settings'}
+        settings: { title: 'translate:ycom_media_auth_settings'}
 
 requires:
     packages:
