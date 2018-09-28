@@ -106,37 +106,5 @@ class rex_ycom_auth_rules
         }
 
         return $options;
-        /*
-                $sel_logintries->addOption($this->i18n('ycom_auth_config_login_tries_unlimited'), 0);
-                $sel_logintries->addOption($this->i18n('ycom_auth_config_login_tries_deactivateafter', 5), 5);
-                $sel_logintries->addOption($this->i18n('ycom_auth_config_login_tries_deactivateafter', 10), 10);
-                $sel_logintries->addOption($this->i18n('ycom_auth_config_login_tries_deactivateafter', 20), 20);
-
-
-        login_tries noch suchen
-
-        auth_rule noch default setzen
-
-                            $maximal_login_tries = (int) rex_plugin::get('ycom', 'auth')->getConfig('login_tries');
-
-                    if ($maximal_login_tries != 0 && $user->login_tries > $maximal_login_tries) {
-
-                    } elseif (@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->id)) {
-                        $me = $user;
-
-                        if (!$params['loginStay']) {
-                            $me->setValue('session_key', '');
-                        }
-
-                        // session fixation
-                        self::regenerateSessionId();
-
-                        $me->setValue('login_tries', 0);
-                    } else {
-                        ++$user->login_tries;
-                        $user->save();
-                    }
-
-        */
     }
 }

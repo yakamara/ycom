@@ -17,4 +17,43 @@ class rex_ycom_group extends \rex_yform_manager_dataset
         }
         return $groups;
     }
+
+    public static function hasGroupPerm($groupType, $groups = [], $userGroups = [])
+    {
+        $groupType = (int) $groupType;
+
+        if ($groupType < 1) {
+            return true;
+        }
+
+        switch ($groupType) {
+            // user in every group
+            case 1:
+                foreach ($groups as $group) {
+                    if ($group != '' && !in_array($group, $userGroups)) {
+                        return false;
+                    }
+                }
+                return true;
+
+            // user in at least one group
+            case 2:
+                foreach ($groups as $group) {
+                    if ($group != '' && in_array($group, $userGroups)) {
+                        return true;
+                    }
+                }
+                return false;
+
+            // user has no groups
+            case 3:
+                if (count($userGroups) == 0) {
+                    return true;
+                }
+                return false;
+
+            default:
+                return false;
+        }
+    }
 }

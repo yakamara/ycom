@@ -1,5 +1,9 @@
 <?php
 
+// TODO:
+
+return;
+
 $info = '';
 $warning = '';
 $content = '';
@@ -20,9 +24,6 @@ if (rex_request('func', 'string') == 'update') {
     $this->setConfig('article_id_jump_denied', rex_request('article_id_jump_denied', 'int'));
     $this->setConfig('article_id_jump_password', rex_request('article_id_jump_password', 'int'));
     $this->setConfig('article_id_jump_termofuse', rex_request('article_id_jump_termofuse', 'int'));
-    $this->setConfig('article_id_login', rex_request('article_id_login', 'int'));
-    $this->setConfig('article_id_register', rex_request('article_id_register', 'int'));
-    $this->setConfig('article_id_password', rex_request('article_id_password', 'int'));
     $this->setConfig('auth_rule', rex_request('auth_rule', 'string'));
     $this->setConfig('login_field', stripslashes(str_replace('"', '', rex_request('login_field', 'string'))));
 
@@ -125,38 +126,6 @@ $content .= ' />
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(10, 'article_id_jump_termofuse', stripslashes($this->getConfig('article_id_jump_termofuse'))) .'
-			</div>
-		</div>
-
-    </fieldset>
-
-	<fieldset>
-		<legend>'.$this->i18n('ycom_auth_config_pages').'</legend>
-		
-		<div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_login">'.$this->i18n('ycom_auth_config_id_login').'</label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(11, 'article_id_login', stripslashes($this->getConfig('article_id_login'))) .'
-			</div>
-		</div>
-
-        <div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_register">'.$this->i18n('ycom_auth_config_id_register').'</label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(12, 'article_id_register', stripslashes($this->getConfig('article_id_register'))) .'
-			</div>
-		</div>
-
-        <div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_password">'.$this->i18n('ycom_auth_config_id_password').'</label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(13, 'article_id_password', stripslashes($this->getConfig('article_id_password'))) .'
 			</div>
 		</div>
 

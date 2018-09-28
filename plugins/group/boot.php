@@ -20,56 +20,18 @@ rex_extension::register('YCOM_AUTH_USER_CHECK', function (rex_extension_point $e
     $article = $ep->getParam('article');
     $me = $ep->getParam('me');
 
-    // if logged in perms - check group perms
-    $article_group_type = (int) $article->getValue('ycom_group_type');
+    $type = $article->getValue('ycom_group_type');
 
-    if ($article_group_type < 1) {
-        return true;
+    $userGroups = [];
+    if (is_object($me) && $me->ycom_groups != '') {
+        $userGroups = explode(',', $me->ycom_groups);
     }
 
-    switch ($article_group_type) {
-        // user in every group
-        case 1:
-            $art_groups = explode(',', $article->getValue('ycom_groups'));
-            $user_groups = [];
-            if (is_object($me)) {
-                $user_groups = explode(',', $me->ycom_groups);
-            }
-            foreach ($art_groups as $ag) {
-                if ($ag != '' && !in_array($ag, $user_groups)) {
-                    return false;
-                }
-            }
-            return true;
-
-        // user in at least one group
-        case 2:
-            $art_groups = explode(',', $article->getValue('ycom_groups'));
-            $user_groups = [];
-            if (is_object($me)) {
-                $user_groups = explode(',', $me->ycom_groups);
-            }
-            foreach ($art_groups as $ag) {
-                if ($ag != '' && in_array($ag, $user_groups)) {
-                    return true;
-                }
-            }
-            return false;
-
-        // user is not in one of the groups
-        case 3:
-            $user_groups = [];
-            if (is_object($me)) {
-                $user_groups = explode(',', $me->ycom_groups);
-            }
-            if (count($user_groups) == 0) {
-                return true;
-            }
-            return false;
-
-        default:
-            return false;
+    $groups = [];
+    if ($article->getValue('ycom_groups') != "") {
+        $groups = explode(',', $article->getValue('ycom_groups'));
     }
 
-    return true;
+    return rex_ycom_group::hasGroupPerm($type, $groups, $userGroups);
+
 });
