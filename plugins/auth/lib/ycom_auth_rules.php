@@ -80,7 +80,7 @@ class rex_ycom_auth_rules
 
         switch ($rule['action']['type']) {
             case 'deactivate':
-                $user->setValue('status', -3); // to much login failures
+                $user->setValue('status', -2); // to much login failures
                 $user->save();
                 return false;
                 break;
