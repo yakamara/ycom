@@ -356,7 +356,7 @@ class rex_ycom_auth
     {
         unset($_SESSION[self::getLoginKey()]);
         unset($_COOKIE[self::getLoginKey()]);
-        setcookie(self::getLoginKey(), '0', time() - 3600, '/');
+        setcookie(self::getLoginKey(), '', time() - 3600, '/');
         self::$me = null;
     }
 
