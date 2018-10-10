@@ -1,3 +1,6 @@
+# YCom: Einführung
+
+
 <h3>Allgemeines</h3>
 
 Am Anfang des Templates sollte stehen:
@@ -17,3 +20,5 @@ Bitte die bestehenden Felder nicht ändern oder löschen.
 Die Benutzerfelder können wie folgt aus der Tabelle 'rex_ycom_user' ausgelesen werden:
 
 <pre>rex_ycom_auth::getUser()->getValue('name');</pre>
+
+

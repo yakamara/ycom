@@ -8,20 +8,15 @@ page:
     perm: ycom[]
     block: ycom
     icon: rex-icon fa-group
-    subpages:
-        main:
-           title: 'translate:ycom_main_title'
-           perm: 'admin[]'
-           subpages:
-                info: { title: 'translate:ycom_info' }
-                manual: { title: 'translate:ycom_manual' }
+
 
 requires:
     packages:
-        yform: '^3.0'
+        yform: '^3.0-beta2'
         phpmailer: '^2.2'
     redaxo: '^5.7'
 
 system_plugins:
     - auth
     - group
+    - docs

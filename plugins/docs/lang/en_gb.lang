@@ -1,0 +1,4 @@
+ycom_docs = Documentation
+ycom_docs_filenotfound = File was not found. Content does not (yet) exist. <br /> Help is much appreciated: <a href="https://github.com/yakamara/redaxo_ycom/tree/master/en_gb" target="_blank">https://github.com/yakamara/redaxo_ycom/tree/master/en_gb</a>
+ycom_docs_navigation = Navigation
+ycom_docs_content = Content

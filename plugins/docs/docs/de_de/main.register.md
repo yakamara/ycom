@@ -1,3 +1,10 @@
+
+
+
+
+### Registrierung
+
+```
 generate_key|activation_key
 hidden|status|0
 
@@ -28,3 +35,37 @@ validate|compare|password|password_2||Bitte geben Sie zweimal das gleiche Passwo
 action|copy_value|email|login
 action|db|rex_ycom_user
 action|tpl2email|access_request_de|email|
+```
+
+
+### E-Mail-Template `access_request_de` für die Bestätigung erstellen
+
+```
+<!--
+http://redaxo/bestaetigung/?rex_ycom_activation_key=xxxx&rex_ycom_id=yyyy 
+Bitte die Id (888) durch die Id des register_proof Artikels ersetzen
+-->
+<p>Bitte klicken Sie diesen Link, um die Anmeldung zu bestätigen:</p>
+<p><a href="<?= trim(rex::getServer(),'/') . rex_getUrl(888) ?>?rex_ycom_activation_key=REX_YFORM_DATA[field=activation_key]&rex_ycom_id=REX_YFORM_DATA[field=email]"><?= trim(rex::getServer(),'/') . rex_getUrl(888) ?>?rex_ycom_activation_key=REX_YFORM_DATA[field=activation_key]&rex_ycom_id=REX_YFORM_DATA[field=email]</a></p>
+```
+
+
+
+
+### Registrierungsbestätigung
+
+
+/* http://redaxo/bestaetigung/?rex_ycom_activation_key=xxxx&rex_ycom_id=yyyy */
+
+```
+hidden|status|1
+objparams|submit_btn_show|0
+objparams|send|1
+objparams|csrf_protection|0
+
+validate|ycom_auth_login|activation_key=rex_ycom_activation_key,email=rex_ycom_id|status=0|Zugang wurde bereits bestätigt oder ist schon fehlgeschlagen|status
+
+action|ycom_auth_db|update
+action|html|<b>Vielen Dank, Sie sind nun eingeloggt und haben Ihre E-Mail bestätigt</b>
+```
+

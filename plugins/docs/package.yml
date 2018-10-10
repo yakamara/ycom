@@ -1,0 +1,9 @@
+package: ycom/docs
+version: '3.0dev'
+author: 'YCom Document Team'
+supportpage: 'https://github.com/yakamara/redaxo_ycom'
+
+page:
+    title: 'translate:ycom_docs'
+    perm: admin
+    itemclass: pull-right 
