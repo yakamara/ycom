@@ -1,8 +1,8 @@
+# Registrierung
 
 
 
-
-### Registrierung
+### Registrierungs-Formular
 
 ```
 generate_key|activation_key

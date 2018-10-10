@@ -1,7 +1,9 @@
+# Passwort zurücksetzen 
 
 
+### Passwort zurücksetzen- Formular
 
-### Passwort zurücksetzen Formular
+Da man auswählen kann, ob man ein Login verwenden möchte, oder die E-mail als Login genutzt wird, muss man das untenstehende Formular entsprechend anpassen. Im Beispiel geht es von der E-Mail als Authentifizierungsfeld aus.
 
 ```
 generate_key|activation_key
@@ -13,8 +15,7 @@ captcha|Bitte geben Sie den entsprechenden Sicherheitscode ein. Sollten Sie den 
 validate|email|email|Bitte geben Sie die E-Mail ein.
 validate|empty|email|Bitte geben Sie Ihre E-Mail ein.
 
-action|copy_value|email|login
-action|db_query|update rex_ycom_user set activation_key = ? where login = ?|activation_key,email
+action|db_query|update rex_ycom_user set activation_key = ? where email = ?|activation_key,email
 action|tpl2email|resetpassword_de|email|
 ```
 
