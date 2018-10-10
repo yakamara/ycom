@@ -10,7 +10,6 @@ $modules = [
 ];
 
 $table = rex_yform_manager_table::get('rex_ycom_user');
-$xform_user_fields = $table->getValueFields();
 
 if (rex_request('func', 'string') == 'update') {
     $this->setConfig('auth_active', rex_request('auth_active', 'int'));
@@ -32,9 +31,14 @@ if (rex_request('func', 'string') == 'update') {
 $sel_userfields = new rex_select();
 $sel_userfields->setName('login_field');
 $sel_userfields->setSize(1);
-foreach ($xform_user_fields as $k => $xf) {
+
+$sel_userfields->addOption('email', 'email');
+$sel_userfields->addOption('login', 'login');
+
+/*foreach ($table->getValueFields() as $k => $xf) {
     $sel_userfields->addOption($k, $k);
-}
+}*/
+
 $sel_userfields->setSelected($this->getConfig('login_field'));
 
 $sel_authrules = new rex_select();
