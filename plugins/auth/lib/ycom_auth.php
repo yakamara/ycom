@@ -23,12 +23,6 @@ class rex_ycom_auth
 
         $params['referer'] = self::cleanReferer($params['referer']);
 
-        $referer_to_logout = strpos($params['referer'], rex_config::get('ycom', 'auth_request_logout'));
-        if ($referer_to_logout === false) {
-        } else {
-            $params['referer'] = '';
-        }
-
         //# Check for Login / Logout
         /*
           login_status
@@ -85,7 +79,6 @@ class rex_ycom_auth
             $article_id_password = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_password');
             $article_id_termofuse = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_termofuse');
 
-            // echo "*".rex_article::getCurrentId().'+'.$article_id_termofuse; exit;
             if ($article_id_password != "" && rex_ycom_auth::getUser()->getValue('new_password_required') == 1) {
                 if ($article_id_password != rex_article::getCurrentId()) {
                     $params['redirect'] = rex_getUrl($article_id_password, '', [], '&');
@@ -98,7 +91,6 @@ class rex_ycom_auth
             }
 
         }
-
 
         return $params['redirect'];
     }
@@ -418,6 +410,13 @@ class rex_ycom_auth
         if (isset($url['query']) && $url['query'] != '') {
             $returnUrl .= '?'. $url['query'];
         }
+
+        $referer_to_logout = strpos($returnUrl, rex_config::get('ycom', 'auth_request_logout'));
+        if ($referer_to_logout === false) {
+        } else {
+            $returnUrl = '';
+        }
+
         return $returnUrl;
     }
 }
