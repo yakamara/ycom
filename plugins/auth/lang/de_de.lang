@@ -1,10 +1,60 @@
-ycom_media_auth_title = Medien
-ycom_media_auth_settings = Settings
-ycom_auth_config_media_auth_rules = Regel wenn Medium nicht aufgerufen werden darf
+ycom_auth_title = Authentifizierung
 
-ycom_media_auth_failed_header_notfound = Header `Not Found` senden
-ycom_media_auth_failed_header_perm_denied = Header `Permission denied` senden
-ycom_media_auth_failed_redirect_login = Weiterleitung zu Login mit Redirect auf Medium (wenn nicht eingeloggt)
-ycom_media_auth_failed_header_redirect_notfound = Weiterleitung zu NotFound Article
+ycom_auth_settings = Einstellungen
+ycom_auth_description = Erklärung
 
-ycom_media_auth_settings_updated = Einstellungen wurden aktualisiert
+ycom_auth_config 				= Konfiguration
+ycom_auth_config_save 			= Konfiguration speichern
+ycom_auth_config_status 			= Status
+ycom_auth_config_security 		= Sicherheit
+ycom_auth_config_forwarder 		= Weiterleitungen zu Artikel
+ycom_auth_config_login_field		= Login-Feld
+
+ycom_auth_config_status_authactive = Authentifizierung aktiviert
+ycom_auth_config_status_stayactive = "Angemeldet bleiben" aktiviert
+ycom_auth_config_security_hashedpasswd = Verschlüsselte Passwörter (sha1)
+ycom_auth_config_id_jump_ok		= ... wenn erfolgreich eingeloggt
+ycom_auth_config_id_jump_not_ok	= ... wenn nicht erfolgreich eingeloggt
+ycom_auth_config_id_jump_logout	= ... nach dem Ausloggen
+ycom_auth_config_id_jump_denied	= ... wenn auf einen gesperrten Artikel zugriffen wird
+ycom_auth_config_id_jump_activation_ok = ... nach erfolgreicher Aktivierung
+ycom_auth_config_id_jump_activation_fail = .. nach fehlgeschlagener Aktivierung
+ycom_auth_config_id_jump_newpassword_ok = ... nach erfolgreicher Passwortrücksetzung
+ycom_auth_config_id_jump_newpassword_fail = .. nach fehlgeschlagener Passwortrücksetzung
+ycom_auth_config_id_jump_password = ... wenn neues Passwort setzen (new_password_required-Feld) gesetzt ist [optional]
+ycom_auth_config_id_jump_termofuse = ... wenn Nutzungsbedingungen noch nicht bestätigt wurden (termofuse_accepted-Feld nicht gesetzt ist) [optional]
+
+ycom_auth_settings_updated = Konfiguration wurde gespeichert
+
+ycom_auth_info_title = Erklärung
+
+ycom_auth_perm = Zugriffsrechte
+ycom_auth_update_perm = Aktualisieren
+ycom_auth_perm_updated = Rechte wurden aktualisiert
+
+ycom_auth_password_not_updated = Passwort wurde nicht aktualisiert
+ycom_auth_password_updated = Passwort wurde aktualisiert
+ycom_auth_password_exists = Passwort existiert
+ycom_auth_password_isempty = Passwort ist nicht vorhanden
+
+ycom_auth_config_auth_rules = Authentifizierungsregel
+ycom_auth_config_login_tries_deactivateafter = User wird nach {0} Login-Versuchen deaktiviert
+ycom_auth_config_login_tries = Maximale Login-Versuche
+ycom_auth_config_login_tries_unlimited = Unendlich viele Versuche
+ycom_auth_config_login_tries_pause = User wird für {1} Minuten nach jeweils {0} Login-Versuchen gesperrt
+ycom_auth_config_login_tries_always_pause = User wird für {1} Minuten nach {0} Login-Versuchen gesperrt
+
+perm_options_ycomArticlePermissions[] = YCom - Seitenrechte einstellen können
+
+no_permission_to_edit = Keine Editierrechte
+
+ycom_validate_password_policy_rules_error = Bitte die Standardregeln beachten mind. 1 Buchstabe groß und klein, mind. 8 Zeichen
+ycom_validate_password_policy_rules = Passwortregeln als JSON
+ycom_validate_password_policy_rules_error_message = Fehlermeldung
+
+ycom_validate_password_policy_rules_script = PasswortCreator aktivieren
+
+ycom_auth_config_pages = Allgemeine Seiten
+ycom_auth_config_id_login = Login-Seite
+ycom_auth_config_id_register = Register-Seite
+ycom_auth_config_id_password = Passwort zurücksetzen
