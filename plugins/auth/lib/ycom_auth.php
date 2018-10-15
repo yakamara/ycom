@@ -236,7 +236,15 @@ class rex_ycom_auth
 
                 $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN', $me, []));
 
+                // $temp necessary because of YForm issues
+                $temp_r = $_REQUEST;
+                $temp_p = $_POST;
+                $temp_g = $_GET;
                 $me->save();
+                $_REQUEST = $temp_r;
+                $_POST = $temp_p;
+                $_GET = $temp_g;
+
             } else {
                 $loginStatus = 0; // not logged in
 
