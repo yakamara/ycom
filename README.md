@@ -22,12 +22,24 @@ Installation
 
 * Ins Backend einloggen und mit dem Installer installieren.
 
-> Hinweis: Benötigt wird das YForm-Addon, empfohlen in der aktuellsten Version.
-
 Last Changes
 -----------
 
-### Version 2.1 // 05.05.2017
+### Version 3.0 // xx.xx.2018
+
+* media_auth Plugin ergänzt. Man kann einzelnen Medien YCom Zugriffsrechte geben. braucht rex 5.7
+* Doku als Plugin für bessere Übersicht und Inhalte ergänzt
+* Passwort-Rules um "generate" ergänzt für die Passwortgenerierung
+* Diverse Verbesserungen. Default Werte, Initiale Werte etc., diverse Notices entfernt
+* YForm ab Version 3 nötig
+* Doppelten "Passwort anzeigen" Button entfernt
+* Status bei zu vielen Fehllogins ist nun richtig, 
+* uninstall verbessert
+* referer to logout bug behoben
+* YForm Bug, vorausgefüllte Felder in Formulare Bug behoben
+
+
+### Version 2.1 // 05.05.2018
 
 #### Achtung
 
