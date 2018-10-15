@@ -1,0 +1,15 @@
+package: ycom/auth_media
+version: '2.1-dev'
+author: Tobias Krais
+supportpage: www.redaxo.org/de/forum
+title: 'translate:ycom_auth_media'
+nav_icon: fa-lock
+description: 'ycom_auth_media_settings_description'
+
+page:
+    title: 'translate:ycom_auth_media'
+
+requires:
+    packages:
+        ycom/auth: '>2.0'
+        ycom/group: '>2.0'

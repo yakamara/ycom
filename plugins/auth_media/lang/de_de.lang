@@ -1,0 +1,9 @@
+ycom_auth_media = Medienzugriff
+
+ycom_auth_media_perm = Zugriffsrechte (zu schützende Dateiendungen werden in den Community Addon Medienzugriff Einstellungen festgelegt)
+ycom_auth_media_settings_auth_active = Authentifizierung aktiviert
+ycom_auth_media_settings_config = Plugin Konfiguration
+ycom_auth_media_settings_secure_fileext = Geschützte Dateiendungen
+ycom_auth_media_settings_secure_fileext_desc = Tragen Sie nachfolgend durch Komma getrennt und ohne Leerzeichen die Dateiendungen ein, die <b>geschützt</b> werden sollen. Alle nicht aufgeführten Dateiendungen werden nicht geschützt.<br><b>Beispiel: pdf,docx,tif</b> schützt Dateien mit der Endung PDF, DOCX und TIF. Dateien mit der Endung PPT bleiben damit ungeschützt.
+ycom_auth_media_settings_description = Dieses Plugin schützt Dateien im Medienpool. Die Sicherheitseinstellungen können für jede Datei einzeln im Medienpool eingestellt werden. Dateien, die durch den Media Manager verarbeitet werden, können derzeicht nicht geschützt werden.
+ycom_auth_media_settings_xsendfile = Wenn möglich, lassen Sie auf Ihrem Server das X-SendFile Modul installieren. Dadurch können große abgesicherte Dateien verarbeitet werden und die Last des Servers wird verringert.

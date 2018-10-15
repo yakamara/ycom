@@ -1,0 +1,9 @@
+ycom_auth_media = File Access
+
+ycom_auth_media_perm = Permissions (protected file extensions can be set in Community Addon File Access settings)
+ycom_auth_media_settings_auth_active = Authentification is active
+ycom_auth_media_settings_config = Plugin Configuration
+ycom_auth_media_settings_secure_fileext = Protected file extensions
+ycom_auth_media_settings_secure_fileext_desc = Please enter next all file extensions you wand to <b>protect</b>. The values must be comma separeted without a space. All not mentioned file extensions will not be secured.<br><b>Example: pdf,docx,tif</b> protects files with the extension PDF, DOCX and TIF. Thus, files with extensino PPT remain unprotected.
+ycom_auth_media_settings_description = This plugin protects files in the media pool. The security settings for each file can be configured separately in the media pool. Files processed by media manager addon are currently not protected.
+ycom_auth_media_settings_xsendfile = If possible, please install X-SendFile module on your server. This will reduce server load and you can even send large secured files.
