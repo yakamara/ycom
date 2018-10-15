@@ -13,4 +13,7 @@ page:
         settings: { title: 'translate:ycom_media_auth_settings'}
 
 requires:
-    redaxo: '^5.6'
+    redaxo: '^5.7'
+
+    packages:
+        yrewrite: '^2.3'
