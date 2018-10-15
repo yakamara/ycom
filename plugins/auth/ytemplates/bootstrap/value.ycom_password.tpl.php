@@ -41,7 +41,6 @@ $input_group_end = '';
 if ($script) {
     $funcName = uniqid('rex_ycom_password_create'.$this->getId());
     $span = '<span class="input-group-btn">
-    <button type="button" class="btn btn-default getNewPass" onclick="'.$funcName.'eye('.$this->getId().')"><span class="fa fa-eye"></span></button>
     <button type="button" class="btn btn-default getNewPass" onclick="'.$funcName.'refresh('.$this->getId().')"><span class="fa fa-refresh"></span></button>
     </span>'; ?><script type="text/javascript">
 
@@ -58,6 +57,8 @@ if ($script) {
             for (var i = 0; i < n; i++) {
                 chars += this.charAt(Math.floor(Math.random() * this.length));
             }
+
+            console.log(min+" "+chars);
 
             return chars;
         };
@@ -103,6 +104,11 @@ if ($script) {
                 if (typeof myRules.uppercase.max === "undefined") {
                     max = min;
                 }
+                generate = myRules.uppercase.generate;
+                if (typeof myRules.uppercase.generate !== "undefined") {
+                    min = generate;
+                    max = generate;
+                }
                 ruleset += rules.uppercase;
                 myPassword += rules.uppercase.pick(min,max);
             }
@@ -114,6 +120,11 @@ if ($script) {
                 max = myRules.lowercase.max;
                 if (typeof myRules.lowercase.max === "undefined") {
                     max = min;
+                }
+                generate = myRules.lowercase.generate;
+                if (typeof myRules.lowercase.generate !== "undefined") {
+                    min = generate;
+                    max = generate;
                 }
                 ruleset += rules.lowercase;
                 myPassword += rules.lowercase.pick(min,max);
@@ -132,11 +143,15 @@ if ($script) {
                 } else {
                     min = 0;
                 }
-
                 if (max > myPassword.length) {
                     max = max - myPassword.length;
                 } else {
                     min = 0;
+                }
+                generate = myRules.letter.generate;
+                if (typeof myRules.letter.max !== "undefined") {
+                    min = generate;
+                    max = generate;
                 }
                 myPassword += ruleset.pick(min,max);
 
@@ -150,6 +165,11 @@ if ($script) {
                 if (typeof myRules.digit.max === "undefined") {
                     max = min;
                 }
+                generate = myRules.digit.generate;
+                if (typeof myRules.digit.max !== "undefined") {
+                    min = generate;
+                    max = generate;
+                }
                 ruleset += rules.digit;
                 myPassword += rules.digit.pick(min,max);
             }
@@ -161,6 +181,11 @@ if ($script) {
                 max = myRules.symbol.max;
                 if (typeof myRules.symbol.max === "undefined") {
                     max = min;
+                }
+                generate = myRules.symbol.generate;
+                if (typeof myRules.symbol.max !== "undefined") {
+                    min = generate;
+                    max = generate;
                 }
                 ruleset += rules.symbol;
                 myPassword += rules.symbol.pick(min,max);
@@ -180,13 +205,16 @@ if ($script) {
                 } else {
                     min = 0;
                 }
-
                 if (max > myPassword.length) {
                     max = max - myPassword.length;
                 } else {
                     min = 0;
                 }
-
+                generate = myRules.length.generate;
+                if (typeof myRules.length.max !== "undefined") {
+                    min = generate;
+                    max = generate;
+                }
                 myPassword += ruleset.pick(min,max);
 
             }
@@ -197,16 +225,6 @@ if ($script) {
 
             item.value = myPassword;
 
-        }
-        function <?= $funcName.'eye' ?>(input) {
-            var item = document.getElementsByName('<?php echo $this->getFieldName(); ?>').item(0);
-            var name = item.getAttribute('name');
-            var type = item.getAttribute('type');
-            if ('password' == type) {
-                item.setAttribute('type', 'text');
-            } else {
-                item.setAttribute('type', 'password');
-            }
         }
     </script><?php
 
