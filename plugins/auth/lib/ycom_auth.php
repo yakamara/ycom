@@ -72,7 +72,14 @@ class rex_ycom_auth
                 if (!in_array(rex_article::getCurrentId(), $ignoreRefArticles)) {
                     $params = [self::getRequestKey('auth_request_ref') => urlencode($_SERVER['REQUEST_URI'])];
                 }
-                $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied'), '', $params, '&');
+
+                if (!rex_ycom_auth::getUser() && rex_plugin::get('ycom', 'auth')->getConfig('article_id_login') != "") {
+                    $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_login'), '', $params, '&');
+
+                } else {
+                    $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied'), '', $params, '&');
+
+                }
             }
         }
 
