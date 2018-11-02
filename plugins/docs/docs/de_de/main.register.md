@@ -7,6 +7,7 @@
 ```
 generate_key|activation_key
 hidden|status|0
+hidden|termofuse_accepted|1
 
 fieldset|label|Login-Daten:
 
