@@ -1,13 +1,15 @@
 
 - Allgemeines
     - [Navigation](main.navigation.md)
+    - [Passwortregeln](main.password_rules.md)
+    - [Nutzerdaten auslesen](user.details.md)
+- Formulare
     - [Login](main.login.md)
     - [Registrierung](main.register.md)
     - [Profil](main.profile.md)
     - [Passwort ändern](main.change_password.md)
     - [Passwort zurücksetzen](main.reset_password.md)
-    - [Passwortregeln](main.password_rules.md)
     - [Logout](main.logout.md)
-    - [MediaAuth](media_auth.info.md)
+    - [Medienpool schützen](media_auth.info.md)
 - YForm erweitern
     - [Zielseiten pro Nutzer / Gruppe definieren](trick.target_per_type.md)
