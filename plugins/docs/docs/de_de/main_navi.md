@@ -9,3 +9,5 @@
     - [Passwortregeln](main.password_rules.md)
     - [Logout](main.logout.md)
     - [MediaAuth](media_auth.info.md)
+- YForm erweitern
+    - [Zielseiten pro Nutzer / Gruppe definieren](trick.target_per_type.md)
