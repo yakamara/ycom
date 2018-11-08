@@ -32,6 +32,7 @@ $sel_userfields = new rex_select();
 $sel_userfields->setName('login_field');
 $sel_userfields->setSize(1);
 
+$sel_userfields->addOption('id', 'id');
 $sel_userfields->addOption('email', 'email');
 $sel_userfields->addOption('login', 'login');
 
