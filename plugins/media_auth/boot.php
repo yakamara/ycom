@@ -1,17 +1,13 @@
 <?php
 
-// TODO: Backend Category Check
-
 if ($this->getConfig('media_auth_active')) {
+
     rex_extension::register(['MEDIA_MANAGER_BEFORE_SEND'], function (rex_extension_point $ep) {
         $redirect = rex_ycom_auth::init();
-        if (rex_ycom_media_auth::checkPerm($ep->getSubject(), $ep)) {
-            return true;
+        if (!rex_ycom_media_auth::checkPerm($ep->getSubject(), $ep)) {
+            $rules = new rex_ycom_media_auth_rules();
+            $rules->check($this->getConfig('media_auth_rule'));
         }
-
-        $rules = new rex_ycom_media_auth_rules();
-        $rules->check($this->getConfig('media_auth_rule'));
-        exit;
     });
 
     rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'MEDIA_UPDATED'], function (rex_extension_point $ep) {
