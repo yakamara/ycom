@@ -1,6 +1,6 @@
 package: ycom/docs
 version: '3.0dev'
-author: 'YCom Document Team'
+author: 'YCom Document Team: Jan Kristinus, Alexander Walther'
 supportpage: 'https://github.com/yakamara/redaxo_ycom'
 
 page:

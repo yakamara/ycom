@@ -1,13 +1,22 @@
 # MediaAuth-Plugin
 
-Mit dem MediaAuth-Plugin kann man einzelne Medien des Medienpools schützen, so dass diese im Frontend nicht mehr, oder nur unter bestimmten Vorraussetzungen aufgerufen werden können.
+Mit dem MediaAuth-Plugin werden Medien des Medienpools geschützt, sodass diese im Frontend nur unter bestimmten Vorraussetzungen aufgerufen werden können, bspw. nur im eingeloggten Zustand und nur für bestimmte YCom-Gruppen.
 
-Dazu ist das YRrewrite-Plugin nötig, welches dafür sorgt, dass alle Medien entsprechend durch die MediaAuth Überprüfung läuft. Technisch, wird der (direkte) Aufruf einer Medienpooldatei an den MediaManager weitergeleitet, eventuelle Effekte werden ausgeführt und gecacht und vor der Auslieferung überprüft MediaAuth die Rechte.
+Dazu ist das YRrewrite-Plugin `media_auth` nötig, das alle Medien auf ihre Berechtigung überprüft. 
 
-Sobald man im Backend eingeloggt ist hat direkt Zugriff zu allen Medien, deswegen bei Tests immer darauf achten, dass man im Backend ausgeloggt ist.
+> **Technische Erläuterung:** Anstelle eines direkten Aufrufs, bspw. `/media/meine_-_datei.pdf` werden die Aufrufe durch eine `.htaccess`-Regel über den **Media Manager** geleitet. Dort sorgt ein Authentifzierungs-Effekt dafür, dass die Berechtigungen des Besuchers überprüft werden und ggf die Auslieferung verweigert wird.
 
-* Aktiviertes YRewrite
-* MediaAuth aktivieren
-* Den Dateien entsprechende Rechte im Medienpool vergeben.
+> **Achtung:** Sofern man als Redakteur/Administrator im REDAXO-Backend eingeloggt ist, hat man immer Zugriff zu allen Medien. Daher empfehlen deswegen bei Tests immer darauf achten, dass man im Backend ausgeloggt ist.
 
+## Einrichtung
 
+1. Das Addon `YRewrite` installieren, aktivieren und das Setup ausführen
+2. Das YCom-Plugin `media_auth` aktivieren
+3. Medienpool den Dateien entsprechende Rechte geben.
+
+## Fehlerbehebung
+
+* **Das Schützen der Datei funktioniert nicht**: Sicherstellen, dass YRewrite installiert ist, aktiviert ist und die `.htaccess` im Hauptverzeichnis folgende Zeile enthält: 
+`RewriteRule ^media/(.*) %{ENV:BASE}/index.php?rex_media_type=default&rex_media_file=$1&%{QUERY_STRING} [B]`
+
+* **Bestimmte Dateitypen werden im Frontend nicht mehr korrekt dargestellt / heruntergeladen**: Bitte hier melden: [YRewrite GitHub](https://github.com/yakamara/redaxo_yrewrite/issues/235)

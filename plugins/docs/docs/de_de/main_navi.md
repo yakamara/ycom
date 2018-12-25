@@ -1,15 +1,17 @@
 
-- Allgemeines
-    - [Navigation](main.navigation.md)
+- Einrichtung
+    - [Erste Schritte](main.first-steps.md)
+    - [Einstellungen](main.settings.md)
+    - [Navigation anpassen](main.navigation.md)
+    - [YCom verwenden](user.details.md)
     - [Passwortregeln](main.password_rules.md)
-    - [Nutzerdaten auslesen](user.details.md)
 - Formulare
     - [Login](main.login.md)
-    - [Registrierung](main.register.md)
-    - [Profil](main.profile.md)
+    - [Logout](main.logout.md)
     - [Passwort ändern](main.change_password.md)
     - [Passwort zurücksetzen](main.reset_password.md)
-    - [Logout](main.logout.md)
+    - [Registrierung](main.register.md)
+    - [Profil](main.profile.md)
+- YCom erweitern
+    - [Login-Ziel je Nutzer / Gruppe definieren](trick.target_per_type.md)
     - [Medienpool schützen](media_auth.info.md)
-- YForm erweitern
-    - [Zielseiten pro Nutzer / Gruppe definieren](trick.target_per_type.md)
