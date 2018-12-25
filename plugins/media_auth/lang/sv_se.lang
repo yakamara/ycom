@@ -1,0 +1,10 @@
+ycom_media_auth_title = Media
+ycom_media_auth_settings = Inställningar
+ycom_auth_config_media_auth_rules = Regel om mediet inte kan öppnas
+
+ycom_media_auth_failed_header_notfound = Skicka Header `Not Found`
+ycom_media_auth_failed_header_perm_denied = Skicka Header `Permission denied`
+ycom_media_auth_failed_redirect_login = Ompekning till inloggning med redirect till medium (om inte inloggad)
+ycom_media_auth_failed_header_redirect_notfound = Vidarebefordring till NotFound Article
+
+ycom_media_auth_settings_updated = Inställningarna aktualiserades

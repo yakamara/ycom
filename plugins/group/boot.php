@@ -18,8 +18,12 @@ rex_extension::register('YCOM_AUTH_USER_CHECK', function (rex_extension_point $e
     }
 
     $article = $ep->getParam('article');
-    $me = $ep->getParam('me');
 
+    if ($article->getValue('ycom_auth_type') != 1) {
+        return $ep->getSubject();
+    }
+
+    $me = $ep->getParam('me');
     $type = $article->getValue('ycom_group_type');
 
     $userGroups = [];

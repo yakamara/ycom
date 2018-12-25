@@ -7,49 +7,54 @@ ycom_auth_config 				= Konfiguration
 ycom_auth_config_save 			= Spara konfigurationen
 ycom_auth_config_status 			= Status
 ycom_auth_config_security 		= Säkerhet
-ycom_auth_config_forwarder 		= Vidarebefordring till artikeln
-ycom_auth_config_login_field		= Login field
+ycom_auth_config_forwarder 		= Omdirigerar till artikel
+ycom_auth_config_login_field		= Login-fält
 
 ycom_auth_config_status_authactive = Autentisering aktiverad
-ycom_auth_config_status_stayactive = "Förbli inloggad" aktiv
+ycom_auth_config_status_stayactive = "Stanna inloggad" aktiverad
 ycom_auth_config_security_hashedpasswd = Krypterade lösenord (sha1)
-ycom_auth_config_id_jump_ok		= ... när du är inloggad
-ycom_auth_config_id_jump_not_ok	= ... när du inte är inloggad
-ycom_auth_config_id_jump_logout	= ... när du är utloggad
-ycom_auth_config_id_jump_denied	= ... när du försöker komma åt en spärrad artikel
+ycom_auth_config_id_jump_ok		= ... om du har loggat in
+ycom_auth_config_id_jump_not_ok	= ... om inte inloggad framgångsrikt
+ycom_auth_config_id_jump_logout	= ... efter att ha loggat ut
+ycom_auth_config_id_jump_denied	= ... när du begär åtkomst till en blockerad artikel
 ycom_auth_config_id_jump_activation_ok = ... efter framgångsrik aktivering
-ycom_auth_config_id_jump_activation_fail = ... när aktiveringen misslyckades
-ycom_auth_config_id_jump_newpassword_ok = ... när du återställde lösenordet
-ycom_auth_config_id_jump_newpassword_fail = ... när återställning av lösenordet misslyckades
-ycom_auth_config_id_jump_password = ... om "välj nytt lösenord" (new_password_required field) är utvald [valfritt]
-ycom_auth_config_id_jump_termofuse = .. om användningsvillkoren ännu inte har bekräftats (termofuse_accepterat fält är inte inställt) [valfritt]
+ycom_auth_config_id_jump_activation_fail = .. efter misslyckad aktivering
+ycom_auth_config_id_jump_newpassword_ok = ... efter framgångsrik återställning av lösenord
+ycom_auth_config_id_jump_newpassword_fail = .. efter misslyckad återställning av lösenord
+ycom_auth_config_id_jump_password = ... om "sätt nytt nya lösenordet" (new_password_required field) är vald [valfritt]
+ycom_auth_config_id_jump_termofuse = ... om användningsvillkoren ännu inte har bekräftats (termofuse_accepterat fält inte är inställt) [valfritt]
 
-ycom_auth_settings_updated = Konfiguration sparades
+ycom_auth_settings_updated = Konfigurationen har sparats
 
 ycom_auth_info_title = Förklaring
 
-ycom_auth_perm = Behörigheter
+ycom_auth_perm = Åtkomsträttigheter
 ycom_auth_update_perm = Aktualisera
-ycom_auth_perm_updated = Behörigheterna aktualiserades
+ycom_auth_perm_updated = Rättigheterna aktualiserades
 
-ycom_auth_password_not_updated = Lösenordet har inte aktualiserats
-ycom_auth_password_updated = Lösenordet har aktualiserats
+ycom_auth_password_not_updated = Lösenordet har inte uppdaterats
+ycom_auth_password_updated = Lösenordet har uppdaterats
 ycom_auth_password_exists = Lösenordet finns
-ycom_auth_password_isempty = Lösenordet finns inte
+ycom_auth_password_isempty = Lösenordet existerar inte
 
-ycom_auth_config_auth_rules = autentiseringsregel
-ycom_auth_config_login_tries_deactivateafter = Användaren kommer att deaktiveras efter {0} loginförsök
-ycom_auth_config_login_tries = Maximal antal loginförsök
-ycom_auth_config_login_tries_unlimited = Obegränsat många försök
-ycom_auth_config_login_tries_pause = Användaren blir spärrat i {1} minuter efter varje {0} inloggningsförsök
-ycom_auth_config_login_tries_always_pause = Användaren blir spärrat i {1} minuter efter {0} inloggningsförsök
+ycom_auth_config_auth_rules = Autentiseringsregel
+ycom_auth_config_login_tries_deactivateafter = Användaren är inaktiverad efter {0} inloggningsförsök
+ycom_auth_config_login_tries = Maximal antal inloggningsförsök
+ycom_auth_config_login_tries_unlimited = Oändlig många försök
+ycom_auth_config_login_tries_pause = Användaren är låst i {1} minuter efter varje {0} inloggningsförsök
+ycom_auth_config_login_tries_always_pause = Användaren är låst i {1} minuter efter {0} inloggningsförsök
 
-perm_options_ycomArticlePermissions[] = YCom - ställa in sidrättigheter
+perm_options_ycomArticlePermissions[] = YCom - att kunna ställa in sidrättigheter
 
-no_permission_to_edit = Ingen behörighet att redigera
+no_permission_to_edit = Inga redigeringsrättigheter
 
 ycom_validate_password_policy_rules_error = Vänligen observera standardreglerna minst 1 bokstav stor och liten, minst 8 tecken
 ycom_validate_password_policy_rules = Lösenordregler som JSON
 ycom_validate_password_policy_rules_error_message = Felmeddelande
 
 ycom_validate_password_policy_rules_script = Aktivera Password Creator
+
+ycom_auth_config_pages = Allmänna sidor
+ycom_auth_config_id_login = Login sida
+ycom_auth_config_id_register = Registreringssida
+ycom_auth_config_id_password = Återställ lösenord
