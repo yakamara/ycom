@@ -5,7 +5,7 @@
     - [Navigation anpassen](main.navigation.md)
     - [YCom verwenden](user.details.md)
     - [Passwortregeln](main.password_rules.md)
-- Formulare
+- Frontend-Formulare
     - [Login](main.login.md)
     - [Logout](main.logout.md)
     - [Passwort ändern](main.change_password.md)
@@ -15,3 +15,5 @@
 - YCom erweitern
     - [Login-Ziel je Nutzer / Gruppe definieren](trick.target_per_type.md)
     - [Medienpool schützen](media_auth.info.md)
+- Tipps und Tricks 
+    - [Weitere Tipps und Tricks](trick.misc.md)
