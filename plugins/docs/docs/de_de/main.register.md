@@ -20,6 +20,8 @@ validate|empty|name|Bitte geben Sie Ihren Namen ein.
 ycom_auth_password|password|Ihr Passwort:*|{"length":{"min":6},"letter":{"min":1},"lowercase":{"min":0},"uppercase":{"min":0},"digit":{"min":1},"symbol":{"min":0}}|Das Passwort muss mindestens 6 Zeichen lang sein und mindestens eine Ziffer enthalten
 password|password_2|Passwort bestätigen:*||no_db
 
+checkbox|termofuse_accepted|Ich habe die Nutzungsbedingungen akzeptiert.|0|0|
+
 html|required|<p class="form-required">* Pflichtfelder</p>
 
 captcha|Bitte geben Sie den entsprechenden Sicherheitscode ein. Sollten Sie den Code nicht lesen können klicken Sie bitte auf die Grafik, um einen neuen Code zu generieren.|Sie haben den Sicherheitscode falsch eingegeben.
@@ -37,6 +39,14 @@ action|db|rex_ycom_user
 action|tpl2email|access_request_de|email|
 ```
 
+> Hinweis: Sollen keine "Terms of Use" abgefragt werden, dann diese Zeile:
+```
+checkbox|termofuse_accepted|Ich habe die Nutzungsbedingungen akzeptiert.|0|0|
+```
+...ersetzt werden durch:
+```
+hidden|termofuse_accepted|1
+```
 
 ### E-Mail-Template `access_request_de` für die Bestätigung erstellen
 
@@ -48,9 +58,6 @@ Bitte die Id (888) durch die Id des register_proof Artikels ersetzen
 <p>Bitte klicken Sie diesen Link, um die Anmeldung zu bestätigen:</p>
 <p><a href="<?= trim(rex::getServer(),'/') . rex_getUrl(888) ?>?rex_ycom_activation_key=REX_YFORM_DATA[field=activation_key]&rex_ycom_id=REX_YFORM_DATA[field=email]"><?= trim(rex::getServer(),'/') . rex_getUrl(888) ?>?rex_ycom_activation_key=REX_YFORM_DATA[field=activation_key]&rex_ycom_id=REX_YFORM_DATA[field=email]</a></p>
 ```
-
-
-
 
 ### Registrierungsbestätigung
 
