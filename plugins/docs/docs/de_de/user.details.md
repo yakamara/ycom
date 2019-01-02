@@ -32,10 +32,29 @@ $ycom_user = rex_ycom_auth::getUser();
 if($ycom_user) {
         $ycom_group = $ycom_user->getRelatedDataset('ycom_groups');
         $ycom_group->getValue("name"); // Name der Gruppe
+
+        if($ycom_user->isInGroup($group_id)) {
+            // User ist in der Gruppe   
+        } else {
+            // User ist nicht in der Gruppe
+        };
 }
 ```
 
 > Hinweis: Die Felder lassen sich über den Table Manager in YForm um eigene Felder erweitern.
+
+**Gruppen-Berechtigung eines YCom-Nutzers auslesen:**
+
+```
+$article_id = 42; // ID des Artikels
+$ycom_user = rex_ycom_auth::getUser();
+if($ycom_user->checkPerm($article_id)) {
+    // User hat Berechtigung, den Artikel zu sehen  
+} else {
+    // User hat nicht die Berechtigung, den Artikel zu sehen
+};
+```
+Weitere Methoden der rex_ycom_auth-Klasse: https://github.com/yakamara/redaxo_ycom/blob/master/plugins/auth/lib/ycom_auth.php
 
 ## SQL-Variante
 
