@@ -214,7 +214,7 @@ class rex_ycom_auth
                     $sessionKey = uniqid('ycom_user', true);
                     $me->setValue('session_key', $sessionKey);
 
-                    self::setCookieVar(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl', 14)), '/');
+                    self::setCookieVar(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl', 14)));
 
                     // session fixation
                     self::regenerateSessionId();
@@ -231,7 +231,7 @@ class rex_ycom_auth
                 if (isset($params['loginStay']) && $params['loginStay']) {
                     $sessionKey = bin2hex(random_bytes(16));
                     $me->setValue('session_key', $sessionKey);
-                    setcookie(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl', 14)), '/');
+                    self::setCookieVar(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl', 14)));
                 }
 
                 $me->setValue('last_action_time', date('Y-m-d H:i:s'));
@@ -367,7 +367,7 @@ class rex_ycom_auth
     {
         self::setSessionVar(self::getLoginKey(), null);
         self::setCookieVar(self::getLoginKey(), null);
-        self::setCookieVar(self::getLoginKey(), '', time() - 3600, '/');
+        self::setCookieVar(self::getLoginKey(), '', time() - 3600);
         self::$me = null;
     }
 
@@ -381,13 +381,16 @@ class rex_ycom_auth
         return rex_session($key, $varType, $default);
     }
 
-    public static function setCookieVar($key, $value, $time = null, $path = '/')
+    public static function setCookieVar($key, $value, $time = null)
     {
+        $sessionConfig = rex::getProperty('session', []);
+
         if (!$time) {
             $time = time() + 3600;
         }
+        setcookie($key, $value, $time, $sessionConfig['frontend']['cookie']['path'], $sessionConfig['frontend']['cookie']['domain']);
         $_COOKIE[$key] = $value;
-        setcookie($key, $value, $time , $path);
+
     }
 
     public static function getCookieVar($key, $varType = 'string', $default = '')
