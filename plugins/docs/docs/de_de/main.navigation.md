@@ -1,9 +1,17 @@
 # Navigationen 
 
-#### rex_ycom_navigation::factory();
 
-Damit die Userberechtigungen in der Navigation berücksichtigt werden muss anstelle der Klasse rex_navigation::factory die Klasse
-`rex_ycom_navigation::factory();` benutzt werden. Die Klasse ist dann weiterhin wie die Klasse rex_navigation::factory(); zu benutzen.
+### Benutzung der REDAXO Navigation
+
+Damit die Userberechtigungen in der Navigation berücksichtigt werden muss die REDAXO Klasse rex_navigation::factory ergänzt werden.
+
+```
+$nav = rex_navigation::factory();
+$nav->addCallback('rex_ycom_auth::checkPerm');
+$nav->show();
+```
+
+die Klasse `rex_ycom_navigation::factory();` existiert seit Version 3 nicht mehr.
 
 ### Meta-User-Navigation
 
