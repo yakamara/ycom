@@ -369,6 +369,8 @@ class rex_ycom_auth
         self::setCookieVar(self::getLoginKey(), null);
         self::setCookieVar(self::getLoginKey(), '', time() - 3600);
         self::$me = null;
+        rex_response::setHeader('Clear-Site-Data', '"cache", "cookies", "storage", "executionContexts"');
+
     }
 
     public static function setSessionVar($key, $value)
