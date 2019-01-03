@@ -48,8 +48,6 @@ class rex_ycom_auth
         $params['filter'] = ['status > 0'];
         $login_status = self::login($params);
 
-        dump($_SESSION);
-
         //# set redirect after Login
         if ($login_status == 2) {
             if ($params['referer']) {
