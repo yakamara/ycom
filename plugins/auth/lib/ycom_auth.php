@@ -70,7 +70,14 @@ class rex_ycom_auth
                 $ignoreRefArticles[] = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_ok');
 
                 if (!in_array(rex_article::getCurrentId(), $ignoreRefArticles)) {
-                    $params = [self::getRequestKey('auth_request_ref') => urlencode($_SERVER['REQUEST_URI'])];
+                    if (rex_addon::get('yrewrite')->isInstalled()) {
+                        $refererURL = rex_yrewrite::getFullUrlByArticleId();
+                    } else {
+                        $refererURL = $_SERVER['REQUEST_URI'];
+                    }
+                    $refererURL = self::cleanReferer($refererURL);
+                    $params = [self::getRequestKey('auth_request_ref') => urlencode($refererURL)];
+
                 }
 
                 if (!rex_ycom_auth::getUser() && rex_plugin::get('ycom', 'auth')->getConfig('article_id_login') != "") {
@@ -448,8 +455,22 @@ class rex_ycom_auth
 
     public static function cleanReferer($url)
     {
+
+        if ($url === '') {
+            return '';
+        }
+
         $url = parse_url($url);
         $returnUrl = '';
+
+        if (isset($url['host']) && rex_addon::get('yrewrite')->isInstalled()) {
+            $domains = rex_yrewrite::getDomains();
+            dump($domains);
+            if (array_key_exists($url['host'], $domains)) {
+                $returnUrl .= (rex_yrewrite::isHttps() ? 'https://' : 'http://');
+                $returnUrl .= $domains[$url['host']]->getHost();
+            }
+        }
 
         if (isset($url['path']) && $url['path'] != '') {
             $returnUrl .= $url['path'];
@@ -467,4 +488,5 @@ class rex_ycom_auth
 
         return $returnUrl;
     }
+
 }
