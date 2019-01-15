@@ -147,7 +147,7 @@ class rex_ycom_auth
         }
 
         if (self::getCookieVar(self::getLoginKey(), 'string', null)) {
-            $sessionKey = rex_cookie(self::getLoginKey(), 'string');
+            $sessionKey = self::getCookieVar(self::getLoginKey(), 'string');
         }
 
         if (
@@ -218,9 +218,8 @@ class rex_ycom_auth
                 if (count($loginUsers) == 1) {
                     $me = $loginUsers[0];
 
-                    $sessionKey = uniqid('ycom_user', true);
+                    $sessionKey = bin2hex(random_bytes(16));
                     $me->setValue('session_key', $sessionKey);
-
                     self::setCookieVar(self::getLoginKey(), $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl', 14)));
 
                     // session fixation
