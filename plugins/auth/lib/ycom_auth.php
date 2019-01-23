@@ -464,7 +464,7 @@ class rex_ycom_auth
 
         if (isset($url['host']) && rex_addon::get('yrewrite')->isInstalled()) {
             $domains = rex_yrewrite::getDomains();
-            dump($domains);
+
             if (array_key_exists($url['host'], $domains)) {
                 $returnUrl .= (rex_yrewrite::isHttps() ? 'https://' : 'http://');
                 $returnUrl .= $domains[$url['host']]->getHost();
