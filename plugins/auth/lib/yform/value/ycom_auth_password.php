@@ -13,9 +13,9 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
         if ($this->params['send'] == '1') {
             $PasswordPolicy = new rex_password_policy($rules);
 
-            if ($this->getValue() != '' && $PasswordPolicy->check($this->getValue()) !== true) {
+            if ($this->getValue() != '' && true !== $msg = $PasswordPolicy->check($this->getValue())) {
                 $this->params['warning'][$this->getId()] = $this->params['error_class'];
-                $this->params['warning_messages'][$this->getId()] = $this->getElement('message');
+                $this->params['warning_messages'][$this->getId()] = trim($this->getElement('message')) == '' ? $msg : $this->getElement('message');
             }
         }
 
