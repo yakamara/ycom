@@ -18,7 +18,7 @@ if (rex_request('func', 'string') == 'update') {
     $this->setConfig('article_id_jump_logout', rex_request('article_id_jump_logout', 'int'));
     $this->setConfig('article_id_jump_denied', rex_request('article_id_jump_denied', 'int'));
     $this->setConfig('article_id_jump_password', rex_request('article_id_jump_password', 'int'));
-    $this->setConfig('article_id_jump_termofuse', rex_request('article_id_jump_termofuse', 'int'));
+    $this->setConfig('article_id_jump_termsofuse', rex_request('article_id_jump_termsofuse', 'int'));
     $this->setConfig('article_id_login', rex_request('article_id_login', 'int'));
     $this->setConfig('article_id_register', rex_request('article_id_register', 'int'));
     $this->setConfig('article_id_password', rex_request('article_id_password', 'int'));
@@ -126,10 +126,10 @@ $content .= ' />
 
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_termofuse">'.$this->i18n('ycom_auth_config_id_jump_termofuse').' <small>[article_id_jump_termofuse]</small></label>
+				<label for="rex-form-article_termsofuse">'.$this->i18n('ycom_auth_config_id_jump_termsofuse').' <small>[article_id_jump_termsofuse]</small></label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(10, 'article_id_jump_termofuse', stripslashes($this->getConfig('article_id_jump_termofuse'))) .'
+				'. rex_var_link::getWidget(10, 'article_id_jump_termsofuse', stripslashes($this->getConfig('article_id_jump_termsofuse'))) .'
 			</div>
 		</div>
 

@@ -22,7 +22,7 @@ ycom_auth_config_id_jump_activation_fail = .. efter misslyckad aktivering
 ycom_auth_config_id_jump_newpassword_ok = ... efter framgångsrik återställning av lösenord
 ycom_auth_config_id_jump_newpassword_fail = .. efter misslyckad återställning av lösenord
 ycom_auth_config_id_jump_password = ... om "sätt nytt nya lösenordet" (new_password_required field) är vald [valfritt]
-ycom_auth_config_id_jump_termofuse = ... om användningsvillkoren ännu inte har bekräftats (termofuse_accepterat fält inte är inställt) [valfritt]
+ycom_auth_config_id_jump_termsofuse = ... om användningsvillkoren ännu inte har bekräftats (termsofuse_accepterat fält inte är inställt) [valfritt]
 
 ycom_auth_settings_updated = Konfigurationen har sparats
 

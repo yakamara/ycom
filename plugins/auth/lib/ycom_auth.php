@@ -104,15 +104,15 @@ class rex_ycom_auth
 
         if (self::getUser()) {
             $article_id_password = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_password');
-            $article_id_termofuse = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_termofuse');
+            $article_id_termsofuse = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_termsofuse');
 
             if ($article_id_password != '' && self::getUser()->getValue('new_password_required') == 1) {
                 if ($article_id_password != rex_article::getCurrentId()) {
                     $params['redirect'] = rex_getUrl($article_id_password, '', [], '&');
                 }
-            } elseif ($article_id_termofuse != '' && self::getUser()->getValue('termofuse_accepted') != 1) {
-                if ($article_id_termofuse != rex_article::getCurrentId()) {
-                    $params['redirect'] = rex_getUrl($article_id_termofuse, '', [], '&');
+            } elseif ($article_id_termsofuse != '' && self::getUser()->getValue('termsofuse_accepted') != 1) {
+                if ($article_id_termsofuse != rex_article::getCurrentId()) {
+                    $params['redirect'] = rex_getUrl($article_id_termsofuse, '', [], '&');
                 }
             }
         }

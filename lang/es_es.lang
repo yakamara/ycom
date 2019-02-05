@@ -58,5 +58,5 @@ ycom_please_enter_login = Por favor ingrese el inicio de sesión
 ycom_please_enter_email = Por favor ingrese el correo electrónico
 
 last_password_time = Último cambio de contraseña
-termofuse_accepted = Términos de uso confirmados
+termsofuse_accepted = Términos de uso confirmados
 new_password_required = Se debe establecer una nueva contraseña

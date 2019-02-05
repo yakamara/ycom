@@ -58,5 +58,5 @@ ycom_please_enter_login = Please enter username
 ycom_please_enter_email = Please enter e-mail address
 
 last_password_time = Last password change
-termofuse_accepted = Confirmed terms of use
+termsofuse_accepted = Confirmed terms of use
 new_password_required = A new password needs to be set

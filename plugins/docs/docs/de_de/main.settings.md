@@ -16,7 +16,7 @@ article_id_jump_not_ok  | Ziel-Artikel, zu dem weitergeleitet wird, wenn der Log
 article_id_jump_logout  | Ziel-Artikel, zu dem weitergeleitet wird, nachdem Logout erfolgt ist. Dies kann auch der Login-Artikel sein.
 article_id_jump_denied  | Ziel-Artikel, zu dem weitergeleitet wird, wenn der Besucher nicht die passende Gruppen-Berechtigung hat. Z.B., wenn der Benutzer nicht eingeloggt ist oder keine passende Gruppenberechtigung hat. Dies kann auch der Login-Artikel sein.
 article_id_jump_password| (optional) Artikel, in dem das Passwort geändert wird.
-article_id_jump_termofuse| (optional) Artikel, zu dem der Nutzer weitergeleitet wird, wenn der Besucher die Nutzungsbedingungen akzeptiert hat.
+article_id_jump_termsofuse| (optional) Artikel, zu dem der Nutzer weitergeleitet wird, wenn der Besucher die Nutzungsbedingungen akzeptiert hat.
 
 Allgemeine Seiten       | Erläuterung
 ----------------------- | ------------

@@ -9,10 +9,9 @@ page:
     block: ycom
     icon: rex-icon fa-group
 
-
 requires:
     packages:
-        yform: '^3.0-beta2'
+        yform: '^3'
         phpmailer: '^2.2'
     redaxo: '^5.6'
 

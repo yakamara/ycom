@@ -22,7 +22,7 @@ ycom_auth_config_id_jump_activation_fail = ... when activation was unsuccessfull
 ycom_auth_config_id_jump_newpassword_ok = ... when successfully reset password
 ycom_auth_config_id_jump_newpassword_fail = ... when password reset was unsuccessfull
 ycom_auth_config_id_jump_password = ... if setting a new password (new_password_required field) [optional]
-ycom_auth_config_id_jump_termofuse = ... if terms of use have not been confirmed (termofuse_accepted field not set) [optional]
+ycom_auth_config_id_jump_termsofuse = ... if terms of use have not been confirmed (termsofuse_accepted field not set) [optional]
 
 ycom_auth_settings_updated = Configuration has been saved
 

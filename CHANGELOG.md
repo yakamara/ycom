@@ -4,6 +4,13 @@ Changelog
 Version 3.0 – xx.xx.2018
 --------------------------
 
+#### Bei Update: Bitte unbedingt beachten:
+
+* termofuse wurde zu termsofuse
+* cookie und session werden nun mit redaxo session geteile.
+* wenn "eingeloggt bleiben" genutzt wird, in der redaxo_config path für frontend und backend auch "/" setzen
+
+
 #### Neu
 
 * media_auth Plugin ergänzt. Man kann einzelnen Medien YCom Zugriffsrechte geben. braucht rex 5.7

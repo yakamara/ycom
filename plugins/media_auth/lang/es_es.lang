@@ -22,7 +22,7 @@ ycom_auth_config_id_jump_activation_fail = .. después de la activación fallida
 ycom_auth_config_id_jump_newpassword_ok = ... después de restablecer con éxito la contraseña
 ycom_auth_config_id_jump_newpassword_fail = .. después de un restablecimiento de contraseña fallido
 ycom_auth_config_id_jump_password = 
-ycom_auth_config_id_jump_termofuse = 
+ycom_auth_config_id_jump_termsofuse =
 
 ycom_auth_settings_updated = Se ha guardado la configuración.
 
