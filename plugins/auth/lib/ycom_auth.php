@@ -106,7 +106,10 @@ class rex_ycom_auth
             $article_id_password = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_password');
             $article_id_termsofuse = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_termsofuse');
 
-            if ($article_id_password != '' && self::getUser()->getValue('new_password_required') == 1) {
+            if (rex_plugin::get('ycom', 'auth')->getConfig('article_id_logout') == rex_article::getCurrentId()) {
+                // ignore rest - because logout is always ok .
+
+            } elseif ($article_id_password != '' && self::getUser()->getValue('new_password_required') == 1) {
                 if ($article_id_password != rex_article::getCurrentId()) {
                     $params['redirect'] = rex_getUrl($article_id_password, '', [], '&');
                 }
