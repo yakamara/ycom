@@ -22,7 +22,7 @@ Folgende Kategorien in der Struktur in oberster Ebene anlegen:
 
 ## Navigation vorbereiten
 
-Die Navigation muss angepasst werden, sodass Kategorien und Artikel, für die der Nutzer keine Berechtigung hat, nicht dargestellt werden. Sofern die Core-Funktion `rex_navigation::factory()` verwendet wird, folgende Zeile austauschen: `rex_ycom_navigation::factory();`
+Die Navigation muss angepasst werden, sodass Kategorien und Artikel, für die der Nutzer keine Berechtigung hat, nicht dargestellt werden. Sofern die Core-Funktion `rex_navigation::factory()` verwendet wird, folgende Zeile hinzufügen: `$nav->addCallback('rex_ycom_auth::checkPerm');`
 
 > Hinweis: Wenn die Navigation nicht via `rex_navigation::factory()` 
 erfolgt, werden ggf. alle Menüpunkte angezeigt. Die Navigation muss dann so erweitert werden, dass Nutzer ohne Berechtigungen die entsprechenden Menüpunkte nicht sehen kann.
