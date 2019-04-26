@@ -73,7 +73,7 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
 
     public function getDescription()
     {
-        return 'ycom_auth_password -> Beispiel: ycom_auth_password|name|label|[password-rules-as-json]|message|[script 0/1]';
+        return 'ycom_auth_password -> Beispiel: ycom_auth_password|name|label|{"length":{"min":10}}|message|[script 0/1]';
     }
 
     public function getDefinitions()
