@@ -2,6 +2,15 @@
 
 if ($this->getConfig('media_auth_active')) {
 
+    rex_extension::register(['MEDIA_IS_PERMITTED'], function (rex_extension_point $ep) {
+        $subject = $ep->getSubject();
+        if (!$subject) {
+            return false;
+        }
+        $rex_media = $ep->getParam('element');
+        return \rex_ycom_media_auth::checkFrontendPerm($rex_media);
+    });
+
     rex_extension::register(['MEDIA_MANAGER_BEFORE_SEND'], function (rex_extension_point $ep) {
         $redirect = rex_ycom_auth::init();
         if (!rex_ycom_media_auth::checkPerm($ep->getSubject(), $ep)) {
