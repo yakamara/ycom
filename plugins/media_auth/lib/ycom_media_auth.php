@@ -22,10 +22,17 @@ class rex_ycom_media_auth extends \rex_yform_manager_dataset
         }
 
         // is rex_media
-        $rex_media = rex_media::get($media->getMediaFilename());
+        $rex_media = \rex_media::get($media->getMediaFilename());
         if(!$rex_media) {
             return false;
         }
+
+        return self::checkFrontendPerm($rex_media);
+
+    }
+
+    public static function checkFrontendPerm(\rex_media $rex_media)
+    {
 
         $authType = (int) $rex_media->getValue('ycom_auth_type');
         $groupType = (int) $rex_media->getValue('ycom_group_type');
