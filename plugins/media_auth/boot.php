@@ -3,7 +3,11 @@
 if ($this->getConfig('media_auth_active')) {
 
     rex_extension::register(['MEDIA_IS_PERMITTED'], function (rex_extension_point $ep) {
+        $ycom_ignore = $ep->getParam('ycom_ignore');
         $subject = $ep->getSubject();
+        if ($ycom_ignore) {
+            return $subject;
+        }
         if (!$subject) {
             return false;
         }
@@ -12,6 +16,10 @@ if ($this->getConfig('media_auth_active')) {
     });
 
     rex_extension::register(['MEDIA_MANAGER_BEFORE_SEND'], function (rex_extension_point $ep) {
+        $ycom_ignore = $ep->getParam('ycom_ignore');
+        if ($ycom_ignore) {
+            return;
+        }
         $redirect = rex_ycom_auth::init();
         if (!rex_ycom_media_auth::checkPerm($ep->getSubject(), $ep)) {
             $rules = new rex_ycom_media_auth_rules();
