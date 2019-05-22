@@ -14,6 +14,7 @@ captcha|Bitte geben Sie den entsprechenden Sicherheitscode ein. Sollten Sie den 
 
 validate|email|email|Bitte geben Sie die E-Mail ein.
 validate|empty|email|Bitte geben Sie Ihre E-Mail ein.
+validate|in_table|email|rex_ycom_user|email|Für die angegebene E-Mail-Adresse existiert kein Nutzer.|
 
 action|db_query|update rex_ycom_user set activation_key = ? where email = ?|activation_key,email
 action|tpl2email|resetpassword_de|email|
