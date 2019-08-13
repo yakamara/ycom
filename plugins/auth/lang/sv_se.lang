@@ -56,5 +56,6 @@ ycom_validate_password_policy_rules_script = Aktivera Password Creator
 
 ycom_auth_config_pages = Allmänna sidor
 ycom_auth_config_id_login = Login sida
+ycom_auth_config_id_logout = Logout-sida
 ycom_auth_config_id_register = Registreringssida
 ycom_auth_config_id_password = Återställ lösenord
