@@ -51,12 +51,14 @@ hidden|termsofuse_accepted|1
 ### E-Mail-Template `access_request_de` für die Bestätigung erstellen
 
 ```
-<!--
-http://redaxo/bestaetigung/?rex_ycom_activation_key=xxxx&rex_ycom_id=yyyy 
-Bitte die Id (888) durch die Id des register_proof Artikels ersetzen
--->
+<?php
+$article_id = 888; // wichtig: hier die Artikel-ID der Bestätigungsseite (register_proof Artikel) eintragen
+
+$article_url = rex_getUrl($article_id,'',array('rex_ycom_activation_key'=>'REX_YFORM_DATA[field=activation_key]','rex_ycom_id'=>'REX_YFORM_DATA[field=email]'));
+$full_url = trim(rex::getServer(),'/').trim($article_url,'.');
+?>
 <p>Bitte klicken Sie diesen Link, um die Anmeldung zu bestätigen:</p>
-<p><a href="<?= trim(rex::getServer(),'/') . rex_getUrl(888) ?>?rex_ycom_activation_key=REX_YFORM_DATA[field=activation_key]&rex_ycom_id=REX_YFORM_DATA[field=email]"><?= trim(rex::getServer(),'/') . rex_getUrl(888) ?>?rex_ycom_activation_key=REX_YFORM_DATA[field=activation_key]&rex_ycom_id=REX_YFORM_DATA[field=email]</a></p>
+<p><a href="<?=$full_url;?>"><?=$full_url;?></a></p>
 ```
 
 ### Registrierungsbestätigung
