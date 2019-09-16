@@ -12,8 +12,9 @@ page:
 requires:
     packages:
         yform: '^3'
+        yrewrite: '^2.6'
         phpmailer: '^2.2'
-    redaxo: '^5.6'
+    redaxo: '^5.7'
 
 system_plugins:
     - auth

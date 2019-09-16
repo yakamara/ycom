@@ -4,6 +4,12 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
 {
     public function enterObject()
     {
+        if (rex::isBackend()) {
+            $this->params['warning'][] = 1;
+            $this->params['warning_messages'][] = rex_i18n::translate($this->getElement(4));
+            return;
+        }
+
         $vars = [];
 
         $e = explode(',', $this->getElement(2));
@@ -15,9 +21,9 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
         }
 
         $filter = null;
-        if ($this->getElement(3) != '') {
+        if ('' != $this->getElement(3)) {
             $filter_query = $this->getElement(3);
-            $filter = function (rex_yform_manager_query $query) use ($filter_query) {
+            $filter = static function (rex_yform_manager_query $query) use ($filter_query) {
                 $query->whereRaw($filter_query);
             };
         }
@@ -32,11 +38,11 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
         } else {
             // Load fields for eMail or DB
             $fields = $this->getElement(5);
-            if ($fields != '') {
+            if ('' != $fields) {
                 $fields = explode(',', $fields);
                 foreach ($fields as $field) {
                     $this->params['value_pool']['email'][$field] = rex_ycom_auth::getUser()->getValue($field);
-                    if ($this->getElement(6) != 'no_db') {
+                    if ('no_db' != $this->getElement(6)) {
                         $this->params['value_pool']['sql'][$field] = rex_ycom_auth::getUser()->getValue($field);
                     }
                 }

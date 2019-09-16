@@ -39,10 +39,10 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
             }
         }
 
-        rex_extension::registerPoint(new rex_extension_point('REX_YCOM_YFORM_SAVED', (isset($sql) ? $sql : null),
+        rex_extension::registerPoint(new rex_extension_point('REX_YCOM_YFORM_SAVED', ($sql ?? null),
             [
                 'form' => $this,
-                'sql' => (isset($sql) ? $sql : null),
+                'sql' => ($sql ?? null),
                 'table' => rex_ycom_user::table(),
                 'action' => $action,
                 'id' => $this->params['main_id'],

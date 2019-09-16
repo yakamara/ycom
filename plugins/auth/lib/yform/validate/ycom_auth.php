@@ -1,6 +1,6 @@
 <?php
 
-class rex_yform_validate_ycom_auths extends rex_yform_validate_abstract
+class rex_yform_validate_ycom_auth extends rex_yform_validate_abstract
 {
     public function postValueAction()
     {
@@ -14,13 +14,13 @@ class rex_yform_validate_ycom_auths extends rex_yform_validate_abstract
             } elseif ($k == $this->getElement(3)) {
                 $psw = $v;
             } elseif ($k == $this->getElement(4)) {
-                if ($v == 1) {
+                if (1 == $v) {
                     $stay = true;
                 }
             }
         }
 
-        if ($login == '' || $psw == '') {
+        if ('' == $login || '' == $psw) {
             $this->params['warning'][] = 1;
             $this->params['warning_messages'][] = $this->getElement(5);
             rex_ycom_auth::clearUserSession();
@@ -43,7 +43,7 @@ class rex_yform_validate_ycom_auths extends rex_yform_validate_abstract
 
         $status = rex_ycom_auth::login($params);
 
-        if ($status != 2) {
+        if (2 != $status) {
             $this->params['warning'][] = 1;
             $this->params['warning_messages'][] = $this->getElement(6);
             rex_ycom_auth::clearUserSession();

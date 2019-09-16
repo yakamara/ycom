@@ -6,13 +6,13 @@ class rex_yform_value_ycom_auth_load_user extends rex_yform_value_abstract
     {
         if (rex_ycom_auth::getUser() && !$this->params['send']) {
             $fields = $this->getElement(2);
-            if ($fields != '') {
+            if ('' != $fields) {
                 $fields = explode(',', $this->getElement(2));
             } else {
                 $fields = [];
             }
             foreach ($this->params['values'] as $o) {
-                if ((count($fields) == 0 || in_array($o->getName(), $fields)) && $o->getName() != $this->getName()) {
+                if ((0 == count($fields) || in_array($o->getName(), $fields)) && $o->getName() != $this->getName()) {
                     $o->setValue(@rex_ycom_auth::getUser()->getValue($o->getName()));
                 }
             }

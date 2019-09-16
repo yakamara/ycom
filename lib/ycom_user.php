@@ -23,4 +23,9 @@ class rex_ycom_user extends \rex_yform_manager_dataset
 
         return false;
     }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
 }
