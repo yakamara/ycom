@@ -414,7 +414,7 @@ class rex_ycom_auth
         if (!$time) {
             $time = time() + 3600;
         }
-        setcookie($key, $value, $time, $sessionConfig['frontend']['cookie']['path'], $sessionConfig['frontend']['cookie']['domain']);
+        setcookie($key, $value, $time, '/', $sessionConfig['frontend']['cookie']['domain']); // $sessionConfig['frontend']['cookie']['path']
         $_COOKIE[$key] = $value;
 
     }
