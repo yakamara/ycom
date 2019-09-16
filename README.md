@@ -1,4 +1,4 @@
-YCom für REDAXO 5.6
+YCom für REDAXO 5.7
 =============
 
 YCom ist ein Addon, das REDAXO um eine Frontend-Authentifizierung erweitert. Dadurch lässt sich bspw. ein einfaches Login im Frontend umsetzen - ebenso wie eine komplexe Community-Verwaltung.
