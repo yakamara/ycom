@@ -56,7 +56,7 @@ class rex_ycom_auth
          */
         $currentId = rex_article::getCurrentId();
         if ($article = rex_article::get($currentId)) {
-            if (!self::checkPerm($article) && !$params['redirect'] && rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied') != rex_article::getCurrentId()) {
+            if (!$article->isPermitted() && !$params['redirect'] && rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied') != rex_article::getCurrentId()) {
                 $params = [];
 
                 $ignoreRefArticles = [];
@@ -292,8 +292,19 @@ class rex_ycom_auth
         return self::$me;
     }
 
-    public static function checkPerm(&$article)
+    /* @deprecated */
+    public static function checkPerm( &$article)
     {
+        return self::articleIsPermitted($article);
+    }
+
+    public static function articleIsPermitted(&$article, $xs = true)
+    {
+
+        if (!$xs) {
+            return false;
+        }
+
         $me = self::getUser();
 
         if ('1' != rex_plugin::get('ycom', 'auth')->getConfig('auth_active')) {
@@ -321,7 +332,7 @@ class rex_ycom_auth
         // 0 - parent perms
         if (!isset($xs) && $permType < 1) {
             if ($o = $article->getParent()) {
-                return self::checkPerm($o);
+                return $o->isPermitted();
             }
 
             // no parent, no perm set -> for all accessible

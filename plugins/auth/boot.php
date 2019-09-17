@@ -13,10 +13,17 @@ if (!rex::isBackend()) {
         }
     });
 
+    /* @deprecated use EP ART_IS_PERMITTED and CAT_IS_PERMITTED instead´*/
     rex_extension::register('YREWRITE_ARTICLE_PERM', function (rex_extension_point $ep) {
         $params = $ep->getParams();
-        return rex_ycom_auth::checkPerm($params['article']);
+        return rex_ycom_auth::articleIsPermitted($params['article']);
     });
+
+    rex_extension::register(['ART_IS_PERMITTED','CAT_IS_PERMITTED'], function (rex_extension_point $ep) {
+        $params = $ep->getParams();
+        return rex_ycom_auth::articleIsPermitted($params['element'], $ep->getSubject());
+    });
+
 } else {
     rex_view::addCssFile($this->getAssetsUrl('styles.css'));
 
