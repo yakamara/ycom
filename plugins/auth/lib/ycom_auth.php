@@ -292,15 +292,14 @@ class rex_ycom_auth
         return self::$me;
     }
 
-    /* @deprecated */
-    public static function checkPerm( &$article)
+    /** @deprecated */
+    public static function checkPerm(&$article)
     {
         return self::articleIsPermitted($article);
     }
 
     public static function articleIsPermitted(&$article, $xs = true)
     {
-
         if (!$xs) {
             return false;
         }
@@ -505,5 +504,37 @@ class rex_ycom_auth
         }
 
         return $returnUrl;
+    }
+
+    public static function getReturnTo(array $returnTos, array $allowedDomains)
+    {
+        $returnTosWithDomains = [];
+        foreach ($returnTos as $returnTo) {
+            if ('' != $returnTo) {
+                if (!preg_match('/http(s?)\:\/\//i', $returnTo)) {
+                    $returnTo = rex_yrewrite::getFullPath(('/' == substr($returnTo, 0, 1) ? substr($returnTo, 1) : $returnTo));
+                }
+                $returnTosWithDomains[] = $returnTo;
+            }
+        }
+
+        foreach (rex_yrewrite::getDomains() as $ydomain) {
+            $allowedDomains[] = $ydomain->getUrl();
+        }
+
+        foreach ($returnTosWithDomains as $returnTosWithDomain) {
+            if ('' != $returnTosWithDomain) {
+                if (0 == count($allowedDomains)) {
+                    return $returnTosWithDomain;
+                }
+                foreach ($allowedDomains as $allowedDomain) {
+                    if (substr($returnTosWithDomain, 0, strlen($allowedDomain)) == $allowedDomain) {
+                        return $returnTosWithDomain;
+                    }
+                }
+            }
+        }
+
+        return '';
     }
 }
