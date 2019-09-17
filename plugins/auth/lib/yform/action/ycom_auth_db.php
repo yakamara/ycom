@@ -5,16 +5,14 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
     public function execute()
     {
         $user = rex_ycom_auth::getUser();
-        $action = '';
-        if (!rex::isBackend() && !$user) {
-            echo 'error - access denied - user not logged in';
-        } else {
-            switch ($this->getElement(2)) {
-                case 'logout':
-                    rex_ycom_auth::clearUserSession();
-                    $action = 'logout';
-                    break;
 
+        if (rex::isBackend() || !$user) {
+            echo 'error - access denied - user not logged in';
+            return;
+
+        } else {
+
+            switch ($this->getElement(2)) {
                 case 'delete':
                     rex_ycom_auth::deleteUser($user->getValue('id'));
                     rex_ycom_auth::clearUserSession();
@@ -23,6 +21,7 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
 
                 case 'update':
                 default:
+
                     $sql = rex_sql::factory();
                     if ($this->params['debug']) {
                         $sql->setDebug();
@@ -32,9 +31,13 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
                     foreach ($this->params['value_pool']['sql'] as $key => $value) {
                         $sql->setValue($key, $value);
                     }
-                    $sql->setWhere('id='.$user->getValue('id').'');
+                    $sql->setWhere('id = :id', ['id' => $user->getValue('id')]);
                     $sql->update();
                     $action = 'update';
+
+                    $this->params['main_id'] = $user->getValue('id');
+                    $this->params['value_pool']['sql']['id'] = $user->getValue('id');
+
                     break;
             }
         }
@@ -49,10 +52,11 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
                 'yform' => true,
             ]
         ));
+
     }
 
     public function getDescription()
     {
-        return 'action|ycom_auth_db|update(default)/delete/logout';
+        return 'action|ycom_auth_db|update(default)/delete';
     }
 }
