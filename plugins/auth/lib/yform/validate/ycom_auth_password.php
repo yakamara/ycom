@@ -9,14 +9,14 @@ class rex_yform_validate_ycom_auth_password extends rex_yform_validate_abstract
         $user = rex_ycom_auth::getUser();
         if (!$user) {
             // no user available -> error
-            $this->params['warning'][$Object->getId()] = true;
+            $this->params['warning'][$Object->getId()] = $this->params['error_class'];
             $this->params['warning_messages'][$Object->getId()] = $this->getElement(3);
         }
 
         $status = rex_ycom_auth::checkPassword($Object->getValue(), $user->getId());
         if (!$status) {
             // password wrong
-            $this->params['warning'][$Object->getId()] = true;
+            $this->params['warning'][$Object->getId()] = $this->params['error_class'];
             $this->params['warning_messages'][$Object->getId()] = $this->getElement(3);
         }
     }
