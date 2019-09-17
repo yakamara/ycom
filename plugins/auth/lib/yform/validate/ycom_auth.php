@@ -29,7 +29,6 @@ class rex_yform_validate_ycom_auth extends rex_yform_validate_abstract
         if ('' == $loginObject->getValue() || '' == $passwordObject->getValue()) {
 
             foreach($warningObjects as $warningObject) {
-                dump($warningObject);
                 $this->params['warning'][$warningObject->getId()] = $this->params['error_class'];
                 $this->params['warning_messages'][$warningObject->getId()] = $this->getElement(5);
             }
