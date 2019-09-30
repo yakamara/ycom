@@ -9,6 +9,9 @@ rex_sql_table::get(rex::getTable('article'))
     ->ensureColumn(new rex_sql_column('ycom_auth_type', 'int', false, '0'))
     ->alter();
 
+// saml dummy file
+rex_file::copy(__DIR__.'/install/saml.php', rex_addon::get('project')->getDataPath('saml.php'));
+
 // termofuse -> termsofuse. Version < 3.0
 try {
     rex_sql::factory()

@@ -425,9 +425,8 @@ class rex_ycom_auth
         return rex_cookie($key, $varType, $default);
     }
 
-    public function deleteUser($id)
+    public function deleteUser(int $id)
     {
-        $id = (int) $id;
         rex_ycom_user::query()->where('id', $id)->find()->delete();
         return true;
     }
