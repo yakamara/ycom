@@ -13,7 +13,7 @@ Dazu ist das YRrewrite-Plugin `media_auth` nötig, das alle Medien auf ihre Bere
 1. Das Addon `YRewrite` installieren, aktivieren und das Setup ausführen
 2. Das YCom-Plugin `media_auth` aktivieren
 3. Unter YCom / Einstellungen unter dem Tab "Medien" Authentifizierung aktivieren
-4. Medienpool den Dateien entsprechende Rechte geben.
+4. Im Medienpool den Dateien entsprechende Rechte geben.
 
 ## Fehlerbehebung
 
