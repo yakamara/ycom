@@ -9,7 +9,6 @@ class rex_ycom_media_auth extends \rex_yform_manager_dataset
 
     public static function checkPerm(\rex_media_manager $media_manager)
     {
-
         // check if original media_path
         $media = $media_manager->getMedia();
         if (rex_path::media($media->getMediaFilename()) != $media_manager->getMedia()->getMediaPath()) {
@@ -23,25 +22,23 @@ class rex_ycom_media_auth extends \rex_yform_manager_dataset
 
         // is rex_media
         $rex_media = \rex_media::get($media->getMediaFilename());
-        if(!$rex_media) {
+        if (!$rex_media) {
             return false;
         }
 
         return self::checkFrontendPerm($rex_media);
-
     }
 
     public static function checkFrontendPerm(\rex_media $rex_media)
     {
-
         $authType = (int) $rex_media->getValue('ycom_auth_type');
         $groupType = (int) $rex_media->getValue('ycom_group_type');
         $groups = [];
-        if ($rex_media->getValue('ycom_groups') != '') {
+        if ('' != $rex_media->getValue('ycom_groups')) {
             $groups = explode(',', $rex_media->getValue('ycom_groups'));
         }
 
-        if ($authType != 1) {
+        if (1 != $authType) {
             return true;
         }
 
@@ -54,11 +51,10 @@ class rex_ycom_media_auth extends \rex_yform_manager_dataset
         }
 
         $userGroups = [];
-        if ($me->getValue('ycom_groups') != '') {
+        if ('' != $me->getValue('ycom_groups')) {
             $userGroups = explode(',', $me->getValue('ycom_groups'));
         }
 
         return rex_ycom_group::hasGroupPerm($groupType, $groups, $userGroups);
-
     }
 }

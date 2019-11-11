@@ -37,12 +37,12 @@ $path = rex_path::plugin('ycom', 'docs', 'docs/'.$lang.'/');
 
 $files = [];
 foreach (scandir($path) as $i_file) {
-    if ($i_file != '.' && $i_file != '..') {
+    if ('.' != $i_file && '..' != $i_file) {
         $files[$i_file] = $i_file;
     }
 }
 
-if (rex_request('ycom_docs_image', 'string') != '' && isset($files[rex_request('ycom_docs_image', 'string')])) {
+if ('' != rex_request('ycom_docs_image', 'string') && isset($files[rex_request('ycom_docs_image', 'string')])) {
     ob_end_clean();
     $content = rex_file::get($path.basename(rex_request('ycom_docs_image', 'string')));
     echo $content;
@@ -56,7 +56,7 @@ if (!in_array($file, $files)) {
     $file = 'main_intro.md';
 }
 $content = rex_file::get($path.basename($file));
-if ($content == '') {
+if ('' == $content) {
     $content = '<p class="alert alert-warning">'.rex_i18n::rawMsg('ycom_docs_filenotfound').'</p>';
 }
 

@@ -4,34 +4,33 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
 {
     public function enterObject()
     {
-
         $rules = json_decode($this->getElement('rules'), true);
-        if (!$rules || count($rules) == 0) {
+        if (!$rules || 0 == count($rules)) {
             $rules = json_decode(rex_yform_validate_password_policy::PASSWORD_POLICY_DEFAULT_RULES, true);
         }
 
-        if ($this->params['send'] == '1') {
+        if ('1' == $this->params['send']) {
             $PasswordPolicy = new rex_password_policy($rules);
 
-            if ($this->getValue() != '' && true !== $msg = $PasswordPolicy->check($this->getValue())) {
+            if ('' != $this->getValue() && true !== $msg = $PasswordPolicy->check($this->getValue())) {
                 $this->params['warning'][$this->getId()] = $this->params['error_class'];
-                $this->params['warning_messages'][$this->getId()] = trim($this->getElement('message')) == '' ? $msg : $this->getElement('message');
+                $this->params['warning_messages'][$this->getId()] = '' == trim($this->getElement('message')) ? $msg : $this->getElement('message');
             }
         }
 
         if ($this->params['send']) {
             $placeholder = rex_i18n::translate('translate:ycom_auth_password_not_updated');
-            if ($this->getValue() != '' && !isset($this->params['warning'][$this->getId()])) {
+            if ('' != $this->getValue() && !isset($this->params['warning'][$this->getId()])) {
                 $placeholder = rex_i18n::translate('translate:ycom_auth_password_updated');
             }
         } else {
             $placeholder = rex_i18n::translate('translate:ycom_auth_password_exists');
-            if ($this->getValue() == '') {
+            if ('' == $this->getValue()) {
                 $placeholder = rex_i18n::translate('translate:ycom_auth_password_isempty');
             }
         }
 
-        if ($this->getElement('placeholder') == '') {
+        if ('' == $this->getElement('placeholder')) {
             $this->setElement('placeholder', $placeholder);
         }
 
@@ -46,19 +45,19 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
         if (isset($this->params['sql_object'])) {
             $hashed_value = $this->params['sql_object']->getValue($this->getName());
 
-            if ($this->getValue() == '') {
+            if ('' == $this->getValue()) {
                 // kein neuer wert
                 $password = '';
             } elseif ($hashed_value == $this->getValue()) {
             } else {
                 $password = $this->getValue();
             }
-        } elseif ($this->getValue() != '') {
+        } elseif ('' != $this->getValue()) {
             $password = $this->getValue();
         }
-        if ($password != '') {
+        if ('' != $password) {
             $hash_info = password_get_info($password);
-            if (!isset($hash_info['algoName']) || $hash_info['algoName'] != 'bcrypt') {
+            if (!isset($hash_info['algoName']) || 'bcrypt' != $hash_info['algoName']) {
                 $hashed_value = rex_login::passwordHash($password);
             } else {
                 $hashed_value = $password;

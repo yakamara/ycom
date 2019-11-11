@@ -53,7 +53,6 @@ class rex_ycom_auth_rules
 
     public function check(rex_ycom_user $user, $rule_name = 'login_try_5_pause')
     {
-
         if (!array_key_exists($rule_name, $this->rules)) {
             $rule_name = 'login_try_5_pause';
         }
@@ -70,7 +69,7 @@ class rex_ycom_auth_rules
                 }
                 break;
             case 'interval':
-                if ($loginTries ==0 || $loginTries % $rule['tries'] != 0) {
+                if (0 == $loginTries || 0 != $loginTries % $rule['tries']) {
                     return true;
                 }
                 break;

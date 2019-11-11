@@ -21,6 +21,3 @@ if ($this->getPlugin('group')->isInstalled()) {
 if ($this->getPlugin('media_auth')->isInstalled()) {
     $this->getPlugin('media_auth')->includeFile(__DIR__.'/plugins/media_auth/uninstall.php');
 }
-
-
-

@@ -21,7 +21,7 @@ try {
     ->setQuery('alter table `rex_ycom_user` drop if exists `termofuse_accepted`', [])
     ;
 } catch (rex_sql_exception $e) {
-   // dump($e);
+    // dump($e);
 }
 
 rex_delete_cache();

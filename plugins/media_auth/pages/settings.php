@@ -3,7 +3,7 @@
 $table = rex_yform_manager_table::get('rex_ycom_user');
 $xform_user_fields = $table->getValueFields();
 
-if (rex_request('func', 'string') == 'update') {
+if ('update' == rex_request('func', 'string')) {
     $this->setConfig('media_auth_rule', rex_request('media_auth_rule', 'string'));
 
     echo rex_view::success($this->i18n('ycom_media_auth_settings_updated'));

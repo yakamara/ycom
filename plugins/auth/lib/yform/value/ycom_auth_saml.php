@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ycom
+ * ycom.
  *
  * Saml 2.0 Auth
  *
@@ -27,8 +27,8 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
             session_start();
         }
 
-        /* @var $settings [] */
-        include(\rex_addon::get('project')->getDataPath($this->samlFile));
+        /** @var [] $settings */
+        include \rex_addon::get('project')->getDataPath($this->samlFile);
 
         // load File IdP Metadata ? Optional
         // $idpInfo = \OneLogin\Saml2\IdPMetadataParser::parseFileXML(\rex_addon::get('project')->getDataPath('onelogin_metadata_993615.xml'));
@@ -38,11 +38,10 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         $idpSettings = OneLogin\Saml2\IdPMetadataParser::parseRemoteXML($settings['idp']['entityId']);
         $mergedSettings = OneLogin\Saml2\IdPMetadataParser::injectIntoSettings($settings, $idpSettings);
 
-
         $returnTos = [];
         $returnTos[] = rex_request('returnTo', 'string', ''); // wenn returnTo übergeben wurde, diesen nehmen
         $returnTos[] = rex_getUrl(rex_config::get('ycom/auth', 'article_id_jump_ok'), '', [], '&'); // Auth Ok -> article_id_jump_ok / Current Language will be selected
-        $returnTo = rex_ycom_auth::getReturnTo($returnTos, ($this->getElement(3) == '') ? [] : explode(',', $this->getElement(3)));
+        $returnTo = rex_ycom_auth::getReturnTo($returnTos, ('' == $this->getElement(3)) ? [] : explode(',', $this->getElement(3)));
 
         $requestSAML = rex_request('rex_ycom_auth_saml', 'string', '');
         if ($this->needsOutput()) {
@@ -57,7 +56,6 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         $auth = new OneLogin\Saml2\Auth($mergedSettings);
 
         switch ($requestSAML) {
-
             // init login
             case 'sso':
                 $returnToUrl = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_saml' => 'auth', 'returnTo' => $returnTo]);
@@ -77,7 +75,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                     if ($this->params['debug']) {
                         dump($e);
                     }
-                    $this->params['warning_messages'][] = ($this->getElement(2) != '') ? $this->getElement(2) : '{{ saml.error.acs }}';
+                    $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.acs }}';
                     return '';
                 }
 
@@ -86,7 +84,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                     if ($this->params['debug']) {
                         dump($errors);
                     }
-                    $this->params['warning_messages'][] = ($this->getElement(2) != '') ? $this->getElement(2) : '{{ saml.error.acs }}';
+                    $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.acs }}';
                     return '';
                 }
 
@@ -136,7 +134,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                     if ($this->params['debug']) {
                         dump($e);
                     }
-                    $this->params['warning_messages'][] = ($this->getElement(2) != '') ? $this->getElement(2) : '{{ saml.error.acs }}';
+                    $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.acs }}';
                     return '';
                 }
 
@@ -149,12 +147,11 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                     // hier wird davon aufgegangen, dass immer ein returnTo gesetzt ist.
                     // \rex_yrewrite::getFullUrlByArticleId(\rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_logout'));
                     rex_response::sendRedirect($returnTo);
-
                 } else {
                     if ($this->params['debug']) {
                         dump($errors);
                     }
-                    $this->params['warning_messages'][] = ($this->getElement(2) != '') ? $this->getElement(2) : '{{ saml.error.sls }}';
+                    $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.sls }}';
                     return '';
                 }
                 break;
@@ -173,21 +170,21 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 
         $data = [];
         $data['email'] = '';
-        foreach(['User.email','emailAddress'] as $Key) {
+        foreach (['User.email', 'emailAddress'] as $Key) {
             if (isset($Userdata[$Key])) {
                 $data['email'] = implode(' ', $Userdata[$Key]);
             }
         }
 
         $data['firstname'] = '';
-        foreach(['User.FirstName','givenName'] as $Key) {
+        foreach (['User.FirstName', 'givenName'] as $Key) {
             if (isset($Userdata[$Key])) {
                 $data['firstname'] = implode(' ', $Userdata[$Key]);
             }
         }
 
         $data['name'] = '';
-        foreach(['User.LastName','surName'] as $Key) {
+        foreach (['User.LastName', 'surName'] as $Key) {
             if (isset($Userdata[$Key])) {
                 $data['name'] = implode(' ', $Userdata[$Key]);
             }
@@ -205,7 +202,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         $params['ignorePassword'] = true;
 
         $loginStatus = \rex_ycom_auth::login($params);
-        if ($loginStatus == 2) {
+        if (2 == $loginStatus) {
             // already logged in
             rex_ycom_user::updateUser($data);
             \rex_response::sendRedirect($returnTo);
@@ -214,7 +211,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         // if user not found, check if exists, but no permission
         $user = \rex_ycom_user::query()->where('email', $data['email'])->findOne();
         if ($user) {
-            $this->params['warning_messages'][] = ($this->getElement(2) != '') ? $this->getElement(2) : '{{ saml.error.ycom_login_failed }}';
+            $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_login_failed }}';
             return '';
         }
 
@@ -223,7 +220,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
             if ($this->params['debug']) {
                 dump($user->getMessages());
             }
-            $this->params['warning_messages'][] = ($this->getElement(2) != '') ? $this->getElement(2) : '{{ saml.error.ycom_create_user }}';
+            $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_create_user }}';
             return '';
         }
 
@@ -232,17 +229,16 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         $params['ignorePassword'] = true;
         $loginStatus = \rex_ycom_auth::login($params);
 
-        if ($loginStatus != 2) {
+        if (2 != $loginStatus) {
             if ($this->params['debug']) {
                 dump($loginStatus);
                 dump($user);
             }
-            $this->params['warning_messages'][] = ($this->getElement(2) != '') ? $this->getElement(2) : '{{ saml.error.ycom_login_created_user }}';
+            $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_login_created_user }}';
             return '';
         }
 
         \rex_response::sendRedirect($returnTo);
-
     }
 
     public function getDescription()

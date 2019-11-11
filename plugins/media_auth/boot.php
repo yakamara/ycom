@@ -1,6 +1,6 @@
 <?php
 
-rex_extension::register(['MEDIA_IS_PERMITTED'], function (rex_extension_point $ep) {
+rex_extension::register(['MEDIA_IS_PERMITTED'], static function (rex_extension_point $ep) {
     $ycom_ignore = $ep->getParam('ycom_ignore');
     $subject = $ep->getSubject();
     if ($ycom_ignore) {
@@ -25,19 +25,19 @@ rex_extension::register(['MEDIA_MANAGER_BEFORE_SEND'], function (rex_extension_p
     }
 });
 
-rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'MEDIA_UPDATED'], function (rex_extension_point $ep) {
+rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'MEDIA_UPDATED'], static function (rex_extension_point $ep) {
     // ----- extens form
 
     $params = $ep->getParams();
     $prefix = 'ycom_';
 
-    if ($ep->getName() == 'MEDIA_FORM_EDIT') {
+    if ('MEDIA_FORM_EDIT' == $ep->getName()) {
         $params['activeItem'] = $params['media'];
         unset($params['media']);
-    } elseif ($ep->getName() == 'MEDIA_ADDED') {
+    } elseif ('MEDIA_ADDED' == $ep->getName()) {
         $sql = rex_sql::factory();
         $sql->setQuery('SELECT id FROM ' . rex::getTablePrefix() . 'media WHERE filename=?', [$params['filename']]);
-        if ($sql->getRows() == 1) {
+        if (1 == $sql->getRows()) {
             $params['id'] = $sql->getValue('id');
         } else {
             throw new rex_exception('Error occured during file upload!');
@@ -63,7 +63,7 @@ rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'ME
 
     // ----- handle save
 
-    if (rex_request_method() == 'post' && isset($params['id'])) {
+    if ('post' == rex_request_method() && isset($params['id'])) {
         $media = rex_sql::factory();
         $media->setTable(rex::getTablePrefix() . 'media');
         $media->setWhere('id=:mediaid', ['mediaid' => $params['id']]);
@@ -147,7 +147,7 @@ rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'ME
         }
 
         if (isset($params['activeItem'])) {
-            if ($params['activeItem']->getValue($prefix.'groups') != '') {
+            if ('' != $params['activeItem']->getValue($prefix.'groups')) {
                 foreach (explode(',', $params['activeItem']->getValue($prefix.'groups')) as $id) {
                     $ycom_groups_sel->setSelected($id);
                 }

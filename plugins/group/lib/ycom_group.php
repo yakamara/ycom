@@ -30,7 +30,7 @@ class rex_ycom_group extends \rex_yform_manager_dataset
             // user in every group
             case 1:
                 foreach ($groups as $group) {
-                    if ($group != '' && !in_array($group, $userGroups)) {
+                    if ('' != $group && !in_array($group, $userGroups)) {
                         return false;
                     }
                 }
@@ -39,7 +39,7 @@ class rex_ycom_group extends \rex_yform_manager_dataset
             // user in at least one group
             case 2:
                 foreach ($groups as $group) {
-                    if ($group != '' && in_array($group, $userGroups)) {
+                    if ('' != $group && in_array($group, $userGroups)) {
                         return true;
                     }
                 }
@@ -47,7 +47,7 @@ class rex_ycom_group extends \rex_yform_manager_dataset
 
             // user has no groups
             case 3:
-                if (count($userGroups) == 0) {
+                if (0 == count($userGroups)) {
                     return true;
                 }
                 return false;

@@ -7,23 +7,22 @@ rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) 
 });
 
 if (!rex::isBackend()) {
-    rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) {
+    rex_extension::register('PACKAGES_INCLUDED', static function (rex_extension_point $ep) {
         if (($redirect = rex_ycom_auth::init())) {
             rex_response::sendRedirect($redirect);
         }
     });
 
     /* @deprecated use EP ART_IS_PERMITTED and CAT_IS_PERMITTED instead´*/
-    rex_extension::register('YREWRITE_ARTICLE_PERM', function (rex_extension_point $ep) {
+    rex_extension::register('YREWRITE_ARTICLE_PERM', static function (rex_extension_point $ep) {
         $params = $ep->getParams();
         return rex_ycom_auth::articleIsPermitted($params['article']);
     });
 
-    rex_extension::register(['ART_IS_PERMITTED','CAT_IS_PERMITTED'], function (rex_extension_point $ep) {
+    rex_extension::register(['ART_IS_PERMITTED', 'CAT_IS_PERMITTED'], static function (rex_extension_point $ep) {
         $params = $ep->getParams();
         return rex_ycom_auth::articleIsPermitted($params['element'], $ep->getSubject());
     });
-
 } else {
     rex_view::addCssFile($this->getAssetsUrl('styles.css'));
 

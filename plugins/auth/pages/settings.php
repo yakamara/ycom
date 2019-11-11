@@ -4,14 +4,14 @@ $info = '';
 $warning = '';
 $content = '';
 $modules = [
-//		"login"		=> array(		"key" => "login", 			"search" => "module:ycom_auth_login",			"name" => "ycom:auth - Login"),
-// 		"pswchange"	=> array(		"key" => "pswchange", 		"search" => "module:ycom_auth_pswchange",		"name" => "ycom:auth - Change Password"),
-// 		"profilechange"	=> array(	"key" => "profilechange", 	"search" => "module:ycom_auth_profilechange",	"name" => "ycom:auth - Profile"),
+    //		"login"		=> array(		"key" => "login", 			"search" => "module:ycom_auth_login",			"name" => "ycom:auth - Login"),
+    // 		"pswchange"	=> array(		"key" => "pswchange", 		"search" => "module:ycom_auth_pswchange",		"name" => "ycom:auth - Change Password"),
+    // 		"profilechange"	=> array(	"key" => "profilechange", 	"search" => "module:ycom_auth_profilechange",	"name" => "ycom:auth - Profile"),
 ];
 
 $table = rex_yform_manager_table::get('rex_ycom_user');
 
-if (rex_request('func', 'string') == 'update') {
+if ('update' == rex_request('func', 'string')) {
     $this->setConfig('article_id_jump_ok', rex_request('article_id_jump_ok', 'int'));
     $this->setConfig('article_id_jump_not_ok', rex_request('article_id_jump_not_ok', 'int'));
     $this->setConfig('article_id_jump_logout', rex_request('article_id_jump_logout', 'int'));

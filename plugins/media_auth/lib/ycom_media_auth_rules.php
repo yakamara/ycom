@@ -41,7 +41,7 @@ class rex_ycom_media_auth_rules
                     exit;
                 }
 
-                rex_redirect($rule['action']['article_id'],'', ['rex_ycom_auth_ref' => $_SERVER['REQUEST_URI']]);
+                rex_redirect($rule['action']['article_id'], '', ['rex_ycom_auth_ref' => $_SERVER['REQUEST_URI']]);
                 break;
 
             case 'header':

@@ -9,10 +9,9 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
         if (rex::isBackend() || !$user) {
             echo 'error - access denied - user not logged in';
             return;
+        }
 
-        } else {
-
-            switch ($this->getElement(2)) {
+        switch ($this->getElement(2)) {
                 case 'delete':
                     rex_ycom_auth::deleteUser($user->getValue('id'));
                     rex_ycom_auth::clearUserSession();
@@ -40,7 +39,6 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
 
                     break;
             }
-        }
 
         rex_extension::registerPoint(new rex_extension_point('REX_YCOM_YFORM_SAVED', ($sql ?? null),
             [
@@ -52,7 +50,6 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
                 'yform' => true,
             ]
         ));
-
     }
 
     public function getDescription()
