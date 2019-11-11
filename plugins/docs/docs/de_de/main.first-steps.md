@@ -31,7 +31,6 @@ erfolgt, werden ggf. alle Menüpunkte angezeigt. Die Navigation muss dann so erw
 
 YCom Einstellungsseite im REDAXO-Backend aufrufen unter `YCom` > `Einstellungen` und konfigurieren:
 
-* **Status**: Authentifizierung aktivieren
 * **Weiterleitungen**: 
   * als `article_id_jump_ok` bspw. die Startseite verwenden. 
   * als `article_id_jump_not_ok` bspw. den Login-Artikel verwenden. 
