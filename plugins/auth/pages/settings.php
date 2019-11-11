@@ -12,7 +12,6 @@ $modules = [
 $table = rex_yform_manager_table::get('rex_ycom_user');
 
 if (rex_request('func', 'string') == 'update') {
-    $this->setConfig('auth_active', rex_request('auth_active', 'int'));
     $this->setConfig('article_id_jump_ok', rex_request('article_id_jump_ok', 'int'));
     $this->setConfig('article_id_jump_not_ok', rex_request('article_id_jump_not_ok', 'int'));
     $this->setConfig('article_id_jump_logout', rex_request('article_id_jump_logout', 'int'));
@@ -58,24 +57,6 @@ $content .= '
 <form action="index.php" method="post" id="ycom_auth_settings">
     <input type="hidden" name="page" value="ycom/auth/settings" />
     <input type="hidden" name="func" value="update" />
-
-
-	<fieldset>
-		<legend>'.$this->i18n('ycom_auth_config_status').'</legend>
-
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-sm-push-6 abstand">
-				<input class="rex-form-text" type="checkbox" id="rex-form-auth" name="auth_active" value="1" ';
-if ($this->getConfig('auth_active') == '1') {
-    $content .= 'checked="checked"';
-}
-$content .= ' />
-				<label for="rex-form-auth">'.$this->i18n('ycom_auth_config_status_authactive').'</label>
-			</div>
-		</div>
-
-
-	</fieldset>
 
 	<fieldset>
 		<legend>'.$this->i18n('ycom_auth_config_forwarder').'</legend>

@@ -306,10 +306,6 @@ class rex_ycom_auth
 
         $me = self::getUser();
 
-        if ('1' != rex_plugin::get('ycom', 'auth')->getConfig('auth_active')) {
-            return true;
-        }
-
         unset($xs);
 
         /*
