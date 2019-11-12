@@ -112,7 +112,7 @@ Genauso, und sogar einfacher, geht es auch mit Passwörtern die älter als 6 Mon
 ```
 $Date = new DateTime();
 $Date->modify("-6 months");
-rex_sql::factory()->setDebug()->setQuery('DELETE FROM rex_ycom_user_password where created_datetime < :deletedate', ['deletedate' => $Date->format('Y-m-d H:i:s')]);
+rex_sql::factory()->setQuery('DELETE FROM rex_ycom_user_password where created_datetime < :deletedate', ['deletedate' => $Date->format('Y-m-d H:i:s')]);
 ```
 
 
