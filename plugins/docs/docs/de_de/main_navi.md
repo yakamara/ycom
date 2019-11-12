@@ -5,6 +5,7 @@
     - [Navigation anpassen](main.navigation.md)
     - [YCom verwenden](user.details.md)
     - [Passwortregeln](main.password_rules.md)
+    - [Erweiterte Passwortregeln](main.password_rules_extra.md)
 - Frontend-Formulare
     - [Login](main.login.md)
     - [Logout](main.logout.md)
