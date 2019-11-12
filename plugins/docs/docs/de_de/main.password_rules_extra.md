@@ -126,7 +126,6 @@ Als Cronjob einrichten.
 $Date = new DateTime();
 $Date->modify("-6 months");
 $Users = rex_ycom_user::query()->where('status', 0, '>')->find();
-dump($Users);
 foreach($Users as $User) {
     $result = rex_sql::factory()->getArray('select * from rex_ycom_user_password where user_id = :uid and created_datetime > :dt LIMIT 1', ['uid' => $User->getId(), 'dt' => $Date->format('Y-m-d H:i:s')]);
     if (0 == count($result)) {
@@ -145,7 +144,6 @@ Als Cronjob einrichten.
 $Date = new DateTime();
 $Date->modify("-9 months");
 $Users = rex_ycom_user::query()->where('status', 0, '>')->find();
-dump($Users);
 foreach($Users as $User) {
     $result = rex_sql::factory()->getArray('select * from rex_ycom_user_password where user_id = :uid and created_datetime > :dt LIMIT 1', ['uid' => $User->getId(), 'dt' => $Date->format('Y-m-d H:i:s')]);
     if (0 == count($result)) {
