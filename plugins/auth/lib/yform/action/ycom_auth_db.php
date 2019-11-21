@@ -4,6 +4,7 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
 {
     public function execute()
     {
+        /** @var rex_ycom_user $user */
         $user = rex_ycom_auth::getUser();
 
         if (rex::isBackend() || !$user) {
@@ -11,43 +12,29 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
             return;
         }
 
-        switch ($this->getElement(2)) {
+        $action = $this->getElement(2);
+
+        switch ($action) {
                 case 'delete':
                     rex_ycom_auth::deleteUser($user->getValue('id'));
                     rex_ycom_auth::clearUserSession();
-                    $action = 'delete';
                     break;
 
                 case 'update':
                 default:
-
-                    $sql = rex_sql::factory();
-                    if ($this->params['debug']) {
-                        $sql->setDebug();
-                    }
-
-                    $sql->setTable(rex_ycom_user::table());
-                    foreach ($this->params['value_pool']['sql'] as $key => $value) {
-                        $sql->setValue($key, $value);
-                    }
-                    $sql->setWhere('id = :id', ['id' => $user->getValue('id')]);
-                    $sql->update();
                     $action = 'update';
-
-                    $this->params['main_id'] = $user->getValue('id');
-                    $this->params['value_pool']['sql']['id'] = $user->getValue('id');
-
+                    foreach ($this->params['value_pool']['sql'] as $key => $value) {
+                        $user->setValue($key, $value);
+                    }
+                    $user->save();
                     break;
             }
 
-        rex_extension::registerPoint(new rex_extension_point('REX_YCOM_YFORM_SAVED', ($sql ?? null),
+        rex_extension::registerPoint(new rex_extension_point('YCOM_YFORM_SAVED', '',
             [
                 'form' => $this,
-                'sql' => ($sql ?? null),
-                'table' => rex_ycom_user::table(),
+                'user' => $user,
                 'action' => $action,
-                'id' => $this->params['main_id'],
-                'yform' => true,
             ]
         ));
     }
