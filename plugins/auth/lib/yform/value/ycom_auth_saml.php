@@ -57,7 +57,10 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         $requestSAMLMode = rex_request('rex_ycom_auth_mode', 'string', '');
         $requestSAMLFunctions = rex_request('rex_ycom_auth_func', 'string', '');
         if ($this->needsOutput()) {
-            $this->params['form_output'][$this->getId()] = '<a href="'.rex_getUrl('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sso', 'returnTo' => $returnTo]).'">{{ saml_auth }}</a>';
+            $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_auth_saml.tpl.php'], [
+                'url' => rex_getUrl('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sso', 'returnTo' => $returnTo]),
+                'name' => '{{ saml_auth }}'
+            ]);
         }
         if (!in_array($requestSAMLFunctions, self::$requestSAMLFunctions, true) || 'saml' != $requestSAMLMode) {
             return '';
