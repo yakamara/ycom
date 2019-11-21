@@ -7,7 +7,7 @@ Damit die Userberechtigungen in der Navigation berücksichtigt werden muss die R
 
 ```
 $nav = rex_navigation::factory();
-$nav->addCallback('rex_ycom_auth::checkPerm');
+$nav->addCallback('rex_ycom_auth::articleIsPermitted');
 $nav->show();
 ```
 
