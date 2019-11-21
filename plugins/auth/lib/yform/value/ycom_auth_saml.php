@@ -5,8 +5,8 @@
  *
  * Saml 2.0 Auth
  *
- * Needs data/addons/project/saml.json data for SP ( ServiceProvider )
- * Dummy here src/addons/ycom/plugins/auth/install/saml.json
+ * Needs data/addons/project/saml.php data for SP ( ServiceProvider )
+ * Dummy here src/addons/ycom/plugins/auth/install/saml.php
  *
  * @author jan.kristinus[at]redaxo[dot]org Jan Kristinus
  * @author <a href="http://www.yakamara.de">www.yakamara.de</a>
@@ -19,16 +19,17 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 
     public function enterObject()
     {
-        // TODO: sls und slo testen
-        // TODO: Settings einlesen . Eigene Settingsverwaltung im Backend ?
-        // TODO: if Metadataload failes -> get lokal xml ?
-        // TODO: Useranlegen/updaten / einloggen / verbieten
-        // TODO: Login noch als Button über Fragmente bauen
+        // TODO: slo testen
+        // TODO: Useranlegen / updaten / einloggen / verbieten
         // TODO: Diverse Variablen in der config hinterlegen.: email, name, vorname erkennung,
-        // standardrechte (Gruppen), Nur Login, oder auch Regostrierung .. Fehlermeldungen
-        // nutzungsbedingungen akzeptieren, neues passwort setzen ? .. StandardUserConfigFelder !!
+
         // TODO .json .xml config laden, statt eigene .php config laden können
         // $idpInfo = \OneLogin\Saml2\IdPMetadataParser::parseFileXML(\rex_addon::get('project')->getDataPath('onelogin_metadata_993615.xml'));
+
+        $defaultUserAttributes = [];
+        if ('' != $this->getElement(4)) {
+            $defaultUserAttributes = json_decode($this->getElement(4), true);
+        }
 
         if (PHP_SESSION_ACTIVE !== session_status()) {
             session_start();
@@ -217,6 +218,10 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
             }
         }
 
+        foreach($defaultUserAttributes as $defaultUserAttributeKey => $defaultUserAttributeValue) {
+            $data[$defaultUserAttributeKey] = $defaultUserAttributeValue;
+        }
+
         $data = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_SAML_MATCHING', $data, ['Userdata' => $Userdata]));
 
         self::auth_saml_clearUserSession();
@@ -270,7 +275,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 
     public function getDescription()
     {
-        return 'ycom_auth_saml|label|error_msg|[allowed returnTo domains: DomainA,DomainB]';
+        return 'ycom_auth_saml|label|error_msg|[allowed returnTo domains: DomainA,DomainB]|[default Userdata as Json{"ycom_groups": 3, "termsofuse_accepted": 1}]';
     }
 
     public static function auth_saml_clearUserSession()
