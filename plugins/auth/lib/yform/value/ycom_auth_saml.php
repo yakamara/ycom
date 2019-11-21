@@ -14,7 +14,7 @@
 
 class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 {
-    private static $requestSAML = ['auth', 'sso', 'acs', 'slo', 'sls'];
+    private static $requestSAMLFunctions = ['auth', 'sso', 'acs', 'slo', 'sls'];
     private $samlFile = 'saml.php';
 
     public function enterObject()
@@ -22,43 +22,70 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         // TODO: sls und slo testen
         // TODO: Settings einlesen . Eigene Settingsverwaltung im Backend ?
         // TODO: if Metadataload failes -> get lokal xml ?
+        // TODO: Useranlegen/updaten / einloggen / verbieten
+        // TODO: Login noch als Button über Fragmente bauen
+        // TODO: Diverse Variablen in der config hinterlegen.: email, name, vorname erkennung,
+        // standardrechte (Gruppen), Nur Login, oder auch Regostrierung .. Fehlermeldungen
+        // nutzungsbedingungen akzeptieren, neues passwort setzen ? .. StandardUserConfigFelder !!
+        // TODO .json .xml config laden, statt eigene .php config laden können
+        // $idpInfo = \OneLogin\Saml2\IdPMetadataParser::parseFileXML(\rex_addon::get('project')->getDataPath('onelogin_metadata_993615.xml'));
 
         if (PHP_SESSION_ACTIVE !== session_status()) {
             session_start();
         }
 
         /** @var [] $settings */
-        include \rex_addon::get('project')->getDataPath($this->samlFile);
+        $samlConfigPath = \rex_addon::get('project')->getDataPath($this->samlFile);
+        if (!file_exists($samlConfigPath)) {
+            throw new rex_exception('SAML Settings file not found ['.$samlConfigPath.']');
+        }
 
-        // load File IdP Metadata ? Optional
-        // $idpInfo = \OneLogin\Saml2\IdPMetadataParser::parseFileXML(\rex_addon::get('project')->getDataPath('onelogin_metadata_993615.xml'));
-        // dump($idpInfo);
+        include $samlConfigPath;
 
-        // load external Metadata
-        $idpSettings = OneLogin\Saml2\IdPMetadataParser::parseRemoteXML($settings['idp']['entityId']);
-        $mergedSettings = OneLogin\Saml2\IdPMetadataParser::injectIntoSettings($settings, $idpSettings);
+        // load external Metadata if possible
+        try {
+            $idpSettings = OneLogin\Saml2\IdPMetadataParser::parseRemoteXML($settings['idp']['entityId']);
+            $settings = OneLogin\Saml2\IdPMetadataParser::injectIntoSettings($settings, $idpSettings);
+        } catch (Exception $e) {
+        }
 
         $returnTos = [];
         $returnTos[] = rex_request('returnTo', 'string', ''); // wenn returnTo übergeben wurde, diesen nehmen
         $returnTos[] = rex_getUrl(rex_config::get('ycom/auth', 'article_id_jump_ok'), '', [], '&'); // Auth Ok -> article_id_jump_ok / Current Language will be selected
         $returnTo = rex_ycom_auth::getReturnTo($returnTos, ('' == $this->getElement(3)) ? [] : explode(',', $this->getElement(3)));
 
-        $requestSAML = rex_request('rex_ycom_auth_saml', 'string', '');
+        $requestSAMLMode = rex_request('rex_ycom_auth_mode', 'string', '');
+        $requestSAMLFunctions = rex_request('rex_ycom_auth_func', 'string', '');
         if ($this->needsOutput()) {
-            // TODO: noch als Button über Fragmente bauen
-            $this->params['form_output'][$this->getId()] = '<a href="'.rex_getUrl('', '', ['rex_ycom_auth_saml' => 'auth', 'returnTo' => $returnTo]).'">{{ saml_auth }}</a>';
+            $this->params['form_output'][$this->getId()] = '<a href="'.rex_getUrl('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sso', 'returnTo' => $returnTo]).'">{{ saml_auth }}</a>';
         }
-        if (!in_array($requestSAML, self::$requestSAML, true)) {
+        if (!in_array($requestSAMLFunctions, self::$requestSAMLFunctions, true) || 'saml' != $requestSAMLMode) {
             return '';
         }
 
         // Auth
-        $auth = new OneLogin\Saml2\Auth($mergedSettings);
+        try {
+            $auth = new OneLogin\Saml2\Auth($settings);
+        } catch (Exception $e) {
+            dump($e);
+            dump('Please use following ServiceProvider Settings in your config');
+            $sp = [
+                'entityid' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId()),
+                'assertionConsumerService' => [
+                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId()).'?rex_ycom_auth_mode=saml&rex_ycom_auth_func=acs',
+                ],
+                'singleLogoutService' => [
+                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId()).'?rex_ycom_auth_mode=saml&rex_ycom_auth_func=slo',
+                ],
+            ];
+            dump($sp);
+            return;
+        }
 
-        switch ($requestSAML) {
+        switch ($requestSAMLFunctions) {
             // init login
             case 'sso':
-                $returnToUrl = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_saml' => 'auth', 'returnTo' => $returnTo]);
+                $returnToUrl = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'auth', 'returnTo' => $returnTo]);
                 $ssoBuiltUrl = $auth->login($returnToUrl, [], false, false, true);
                 rex_ycom_auth::setSessionVar('SAML_AuthNRequestID', $auth->getLastRequestID());
                 rex_ycom_auth::setSessionVar('SAML_ssoDate', date('Y-m-d H:i:s'));
@@ -105,7 +132,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
             // init Logout processs with returnTo or redirect from idp
             case 'slo':
 
-                $returnToURL = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_saml' => 'sls', 'returnTo' => $returnTo]);
+                $returnToURL = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sls', 'returnTo' => $returnTo]);
                 $parameters = [];
 
                 $nameId = rex_ycom_auth::getSessionVar('SAML_NameId', 'string', null);
@@ -159,12 +186,9 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 
         if (0 == count(rex_ycom_auth::getSessionVar('SAML_Userdata', 'array', []))) {
             // direkt durchschleifen zu SAML AUTH .. Hier könnte man auch eine abfrage machen.
-            rex_response::sendRedirect(rex_getUrl('', '', ['rex_ycom_auth_saml' => 'sso', 'returnTo' => $returnTo], '&'));
+            rex_response::sendRedirect(rex_getUrl('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sso', 'returnTo' => $returnTo], '&'));
             exit;
         }
-
-        // TODO: Useranlegen/updaten / einloggen / verbieten
-        // TODO. install -> saml.php -> project
 
         $Userdata = rex_ycom_auth::getSessionVar('SAML_Userdata', 'array', []);
 
