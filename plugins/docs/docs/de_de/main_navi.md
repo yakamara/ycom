@@ -16,5 +16,6 @@
 - YCom erweitern
     - [Login-Ziel je Nutzer / Gruppe definieren](trick.target_per_type.md)
     - [Medienpool schützen](media_auth.info.md)
+    - [SAML-Authentifizierung](saml_auth.md)
 - Tipps und Tricks 
     - [Weitere Tipps und Tricks](trick.misc.md)
