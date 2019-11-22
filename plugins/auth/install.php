@@ -10,7 +10,7 @@ rex_sql_table::get(rex::getTable('article'))
     ->alter();
 
 // saml dummy file
-rex_file::copy(__DIR__.'/install/saml.php', rex_addon::get('project')->getDataPath('saml.php'));
+rex_file::copy(__DIR__.'/install/saml.php', rex_addon::get('ycom')->getDataPath('saml.php'));
 
 // termofuse -> termsofuse. Version < 3.0
 try {

@@ -24,7 +24,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         // TODO: Diverse Variablen in der config hinterlegen.: email, name, vorname erkennung,
 
         // TODO .json .xml config laden, statt eigene .php config laden können
-        // $idpInfo = \OneLogin\Saml2\IdPMetadataParser::parseFileXML(\rex_addon::get('project')->getDataPath('onelogin_metadata_993615.xml'));
+        // $idpInfo = \OneLogin\Saml2\IdPMetadataParser::parseFileXML(\rex_addon::get('ycom')->getDataPath('onelogin_metadata_993615.xml'));
 
         $defaultUserAttributes = [];
         if ('' != $this->getElement(4)) {
@@ -36,7 +36,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         }
 
         /** @var [] $settings */
-        $samlConfigPath = \rex_addon::get('project')->getDataPath($this->samlFile);
+        $samlConfigPath = \rex_addon::get('ycom')->getDataPath($this->samlFile);
         if (!file_exists($samlConfigPath)) {
             throw new rex_exception('SAML Settings file not found ['.$samlConfigPath.']');
         }

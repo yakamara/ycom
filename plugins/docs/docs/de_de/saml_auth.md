@@ -5,7 +5,7 @@ Dazu muss dieser Provider inkl. Metadaten entsprechend vorbereitet sein.
 
 ## Einrichtung
 
-Bei der Installation des Auth Plugins wurde eine saml.php in den Data Ordner des project AddOns gelegt. Diesen muss man entsprechend anpassen. Die Identityprovider information müssen dort eingerichtet sein.
+Bei der Installation des Auth Plugins wurde eine saml.php in den Data Ordner des YCom AddOns gelegt. Diesen muss man entsprechend anpassen. Die Identityprovider information müssen dort eingerichtet sein.
 
 Damit die Authentifizierung funktioniert, muss in Loginformular von YCOM ein Feld erweitert werden und müssen in der saml.php ergänzt werden.
 
