@@ -1,5 +1,5 @@
 package: ycom
-version: '3.0dev'
+version: '4.0dev'
 author: Yakamara Media GmbH & Co. KG, concedra GmbH
 supportpage: www.redaxo.org/de/forum
 
@@ -11,10 +11,10 @@ page:
 
 requires:
     packages:
-        yform: '^3'
+        yform: '^3.3.1'
         yrewrite: '^2.6'
         phpmailer: '^2.2'
-    redaxo: '^5.7'
+    redaxo: '^5.8'
 
 system_plugins:
     - auth

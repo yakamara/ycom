@@ -1,5 +1,5 @@
 package: ycom/media_auth
-version: '3.0dev'
+version: '4.0dev'
 author: Yakamara Media GmbH & Co. KG
 supportpage: www.redaxo.org/de/forum
 title: 'MediaAuth'
@@ -11,9 +11,3 @@ page:
     hidden: false
     subpages:
         settings: { title: 'translate:ycom_media_auth_settings'}
-
-requires:
-    redaxo: '^5.7'
-
-    packages:
-        yrewrite: '^2.3'
