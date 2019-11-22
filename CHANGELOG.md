@@ -1,13 +1,16 @@
 Changelog
 =========
 
-Version 3.0 – xx.xx.2018
+
+Version 3.1 – xx.xx.2019
 --------------------------
 
 #### Bei Update: Bitte unbedingt beachten:
 
+Version 3.0beta unterscheidet sich von Version 3.1. Da dies ein paar elementare Änderungen mit sich gebracht hatte wurde Version 3.0 nicht released. Bitte in der Doku nachlesen. Man kann sich nun nicht mehr auf jeder Seite einloggen, sondern nur auf den spezifischen Loginseiten. 
+
 * termofuse wurde zu termsofuse
-* cookie und session werden nun mit redaxo session geteile.
+* cookie und session werden nun mit redaxo session geteilt.
 * wenn "eingeloggt bleiben" genutzt wird, in der redaxo_config path für frontend und backend auch "/" setzen
 
 
@@ -15,7 +18,8 @@ Version 3.0 – xx.xx.2018
 
 * media_auth Plugin ergänzt. Man kann einzelnen Medien YCom Zugriffsrechte geben. braucht rex 5.7
 * Doku als Plugin für bessere Übersicht und Inhalte ergänzt
-
+* PlugIns auth und media_auth sind aktiv, sobald die PlugIns installiert sind.
+* SAML Authentifizierung ergänzt
 
 ### Änderungen / Korrekturen
 
@@ -30,6 +34,10 @@ Version 3.0 – xx.xx.2018
 * auth: Wenn nicht eingeloggt und gesperrte Seite -> Loginseite
 * Danke an Pixeldaniel, Alexander Walther, Jürgen Weiss, Yves Torres, christophboecker für diverse Korrekturen, Doku, Sprachdateien ..
 * placeholer passwort meldungen fixed
+* EP REX_YCOM_YFORM_SAVED -> YCOM_YFORM_SAVED
+* Umbau der action ycom_auth_db.php. rex_manager_dataset wird nun verwendet. Dadurch einheitliche EPs und Prozesse
+* Prüfung auf Perm nun über Core Methode rex_article->isPermitted(), so dass diese auch bei Sitemaps (YRewrite) richtig geht
+* returnTo Feld ergänzt, um erweiterte Weiterleitung mit Prüfung zu ermöglichen
 
 
 Version 2.1 – 05.05.2018
