@@ -1,5 +1,5 @@
 ycom_media_auth_title = Medien
-ycom_media_auth_settings = Settings
+ycom_media_auth_settings = Einstellungen
 ycom_auth_config_media_auth_rules = Regel wenn Medium nicht aufgerufen werden darf
 
 ycom_media_auth_failed_header_notfound = Header `Not Found` senden
