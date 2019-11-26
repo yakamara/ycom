@@ -17,6 +17,7 @@ Version 3.0beta unterscheidet sich von Version 4.x. Da dies ein paar elementare 
 
 * PlugIns auth und media_auth sind aktiv, sobald die PlugIns installiert sind.
 * SAML Authentifizierung ergänzt
+* media_auth-Rule ergänzt um Weiterleitung auf ErrorSeite wenn User eingeloggt und Zugriff verboten
 
 ### Änderungen / Korrekturen
 
