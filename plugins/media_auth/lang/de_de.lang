@@ -4,7 +4,8 @@ ycom_auth_config_media_auth_rules = Regel wenn Medium nicht aufgerufen werden da
 
 ycom_media_auth_failed_header_notfound = Header `Not Found` senden
 ycom_media_auth_failed_header_perm_denied = Header `Permission denied` senden
-ycom_media_auth_failed_redirect_login = Weiterleitung zu Login mit Redirect auf Medium (wenn nicht eingeloggt)
+ycom_media_auth_failed_redirect_login = Weiterleitung zu Login mit Redirect auf Medium (wenn nicht eingeloggt). Bei Fehler 401 Header (wenn eingeloggt)
+ycom_media_auth_failed_redirect_login_with_error_page = Weiterleitung zu Login mit Redirect auf Medium (wenn nicht eingeloggt). Bei Fehler Weiterleitung auf Error-Seite (wenn eingeloggt)
 ycom_media_auth_failed_header_redirect_notfound = Weiterleitung zu NotFound Article
 
 ycom_media_auth_settings_updated = Einstellungen wurden aktualisiert
