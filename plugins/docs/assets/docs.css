@@ -111,3 +111,6 @@ font-family: FontAwesome;
 .rex-ycom-docs .ycom-docs-navi ul sup {
     display: none;
 }
+.rex-ycom-docs img {
+    max-width: 100%;
+}

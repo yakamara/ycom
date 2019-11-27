@@ -1,5 +1,7 @@
 <?php
 
 if (rex::isBackend() && rex::getUser()) {
-    rex_view::addCssFile($this->getAssetsUrl('docs.css'));
+    if ('ycom/docs' == rex_be_controller::getCurrentPage()) {
+        rex_view::addCssFile($this->getAssetsUrl('docs.css'));
+    }
 }
