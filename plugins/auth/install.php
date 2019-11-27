@@ -24,3 +24,4 @@ try {
 }
 
 rex_delete_cache();
+rex_yform_manager_table::deleteCache();

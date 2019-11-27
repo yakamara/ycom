@@ -7,3 +7,5 @@ $sql->setQuery('DELETE FROM `'.rex::getTable('yform_history').'` WHERE table_nam
 
 rex_sql_table::get(rex::getTable('ycom_group'))
     ->drop();
+
+rex_yform_manager_table::deleteCache();

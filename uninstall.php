@@ -14,10 +14,13 @@ rex_sql_table::get(rex::getTable('article'))
 rex_sql_table::get(rex::getTable('ycom_user'))
     ->drop();
 
-if ($this->getPlugin('group')->isInstalled()) {
-    $this->getPlugin('group')->includeFile(__DIR__.'/plugins/group/uninstall.php');
+foreach ($this->getInstalledPlugins() as $plugin) {
+    // use path relative to __DIR__ to get correct path in update temp dir
+    $file = __DIR__ . '/plugins/' . $plugin->getName() . '/uninstall.php';
+
+    if (file_exists($file)) {
+        $plugin->includeFile($file);
+    }
 }
 
-if ($this->getPlugin('media_auth')->isInstalled()) {
-    $this->getPlugin('media_auth')->includeFile(__DIR__.'/plugins/media_auth/uninstall.php');
-}
+rex_yform_manager_table::deleteCache();

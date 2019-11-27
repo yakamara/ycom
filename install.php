@@ -1,5 +1,7 @@
 <?php
 
+rex_yform_manager_table::deleteCache();
+
 /** @var rex_addon $this */
 
 $content = rex_file::get(rex_path::addon('ycom', 'install/tablesets/yform_user.json'));
@@ -15,3 +17,4 @@ foreach ($this->getInstalledPlugins() as $plugin) {
 }
 
 rex_delete_cache();
+rex_yform_manager_table::deleteCache();
