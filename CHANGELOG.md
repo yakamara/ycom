@@ -25,7 +25,7 @@ Version 3.0beta unterscheidet sich von Version 4.x. Da dies ein paar elementare 
 * Umbau der action ycom_auth_db.php. rex_manager_dataset wird nun verwendet. Dadurch einheitliche EPs und Prozesse
 * Prüfung auf Perm nun über Core Methode rex_article->isPermitted(), so dass diese auch bei Sitemaps (YRewrite) richtig geht
 * returnTo Feld ergänzt, um erweiterte Weiterleitung mit Prüfung zu ermöglichen
-
+* Cache von YForm wird nun bei install und uninstall geleert.
 
 Version 3.0 – xx.xx.2018
 --------------------------
