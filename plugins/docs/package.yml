@@ -1,7 +1,6 @@
 package: ycom/docs
-version: '4.0dev'
+version: '4.0'
 author: 'YCom Document Team: Jan Kristinus, Alexander Walther'
-supportpage: 'https://github.com/yakamara/redaxo_ycom'
 
 page:
     title: 'translate:ycom_docs'

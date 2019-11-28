@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-Version 4.0 – xx.xx.2019
+Version 4.0 – 28.11.2019
 --------------------------
 
 #### Bei Update: Bitte unbedingt beachten:
