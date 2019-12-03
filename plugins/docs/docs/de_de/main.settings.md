@@ -4,11 +4,6 @@ Die Einstellungsseite befindet sich im REDAXO-Backend unter `YCom` > `Einstellun
 
 > Hinweis: Nicht alle hier getätigen Einstellungen funktionieren von Haus aus und erfordern ggf. noch weitere Einstellungen in der Struktur, Tempaltes, Modulen oder E-Mail-Tempaltes.
 
-Status                  | Erläuterung
------------------------ | ------------
-Authentifizierung       | Authentifizierung aktivieren, um YCom zu aktivieren
-
-
 Weiteleitungen          | Erläuterung
 ----------------------- | ------------
 article_id_jump_ok      | Ziel-Artikel, zu dem weitergeleitet wird, wenn der Login erfolgreich war.
