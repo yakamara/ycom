@@ -9,6 +9,11 @@ Damit die Userberechtigungen in der Navigation berücksichtigt werden muss die R
 $nav = rex_navigation::factory();
 $nav->addCallback('rex_ycom_auth::articleIsPermitted');
 $nav->show();
+
+Die Ausgabe der Navigation kann angepasst und um Parameter erweitert werden. Details siehe in der Doku:
+https://redaxo.org/doku/master/navigationen
+Beispiel: Offline-Kategorien ausblenden: 
+$nav->show(0, 1, TRUE, TRUE);
 ```
 
 die Klasse `rex_ycom_navigation::factory();` existiert seit Version 3 nicht mehr.
