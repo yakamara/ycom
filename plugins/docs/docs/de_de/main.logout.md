@@ -14,3 +14,5 @@ ycom_auth_logout|label|
 
 Nun können sich Nutzer nach einem Login ausloggen und werden dann weitergeleitet.
 
+### Ohne YForm-Formbuilder
+Alternativ kann der ein Logout mithilfe der Funktion `rex_ycom_auth::clearUserSession()` implementiert werden. 
