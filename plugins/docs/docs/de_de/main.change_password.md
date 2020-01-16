@@ -21,6 +21,7 @@ validate|empty|password|Bitte geben Sie ein Passwort ein.
 validate|compare|password|password_2|!=|Bitte geben Sie zweimal das gleiche Passwort ein
 action|showtext|Ihre Daten wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.|||1
 action|ycom_auth_db
+hidden|new_password_required|0
 ```
 
 4. Den Artikel verlinken, damit die Nutzer die Seite zum Ändern des Passworts aufrufen können.
