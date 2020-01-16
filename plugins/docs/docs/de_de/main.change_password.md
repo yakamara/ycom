@@ -22,6 +22,10 @@ validate|compare|password|password_2|!=|Bitte geben Sie zweimal das gleiche Pass
 action|showtext|Ihre Daten wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.|||1
 action|ycom_auth_db
 ```
+Wenn im Backend "Neues Passwort muss gesetzt werden" hinterlegt ist füge zusätzlich folgende Zeile ein:
+```
+hidden|new_password_required|0
+```
 
 4. Den Artikel verlinken, damit die Nutzer die Seite zum Ändern des Passworts aufrufen können.
 
