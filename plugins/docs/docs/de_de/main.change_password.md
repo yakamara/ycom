@@ -21,9 +21,6 @@ validate|empty|password|Bitte geben Sie ein Passwort ein.
 validate|compare|password|password_2|!=|Bitte geben Sie zweimal das gleiche Passwort ein
 action|showtext|Ihre Daten wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.|||1
 action|ycom_auth_db
-```
-Wenn im Backend "Neues Passwort muss gesetzt werden" hinterlegt ist füge zusätzlich folgende Zeile ein:
-```
 hidden|new_password_required|0
 ```
 
