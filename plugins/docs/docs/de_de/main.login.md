@@ -4,8 +4,9 @@
 2. Im Artikel `Login` den YForm Formbuilder hinzufügen und folgende Formulardefinition eintragen:
 ```
 validate|ycom_auth|login|psw|stayfield|warning_message_enterloginpsw|warning_message_login_failed
-text|login|Benutzername
+text|login|Benutzername|#attributes:{"autocomplete":"off"}
 password|psw|Passwort
+checkbox|stayfield|eingeloggt bleiben
 ycom_auth_returnto|returnTo|
 ```
 
