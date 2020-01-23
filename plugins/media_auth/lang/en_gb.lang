@@ -4,7 +4,8 @@ ycom_auth_config_media_auth_rules = Rule for denying media
 
 ycom_media_auth_failed_header_notfound = send header `Not Found`
 ycom_media_auth_failed_header_perm_denied = send header `Permission denied`
-ycom_media_auth_failed_redirect_login = Redirect to login with redirect to media (if not logged in)
+ycom_media_auth_failed_redirect_login = Redirect to login with redirect to media (if not logged in). In case of error with 401 response header (if logged in)
+ycom_media_auth_failed_redirect_login_with_error_page = Redirect to login with redirect to media (if not logged in). In case of erro
 ycom_media_auth_failed_header_redirect_notfound = Redirect to NotFound article
 
-ycom_media_auth_settings_updated = Settings saved
+ycom_media_auth_settings_updated = Settings updated
