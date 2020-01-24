@@ -5,6 +5,7 @@ ycom_auth_config_media_auth_rules = Regla si no se puede llamar medio
 ycom_media_auth_failed_header_notfound = Encabezado `Not Found` senden
 ycom_media_auth_failed_header_perm_denied = Encabezado `Permiso denegado` senden
 ycom_media_auth_failed_redirect_login = Redirigir al inicio de sesión con Redirigir a medio (si no se ha iniciado sesión)
+ycom_media_auth_failed_redirect_login_with_error_page = Reenvío para iniciar sesión con redireccionamiento en media (si no está conectado). Si los errores se reenvían a la página de error (si está conectado)
 ycom_media_auth_failed_header_redirect_notfound = Reenvío a artículo NotFound
 
 ycom_media_auth_settings_updated = Configuraciones se han actualizado
