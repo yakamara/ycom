@@ -32,9 +32,8 @@ class rex_yform_value_ycom_auth_returnto extends rex_yform_value_abstract
     public function executeAction()
     {
         if ('' != $this->getValue()) {
-            rex_response::cleanOutputBuffers();
             header('Location: ' . $this->getValue());
-            // no exit(); because there could be other actions and also post action triggers.
+            $this->params['form_exit'] = true;
         }
     }
 
