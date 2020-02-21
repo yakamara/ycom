@@ -33,7 +33,7 @@ YCom Einstellungsseite im REDAXO-Backend aufrufen unter `YCom` > `Einstellungen`
 
 * **Weiterleitungen**: 
   * als `article_id_jump_ok` bspw. die Startseite verwenden. 
-  * als `article_id_jump_not_ok` bspw. den Login-Artikel verwenden. 
+  * als `article_id_jump_not_ok` (nur SAML-Authentifizierung) bspw. den Login-Artikel verwenden. 
   * als `article_id_jump_logout` bspw. den Login-Artikel oder die Startseite verwenden. 
   * als `article_id_jump_denied` bspw. den Login-Artikel verwenden oder einen eigenen Artikel anlegen.
 * **Allgemeine Seiten**
