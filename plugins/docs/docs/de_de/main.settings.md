@@ -7,7 +7,7 @@ Die Einstellungsseite befindet sich im REDAXO-Backend unter `YCom` > `Einstellun
 Weiteleitungen          | Erläuterung
 ----------------------- | ------------
 article_id_jump_ok      | Ziel-Artikel, zu dem weitergeleitet wird, wenn der Login erfolgreich war.
-article_id_jump_not_ok  | Ziel-Artikel, zu dem weitergeleitet wird, wenn der Login fehlgeschlagen ist. Dies kann auch der Login-Artikel sein.
+article_id_jump_not_ok  | Ziel-Artikel, zu dem weitergeleitet wird, wenn der Login fehlgeschlagen ist. Dies kann auch der Login-Artikel sein. (nur für SAML-Authentifizierung)
 article_id_jump_logout  | Ziel-Artikel, zu dem weitergeleitet wird, nachdem Logout erfolgt ist. Dies kann auch der Login-Artikel sein.
 article_id_jump_denied  | Ziel-Artikel, zu dem weitergeleitet wird, wenn der Besucher nicht die passende Gruppen-Berechtigung hat. Z.B., wenn der Benutzer nicht eingeloggt ist oder keine passende Gruppenberechtigung hat. Dies kann auch der Login-Artikel sein.
 article_id_jump_password| (optional) Artikel, in dem das Passwort geändert wird.
