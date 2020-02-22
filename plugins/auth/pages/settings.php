@@ -84,15 +84,6 @@ $content .= '
 
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_login_failed">'.$this->i18n('ycom_auth_config_id_jump_not_ok').' <small>[article_id_jump_not_ok]</small></label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(6, 'article_id_jump_not_ok', stripslashes($this->getConfig('article_id_jump_not_ok'))) .'
-			</div>
-		</div>
-
-		<div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
 				<label for="rex-form-article_logout">'.$this->i18n('ycom_auth_config_id_jump_logout').' <small>[article_id_jump_logout]</small></label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
@@ -207,6 +198,20 @@ $content .= '
                 '.$sel_authcookiettl->get().'
             </div>
         </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>'.$this->i18n('ycom_auth_config_saml').'</legend>
+
+        <div class="row abstand">
+			<div class="col-xs-12 col-sm-6">
+				<label for="rex-form-article_login_failed">'.$this->i18n('ycom_auth_config_id_jump_not_ok').' <small>[article_id_jump_not_ok]</small></label>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				'. rex_var_link::getWidget(6, 'article_id_jump_not_ok', stripslashes($this->getConfig('article_id_jump_not_ok'))) .'
+			</div>
+		</div>
+
     </fieldset>
 
 
