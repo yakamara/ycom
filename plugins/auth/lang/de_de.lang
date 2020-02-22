@@ -59,3 +59,6 @@ ycom_auth_config_id_login = LogIn-Seite
 ycom_auth_config_id_logout = LogOut-Seite
 ycom_auth_config_id_register = Register-Seite
 ycom_auth_config_id_password = Passwort zurücksetzen
+
+ycom_auth_config_auth_cookie_ttl = Cookie-Laufzeit für `eingeloggt bleiben`
+ycom_days = {0} Tage

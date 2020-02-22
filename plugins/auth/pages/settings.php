@@ -23,6 +23,7 @@ if ('update' == rex_request('func', 'string')) {
     $this->setConfig('article_id_register', rex_request('article_id_register', 'int'));
     $this->setConfig('article_id_password', rex_request('article_id_password', 'int'));
     $this->setConfig('auth_rule', rex_request('auth_rule', 'string'));
+    $this->setConfig('auth_cookie_ttl', rex_request('auth_cookie_ttl', 'int'));
     $this->setConfig('login_field', stripslashes(str_replace('"', '', rex_request('login_field', 'string'))));
 
     echo rex_view::success($this->i18n('ycom_auth_settings_updated'));
@@ -52,6 +53,17 @@ $sel_authrules->addOptions($rules->getOptions());
 
 $sel_authrules->setAttribute('class', 'form-control selectpicker');
 $sel_authrules->setSelected($this->getConfig('auth_rule'));
+
+$sel_authcookiettl = new rex_select();
+$sel_authcookiettl->setId('auth-cookie-ttl');
+$sel_authcookiettl->setName('auth_cookie_ttl');
+$sel_authcookiettl->setAttribute('class', 'form-control selectpicker');
+$sel_authcookiettl->setSelected($this->getConfig('auth_cookie_ttl'));
+
+$sel_authcookiettl->addOption($this->i18n('ycom_days', 7), '7');
+$sel_authcookiettl->addOption($this->i18n('ycom_days', 14), '14');
+$sel_authcookiettl->addOption($this->i18n('ycom_days', 30), '30');
+$sel_authcookiettl->addOption($this->i18n('ycom_days', 90), '90');
 
 $content .= '
 <form action="index.php" method="post" id="ycom_auth_settings">
@@ -119,7 +131,7 @@ $content .= '
 
 	<fieldset>
 		<legend>'.$this->i18n('ycom_auth_config_pages').'</legend>
-		
+
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
 				<label for="rex-form-article_login">'.$this->i18n('ycom_auth_config_id_login').' <small>[article_id_login]</small></label>
@@ -175,16 +187,26 @@ $content .= '
 
     <fieldset>
             <legend>'.$this->i18n('ycom_auth_config_security').'</legend>
-    
-            <div class="row">
+
+            <div class="row abstand">
                 <div class="col-xs-12 col-sm-6">
                     <label for="auth_rules_select">' . $this->i18n('ycom_auth_config_auth_rules') . '</label>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                 '.$sel_authrules->get().'
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <label for="auth_cookie_ttl_select">' . $this->i18n('ycom_auth_config_auth_cookie_ttl') . '</label>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                '.$sel_authcookiettl->get().'
             </div>
         </div>
     </fieldset>
+
 
 	<div class="row">
 		<div class="col-xs-12 col-sm-6 col-sm-push-6">
