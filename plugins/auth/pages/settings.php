@@ -102,7 +102,9 @@ $content .= '
 
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_denied">'.$this->i18n('ycom_auth_config_id_jump_denied').' <small>[article_id_jump_denied]</small></label>
+				<label for="rex-form-article_denied">'.$this->i18n('ycom_auth_config_id_jump_denied').'
+				<small>[article_id_jump_denied]</small></label>
+			    <small><br />'.$this->i18n('ycom_auth_config_id_jump_denied_notice').'</small>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(8, 'article_id_jump_denied', stripslashes($this->getConfig('article_id_jump_denied'))) .'

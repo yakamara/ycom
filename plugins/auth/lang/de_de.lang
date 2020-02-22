@@ -17,6 +17,8 @@ ycom_auth_config_id_jump_ok		= ... wenn erfolgreich eingeloggt
 ycom_auth_config_id_jump_not_ok	= ... wenn nicht erfolgreich eingeloggt
 ycom_auth_config_id_jump_logout	= ... nach dem Ausloggen
 ycom_auth_config_id_jump_denied	= ... wenn auf einen gesperrten Artikel zugriffen wird
+ycom_auth_config_id_jump_denied_notice	= Wenn man nicht eingeloggt ist, wird man zunächst auf die Loginseite geleitet. Erst danach wird man auf den denied Artikel geleitet wenn man keine Rechte an diesem Artikel hat.
+
 ycom_auth_config_id_jump_activation_ok = ... nach erfolgreicher Aktivierung
 ycom_auth_config_id_jump_activation_fail = .. nach fehlgeschlagener Aktivierung
 ycom_auth_config_id_jump_newpassword_ok = ... nach erfolgreicher Passwortrücksetzung
