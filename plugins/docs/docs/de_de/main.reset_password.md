@@ -39,10 +39,24 @@ objparams|submit_btn_show|0
 objparams|send|1
 objparams|csrf_protection|0
 
-validate|ycom_auth_login|activation_key=rex_ycom_activation_key,email=rex_ycom_id|status=2|Zugang wurde bereits bestätigt oder ist schon fehlgeschlagen|status
+validate|ycom_auth_login|activation_key=rex_ycom_activation_key,email=rex_ycom_id|status=1|Zugang wurde bereits bestätigt oder ist schon fehlgeschlagen|status
 
 action|ycom_auth_db|update
 action|html|<b>Sie sind eingeloggt. Das Passwort kann nun geändert werden.</b>
 ```
 
-Der `status=2` muss hier 2 sein, da es sich in der Regel um einen bereits *aktiven Account* handelt, der ein zurücksetzen des Passworts anfordert.
+Arbeitet man nur mit *bestätigten Accounts*, muss der `status=1` sein.
+
+Der Status kann hier auch 2 sein (`status=2`), wenn man mit selbst angelegten Accounts ohne Bestätigung arbeitet. Wenn man also im Backend einen Account anlegt und diesen auf **Zugang ist aktiv** stellt. Siehe dazu auch folgende Liste.
+
+
+### Status Liste eines YCom-Accounts
+
+Interner Name | Übersetzung | Wert
+------ | ------ | ------
+ycom_account_inactive_termination | Zugang wurde gekündigt | -3
+ycom_account_inactive_logins | Zugang wurde deaktiviert [Loginfehlversuche] | -2
+ycom_account_inactive | Zugang ist inaktiv | -1
+ycom_account_requested | Zugang wurde angefragt | 0
+ycom_account_confirm | Zugang wurde bestätigt und ist aktiv | 1
+ycom_account_active | Zugang ist aktiv | 2
