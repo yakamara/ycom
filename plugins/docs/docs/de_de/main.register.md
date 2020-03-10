@@ -50,6 +50,8 @@ hidden|termsofuse_accepted|1
 
 ### E-Mail-Template `access_request_de` für die Bestätigung erstellen
 
+Erstelle unter yform/E-Mail Templates ein neues Template mit dem Namen `access_request_de` und kopiere den folgenden Code in das Feld **Body (Html)**
+
 Diese E-Mail fordert den Nutzer dazu auf, die Anmeldung zu bestätigen. Der endgültige Link sieht bspw. aus wie folgt: <code>https://www.redaxo.org/anmeldung/bestaetigen/?rex_ycom_activation_key=ACTIVATION_KEY&rex_ycom_id=YCOM_LOGIN</code>
 
 ```
@@ -64,6 +66,7 @@ $full_url = trim(rex::getServer(),'/').trim($article_url,'.');
 ```
 
 ### Registrierungsbestätigung
+Erstelle unter yform/E-Mail Templates ein neues Template und kopiere den folgenden Code in das Feld **Body (Html)**
 
 Der Artikel für die Registrierungsbestätigung muss öffentlich zugänglich sein und unter dem Link erreichbar sein, der im o.g. E-Mail-Template angegeben wurde, z.B.: <code>https://www.redaxo.org/anmeldung/bestaetigen/?rex_ycom_activation_key=ACTIVATION_KEY&rex_ycom_id=YCOM_LOGIN</code>
 
