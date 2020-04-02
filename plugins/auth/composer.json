@@ -1,5 +1,6 @@
 {
     "require": {
-        "onelogin/php-saml": "^3.3"
+        "onelogin/php-saml": "^3.3",
+        "apereo/phpcas": "^1.3"
     }
 }

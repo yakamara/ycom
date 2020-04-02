@@ -11,6 +11,8 @@ rex_sql_table::get(rex::getTable('article'))
 
 // saml dummy file
 rex_file::copy(__DIR__.'/install/saml.php', rex_addon::get('ycom')->getDataPath('saml.php'));
+// cas dummy file
+rex_file::copy(__DIR__.'/install/cas.php', rex_addon::get('ycom')->getDataPath('cas.php'));
 
 // termofuse -> termsofuse. Version < 3.0
 try {
