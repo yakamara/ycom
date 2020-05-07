@@ -40,7 +40,7 @@ ycom_account_inactive_termination = Access terminated
 ycom_account_inactive_logins = Access deactivated [Too many failed Logins]
 ycom_account_inactive = Access is deactivated
 ycom_account_requested = Access requested
-ycom_account_confirm = Access has been confirmned
+ycom_account_confirm = Access has been confirmed
 ycom_account_active = Access is active
 
 ycom_status = Status
