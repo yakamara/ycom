@@ -6,6 +6,16 @@ navigation_ycom = Community
 ycom_title = Community: Einstellungen
 ycom_navi_title = Einstellungen
 
+ycom_docs = Dokumentation
+ycom_docs_intro = Übersicht
+ycom_docs_settings = Einstellungen
+ycom_docs_login = Login und Authentifizierung
+ycom_docs_password = Passwörter
+ycom_docs_user = Benutzer und Registrierung
+ycom_docs_navigation = Navigation
+ycom_docs_mediaauth = Medienpool schützen
+ycom_docs_tricks = Tricks
+
 ycom_main_title = Info
 ycom_info = Readme
 ycom_info_title = Nützliche Informationen zur Verwendung des Community Addons

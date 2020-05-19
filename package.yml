@@ -20,3 +20,44 @@ system_plugins:
     - auth
     - group
     - docs
+
+pages:
+    ycom/help:
+        title: 'translate:ycom_docs'
+        perm: admin[]
+        subPath: README.md
+        itemclass: pull-right 
+        icon: rex-icon fa-book
+        subpages:
+            intro:
+                title: 'translate:ycom_docs_intro'
+                subPath: README.md
+                icon: rex-icon fa-book
+            settings:
+                title: 'translate:ycom_docs_settings'
+                subPath: docs/de_de/settings.md
+                icon: rex-icon fa-gear
+            login:
+                title: 'translate:ycom_docs_login'
+                subPath: docs/de_de/login.md
+                icon: rex-icon fa-vcard
+            user:
+                title: 'translate:ycom_docs_user'
+                subPath: docs/de_de/user.md
+                icon: rex-icon fa-user-circle
+            navigation:
+                title: 'translate:ycom_docs_navigation'
+                subPath: docs/de_de/navigation.md
+                icon: rex-icon fa-bars
+            password:
+                title: 'translate:ycom_docs_password'
+                subPath: docs/de_de/password.md
+                icon: rex-icon fa-key
+            mediaauth:
+                title: 'translate:ycom_docs_mediaauth'
+                subPath: docs/de_de/mediaauth.md
+                icon: rex-icon fa-lock
+            tricks:
+                title: 'translate:ycom_docs_tricks'
+                subPath: docs/de_de/tricks.md
+                icon: rex-icon fa-lightbulb-o

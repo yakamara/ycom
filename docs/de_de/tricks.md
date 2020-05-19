@@ -1,8 +1,16 @@
-# Unsterschiedliche Zielseiten für verschiedene Nutzer
+# Weitere Tricks
+
+## Nach dem Aktivierungs-Link direkt wieder ausloggen
+
+Nach der Zeile `action|ycom_auth_db|update` diese Zeile einfügen: `action|ycom_auth_db|logout`
+
+[Diskussion auf Github](https://github.com/yakamara/redaxo_ycom/issues/221), vielen Dank an @godsdog
+
+## Unsterschiedliche Zielseiten für verschiedene Nutzer
 
 Wenn nach dem Login Nutzer zu unterschiedlichen Seiten weitergeleitet werden sollen, muss YCom um die entsprechende Funktion erweitert werden.
 
-## Variante A: Unterschiedliche Zielseiten je YCom-Nutzer 
+### Variante A: Unterschiedliche Zielseiten je YCom-Nutzer 
 
 Voraussetzung ist, dass mindestens ein Benutzer vorhanden ist.
 
@@ -58,7 +66,7 @@ if($ycom_user) {
 2. Unter Struktur einen neuen Artikel `Login-Weiterleitung` anlegen und das Template `Login-Weiterleitung` zuweisen.
 3. Im REDAXO-Backend `YCom` -> `Einstellungen` aufrufen und unter "...wenn erfolgreich eingeloggt [target_id_jump_ok]" den Artikel `Login-Weiterleitung` auswählen.
 
-## Variante B: Unterschiedliche Zielseiten je YCom-Gruppe 
+### Variante B: Unterschiedliche Zielseiten je YCom-Gruppe 
 
 Voraussetzung ist, dass mindestens ein Benutzer mindestens einer Gruppe zugewiesen ist.
 
@@ -87,7 +95,7 @@ Zu guter Letzt werden REDAXO und YCom so konfiguriert, dass nach dem Login autom
 
 1. Im REDAXO-Backend ein neues Template `Login-Weiterleitung` anlegen und folgenden Code kopieren:
 
-```
+```php
 <?php
 
 $ycom_user = rex_ycom_auth::getUser();
@@ -113,3 +121,7 @@ if($ycom_user) {
 
 2. Unter Struktur einen neuen Artikel `Login-Weiterleitung` anlegen und das Template `Login-Weiterleitung` zuweisen.
 3. Im REDAXO-Backend `YCom` -> `Einstellungen` aufrufen und unter "...wenn erfolgreich eingeloggt [target_id_jump_ok]" den Artikel `Login-Weiterleitung` auswählen.
+
+## Du hast weitere Tricks auf Lager?
+
+Dann [ergänze die YCom-Doku](https://github.com/yakamara/redaxo_ycom/tree/master/) oder schreibe ein [Issue auf GitHub](https://github.com/yakamara/redaxo_ycom/issues).

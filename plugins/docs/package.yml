@@ -1,8 +1,0 @@
-package: ycom/docs
-version: '4.0.1'
-author: 'YCom Document Team: Jan Kristinus, Alexander Walther'
-
-page:
-    title: 'translate:ycom_docs'
-    perm: admin
-    itemclass: pull-right
