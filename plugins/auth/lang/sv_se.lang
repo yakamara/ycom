@@ -17,6 +17,8 @@ ycom_auth_config_id_jump_ok		= ... om du har loggat in
 ycom_auth_config_id_jump_not_ok	= ... om inte inloggad framgångsrikt
 ycom_auth_config_id_jump_logout	= ... efter att ha loggat ut
 ycom_auth_config_id_jump_denied	= ... när du begär åtkomst till en blockerad artikel
+ycom_auth_config_id_jump_denied_notice	= Om du inte är inloggad kommer du att ledas till inloggningssidan. Först då kommer du att riktas till den nekade artikeln om du inte har några rättigheter till den här artikeln.
+
 ycom_auth_config_id_jump_activation_ok = ... efter framgångsrik aktivering
 ycom_auth_config_id_jump_activation_fail = .. efter misslyckad aktivering
 ycom_auth_config_id_jump_newpassword_ok = ... efter framgångsrik återställning av lösenord
@@ -59,3 +61,8 @@ ycom_auth_config_id_login = Login sida
 ycom_auth_config_id_logout = Logout-sida
 ycom_auth_config_id_register = Registreringssida
 ycom_auth_config_id_password = Återställ lösenord
+
+ycom_auth_config_auth_cookie_ttl = Cookie-varaktighet för "förbli inloggad"
+ycom_days = {0} dagar
+
+ycom_auth_config_saml = SAML autentisering
