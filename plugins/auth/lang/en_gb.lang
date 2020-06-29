@@ -11,12 +11,14 @@ ycom_auth_config_forwarder 		= Forward to article
 ycom_auth_config_login_field		= Login field
 
 ycom_auth_config_status_authactive = Authentication active
-ycom_auth_config_status_stayactive = "Stay signed in" active
+ycom_auth_config_status_stayactive = "Remain signed in" active
 ycom_auth_config_security_hashedpasswd = Encrypted passwords (sha1)
 ycom_auth_config_id_jump_ok		= ... when successfully signed in
 ycom_auth_config_id_jump_not_ok	= ... when sign in is unsuccessfull
 ycom_auth_config_id_jump_logout	= ... when signed out
 ycom_auth_config_id_jump_denied	= ... when attempting to access a restricted article
+ycom_auth_config_id_jump_denied_notice	= When not already signed in visitors will be redirected to the sign in page. Afterwards visitors will be redirected to the access denied article if they have insufficient permissions to view this article.
+
 ycom_auth_config_id_jump_activation_ok = ... when successfully activated
 ycom_auth_config_id_jump_activation_fail = ... when activation was unsuccessfull
 ycom_auth_config_id_jump_newpassword_ok = ... when successfully reset password
@@ -59,3 +61,8 @@ ycom_auth_config_id_login = Login page
 ycom_auth_config_id_logout = Logout page
 ycom_auth_config_id_register = Register page
 ycom_auth_config_id_password = Reset password
+
+ycom_auth_config_auth_cookie_ttl = Cookie lifespan for "remain signed in"
+ycom_days = {0} days
+
+ycom_auth_config_saml = SAML authentication
