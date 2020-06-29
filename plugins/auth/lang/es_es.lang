@@ -17,6 +17,8 @@ ycom_auth_config_id_jump_ok		= ... si ha iniciado sesión correctamente
 ycom_auth_config_id_jump_not_ok	= ... si no ha iniciado sesión correctamente
 ycom_auth_config_id_jump_logout	= ...después de desconectarse
 ycom_auth_config_id_jump_denied	= ...al acceder a un artículo bloqueado
+ycom_auth_config_id_jump_denied_notice	= Si no ha iniciado sesión, se lo dirigirá a la página de inicio de sesión. Solo entonces se lo dirigirá al artículo denegado si no tiene derechos sobre este artículo.
+
 ycom_auth_config_id_jump_activation_ok = ...después de la activación exitosa
 ycom_auth_config_id_jump_activation_fail = .. después de la activación fallida
 ycom_auth_config_id_jump_newpassword_ok = ...después de restablecer con éxito la contraseña
@@ -59,3 +61,8 @@ ycom_auth_config_id_login = página de login
 ycom_auth_config_id_logout = Página de cierre de sesión
 ycom_auth_config_id_register = Regístrese página
 ycom_auth_config_id_password = Restablecer contraseña
+
+ycom_auth_config_auth_cookie_ttl = Duración de la cookie para `permanecer conectado`
+ycom_days = {0} días
+
+ycom_auth_config_saml = Autenticación SAML
