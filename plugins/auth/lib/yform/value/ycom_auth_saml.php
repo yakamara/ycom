@@ -21,7 +21,6 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
     {
         // TODO: slo testen
         // TODO: Useranlegen / updaten / einloggen / verbieten
-        // TODO: Diverse Variablen in der config hinterlegen.: email, name, vorname erkennung,
 
         // TODO .json .xml config laden, statt eigene .php config laden können
         // $idpInfo = \OneLogin\Saml2\IdPMetadataParser::parseFileXML(\rex_addon::get('ycom')->getDataPath('onelogin_metadata_993615.xml'));
@@ -74,12 +73,12 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
             dump($e);
             dump('Please use following ServiceProvider Settings in your config');
             $sp = [
-                'entityid' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId()),
+                'entityid' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(),'', [], '&'),
                 'assertionConsumerService' => [
-                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId()).'?rex_ycom_auth_mode=saml&rex_ycom_auth_func=acs',
+                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(),'', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'acs'], '&'),
                 ],
                 'singleLogoutService' => [
-                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId()).'?rex_ycom_auth_mode=saml&rex_ycom_auth_func=slo',
+                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(),'', ['rex_ycom_auth_mode' =>'saml', 'rex_ycom_auth_func' => 'slo'], '&'),
                 ],
             ];
             dump($sp);
@@ -89,7 +88,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         switch ($requestSAMLFunctions) {
             // init login
             case 'sso':
-                $returnToUrl = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'auth', 'returnTo' => $returnTo]);
+                $returnToUrl = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'auth', 'returnTo' => $returnTo],'&');
                 $ssoBuiltUrl = $auth->login($returnToUrl, [], false, false, true);
                 rex_ycom_auth::setSessionVar('SAML_AuthNRequestID', $auth->getLastRequestID());
                 rex_ycom_auth::setSessionVar('SAML_ssoDate', date('Y-m-d H:i:s'));
@@ -136,7 +135,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
             // init Logout processs with returnTo or redirect from idp
             case 'slo':
 
-                $returnToURL = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sls', 'returnTo' => $returnTo]);
+                $returnToURL = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sls', 'returnTo' => $returnTo], '&');
                 $parameters = [];
 
                 $nameId = rex_ycom_auth::getSessionVar('SAML_NameId', 'string', null);
