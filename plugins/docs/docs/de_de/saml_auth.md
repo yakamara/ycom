@@ -19,8 +19,38 @@ Mit diesem Feld erweitert man das Login um einen Loginbutton, der zum entspreche
 **allowed returnTo domains** Optional: sollte man returnTo verwenden um eine Weiterleitung zu einer bestimmten Seite zu bekommen, kann man diese Weiterleitung filter, so dass nicht unerlaubte Domains genutzt werden können
 **default Userdata as Json** Optional: Will man bestimmte Userdaten eines Users bei der Anmeldung über SAML festlegen, so kann man dies hier über JSON festlegen. Einfach die Feldnamen der Usertabelle dazu nutzen
 
-> **Technische Erläuterung:** Sobald vom User der SAML-Auth-Login-Button geklickt wurde, wird man anhand der saml.php-Settings zum Identity Provider geschickt, welche den User eigenständig authentifiziert und dem User einen Token mit entsprechenden Usermetadaten zuweist. 
+> **Technische Erläuterung:** Sobald vom User der SAML-Auth-Login-Button geklickt wurde, wird man anhand der saml.php-Settings zum Identity Provider geschickt, welche den User eigenständig authentifiziert und dem User einen Token mit entsprechenden Usermetadaten zuweist.
 
 > Diese werden von YCom genutzt und der User wird, wenn nicht vorhanden, angelegt und den eventuell individuell festgelegten Userattributen angelegt, oder die Daten werden aktualisiert.
 
 > Danach ist der User auch in YCom authentifiziert und eine weiteres Login ist nicht nötig. Sofern eine Session weiterhin vorhanden ist, wird dieser User nur bei Ablauf der Session oder nach einem Logout wieder über dem Identityprovider authentifiziert.
+
+Sofern die automatische E-Mail Erkennung nicht klappt, oder/und man eigene Felder bei der Usergenerierung festlegen will, folgendes am besten in die `addons/project/boot.php` legen und anpassen.
+
+```
+rex_extension::register('YCOM_AUTH_SAML_MATCHING', function (rex_extension_point $ep) {
+
+    $data = $ep->getSubject();
+    $params = $ep->getParams();
+    $Userdata = $params['Userdata'];
+
+    echo '<p>Hier auslesen welche Parameter übergeben werden und eventuell übernehmen/auswerten</p>';
+    echo '<p>Danach diesen Block löschen</p>';
+    dump($Userdata);
+    exit;
+
+    // z.B.
+    $emailKey = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress';
+    $givennameKey = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname';
+    $surnameKey = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname';
+
+    $data['email'] = @$Userdata[$emailKey][0];
+
+    // Userdatensatz mit gewünschten Einstellungen anreichern.
+    $data['termsofuse_accepted'] = 1;
+    $data['login_tries'] = 0;
+
+    return $data;
+
+});
+```
