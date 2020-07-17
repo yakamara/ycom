@@ -13,7 +13,7 @@ Dazu ist es zunächst nötig die Passworteingaben des Users zu erfassen. Eine en
 
 Sobald diese Tabelle existiert, müssen wir dafür sorgen, dass die Passwörter des Users bei jeder neuen Eingabe in unserer neuen Tabelle erfasst werden.
 
-Das passiert im Normalfall unter "Passwort ändern". Dort gibt man sein altes Passwort ein und erstellt ein Neues. 
+Das passiert im Normalfall unter "Passwort ändern". Dort gibt man sein altes Passwort ein und erstellt ein Neues.
 
 Über einen ExtensionPoint (EP) können wir uns nun an dieses Formular hängen, und die Werte entsprechend abziehen und bei uns speichern.
 Dieser EP könnt im eigenen `project`-AddOn liegen, dort z.B. in der boot.php
@@ -21,7 +21,7 @@ Dieser EP könnt im eigenen `project`-AddOn liegen, dort z.B. in der boot.php
 für das **xxxxxx** bitte den Feldnamen des neuen Passwortes eintragen.
 
 ```
-rex_extension::register('REX_YCOM_YFORM_SAVED', function ($params) {
+rex_extension::register('YCOM_YFORM_SAVED', function ($params) {
 
     /* @var $form rex_yform */
     $form = $params->getParams()['form'];
@@ -91,16 +91,16 @@ $limit = 6;
 $Users = rex_sql::factory()->getArray('select user_id from( select user_id, count(id) as id_count from rex_ycom_user_password GROUP BY user_id ) as my_table WHERE id_count >= :limit', ['limit' => $limit]);
 foreach ($Users as $User) {
     $s = rex_sql::factory()->setQuery('
-        DELETE otbl 
+        DELETE otbl
         FROM rex_ycom_user_password as otbl
         JOIN (
-                SELECT id 
-                FROM rex_ycom_user_password 
+                SELECT id
+                FROM rex_ycom_user_password
                 WHERE user_id = :uid
-                ORDER BY id desc      
+                ORDER BY id desc
                 LIMIT 1 OFFSET ' . $limit . '
-        ) as itbl 
-        ON otbl.id <= itbl.id 
+        ) as itbl
+        ON otbl.id <= itbl.id
         WHERE otbl.user_id = :uid', ['uid' => $User['user_id']]
     );
 }
