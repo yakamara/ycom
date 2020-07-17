@@ -35,7 +35,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
         $data['password'] = str_shuffle('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
         $data['login'] = $data['email'];
         $data['login_tries'] = 0;
-        $data['termofuse_accepted'] = 0;
+        $data['termsofuse_accepted'] = 0;
 
         $data = rex_extension::registerPoint(new rex_extension_point('YCOM_USER_CREATE', $data, []));
 
