@@ -73,6 +73,8 @@ $content .= '
 	<fieldset>
 		<legend>'.$this->i18n('ycom_auth_config_forwarder').'</legend>
 
+        Werte sind über: rex_config::get(\'ycom/auth\',\'article_id_login\', null); auslesbar
+
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
 				<label for="rex-form-article_login_ok">'.$this->i18n('ycom_auth_config_id_jump_ok').' <small>[article_id_jump_ok]</small></label>
