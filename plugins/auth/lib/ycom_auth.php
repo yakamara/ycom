@@ -492,7 +492,7 @@ class rex_ycom_auth
             $returnUrl .= '?'. $url['query'];
         }
 
-        $referer_to_logout = strpos($returnUrl, self::getRequestKey('auth_request_logout'));
+        $referer_to_logout = strpos($returnUrl, rex_getUrl(rex_config::get('ycom/auth','article_id_jump_logout','')));
         if (false === $referer_to_logout) {
         } else {
             $returnUrl = '';

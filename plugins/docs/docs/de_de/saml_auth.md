@@ -10,7 +10,7 @@ Bei der Installation des Auth-Plugins wurde eine saml.php in den Data-Ordner des
 Damit die Authentifizierung funktioniert, muss im Loginformular von YCOM ein Feld erweitert werden und es in der saml.php ergänzt werden.
 
 ```
-ycom_auth_saml|samllabel|error_msg|[allowed returnTo domains: DomainA,DomainB]|[default Userdata as Json{"ycom_groups": 3, "termsofuse_accepted": 1}]
+ycom_auth_saml|samllabel|error_msg|[allowed returnTo domains: DomainA,DomainB]|default Userdata as Json{"ycom_groups": 3, "termsofuse_accepted": 1}
 ```
 
 Mit diesem Feld erweitert man das Login um einen Loginbutton, der zum entsprechenden Authentifizierung führt. Wenn man diesen in der Loginmaske anklickt, wird diese Authentifizierung gestartet und eventuelle fehlende oder falsche Informationen werden angezeigt.
@@ -36,7 +36,11 @@ rex_extension::register('YCOM_AUTH_SAML_MATCHING', function (rex_extension_point
 
     echo '<p>Hier auslesen welche Parameter übergeben werden und eventuell übernehmen/auswerten</p>';
     echo '<p>Danach diesen Block löschen</p>';
+    echo '<p>Das hier ist bereits erkannt worden</p>';
+    dump($data);
+    echo '<p>Das hier kam über die SAML Schnittstelle</p>';
     dump($Userdata);
+
     exit;
 
     // z.B.

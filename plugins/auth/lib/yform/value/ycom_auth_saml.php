@@ -12,83 +12,72 @@
  * @author <a href="http://www.yakamara.de">www.yakamara.de</a>
  */
 
+use OneLogin\Saml2\IdPMetadataParser;
+use OneLogin\Saml2\Auth;
+use OneLogin\Saml2\Utils;
+
 class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 {
-    private static $requestSAMLFunctions = ['auth', 'sso', 'acs', 'slo', 'sls'];
-    private $samlFile = 'saml.php';
+    use rex_yform_trait_value_auth_extern;
+    private $auth_requestFunctions = ['auth', 'sso', 'acs', 'slo', 'sls'];
+    private $auth_directLink = false;
+    private $auth_SessionVars = ['SAML_Userdata', 'SAML_NameId', 'SAML_SessionIndex', 'SAML_AuthNRequestID', 'SAML_LogoutRequestID', 'SAML_NameIdFormat', 'SAML_ssoDate'];
+    private $auth_ClassKey = 'saml';
 
     public function enterObject()
     {
-        // TODO: slo testen
-        // TODO: Useranlegen / updaten / einloggen / verbieten
-
-        // TODO .json .xml config laden, statt eigene .php config laden können
-        // $idpInfo = \OneLogin\Saml2\IdPMetadataParser::parseFileXML(\rex_addon::get('ycom')->getDataPath('onelogin_metadata_993615.xml'));
-
-        $defaultUserAttributes = [];
-        if ('' != $this->getElement(4)) {
-            $defaultUserAttributes = json_decode($this->getElement(4), true);
+        if (rex::isFrontend()) {
+            $this->auth_directLink = $this->getElement(5) == 1;
         }
 
         if (PHP_SESSION_ACTIVE !== session_status()) {
             session_start();
         }
 
-        /** @var [] $settings */
-        $samlConfigPath = \rex_addon::get('ycom')->getDataPath($this->samlFile);
-        if (!file_exists($samlConfigPath)) {
-            throw new rex_exception('SAML Settings file not found ['.$samlConfigPath.']');
-        }
-
-        include $samlConfigPath;
-
+        $settings = $this->auth_loadSettings();
         // load external Metadata if possible
         try {
-            $idpSettings = OneLogin\Saml2\IdPMetadataParser::parseRemoteXML($settings['idp']['entityId']);
-            $settings = OneLogin\Saml2\IdPMetadataParser::injectIntoSettings($settings, $idpSettings);
+            $idpSettings = IdPMetadataParser::parseRemoteXML($settings['idp']['entityId']);
+            $settings = IdPMetadataParser::injectIntoSettings($settings, $idpSettings);
         } catch (Exception $e) {
         }
 
-        $returnTos = [];
-        $returnTos[] = rex_request('returnTo', 'string', ''); // wenn returnTo übergeben wurde, diesen nehmen
-        $returnTos[] = rex_getUrl(rex_config::get('ycom/auth', 'article_id_jump_ok'), '', [], '&'); // Auth Ok -> article_id_jump_ok / Current Language will be selected
-        $returnTo = rex_ycom_auth::getReturnTo($returnTos, ('' == $this->getElement(3)) ? [] : explode(',', $this->getElement(3)));
+        $returnTo = $this->auth_getReturnTo();
+        $this->auth_FormOutput(rex_getUrl('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sso', 'returnTo' => $returnTo]));
 
-        $requestSAMLMode = rex_request('rex_ycom_auth_mode', 'string', '');
-        $requestSAMLFunctions = rex_request('rex_ycom_auth_func', 'string', '');
-        if ($this->needsOutput()) {
-            $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_auth_saml.tpl.php'], [
-                'url' => rex_getUrl('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sso', 'returnTo' => $returnTo]),
-                'name' => '{{ saml_auth }}'
-            ]);
-        }
-        if (!in_array($requestSAMLFunctions, self::$requestSAMLFunctions, true) || 'saml' != $requestSAMLMode) {
-            return '';
+        $requestMode = rex_request('rex_ycom_auth_mode', 'string', '');
+        $requestFunction = rex_request('rex_ycom_auth_func', 'string', '');
+        if (!in_array($requestFunction, $this->auth_requestFunctions, true) || $this->auth_ClassKey != $requestMode) {
+            if ($this->auth_directLink) {
+                $requestFunction = 'sso';
+            } else {
+                return '';
+            }
         }
 
         // Auth
         try {
-            $auth = new OneLogin\Saml2\Auth($settings);
+            $auth = new Auth($settings);
         } catch (Exception $e) {
             dump($e);
             dump('Please use following ServiceProvider Settings in your config');
             $sp = [
-                'entityid' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(),'', [], '&'),
+                'entityid' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(), '', [], '&'),
                 'assertionConsumerService' => [
-                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(),'', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'acs'], '&'),
+                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(), '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'acs'], '&'),
                 ],
                 'singleLogoutService' => [
-                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(),'', ['rex_ycom_auth_mode' =>'saml', 'rex_ycom_auth_func' => 'slo'], '&'),
+                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(), '', ['rex_ycom_auth_mode' =>'saml', 'rex_ycom_auth_func' => 'slo'], '&'),
                 ],
             ];
             dump($sp);
-            return;
+            return '';
         }
 
-        switch ($requestSAMLFunctions) {
+        switch ($requestFunction) {
             // init login
             case 'sso':
-                $returnToUrl = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'auth', 'returnTo' => $returnTo],'&');
+                $returnToUrl = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'auth', 'returnTo' => $returnTo], '&');
                 $ssoBuiltUrl = $auth->login($returnToUrl, [], false, false, true);
                 rex_ycom_auth::setSessionVar('SAML_AuthNRequestID', $auth->getLastRequestID());
                 rex_ycom_auth::setSessionVar('SAML_ssoDate', date('Y-m-d H:i:s'));
@@ -125,7 +114,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 
                 session_write_close();
 
-                if (isset($_POST['RelayState']) && OneLogin\Saml2\Utils::getSelfURL() != $_POST['RelayState']) {
+                if (isset($_POST['RelayState']) && Utils::getSelfURL() != $_POST['RelayState']) {
                     $auth->redirectTo($_POST['RelayState']);
                 }
 
@@ -143,7 +132,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                 $nameIdFormat = rex_ycom_auth::getSessionVar('SAML_NameIdFormat', 'string', null);
 
                 rex_ycom_auth::clearUserSession();
-                self::auth_saml_clearUserSession();
+                self::auth_clearUserSession();
 
                 $sloBuiltUrl = $auth->logout($returnToURL, $parameters, $nameId, $sessionIndex, true, $nameIdFormat);
                 rex_ycom_auth::setSessionVar('SAML_LogoutRequestID', $auth->getLastRequestID());
@@ -169,7 +158,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                 }
 
                 rex_ycom_auth::clearUserSession();
-                self::auth_saml_clearUserSession();
+                self::auth_clearUserSession();
 
                 // returnTo setzen auf LogoutSeite
                 $errors = $auth->getErrors();
@@ -195,96 +184,11 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 
         $Userdata = rex_ycom_auth::getSessionVar('SAML_Userdata', 'array', []);
 
-        $data = [];
-        $data['email'] = '';
-        foreach (['User.email', 'emailAddress'] as $Key) {
-            if (isset($Userdata[$Key])) {
-                $data['email'] = implode(' ', $Userdata[$Key]);
-            }
-        }
-
-        $data['firstname'] = '';
-        foreach (['User.FirstName', 'givenName'] as $Key) {
-            if (isset($Userdata[$Key])) {
-                $data['firstname'] = implode(' ', $Userdata[$Key]);
-            }
-        }
-
-        $data['name'] = '';
-        foreach (['User.LastName', 'surName'] as $Key) {
-            if (isset($Userdata[$Key])) {
-                $data['name'] = implode(' ', $Userdata[$Key]);
-            }
-        }
-
-        foreach($defaultUserAttributes as $defaultUserAttributeKey => $defaultUserAttributeValue) {
-            $data[$defaultUserAttributeKey] = $defaultUserAttributeValue;
-        }
-
-        $data = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_SAML_MATCHING', $data, ['Userdata' => $Userdata]));
-
-        self::auth_saml_clearUserSession();
-
-        // not logged in - check if available
-        $params = [];
-        $params['loginName'] = $data['email'];
-        $params['loginStay'] = true;
-        $params['filter'] = 'status > 0';
-        $params['ignorePassword'] = true;
-
-        $loginStatus = \rex_ycom_auth::login($params);
-        if (2 == $loginStatus) {
-            // already logged in
-            rex_ycom_user::updateUser($data);
-            \rex_response::sendRedirect($returnTo);
-        }
-
-        // if user not found, check if exists, but no permission
-        $user = \rex_ycom_user::query()->where('email', $data['email'])->findOne();
-        if ($user) {
-            $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_login_failed }}';
-            return '';
-        }
-
-        $user = rex_ycom_user::createUserByEmail($data);
-        if (!$user || count($user->getMessages()) > 0) {
-            if ($this->params['debug']) {
-                dump($user->getMessages());
-            }
-            $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_create_user }}';
-            return '';
-        }
-
-        $params = [];
-        $params['loginName'] = $user->getValue('email');
-        $params['ignorePassword'] = true;
-        $loginStatus = \rex_ycom_auth::login($params);
-
-        if (2 != $loginStatus) {
-            if ($this->params['debug']) {
-                dump($loginStatus);
-                dump($user);
-            }
-            $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_login_created_user }}';
-            return '';
-        }
-
-        \rex_response::sendRedirect($returnTo);
+        return $this->auth_createOrUpdateYComUser($Userdata, $returnTo);
     }
 
     public function getDescription()
     {
-        return 'ycom_auth_saml|label|error_msg|[allowed returnTo domains: DomainA,DomainB]|[default Userdata as Json{"ycom_groups": 3, "termsofuse_accepted": 1}]';
-    }
-
-    public static function auth_saml_clearUserSession()
-    {
-        rex_ycom_auth::unsetSessionVar('SAML_Userdata');
-        rex_ycom_auth::unsetSessionVar('SAML_NameId');
-        rex_ycom_auth::unsetSessionVar('SAML_SessionIndex');
-        rex_ycom_auth::unsetSessionVar('SAML_AuthNRequestID');
-        rex_ycom_auth::unsetSessionVar('SAML_LogoutRequestID');
-        rex_ycom_auth::unsetSessionVar('SAML_NameIdFormat');
-        rex_ycom_auth::unsetSessionVar('SAML_ssoDate');
+        return 'ycom_auth_saml|label|error_msg|[allowed returnTo domains: DomainA,DomainB]|default Userdata as Json{"ycom_groups": 3, "termsofuse_accepted": 1}|direct_link 0,1';
     }
 }

@@ -65,4 +65,4 @@ ycom_auth_config_id_password = Restablecer contraseña
 ycom_auth_config_auth_cookie_ttl = Duración de la cookie para `permanecer conectado`
 ycom_days = {0} días
 
-ycom_auth_config_saml = Autenticación SAML
+ycom_auth_config_extern = Autenticación (SAML/CAS/OAUTH2)

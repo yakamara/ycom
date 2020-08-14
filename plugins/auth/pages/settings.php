@@ -73,7 +73,11 @@ $content .= '
 	<fieldset>
 		<legend>'.$this->i18n('ycom_auth_config_forwarder').'</legend>
 
-        Werte sind über: rex_config::get(\'ycom/auth\',\'article_id_login\', null); auslesbar
+        <div class="row abstand">
+			<div class="col-xs-12 col-sm-12">
+				<label for="rex-form-article_login_ok"><strong>'.$this->i18n('ycom_auth_howtoread_configvalues').'</strong></label>
+			</div>
+		</div>
 
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
@@ -96,8 +100,9 @@ $content .= '
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
 				<label for="rex-form-article_denied">'.$this->i18n('ycom_auth_config_id_jump_denied').'
-				<small>[article_id_jump_denied]</small></label>
-			    <small><br />'.$this->i18n('ycom_auth_config_id_jump_denied_notice').'</small>
+				<small>[article_id_jump_denied]</small>
+				</label>
+				<small><br />'.$this->i18n('ycom_auth_config_id_jump_denied_notice').'</small>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(8, 'article_id_jump_denied', stripslashes($this->getConfig('article_id_jump_denied'))) .'
@@ -203,7 +208,7 @@ $content .= '
     </fieldset>
 
     <fieldset>
-        <legend>'.$this->i18n('ycom_auth_config_saml').'</legend>
+        <legend>'.$this->i18n('ycom_auth_config_extern').'</legend>
 
         <div class="row abstand">
 			<div class="col-xs-12 col-sm-6">

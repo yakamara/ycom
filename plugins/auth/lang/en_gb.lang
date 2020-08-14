@@ -65,4 +65,4 @@ ycom_auth_config_id_password = Reset password
 ycom_auth_config_auth_cookie_ttl = Cookie lifespan for "remain signed in"
 ycom_days = {0} days
 
-ycom_auth_config_saml = SAML authentication
+ycom_auth_config_extern = authentication (SAML/CAS/OAUTH2)
