@@ -12,8 +12,8 @@
  * @author <a href="http://www.yakamara.de">www.yakamara.de</a>
  */
 
-use OneLogin\Saml2\IdPMetadataParser;
 use OneLogin\Saml2\Auth;
+use OneLogin\Saml2\IdPMetadataParser;
 use OneLogin\Saml2\Utils;
 
 class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
@@ -27,7 +27,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
     public function enterObject()
     {
         if (rex::isFrontend()) {
-            $this->auth_directLink = $this->getElement(5) == 1;
+            $this->auth_directLink = 1 == $this->getElement(5);
         }
 
         if (PHP_SESSION_ACTIVE !== session_status()) {
@@ -67,7 +67,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                     'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(), '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'acs'], '&'),
                 ],
                 'singleLogoutService' => [
-                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(), '', ['rex_ycom_auth_mode' =>'saml', 'rex_ycom_auth_func' => 'slo'], '&'),
+                    'url' => rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(), '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'slo'], '&'),
                 ],
             ];
             dump($sp);

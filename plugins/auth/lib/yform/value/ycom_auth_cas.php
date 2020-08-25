@@ -11,12 +11,11 @@
 
 class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 {
-    private static $requestAuthFunctions = ['auth','logout'];
+    private static $requestAuthFunctions = ['auth', 'logout'];
     private $casFile = 'cas.php';
 
     public function enterObject()
     {
-
         if (PHP_SESSION_ACTIVE !== session_status()) {
             session_start();
         }
@@ -38,7 +37,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         if ($this->needsOutput()) {
             $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_auth_cas.tpl.php', 'value.ycom_auth_saml.tpl.php'], [
                 'url' => rex_getUrl('', '', ['rex_ycom_auth_mode' => 'cas', 'rex_ycom_auth_func' => 'auth', 'returnTo' => $returnTo]),
-                'name' => '{{ cas_auth }}'
+                'name' => '{{ cas_auth }}',
             ]);
         }
         if (!in_array($requestAuthFunctions, self::$requestAuthFunctions, true) || 'cas' != $requestAuthMode) {
@@ -58,7 +57,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         }
 
         // ----- logout
-        if ($requestAuthFunctions == 'logout') {
+        if ('logout' == $requestAuthFunctions) {
             $logoutUrl = rex_yrewrite::getFullUrlByArticleId(rex_plugin::get('ycom', 'auth')->getConfig('article_id_logout'), '', [], '&');
             phpCAS::logoutWithRedirectService($logoutUrl);
             exit;
@@ -67,8 +66,9 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         // ----- auth
         try {
             phpCAS::forceAuthentication();
-        } catch ( Exception $e ) {
-            dump($e);exit;
+        } catch (Exception $e) {
+            dump($e);
+            exit;
         }
 
         $email = phpCAS::getUser();
@@ -84,7 +84,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         $data['email'] = $email;
 
         if ('' != $this->getElement(4)) {
-            foreach(json_decode($this->getElement(4), true) as $defaultUserAttributeKey => $defaultUserAttributeValue) {
+            foreach (json_decode($this->getElement(4), true) as $defaultUserAttributeKey => $defaultUserAttributeValue) {
                 $data[$defaultUserAttributeKey] = $defaultUserAttributeValue;
             }
         }
@@ -136,7 +136,6 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         }
 
         \rex_response::sendRedirect($returnTo);
-
     }
 
     public function getDescription()

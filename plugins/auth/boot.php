@@ -28,7 +28,7 @@ if (!rex::isBackend()) {
         return rex_ycom_auth::articleIsPermitted($params['element'], $ep->getSubject());
     });
 
-    rex_extension::register('YCOM_AUTH_MATCHING', function (rex_extension_point $ep) {
+    rex_extension::register('YCOM_AUTH_MATCHING', static function (rex_extension_point $ep) {
         $data = $ep->getSubject();
         $params = $ep->getParams();
         $Userdata = $params['Userdata'];

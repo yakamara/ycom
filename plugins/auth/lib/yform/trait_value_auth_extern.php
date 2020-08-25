@@ -28,7 +28,7 @@ trait rex_yform_trait_value_auth_extern
         if ($this->needsOutput()) {
             $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_auth_' . $this->auth_ClassKey. '.tpl.php', 'value.ycom_auth_extern.tpl.php'], [
                 'url' => $url,
-                'name' => '{{ ' . $this->auth_ClassKey. '_auth }}'
+                'name' => '{{ ' . $this->auth_ClassKey. '_auth }}',
             ]);
         }
     }
@@ -58,21 +58,21 @@ trait rex_yform_trait_value_auth_extern
         $data['email'] = '';
         foreach (['User.email', 'emailAddress', 'email'] as $Key) {
             if (isset($Userdata[$Key])) {
-                $data['email'] = is_array($Userdata[$Key]) ? implode(' ', $Userdata[$Key]): $Userdata[$Key];
+                $data['email'] = is_array($Userdata[$Key]) ? implode(' ', $Userdata[$Key]) : $Userdata[$Key];
             }
         }
 
         $data['firstname'] = '';
         foreach (['User.FirstName', 'givenName', 'first_name'] as $Key) {
             if (isset($Userdata[$Key])) {
-                $data['firstname'] = is_array($Userdata[$Key]) ? implode(' ', $Userdata[$Key]): $Userdata[$Key];
+                $data['firstname'] = is_array($Userdata[$Key]) ? implode(' ', $Userdata[$Key]) : $Userdata[$Key];
             }
         }
 
         $data['name'] = '';
         foreach (['User.LastName', 'surName', 'last_name'] as $Key) {
             if (isset($Userdata[$Key])) {
-                $data['name'] = is_array($Userdata[$Key]) ? implode(' ', $Userdata[$Key]): $Userdata[$Key];
+                $data['name'] = is_array($Userdata[$Key]) ? implode(' ', $Userdata[$Key]) : $Userdata[$Key];
             }
         }
 
@@ -89,8 +89,8 @@ trait rex_yform_trait_value_auth_extern
             'loginName' => $data['email'],
             'loginStay' => true,
             'filter' => 'status > 0',
-            'ignorePassword' => true
-            ];
+            'ignorePassword' => true,
+        ];
 
         $loginStatus = rex_ycom_auth::login($params);
         if (2 == $loginStatus) {
@@ -133,7 +133,7 @@ trait rex_yform_trait_value_auth_extern
         }
 
         rex_response::sendRedirect($returnTo);
-        
+
         return '';
     }
 

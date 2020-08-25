@@ -8,8 +8,8 @@ rex_sql_table::get(rex::getTable('article'))
     ->ensureColumn(new rex_sql_column('ycom_auth_type', 'int', false, '0'))
     ->alter();
 
-foreach (['saml','oauth2','cas'] as $settingType) {
-    $pathFrom =  __DIR__ . '/install/' . $settingType . '.php';
+foreach (['saml', 'oauth2', 'cas'] as $settingType) {
+    $pathFrom = __DIR__ . '/install/' . $settingType . '.php';
     $pathTo = rex_addon::get('ycom')->getDataPath($settingType . '.php');
     if (!file_exists($pathTo)) {
         rex_file::copy($pathFrom, $pathTo);
