@@ -12,8 +12,8 @@
  * @author <a href="http://www.yakamara.de">www.yakamara.de</a>
  */
 
-use \League\OAuth2\Client\Provider\GenericProvider;
-use \League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use League\OAuth2\Client\Provider\GenericProvider;
 
 class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
 {
@@ -26,7 +26,7 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
     public function enterObject()
     {
         if (rex::isFrontend()) {
-            $this->auth_directLink = $this->getElement(5) == 1 ? true: false;
+            $this->auth_directLink = 1 == $this->getElement(5) ? true : false;
         }
 
         if (PHP_SESSION_ACTIVE !== session_status()) {
@@ -49,7 +49,7 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
 
         if ('' == $settings['redirectUri']) {
             echo 'use this URL for redirect';
-            dump(rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(), '', ['rex_ycom_auth_mode' =>'oauth2', 'rex_ycom_auth_func' => 'code'], '&'));
+            dump(rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(), '', ['rex_ycom_auth_mode' => 'oauth2', 'rex_ycom_auth_func' => 'code'], '&'));
             return '';
         }
 
@@ -57,7 +57,6 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
 
         $Userdata = [];
         switch ($requestFunction) {
-
             case 'code':
                 $code = rex_request('code', 'string');
                 if ('' != $code) {
@@ -74,17 +73,18 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
 
                     try {
                         $accessToken = $provider->getAccessToken('authorization_code', [
-                            'code' => $code
+                            'code' => $code,
                         ]);
 
                         if ($accessToken->hasExpired()) {
                             $this->auth_redirectToFailed('{{ oauth.error.access_expired }}');
                             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ oauth.error.access_expired }}';
                             return '';
-                        } else {
-                            $resourceOwner = $provider->getResourceOwner($accessToken);
-                            $Userdata = $resourceOwner->toArray();
                         }
+                        $resourceOwner = $provider->getResourceOwner($accessToken);
+                        $Userdata = $resourceOwner->toArray();
+                        $returnTo = rex_ycom_auth::getSessionVar('OAUTH2_oauth2returnTo');
+                        rex_ycom_auth::unsetSessionVar('OAUTH2_oauth2returnTo');
                     } catch (IdentityProviderException $e) {
                         $this->auth_redirectToFailed('{{ oauth.error.code }}');
                         $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ oauth.error.code }}';
@@ -100,9 +100,9 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
             case 'init':
                 $authorizationUrl = $provider->getAuthorizationUrl();
                 rex_ycom_auth::setSessionVar('OAUTH2_oauth2state', $provider->getState());
+                rex_ycom_auth::setSessionVar('OAUTH2_oauth2returnTo', $returnTo);
                 rex_response::sendRedirect($authorizationUrl);
                 exit;
-
         }
 
         return $this->auth_createOrUpdateYComUser($Userdata, $returnTo);
