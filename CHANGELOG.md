@@ -2,16 +2,22 @@ Changelog
 =========
 
 
-Version 4.0 – 28.11.2019
+Version 4.0.3 – 22.02.2020
 --------------------------
 
 #### Bei Update: Bitte unbedingt beachten:
 
-Version 3.0beta unterscheidet sich von Version 4.x. Da dies ein paar elementare Änderungen mit sich gebracht hatte wurde Version 3.0 nicht released. Bitte in der Doku nachlesen. Man kann sich nun nicht mehr auf jeder Seite einloggen, sondern nur auf den spezifischen Loginseiten. 
+Version 3.0beta unterscheidet sich von Version 4.x. Da dies ein paar elementare Änderungen mit sich gebracht hatte wurde Version 3.0 nicht released. Bitte in der Doku nachlesen. Man kann sich nun nicht mehr auf jeder Seite einloggen, sondern nur auf den spezifischen Loginseiten.
 
 * termofuse wurde zu termsofuse
 * cookie und session werden nun mit redaxo session geteilt.
 * wenn "eingeloggt bleiben" genutzt wird, in der redaxo_config path für frontend und backend auch "/" setzen
+* 4.0.2: kleinere Korrekturen zu termsofuse_accepted, wie auch beim Aufruf von createUserByEmail
+* 4.0.2: SAML Auth Korrekturen
+* 4.0.3: OAUTH2 ergänzt
+* 4.0.3: Problem MariaDB vs MySQL behoben
+* 4.0.3: OnUpdate Fehler bei Import der YForm Tabellen behoben
+
 
 #### Neu
 
@@ -49,7 +55,7 @@ Version 3.0 – xx.xx.2018
 * Diverse Verbesserungen. Default Werte, Initiale Werte etc., diverse Notices entfernt
 * YForm ab Version 3 nötig
 * Doppelten "Passwort anzeigen" Button entfernt
-* Status bei zu vielen Fehllogins ist nun richtig, 
+* Status bei zu vielen Fehllogins ist nun richtig,
 * uninstall verbessert
 * referer to logout bug behoben
 * Doku aktualisiert
