@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-Version 4.0.3 – 22.02.2020
+Version 4.0.3 – 25.08.2020
 --------------------------
 
 #### Bei Update: Bitte unbedingt beachten:
