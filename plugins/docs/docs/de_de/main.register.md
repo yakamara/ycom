@@ -30,7 +30,7 @@ validate|email|email|Bitte geben Sie die E-Mail ein.
 validate|unique|email|Diese E-Mail existiert schon|rex_ycom_user
 validate|empty|email|Bitte geben Sie Ihre e-Mail ein.
 validate|empty|password|Bitte geben Sie ein Passwort ein.
-
+validate|password_policy|password|Passwort muss mindestens 8 Zeichen lang sein und sowohl Gross- als auch Kleinbuchstaben enthalten|
 validate|compare|password|password_2||Bitte geben Sie zweimal das gleiche Passwort ein
 
 # email als Login verwenden
