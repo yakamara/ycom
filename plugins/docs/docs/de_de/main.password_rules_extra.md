@@ -21,29 +21,21 @@ Dieser EP könnt im eigenen `project`-AddOn liegen, dort z.B. in der boot.php
 für das **xxxxxx** bitte den Feldnamen des neuen Passwortes eintragen.
 
 ```
-rex_extension::register('YCOM_YFORM_SAVED', function ($params) {
-
-    /* @var $form rex_yform */
-    $form = $params->getParams()['form'];
-    // email means here: email pool of values, which normally is for sending emails.
-    $values = $form->params['value_pool']['email'];
-    $nameOfFieldInForm = 'xxxxxx';
-
-    // wir gehen davon aus, dass das -password-Feld nur im Passwort ändern
-    // Formular verwendet wird.
-
-    if (isset($values[$nameOfFieldInForm])) {
-        $newPassword = $values[$nameOfFieldInForm];
-        $newPassword = rex_login::passwordHash($newPassword);
-        $me = rex_ycom_user::getMe();
-        if ($me) {
-            $instance = rex_yform_manager_dataset::create('rex_ycom_user_password');
-            $instance->setValue('user_id', $me->getId());
-            $instance->setValue('password', $newPassword);
-            $instance->save();
+if (\rex::isBackend() || \rex::isFrontend()) {
+    rex_extension::register('REX_YFORM_SAVED', function ($ep): void {
+        $params = $ep->getParams();
+        if ('rex_ycom_user' == $params['table'] && isset($params['id']) && 0 < $params['id']) {
+            $password = $params['form']->getParam('value_pool')['email']['password'];
+            $password_hashed = $params['form']->getParam('value_pool')['sql']['password'];
+            if ($password != $password_hashed && '' != $password) {
+                $instance = rex_yform_manager_dataset::create('rex_ycom_user_password');
+                $instance->setValue('user_id', $params['id']);
+                $instance->setValue('password', $password_hashed);
+                $instance->save();
+            }
         }
-    }
-});
+    });
+}
 
 ```
 
