@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 4.x – xx.xx.2020
+--------------------------
+
+* YCOM_YFORM_SAVED entfernt da er fehlerhaft und unötig war
+* action_ycom_auth_db optimiert, dass nur noch ein User Objekt benutzt wird und erbt nun von action db
+* Doku entsprechend angepasst
+
 
 Version 4.0.3 – 25.08.2020
 --------------------------
