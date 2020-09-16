@@ -1,42 +1,40 @@
 <?php
 
-class rex_yform_action_ycom_auth_db extends rex_yform_action_abstract
+declare(strict_types=1);
+
+class rex_yform_action_ycom_auth_db extends rex_yform_action_db
 {
-    public function execute()
+    public function executeAction()
     {
         /** @var rex_ycom_user $user */
         $user = rex_ycom_auth::getUser();
 
         if (rex::isBackend() || !$user) {
             echo 'error - access denied - user not logged in';
-            return;
+
+            return false;
         }
 
         $action = $this->getElement(2);
 
         switch ($action) {
-                case 'delete':
-                    rex_ycom_auth::deleteUser($user->getValue('id'));
-                    rex_ycom_auth::clearUserSession();
-                    break;
+            case 'delete':
+                rex_ycom_auth::deleteUser($user->getValue('id'));
+                rex_ycom_auth::clearUserSession();
 
-                case 'update':
-                default:
-                    $action = 'update';
-                    foreach ($this->params['value_pool']['sql'] as $key => $value) {
-                        $user->setValue($key, $value);
-                    }
-                    $user->save();
-                    break;
-            }
+                break;
+            case 'update':
+            default:
+                $this->params['main_table'] = rex_ycom_user::table()->getTableName();
+                $this->params['main_where'] = 'id='.(int) rex_ycom_user::getMe()->getId();
 
-        rex_extension::registerPoint(new rex_extension_point('YCOM_YFORM_SAVED', '',
-            [
-                'form' => $this,
-                'user' => $user,
-                'action' => $action,
-            ]
-        ));
+                $this->setElement(2, '');
+                $this->setElement(3, 'main_where');
+
+                return parent::executeAction();
+
+                break;
+        }
     }
 
     public function getDescription()

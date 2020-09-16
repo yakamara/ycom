@@ -59,9 +59,9 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
             $hash_info = password_get_info($password);
             if (!isset($hash_info['algoName']) || 'bcrypt' != $hash_info['algoName']) {
                 $hashed_value = rex_login::passwordHash($password);
+                $password = ''; // empty in email pool
             } else {
                 $hashed_value = $password;
-                $password = '';
             }
         }
 
