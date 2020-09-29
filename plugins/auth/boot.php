@@ -13,6 +13,7 @@ rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) 
 if (!rex::isBackend()) {
     rex_extension::register('PACKAGES_INCLUDED', static function (rex_extension_point $ep) {
         if (($redirect = rex_ycom_auth::init())) {
+            rex_response::sendCacheControl();
             rex_response::sendRedirect($redirect);
         }
     });
