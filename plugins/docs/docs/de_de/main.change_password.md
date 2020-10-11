@@ -35,31 +35,19 @@ Nun können Nutzer ihr Passwort selbständig ändern.
 1. Feld für altes Passwort und Validierung hinzufügen
 
 ```
-password|old_password|Altes Passwort|
-validate|customfunction|old_password|myCheckOldPassword||Das alte Passwort ist fehlerhaft!
-```
-2. Funktion in der boot.php anlegen
-
-Entweder in der boot.php eines eigenen Addons oder in der boot.php des project-Addons.
-
-```
-function myCheckOldPassword($_label, $_value, $_additional_param)
-{
-    //dump($_label); dump($_value); dump($_additional_param);
-    $user = rex_ycom_auth::getUser();
-    $status = rex_ycom_auth::checkPassword($_value, $user->getId());
-    //dump($status);
-    // RETURN: false = Passwort ok, true = Passwort falsch
-    return !$status; // da checkPasswort true liefert bei korrektem Passwort hier return 'false'
-}
+password|old_password|Altes Passwort||no_db
+validate|empty|old_password|Bitte altes Passwort angeben.
+validate|ycom_auth_password|old_password|Das alte Passwort ist fehlerhaft!
 ```
 
 Das ganze Formular sieht dann wie folgt aus:
 ```
-password|old_password|Altes Passwort|
+password|old_password|Altes Passwort||no_db
 ycom_auth_password|password|Ihr Passwort:*|{"length":{"min":6},"letter":{"min":1},"lowercase":{"min":0},"uppercase":{"min":0},"digit":{"min":1},"symbol":{"min":0}}|Das Passwort muss mindestens 6 Zeichen lang sein und mindestens eine Ziffer enthalten
 password|password_2|Passwort wiederholen:||no_db
-validate|customfunction|old_password|myCheckOldPassword||Das alte Passwort ist fehlerhaft!
+
+validate|empty|old_password|Bitte altes Passwort angeben.
+validate|ycom_auth_password|old_password|Das alte Passwort ist fehlerhaft!
 validate|empty|password|Bitte geben Sie ein Passwort ein.
 validate|compare|password|password_2|!=|Bitte geben Sie zweimal das gleiche Passwort ein
 action|showtext|Ihre Daten wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.|||1
