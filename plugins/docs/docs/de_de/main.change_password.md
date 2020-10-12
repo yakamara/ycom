@@ -40,6 +40,14 @@ validate|empty|old_password|Bitte altes Passwort angeben.
 validate|ycom_auth_password|old_password|Das alte Passwort ist fehlerhaft!
 ```
 
+2. Neues Passwort darf nicht dem alten Passwort entsprechen
+
+Dafür noch folgende Validierung hinzufügen
+
+```
+validate|compare|password|old_password|==|Das neue Passwort darf nicht dem alten Passwort entsprechen.
+```
+
 Das ganze Formular sieht dann wie folgt aus:
 ```
 password|old_password|Altes Passwort||no_db
@@ -48,6 +56,7 @@ password|password_2|Passwort wiederholen:||no_db
 
 validate|empty|old_password|Bitte altes Passwort angeben.
 validate|ycom_auth_password|old_password|Das alte Passwort ist fehlerhaft!
+validate|compare|password|old_password|==|Das neue Passwort darf nicht dem alten Passwort entsprechen.
 validate|empty|password|Bitte geben Sie ein Passwort ein.
 validate|compare|password|password_2|!=|Bitte geben Sie zweimal das gleiche Passwort ein
 action|showtext|Ihre Daten wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.|||1
