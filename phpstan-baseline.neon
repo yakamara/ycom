@@ -1,0 +1,1194 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to static method addTemplatePath\\(\\) on an unknown class rex_yform\\.$#"
+			count: 1
+			path: plugins/auth/boot.php
+
+		-
+			message: "#^Undefined variable\\: \\$this$#"
+			count: 2
+			path: plugins/auth/boot.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/boot.php
+
+		-
+			message: "#^Call to static method table\\(\\) on an unknown class rex_yform_manager_field\\.$#"
+			count: 1
+			path: plugins/auth/install.php
+
+		-
+			message: "#^Call to static method deleteCache\\(\\) on an unknown class rex_yform_manager_table\\.$#"
+			count: 1
+			path: plugins/auth/install.php
+
+		-
+			message: "#^Variable \\$params might not be defined\\.$#"
+			count: 3
+			path: plugins/auth/pages/content.ycom_auth.php
+
+		-
+			message: "#^Instantiated class rex_yform not found\\.$#"
+			count: 1
+			path: plugins/auth/pages/content.ycom_auth.php
+
+		-
+			message: "#^Call to method setObjectparams\\(\\) on an unknown class rex_yform\\.$#"
+			count: 8
+			path: plugins/auth/pages/content.ycom_auth.php
+
+		-
+			message: "#^Call to method setHiddenField\\(\\) on an unknown class rex_yform\\.$#"
+			count: 1
+			path: plugins/auth/pages/content.ycom_auth.php
+
+		-
+			message: "#^Call to method setValueField\\(\\) on an unknown class rex_yform\\.$#"
+			count: 1
+			path: plugins/auth/pages/content.ycom_auth.php
+
+		-
+			message: "#^Call to static method get\\(\\) on an unknown class rex_yform_manager_table\\.$#"
+			count: 1
+			path: plugins/auth/pages/settings.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 54
+			path: plugins/auth/pages/settings.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/update.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between string and false will always evaluate to false\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^Variable \\$res might not be defined\\.$#"
+			count: 5
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(int &\\$err_code an error code Possible values are
+					PHPCAS_SERVICE_OK \\(on success\\), PHPCAS_SERVICE_PT_NO_SERVER_RESPONSE,
+					PHPCAS_SERVICE_PT_BAD_SERVER_RESPONSE, PHPCAS_SERVICE_PT_FAILURE,
+					PHPCAS_SERVICE_NOT_AVAILABLE\\.\\)\\: Unexpected token "&", expected variable at offset 141$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$output   the output of the service \\(also used to give an
+					error message on failure\\)\\.\\)\\: Unexpected token "&", expected variable at offset 394$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(int &\\$err_code an error code Possible values are
+					PHPCAS_SERVICE_OK \\(on success\\), PHPCAS_SERVICE_PT_NO_SERVER_RESPONSE,
+					PHPCAS_SERVICE_PT_BAD_SERVER_RESPONSE, PHPCAS_SERVICE_PT_FAILURE,
+					PHPCAS_SERVICE_NOT_AVAILABLE\\.\\)\\: Unexpected token "&", expected variable at offset 381$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(string &\\$err_msg  an error message on failure\\)\\: Unexpected token \"&\", expected variable at offset 634$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$pt       the Proxy Ticket \\(PT\\) retrieved from the CAS
+					server to access the URL on success, false on error\\)\\.\\)\\: Unexpected token "&", expected variable at offset 694$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^Method phpCAS\\:\\:getUser\\(\\) should return string but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^Method phpCAS\\:\\:getAttributes\\(\\) should return array but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^Method phpCAS\\:\\:hasAttributes\\(\\) should return bool but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^Method phpCAS\\:\\:hasAttribute\\(\\) should return bool but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^Method phpCAS\\:\\:handleLogoutRequests\\(\\) with return type void returns void but should not return anything\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^Result of method CAS_Client\\:\\:handleLogoutRequests\\(\\) \\(void\\) is used\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^Call to function is_array\\(\\) with string will always evaluate to false\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^Argument of an invalid type string supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(int &\\$err_code      error code\\)\\: Unexpected token \"&\", expected variable at offset 149$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(string &\\$err_msg       error message\\)\\: Unexpected token \"&\", expected variable at offset 197$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^Method phpCAS\\:\\:retrievePT\\(\\) should return string but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS.php
+
+		-
+			message: "#^Variable \\$file_path might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Autoload.php
+
+		-
+			message: "#^Parameter \\#1 \\$autoload_function of function spl_autoload_register expects callable\\(string\\)\\: void, 'CAS_autoload' given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Autoload.php
+
+		-
+			message: "#^Parameter \\#1 \\$autoload_function of function spl_autoload_register expects callable\\(string\\)\\: void, '__autoload' given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Autoload.php
+
+		-
+			message: "#^Method CAS_Client\\:\\:markAuthenticationCall\\(\\) should return null but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Method CAS_Client\\:\\:getAttribute\\(\\) should return string but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 2
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Variable \\$logoutTicket might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Result of && is always false\\.$#"
+			count: 2
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Call to function is_null\\(\\) with callable\\(\\)\\: mixed will always evaluate to false\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Variable \\$client might not be defined\\.$#"
+			count: 2
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$text_response reference to the response of the CAS
+					server, as is \\(XML text\\)\\.\\)\\: Unexpected token "&", expected variable at offset 285$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$tree_response reference to the response of the CAS
+					server, as a DOM XML tree\\.\\)\\: Unexpected token "&", expected variable at offset 392$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$validate_url  reference to the the URL of the request to
+					the CAS server\\.\\)\\: Unexpected token "&", expected variable at offset 182$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$text_response reference to the response of the CAS
+					server, as is \\(XML text\\)\\.\\)\\: Unexpected token "&", expected variable at offset 368$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$tree_response reference to the response of the CAS
+					server, as a DOM XML tree\\.\\)\\: Unexpected token "&", expected variable at offset 475$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$validate_url  reference to the the URL of the request to
+					the CAS server\\.\\)\\: Unexpected token "&", expected variable at offset 265$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Static method phpCAS\\:\\:traceExit\\(\\) invoked with 1 parameter, 0 required\\.$#"
+			count: 5
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(string &\\$validate_url the URL of the request to the CAS server\\.\\)\\: Unexpected token \"&\", expected variable at offset 92$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(int &\\$err_code      an error code \\(PHPCAS_SERVICE_OK on success\\)\\.\\)\\: Unexpected token \"&\", expected variable at offset 183$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(string &\\$err_msg       an error message \\(empty on success\\)\\.\\)\\: Unexpected token \"&\", expected variable at offset 266$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Variable \\$root might not be defined\\.$#"
+			count: 5
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$body    the body of the response, as a string \\(empty on
+					failure\\)\\.\\)\\: Unexpected token "&", expected variable at offset 257$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(string &\\$err_msg an error message, filled on failure\\.\\)\\: Unexpected token \"&\", expected variable at offset 353$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$headers an array containing the HTTP header lines of the
+					response \\(an empty array on failure\\)\\.\\)\\: Unexpected token "&", expected variable at offset 132$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(int    &\\$err_code an error code Possible values are
+					PHPCAS_SERVICE_OK \\(on success\\), PHPCAS_SERVICE_PT_NO_SERVER_RESPONSE,
+					PHPCAS_SERVICE_PT_BAD_SERVER_RESPONSE, PHPCAS_SERVICE_PT_FAILURE,
+					PHPCAS_SERVICE_NOT_AVAILABLE\\.\\)\\: Unexpected token "&", expected variable at offset 144$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$output   the output of the service \\(also used to give an error
+					message on failure\\)\\.\\)\\: Unexpected token "&", expected variable at offset 397$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Call to an undefined method CAS_ProxiedService\\:\\:setUrl\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Call to an undefined method CAS_ProxiedService\\:\\:send\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Call to an undefined method CAS_ProxiedService\\:\\:getResponseBody\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(int    &\\$err_code  an error code Possible values are
+					PHPCAS_SERVICE_OK \\(on success\\), PHPCAS_SERVICE_PT_NO_SERVER_RESPONSE,
+					PHPCAS_SERVICE_PT_BAD_SERVER_RESPONSE, PHPCAS_SERVICE_PT_FAILURE,
+					PHPCAS_SERVICE_NOT_AVAILABLE\\.\\)\\: Unexpected token "&", expected variable at offset 387$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(string &\\$err_msg   an error message on failure\\)\\: Unexpected token \"&\", expected variable at offset 642$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(string &\\$pt        the Proxy Ticket \\(PT\\) retrieved from the CAS
+					server to access the URL on success, false on error\\)\\.\\)\\: Unexpected token "&", expected variable at offset 703$#
+				"""
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Call to an undefined method CAS_ProxiedService\\:\\:setServiceUrl\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Call to an undefined method CAS_ProxiedService\\:\\:setMailbox\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Call to an undefined method CAS_ProxiedService\\:\\:setOptions\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Call to an undefined method CAS_ProxiedService\\:\\:open\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Call to an undefined method CAS_ProxiedService\\:\\:getImapProxyTicket\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(DOMElement &\\$tree_response the domxml tree of the respones\\)\\: Unexpected token \"&\", expected variable at offset 273$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(string &\\$text_response the text of the repsones\\)\\: Unexpected token \"&\", expected variable at offset 207$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(string &\\$validate_url  the url of the reponse\\)\\: Unexpected token \"&\", expected variable at offset 147$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Parameter \\#7 \\$err_code of class CAS_AuthenticationException constructor expects int, string given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getElementsByTagName\\(\\)\\.$#"
+			count: 4
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(array  &\\$attributeArray reference to array\\)\\: Unexpected token \"&\", expected variable at offset 89$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Client.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(array &\\$storageArray Array to store cookies\\)\\: Unexpected token \"&\", expected variable at offset 141$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/CookieJar.php
+
+		-
+			message: "#^Method CAS_PGTStorage_AbstractStorage\\:\\:getStorageType\\(\\) should return string but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/PGTStorage/AbstractStorage.php
+
+		-
+			message: "#^Method CAS_PGTStorage_AbstractStorage\\:\\:getStorageInfo\\(\\) should return string but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/PGTStorage/AbstractStorage.php
+
+		-
+			message: "#^Method CAS_PGTStorage_AbstractStorage\\:\\:read\\(\\) should return string but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/PGTStorage/AbstractStorage.php
+
+		-
+			message: "#^Call to function is_array\\(\\) with string\\|null will always evaluate to false\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/PGTStorage/Db.php
+
+		-
+			message: "#^Instanceof between string and PDO will always evaluate to false\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/PGTStorage/Db.php
+
+		-
+			message: "#^Return type \\(void\\) of method CAS_ProxiedService_Http_Abstract\\:\\:send\\(\\) should be compatible with return type \\(bool\\) of method CAS_ProxiedService_Http\\:\\:send\\(\\)$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/ProxiedService/Http/Abstract.php
+
+		-
+			message: "#^Property CAS_ProxiedService_Http_Abstract\\:\\:\\$_responseStatusCode \\(int\\) does not accept default value of type string\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/ProxiedService/Http/Abstract.php
+
+		-
+			message: "#^Method CAS_Request_CurlMultiRequest\\:\\:send\\(\\) should return bool but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/apereo/phpcas/source/CAS/Request/CurlMultiRequest.php
+
+		-
+			message: "#^Parameter \\#1 \\$autoload_function of function spl_autoload_register expects callable\\(string\\)\\: void, array\\(\\$this\\(Composer\\\\Autoload\\\\ClassLoader\\), 'loadClass'\\) given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/composer/ClassLoader.php
+
+		-
+			message: "#^Method Composer\\\\Autoload\\\\ClassLoader\\:\\:loadClass\\(\\) should return bool\\|null but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/composer/ClassLoader.php
+
+		-
+			message: "#^Parameter \\#1 \\$autoload_function of function spl_autoload_register expects callable\\(string\\)\\: void, array\\('ComposerAutoloaderI…', 'loadClassLoader'\\) given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/composer/autoload_real.php
+
+		-
+			message: "#^Parameter \\#2 \\$prefix of function http_build_query expects string, null given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/guzzle/src/Client.php
+
+		-
+			message: "#^Result of && is always false\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/guzzle/src/Middleware.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/guzzle/src/Pool.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 3
+			path: plugins/auth/vendor/guzzlehttp/promises/src/EachPromise.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/EachPromise.php
+
+		-
+			message: "#^Property GuzzleHttp\\\\Promise\\\\EachPromise\\:\\:\\$concurrency \\(\\(callable\\(\\)\\: mixed\\)\\|int\\) does not accept null\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/EachPromise.php
+
+		-
+			message: "#^Property GuzzleHttp\\\\Promise\\\\EachPromise\\:\\:\\$iterable \\(Iterator\\) does not accept null\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/EachPromise.php
+
+		-
+			message: "#^Property GuzzleHttp\\\\Promise\\\\EachPromise\\:\\:\\$onFulfilled \\(callable\\(\\)\\: mixed\\) does not accept null\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/EachPromise.php
+
+		-
+			message: "#^Property GuzzleHttp\\\\Promise\\\\EachPromise\\:\\:\\$onRejected \\(callable\\(\\)\\: mixed\\) does not accept null\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/EachPromise.php
+
+		-
+			message: "#^Negated boolean expression is always false\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/EachPromise.php
+
+		-
+			message: "#^Dead catch \\- Exception is already caught by Throwable above\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/EachPromise.php
+
+		-
+			message: "#^Dead catch \\- Exception is already caught by Throwable above\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/FulfilledPromise.php
+
+		-
+			message: "#^Dead catch \\- Exception is already caught by Throwable above\\.$#"
+			count: 2
+			path: plugins/auth/vendor/guzzlehttp/promises/src/Promise.php
+
+		-
+			message: "#^Method GuzzleHttp\\\\Promise\\\\Promise\\:\\:callHandler\\(\\) should return array but empty return statement found\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/Promise.php
+
+		-
+			message: "#^Method GuzzleHttp\\\\Promise\\\\Promise\\:\\:callHandler\\(\\) should return array but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/Promise.php
+
+		-
+			message: "#^Dead catch \\- Exception is already caught by Throwable above\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/RejectedPromise.php
+
+		-
+			message: "#^Variable \\$task in PHPDoc tag @var does not exist\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/promises/src/TaskQueue.php
+
+		-
+			message: "#^Dead catch \\- Exception is already caught by Throwable above\\.$#"
+			count: 2
+			path: plugins/auth/vendor/guzzlehttp/promises/src/functions.php
+
+		-
+			message: "#^Cannot call method then\\(\\) on array\\.$#"
+			count: 3
+			path: plugins/auth/vendor/guzzlehttp/promises/src/functions.php
+
+		-
+			message: "#^Function each invoked with 3 parameters, 1 required\\.$#"
+			count: 3
+			path: plugins/auth/vendor/guzzlehttp/promises/src/functions.php
+
+		-
+			message: "#^Method GuzzleHttp\\\\Psr7\\\\AppendStream\\:\\:detach\\(\\) should return resource\\|null but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/AppendStream.php
+
+		-
+			message: "#^Method GuzzleHttp\\\\Psr7\\\\BufferStream\\:\\:detach\\(\\) should return resource\\|null but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/BufferStream.php
+
+		-
+			message: "#^Method GuzzleHttp\\\\Psr7\\\\BufferStream\\:\\:write\\(\\) should return int but returns false\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/BufferStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\CachingStream\\:\\:\\$stream\\.$#"
+			count: 19
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/CachingStream.php
+
+		-
+			message: "#^Left side of && is always false\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/CachingStream.php
+
+		-
+			message: "#^Result of method Psr\\\\Http\\\\Message\\\\StreamInterface\\:\\:close\\(\\) \\(void\\) is used\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/CachingStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\DroppingStream\\:\\:\\$stream\\.$#"
+			count: 18
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/DroppingStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn___toString\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_close\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Method GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:close\\(\\) with return type void returns mixed but should not return anything\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_detach\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_getSize\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_tell\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_eof\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_isSeekable\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_rewind\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_seek\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_isWritable\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_write\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_isReadable\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_read\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_getContents\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Access to an undefined property GuzzleHttp\\\\Psr7\\\\FnStream\\:\\:\\$_fn_getMetadata\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/FnStream.php
+
+		-
+			message: "#^Parameter \\#1 \\$status of class GuzzleHttp\\\\Psr7\\\\Response constructor expects int, string given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/functions.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(\\$filename\\)\\: Unexpected token \"\\$filename\", expected type at offset 83$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/functions.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(\\$extension string The file extension\\.\\)\\: Unexpected token \"\\$extension\", expected type at offset 58$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/functions.php
+
+		-
+			message: "#^Variable \\$headerLines in PHPDoc tag @var does not match assigned variable \\$count\\.$#"
+			count: 1
+			path: plugins/auth/vendor/guzzlehttp/psr7/src/functions.php
+
+		-
+			message: "#^Method League\\\\OAuth2\\\\Client\\\\Provider\\\\AbstractProvider\\:\\:parseResponse\\(\\) should return array but returns string\\.$#"
+			count: 1
+			path: plugins/auth/vendor/league/oauth2-client/src/Provider/AbstractProvider.php
+
+		-
+			message: "#^PHPDoc tag @param for parameter \\$result with type mixed is not subtype of native type array\\.$#"
+			count: 1
+			path: plugins/auth/vendor/league/oauth2-client/src/Provider/AbstractProvider.php
+
+		-
+			message: "#^Parameter \\#2 \\$prefix of function http_build_query expects string, null given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/league/oauth2-client/src/Provider/AbstractProvider.php
+
+		-
+			message: "#^Parameter \\#2 \\$prefix of function http_build_query expects string, null given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/league/oauth2-client/src/OptionProvider/PostAuthOptionProvider.php
+
+		-
+			message: "#^Parameter \\$body of method League\\\\OAuth2\\\\Client\\\\Tool\\\\RequestFactory\\:\\:getRequest\\(\\) has invalid typehint type League\\\\OAuth2\\\\Client\\\\Tool\\\\StreamInterface\\.$#"
+			count: 1
+			path: plugins/auth/vendor/league/oauth2-client/src/Tool/RequestFactory.php
+
+		-
+			message: "#^Property OneLogin\\\\Saml2\\\\Auth\\:\\:\\$_lastErrorException \\(OneLogin\\\\Saml2\\\\Error\\|null\\) does not accept Exception\\|null\\.$#"
+			count: 2
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Auth.php
+
+		-
+			message: "#^Method OneLogin\\\\Saml2\\\\Auth\\:\\:processSLO\\(\\) should return string\\|null but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Auth.php
+
+		-
+			message: "#^Property OneLogin\\\\Saml2\\\\Auth\\:\\:\\$_lastErrorException \\(OneLogin\\\\Saml2\\\\Error\\|null\\) does not accept Exception\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Auth.php
+
+		-
+			message: "#^Variable \\$relayState in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 2
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Auth.php
+
+		-
+			message: "#^Variable \\$idpDescriptorNodes in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/IdPMetadataParser.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:hasAttribute\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/IdPMetadataParser.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			count: 6
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/IdPMetadataParser.php
+
+		-
+			message: "#^Parameter \\#3 \\$context of static method OneLogin\\\\Saml2\\\\Utils\\:\\:query\\(\\) expects DOMElement\\|null, DOMNode\\|null given\\.$#"
+			count: 7
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/IdPMetadataParser.php
+
+		-
+			message: "#^Offset 'signing' does not exist on array\\(\\)\\|array\\(\\?'encryption' \\=\\> array\\<int, string\\>, \\?'signing' \\=\\> array\\<int, string\\>\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/IdPMetadataParser.php
+
+		-
+			message: "#^Offset 'encryption' does not exist on array\\(\\)\\|array\\(\\?'encryption' \\=\\> array\\<int, string\\>, \\?'signing' \\=\\> array\\<int, string\\>\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/IdPMetadataParser.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getElementsByTagName\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/LogoutRequest.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:hasAttribute\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/LogoutRequest.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/LogoutRequest.php
+
+		-
+			message: "#^Property OneLogin\\\\Saml2\\\\LogoutRequest\\:\\:\\$_error \\(Exception\\) does not accept null\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/LogoutRequest.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/LogoutResponse.php
+
+		-
+			message: "#^Variable \\$noa might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Response.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:hasAttribute\\(\\)\\.$#"
+			count: 2
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Response.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			count: 6
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Response.php
+
+		-
+			message: "#^Parameter \\#1 \\$encryptedData of static method OneLogin\\\\Saml2\\\\Utils\\:\\:decryptElement\\(\\) expects DOMElement, DOMNode\\|null given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Response.php
+
+		-
+			message: "#^PHPDoc tag @var has invalid value \\(\\$entry DOMNode\\)\\: Unexpected token \"\\$entry\", expected type at offset 9$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Response.php
+
+		-
+			message: "#^Parameter \\#1 \\$element of method RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:locateEncryptedData\\(\\) expects DOMDocument, DOMNode given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Response.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:hasAttributeNS\\(\\)\\.$#"
+			count: 2
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Response.php
+
+		-
+			message: "#^Access to an undefined property DOMNode\\:\\:\\$tagName\\.$#"
+			count: 2
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Response.php
+
+		-
+			message: "#^Variable \\$settings in PHPDoc tag @var does not exist\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Settings.php
+
+		-
+			message: "#^Variable \\$advancedSettings in PHPDoc tag @var does not exist\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Settings.php
+
+		-
+			message: "#^Undefined variable\\: \\$advancedSettings$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Settings.php
+
+		-
+			message: "#^Undefined variable\\: \\$settings$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Settings.php
+
+		-
+			message: "#^Variable \\$settings might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Settings.php
+
+		-
+			message: "#^Result of \\|\\| is always true\\.$#"
+			count: 2
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Utils.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(\\$protocolRegex string\\)\\: Unexpected token \"\\$protocolRegex\", expected type at offset 18$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Utils.php
+
+		-
+			message: "#^Parameter \\#1 \\$port of static method OneLogin\\\\Saml2\\\\Utils\\:\\:setSelfPort\\(\\) expects int, string given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Utils.php
+
+		-
+			message: "#^Variable \\$spnq in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Utils.php
+
+		-
+			message: "#^Parameter \\#1 \\$importednode of method DOMDocument\\:\\:importNode\\(\\) expects DOMNode, RobRichards\\\\XMLSecLibs\\\\DOMElement given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Utils.php
+
+		-
+			message: "#^Parameter \\#3 \\$context of static method OneLogin\\\\Saml2\\\\Utils\\:\\:query\\(\\) expects DOMElement\\|null, DOMNode\\|null given\\.$#"
+			count: 3
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Utils.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			count: 2
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Utils.php
+
+		-
+			message: "#^Method OneLogin\\\\Saml2\\\\Utils\\:\\:decryptElement\\(\\) should return DOMElement but returns DOMNode\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Utils.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(\\$algorithm\\)\\: Unexpected token \"\\$algorithm\", expected type at offset 18$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Utils.php
+
+		-
+			message: "#^Access to an undefined property DOMNode\\:\\:\\$tagName\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Utils.php
+
+		-
+			message: "#^Property RobRichards\\\\XMLSecLibs\\\\XMLSecurityDSig\\:\\:\\$sigNode \\(DOMElement\\|null\\) does not accept DOMNode\\|null\\.$#"
+			count: 1
+			path: plugins/auth/vendor/onelogin/php-saml/src/Saml2/Utils.php
+
+		-
+			message: "#^Function getallheaders\\(\\) should return string but returns array\\<string, mixed\\>\\.$#"
+			count: 1
+			path: plugins/auth/vendor/ralouphie/getallheaders/src/getallheaders.php
+
+		-
+			message: "#^Property RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:\\$encKey has unknown class RobRichards\\\\XMLSecLibs\\\\DOMElement as its type\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Return typehint of method RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:encryptNode\\(\\) has invalid type RobRichards\\\\XMLSecLibs\\\\DOMElement\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:setAttribute\\(\\)\\.$#"
+			count: 3
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Method RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:encryptNode\\(\\) should return RobRichards\\\\XMLSecLibs\\\\DOMElement but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Method RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:encryptNode\\(\\) should return RobRichards\\\\XMLSecLibs\\\\DOMElement but returns DOMDocument\\|null\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Method RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:encryptNode\\(\\) should return RobRichards\\\\XMLSecLibs\\\\DOMElement but returns DOMNode\\.$#"
+			count: 2
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Method RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:encryptNode\\(\\) should return RobRichards\\\\XMLSecLibs\\\\DOMElement but returns DOMElement\\|null\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Return typehint of method RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:decryptNode\\(\\) has invalid type RobRichards\\\\XMLSecLibs\\\\DOMElement\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Method RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:decryptNode\\(\\) should return RobRichards\\\\XMLSecLibs\\\\DOMElement\\|string but returns DOMDocument\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Method RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:decryptNode\\(\\) should return RobRichards\\\\XMLSecLibs\\\\DOMElement\\|string but returns DOMNode\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:createDocumentFragment\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Method RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:decryptNode\\(\\) should return RobRichards\\\\XMLSecLibs\\\\DOMElement\\|string but returns DOMNode\\|null\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Result of \\|\\| is always false\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Property RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:\\$encKey \\(RobRichards\\\\XMLSecLibs\\\\DOMElement\\|null\\) does not accept DOMElement\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Return typehint of method RobRichards\\\\XMLSecLibs\\\\XMLSecEnc\\:\\:decryptKey\\(\\) has invalid type RobRichards\\\\XMLSecLibs\\\\DOMElement\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Else branch is unreachable because previous condition is always true\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Parameter \\#1 \\$element of static method RobRichards\\\\XMLSecLibs\\\\XMLSecurityKey\\:\\:fromEncryptedKeyElement\\(\\) expects DOMElement, DOMNode given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecEnc.php
+
+		-
+			message: "#^Parameter \\#1 \\$prefix of function uniqid expects string, int given\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecurityDSig.php
+
+		-
+			message: "#^Else branch is unreachable because previous condition is always true\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecurityDSig.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecurityDSig.php
+
+		-
+			message: "#^Property RobRichards\\\\XMLSecLibs\\\\XMLSecurityDSig\\:\\:\\$sigNode \\(DOMElement\\|null\\) does not accept DOMNode\\|null\\.$#"
+			count: 2
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecurityDSig.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecurityDSig.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:setAttribute\\(\\)\\.$#"
+			count: 2
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecurityDSig.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			count: 3
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecurityDSig.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(\\$refNode\\)\\: Unexpected token \"\\$refNode\", expected type at offset 18$#"
+			count: 2
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecurityDSig.php
+
+		-
+			message: "#^Method RobRichards\\\\XMLSecLibs\\\\XMLSecurityDSig\\:\\:getRefNodeID\\(\\) should return null but returns string\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecurityDSig.php
+
+		-
+			message: "#^Method RobRichards\\\\XMLSecLibs\\\\XMLSecurityKey\\:\\:verifySignature\\(\\) should return bool\\|int but return statement is missing\\.$#"
+			count: 1
+			path: plugins/auth/vendor/robrichards/xmlseclibs/src/XMLSecurityKey.php
+
+		-
+			message: "#^Variable \\$name might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/ytemplates/bootstrap/value.ycom_auth_extern.tpl.php
+
+		-
+			message: "#^Variable \\$url might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/ytemplates/bootstrap/value.ycom_auth_extern.tpl.php
+
+		-
+			message: "#^Variable \\$name might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/ytemplates/bootstrap/value.ycom_auth_saml.tpl.php
+
+		-
+			message: "#^Variable \\$url might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/ytemplates/bootstrap/value.ycom_auth_saml.tpl.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 13
+			path: plugins/auth/ytemplates/bootstrap/value.ycom_password.tpl.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: plugins/auth/ytemplates/bootstrap/value.ycom_password.tpl.php
+
+		-
+			message: "#^Variable \\$script might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/ytemplates/bootstrap/value.ycom_password.tpl.php
+
+		-
+			message: "#^Variable \\$rules might not be defined\\.$#"
+			count: 1
+			path: plugins/auth/ytemplates/bootstrap/value.ycom_password.tpl.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 1
+			path: plugins/docs/boot.php
+
+		-
+			message: "#^Call to static method importTablesets\\(\\) on an unknown class rex_yform_manager_table_api\\.$#"
+			count: 2
+			path: plugins/group/install.php
+
+		-
+			message: "#^Call to static method deleteCache\\(\\) on an unknown class rex_yform_manager_table\\.$#"
+			count: 1
+			path: plugins/group/install.php
+
+		-
+			message: "#^Call to static method deleteCache\\(\\) on an unknown class rex_yform_manager_table\\.$#"
+			count: 1
+			path: plugins/group/uninstall.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 1
+			path: plugins/group/update.php
+
+		-
+			message: "#^Call to static method get\\(\\) on an unknown class rex_yform_manager_table\\.$#"
+			count: 1
+			path: plugins/media_auth/pages/settings.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 7
+			path: plugins/media_auth/pages/settings.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 1
+			path: plugins/media_auth/update.php
+
