@@ -6,4 +6,6 @@ parameters:
     paths:
         - lib/
         - plugins/
-
+    excludes_analyse:
+        - */vendor/*
+        
