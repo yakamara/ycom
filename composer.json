@@ -3,7 +3,7 @@
 
     "require-dev": {
         "redaxo/source": "^5.8",
-        "yakamara/redaxo_yform": "dev-master as ^3",
+        "yakamara/redaxo_yform": "dev-master",
         "phpstan/phpstan": "^0.12.52"
     },
     "scripts": {
