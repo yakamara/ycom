@@ -6,6 +6,6 @@ parameters:
     paths:
         - lib/
         - plugins/
-    excludes_analyse:
+    excludes_analyse: # ignore committed vendors
         - */vendor/*
         
