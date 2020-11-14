@@ -13,7 +13,8 @@
     "autoload-dev": {
         "classmap": [
             "lib/",
-            "plugins/"
+            "plugins/",
+            "vendor/yakamara/"
         ]
     }
 }
