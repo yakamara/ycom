@@ -3,7 +3,8 @@
 
     "require-dev": {
         "redaxo/source": "^5.8",
-        "phpstan/phpstan": "0.12.52"
+        "yakamara/redaxo_yform": "dev-master",
+        "phpstan/phpstan": "^0.12.52"
     },
     "scripts": {
         "phpstan": "phpstan analyse",
@@ -12,7 +13,8 @@
     "autoload-dev": {
         "classmap": [
             "lib/",
-            "plugins/"
+            "plugins/",
+            "vendor/yakamara/"
         ]
     }
 }

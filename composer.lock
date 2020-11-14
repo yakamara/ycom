@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ef9b5a486efb4c254f9a19df53f574f",
+    "content-hash": "2aace807ffd6f017deb39dfc048d4788",
     "packages": [],
     "packages-dev": [
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.52",
+            "version": "0.12.54",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e96dd5e7ae9aefed663bc7e285ad96792b67eadc"
+                "reference": "45c7b999a4b7dd9ac5558bdaaf23dcebbef88223"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e96dd5e7ae9aefed663bc7e285ad96792b67eadc",
-                "reference": "e96dd5e7ae9aefed663bc7e285ad96792b67eadc",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/45c7b999a4b7dd9ac5558bdaaf23dcebbef88223",
+                "reference": "45c7b999a4b7dd9ac5558bdaaf23dcebbef88223",
                 "shasum": ""
             },
             "require": {
@@ -61,58 +61,59 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-25T07:23:44+00:00"
+            "time": "2020-11-05T13:36:26+00:00"
         },
         {
             "name": "redaxo/source",
-            "version": "5.11.0",
+            "version": "5.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/redaxo/redaxo.git",
-                "reference": "62e48d2d48cbf762ee36afb4ef417a0b402dda1a"
+                "reference": "cc1bffb20b0de3967da48d3592c0af15f68417ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/redaxo/redaxo/zipball/62e48d2d48cbf762ee36afb4ef417a0b402dda1a",
-                "reference": "62e48d2d48cbf762ee36afb4ef417a0b402dda1a",
+                "url": "https://api.github.com/repos/redaxo/redaxo/zipball/cc1bffb20b0de3967da48d3592c0af15f68417ed",
+                "reference": "cc1bffb20b0de3967da48d3592c0af15f68417ed",
                 "shasum": ""
             },
             "replace": {
                 "erusev/parsedown": "1.7.4",
                 "erusev/parsedown-extra": "0.8.1",
-                "filp/whoops": "2.7.3",
-                "itsgoingd/clockwork": "v4.1.5",
-                "phpmailer/phpmailer": "v6.1.6",
+                "filp/whoops": "2.9.1",
+                "itsgoingd/clockwork": "v4.1.8",
+                "phpmailer/phpmailer": "v6.1.8",
                 "psr/container": "1.0.0",
                 "psr/http-message": "1.0.1",
                 "psr/log": "1.1.3",
                 "ramsey/collection": "0.3.0",
                 "ramsey/http-range": "dev-legacy",
-                "scssphp/scssphp": "1.1.1",
-                "symfony/console": "v4.4.10",
-                "symfony/polyfill-ctype": "v1.17.1",
-                "symfony/polyfill-intl-grapheme": "v1.17.1",
-                "symfony/polyfill-intl-normalizer": "v1.17.1",
-                "symfony/polyfill-mbstring": "v1.17.1",
-                "symfony/polyfill-php72": "v1.17.0",
-                "symfony/polyfill-php73": "v1.17.1",
-                "symfony/polyfill-php80": "v1.17.1",
-                "symfony/service-contracts": "v1.1.8",
-                "symfony/var-dumper": "v4.4.10",
-                "symfony/yaml": "v4.4.10",
-                "voku/anti-xss": "4.1.25",
-                "voku/portable-ascii": "1.5.2",
-                "voku/portable-utf8": "5.4.45"
+                "scssphp/scssphp": "1.2.1",
+                "symfony/console": "v4.4.16",
+                "symfony/polyfill-ctype": "v1.20.0",
+                "symfony/polyfill-intl-grapheme": "v1.20.0",
+                "symfony/polyfill-intl-normalizer": "v1.20.0",
+                "symfony/polyfill-mbstring": "v1.20.0",
+                "symfony/polyfill-php72": "v1.20.0",
+                "symfony/polyfill-php73": "v1.20.0",
+                "symfony/polyfill-php80": "v1.20.0",
+                "symfony/service-contracts": "v1.1.9",
+                "symfony/var-dumper": "v4.4.16",
+                "symfony/yaml": "v4.4.16",
+                "voku/anti-xss": "4.1.29",
+                "voku/portable-ascii": "1.5.4",
+                "voku/portable-utf8": "5.4.48"
             },
             "require-dev": {
+                "composer/package-versions-deprecated": "^1.11",
                 "friendsofphp/php-cs-fixer": "2.16.4",
                 "friendsofredaxo/linter": "1.2.6",
                 "phpstan/extension-installer": "1.0.4",
-                "phpstan/phpstan": "0.12.31",
-                "phpstan/phpstan-phpunit": "0.12.11",
-                "phpunit/phpunit": "7.5.20",
+                "phpstan/phpstan": "0.12.33",
+                "phpstan/phpstan-phpunit": "0.12.15",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.2",
                 "psalm/plugin-phpunit": "0.10.1",
-                "psalm/plugin-symfony": "1.3.0",
+                "psalm/plugin-symfony": "1.4.1",
                 "vimeo/psalm": "3.12.1"
             },
             "bin": [
@@ -165,12 +166,36 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-07-01T11:39:39+00:00"
+            "time": "2020-11-11T10:08:30+00:00"
+        },
+        {
+            "name": "yakamara/redaxo_yform",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yakamara/redaxo_yform.git",
+                "reference": "6196c194e645ac65300233c4121d828bb6e91792"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yakamara/redaxo_yform/zipball/6196c194e645ac65300233c4121d828bb6e91792",
+                "reference": "6196c194e645ac65300233c4121d828bb6e91792",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.52",
+                "redaxo/source": "^5.8"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2020-11-05T20:40:32+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "yakamara/redaxo_yform": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
