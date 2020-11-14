@@ -1,6 +1,16 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: boot.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 1
+			path: boot.php
+
+		-
 			message: "#^Access to an undefined property rex_ycom_user\\:\\:\\$password\\.$#"
 			count: 1
 			path: lib/ycom_user.php
@@ -224,4 +234,9 @@ parameters:
 			message: "#^Variable \\$this might not be defined\\.$#"
 			count: 1
 			path: plugins/media_auth/update.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 1
+			path: uninstall.php
 
