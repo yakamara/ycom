@@ -17,6 +17,8 @@ validate|in_table|email|rex_ycom_user|email|Für die angegebene E-Mail-Adresse e
 
 action|db_query|update rex_ycom_user set activation_key = ? where email = ?|activation_key,email
 action|tpl2email|resetpassword_de|email|
+
+action|showtext|Sie erhalten eine E-Mail mit einem Link, über den Sie das Passwort neu setzen können.|<p>|</p>|1
 ```
 
 ## E-Mail-Template `resetpassword_de` für „Passwort zurücksetzen” anlegen
