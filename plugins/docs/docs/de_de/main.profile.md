@@ -27,8 +27,7 @@ action|showtext|<div class="alert alert-success">Profildaten wurden aktualisiert
 action|ycom_auth_db
 ```
 
-3. Im REDAXO-Backend unter `YCom` > `Einstellungen` den Artikel unter `Profil ändern` verknüpfen.
-4. Den Artikel für den Nutzer zugänglich verlinken, z.B. in der Navigation oder im Header.
+3. Den Artikel für den Nutzer zugänglich verlinken, z.B. in der Navigation oder im Header.
 
 > Hinweis: Über den Formularcode-Generator in YForm kann man die Pipe-Schreibweise des Formulars auch für andere Felder des Nutzers abrufen.
 
