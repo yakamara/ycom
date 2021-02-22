@@ -67,3 +67,4 @@ ycom_days = {0} dagar
 
 ycom_auth_config_extern = autentisering (SAML/CAS/OAUTH2)
 
+ycom_auth_howtoread_configvalues = Värden är via: rex_config :: get ('ycom / authent', 'Article_id_login', null); läsbara
