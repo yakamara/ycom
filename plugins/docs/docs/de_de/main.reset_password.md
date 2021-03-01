@@ -60,3 +60,19 @@ ycom_account_inactive | Zugang ist inaktiv | -1
 ycom_account_requested | Zugang wurde angefragt | 0
 ycom_account_confirm | Zugang wurde bestätigt und ist aktiv | 1
 ycom_account_active | Zugang ist aktiv | 2
+
+### Weitere Hinweise
+
+Um zu verhindern, dass ein Passwort-zurücksetzen-Link mehrfach verwendet werden kann, kann mit folgenden Zeilen der activation_key neu gesetzt werden:
+
+```
+generate_key|activation_key
+action|db_query|update rex_ycom_user set activation_key = ? where email = ?|activation_key,rex_ycom_id
+```
+
+Da man durch das Modul gleich eingeloggt wird, kann es sinnvoll sein im Anschluss gleich einen Redirect auszuführen, damit ggf. der Login Status im Menü aktualisiert wird:
+
+```
+// bei pw_change_article_id die Id der Passwort-ändern-Seite eintragen
+action|redirect|pw_change_article_id
+```
