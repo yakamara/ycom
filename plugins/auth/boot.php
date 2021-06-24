@@ -37,12 +37,17 @@ if (!rex::isBackend()) {
 
         switch ($AuthType) {
             case 'oauth2':
-                return rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_OAUTH2_MATCHING', $data, ['Userdata' => $Userdata]));
+                $data = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_OAUTH2_MATCHING', $data, ['Userdata' => $Userdata]));
+                break;
             case 'saml':
-                return rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_SAML_MATCHING', $data, ['Userdata' => $Userdata]));
+                $data =  rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_SAML_MATCHING', $data, ['Userdata' => $Userdata]));
+                break;
             case 'cas':
-                return rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_CAS_MATCHING', $data, ['Userdata' => $Userdata]));
+                $data =  rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_CAS_MATCHING', $data, ['Userdata' => $Userdata]));
+                break;
         }
+
+        return $data;
     }, rex_extension::EARLY);
 } else {
     rex_view::addCssFile($this->getAssetsUrl('styles.css'));
