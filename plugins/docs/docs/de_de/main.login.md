@@ -6,7 +6,7 @@
 ```plaintext
 validate|ycom_auth|login|psw|stayfield|warning_message_enterloginpsw|warning_message_login_failed
 text|login|Benutzername|
-password|psw|Passwort
+ycom_auth_password|psw|Passwort|||0|
 checkbox|stayfield|eingeloggt bleiben
 ycom_auth_returnto|returnTo|
 ```
