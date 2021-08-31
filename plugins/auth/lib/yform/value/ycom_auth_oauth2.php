@@ -86,6 +86,18 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
                         $returnTo = rex_ycom_auth::getSessionVar('OAUTH2_oauth2returnTo');
                         rex_ycom_auth::unsetSessionVar('OAUTH2_oauth2returnTo');
                     } catch (IdentityProviderException $e) {
+                        if ($this->params['debug']) {
+                            dump($e);
+                        }
+                        $this->auth_redirectToFailed('{{ oauth.error.code }}');
+                        $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ oauth.error.code }}';
+                        return '';
+                    } catch (Exception $e) {
+                        if ($this->params['debug']) {
+                            dump($accessToken);
+                            dump($e);
+                            dump($e->getMessage());
+                        }
                         $this->auth_redirectToFailed('{{ oauth.error.code }}');
                         $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ oauth.error.code }}';
                         return '';
@@ -102,7 +114,6 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
                 rex_ycom_auth::setSessionVar('OAUTH2_oauth2state', $provider->getState());
                 rex_ycom_auth::setSessionVar('OAUTH2_oauth2returnTo', $returnTo);
                 rex_response::sendRedirect($authorizationUrl);
-                exit;
         }
 
         return $this->auth_createOrUpdateYComUser($Userdata, $returnTo);
