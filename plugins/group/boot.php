@@ -6,8 +6,18 @@ rex_ycom::addTable('rex_ycom_group');
 if (rex::isBackend()) {
     rex_extension::register('YCOM_ARTICLE_PERM_SELECT', static function (rex_extension_point $ep) {
         $yform = $ep->getSubject();
-        $yform->setValueField('select', ['ycom_group_type', rex_i18n::msg('ycom_group_type'), rex_ycom_group::$perms, '', 0]);
-        $yform->setValueField('select', ['ycom_groups', rex_i18n::msg('ycom_groups'), rex_ycom_group::getGroups(), '', 0, 'size' => 5, 'multiple' => true]);
+        $yform->setValueField('choice', [
+            'name' => 'ycom_group_type',
+            'label' => rex_i18n::msg('ycom_group_type'),
+            'choices' => rex_ycom_group::$perms,
+        ]);
+        $yform->setValueField('choice', [
+            'name' => 'ycom_groups',
+            'label' => rex_i18n::msg('ycom_groups'),
+            'choices' => rex_ycom_group::getGroups(),
+            'size' => 5,
+            'multiple' => true,
+        ]);
         return $yform;
     });
 }

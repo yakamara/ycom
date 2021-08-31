@@ -20,7 +20,11 @@ $yform->setObjectparams('main_id', $article_id);
 $yform->setObjectparams('main_where', 'id = ' . $article_id . ' and clang_id = ' . $clang);
 $yform->setObjectparams('getdata', true);
 
-$yform->setValueField('select', ['ycom_auth_type', $addon->i18n('ycom_auth_perm'), rex_ycom_auth::$perms, '', 0]);
+$yform->setValueField('choice', [
+    'name' => 'ycom_auth_type',
+    'label' => $addon->i18n('ycom_auth_perm'),
+    'choices' => rex_ycom_auth::$perms,
+]);
 $yform = rex_extension::registerPoint(new rex_extension_point('YCOM_ARTICLE_PERM_SELECT', $yform, [
     'article_id' => $article_id,
 ]));
