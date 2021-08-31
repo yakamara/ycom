@@ -1,12 +1,24 @@
 Changelog
 =========
 
-Version 4.x – xx.xx.2020
+Version 4.04 – 31.08.2021
 --------------------------
+
+### Änderungen / Korrekturen
 
 * YCOM_YFORM_SAVED entfernt da er fehlerhaft und unötig war
 * action_ycom_auth_db optimiert, dass nur noch ein User Objekt benutzt wird und erbt nun von action db
-* Doku entsprechend angepasst
+* Doku angepasst umstrukturiert
+* Ausblenden von nicht erlaubten Backendseiten
+* Bei Weiterleitungen wird nun CacheControl gesetzt um Cachen zu vermeiden
+* Exceptions bei OAuth2 optimiert
+
+### Bugs
+* Fehlerhaften Aufruf der ycom_auth_db action korrigiert,
+* Permissions konnten nicht abgefragt werden, wenn man das Group Plugin deaktiviert hatte
+* returnTo URL bei Logout im AuthPlugin war falsch gesetzt
+
+Danke an: Alex Platter, Christoph Gerber, Wolfgang Bund, Markus Staab, Yves Torres, Andreas Eberhard, Alexander WalterJürgen Weis
 
 
 Version 4.0.3 – 25.08.2020
