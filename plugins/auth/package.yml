@@ -1,5 +1,5 @@
 package: ycom/auth
-version: '4.0.3'
+version: '4.0.4'
 author: Yakamara Media GmbH & Co. KG / concedra GmbH
 title: 'Auth'
 nav_icon: fa-minus
