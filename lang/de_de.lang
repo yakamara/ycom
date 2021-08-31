@@ -3,7 +3,7 @@ ycom_perm = Community Rechte
 ycom_page_perm = Community Seitenrechte
 
 navigation_ycom = Community
-ycom_title = Community: Einstellungen
+ycom_title = Community
 ycom_navi_title = Einstellungen
 
 ycom_main_title = Info
@@ -71,3 +71,4 @@ ycom_docs_login_logout_profile_register = Login/Logout/Profile/Registrierung
 docs = Dokumentation
 ycom_docs_tricks = Tricks
 ycom_docs_user_groups = User und Gruppen auslesen
+ycom_docs = Dokumentation

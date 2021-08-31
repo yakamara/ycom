@@ -29,7 +29,7 @@ foreach ($mdFiles as $key => $mdFile) {
     );
 }
 
-echo rex_view::title($this->i18n('yform'));
+echo rex_view::title($this->i18n('ycom_title'));
 
 [$Toc, $Content] = rex_markdown::factory()->parseWithToc(rex_file::require($mdFiles[$currenMDFile]), 2, 3, false);
 

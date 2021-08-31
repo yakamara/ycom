@@ -15,6 +15,7 @@ page:
             pjax: false
             itemclass: pull-right
             icon: rex-icon fa-info-circle
+
 requires:
     packages:
         yform: '^3.3.1'
@@ -25,4 +26,3 @@ requires:
 system_plugins:
     - auth
     - group
-    - docs
