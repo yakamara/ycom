@@ -8,7 +8,10 @@ Siehe auch
 * YForm-Dokumentation, Kapitel "YOrm": https://github.com/yakamara/redaxo_yform_docs/blob/master/de_de/yorm.md
 
 **Details des YCom-Nutzers auslesen**
-```
+
+```php
+<?php
+
 $ycom_user = rex_ycom_auth::getUser();
 
 # dump($ycom_user); // auskommentieren, um alle Eigenschaften des Objekts auszugeben
@@ -21,12 +24,17 @@ if($ycom_user) {
     echo $ycom_user->getValue('last_login_time');   // Letzter Login
     echo $ycom_user->getValue('ycom_groups');       // IDs der zugeordneten Gruppen
 }
+
+?>
 ```
 
 > Hinweis: Die Felder lassen sich über den Table Manager in YForm um eigene Felder erweitern.
 
 **Details zur Gruppe eines YCom-Nutzers auslesen**
-```
+
+```php
+<?php
+
 $ycom_user = rex_ycom_auth::getUser();
 
 if($ycom_user) {
@@ -39,13 +47,17 @@ if($ycom_user) {
             // User ist nicht in der Gruppe
         };
 }
+
+?>
 ```
 
 > Hinweis: Die Felder lassen sich über den Table Manager in YForm um eigene Felder erweitern.
 
 **Gruppen-Berechtigung eines YCom-Nutzers auslesen:**
 
-```
+```php
+<?php
+
 $article_id = 42; // ID des Artikels
 $ycom_user = rex_ycom_auth::getUser();
 if($ycom_user->checkPerm($article_id)) {
@@ -53,6 +65,8 @@ if($ycom_user->checkPerm($article_id)) {
 } else {
     // User hat nicht die Berechtigung, den Artikel zu sehen
 };
+
+?>
 ```
 Weitere Methoden der rex_ycom_auth-Klasse: https://github.com/yakamara/redaxo_ycom/blob/master/plugins/auth/lib/ycom_auth.php
 
@@ -62,11 +76,15 @@ Siehe auch:
 * REDAXO API-Dokumentation: https://redaxo.org/api/master/class-rex_sql.html
 * Datenbank-Queries in REDAXO 5: https://redaxo.org/doku/master/datenbank-queries
 
-```
+```php
+<?php
+
 $ycom_user = rex_ycom_auth::getUser();
 
 if($ycom_user) {
     $user = $rex_sql::factory()->getArray('SELECT id, name FROM rex_ycom_user WHERE id = :id', [$ycom_user->getId()]);
     # dump($user); // auskommentieren, um alle Schlüssel und Werte des Arrays auszugeben
 }
+
+?>
 ```

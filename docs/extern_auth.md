@@ -1,15 +1,17 @@
-# SAML-Authentifizierung
+# Externe Authentifizierungen
+
+## SAML-Authentifizierung
 
 Mit der SAML-Authentifizierung kann man sich über einen externen Identityprovider in der YCOM registrieren und einloggen.
 Dazu muss dieser Provider inkl. Metadaten entsprechend vorbereitet sein.
 
-## Einrichtung
+### Einrichtung
 
 Bei der Installation des Auth-Plugins wurde eine saml.php in den Data-Ordner des YCom-AddOns gelegt. Diesen muss man entsprechend anpassen. Die Identityprovider information müssen dort eingerichtet sein.
 
 Damit die Authentifizierung funktioniert, muss im Loginformular von YCOM ein Feld erweitert werden und es in der saml.php ergänzt werden.
 
-```
+```php
 ycom_auth_saml|samllabel|error_msg|[allowed returnTo domains: DomainA,DomainB]|default Userdata as Json{"ycom_groups": 3, "termsofuse_accepted": 1}
 ```
 
@@ -27,7 +29,7 @@ Mit diesem Feld erweitert man das Login um einen Loginbutton, der zum entspreche
 
 Sofern die automatische E-Mail Erkennung nicht klappt, oder/und man eigene Felder bei der Usergenerierung festlegen will, folgendes am besten in die `addons/project/boot.php` legen und anpassen.
 
-```
+```php
 rex_extension::register('YCOM_AUTH_SAML_MATCHING', function (rex_extension_point $ep) {
 
     $data = $ep->getSubject();
@@ -58,3 +60,7 @@ rex_extension::register('YCOM_AUTH_SAML_MATCHING', function (rex_extension_point
 
 });
 ```
+
+## CAS
+
+## OAuth2

@@ -60,3 +60,14 @@ ycom_please_enter_email = Bitte die E-mail eingeben
 last_password_time = Letzter Passwortwechsel
 termsofuse_accepted = Nutzungsbedingungen bestätigt
 new_password_required = Neues Passwort muss gesetzt werden
+
+ycom_docs_intro = Einrichtung
+ycom_docs_navigations = Navigationen
+ycom_docs_passwords = Passwörter
+ycom_docs_settings = Einstellungen
+ycom_docs_extern_auth = Externe Authentifizierung
+ycom_docs_plugin_media_auth = MediaAuth-Plugin
+ycom_docs_login_logout_profile_register = Login/Logout/Profile/Registrierung
+docs = Dokumentation
+ycom_docs_tricks = Tricks
+ycom_docs_user_groups = User und Gruppen auslesen

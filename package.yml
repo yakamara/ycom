@@ -8,7 +8,13 @@ page:
     perm: ycom[]
     block: ycom
     icon: rex-icon fa-group
-
+    subpages:
+        docs:
+            title: 'translate:docs'
+            perm: admin[]
+            pjax: false
+            itemclass: pull-right
+            icon: rex-icon fa-info-circle
 requires:
     packages:
         yform: '^3.3.1'

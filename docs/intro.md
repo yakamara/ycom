@@ -47,7 +47,7 @@ YCom Einstellungsseite im REDAXO-Backend aufrufen unter `YCom` > `Einstellungen`
 
 Anschließend können Module und Templates in Abhängigkeit des Login-Status (eingeloggt/ausgeloggt) dargestellt werden. 
 
-```
+```php
 $ycom_user = rex_ycom_auth::getUser() // zu Beginn eines Moduls oder Templates
 
 if ($ycom_user) {
