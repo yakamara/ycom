@@ -32,8 +32,6 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_db
                 $this->setElement(3, 'main_where');
 
                 return parent::executeAction();
-
-                break;
         }
     }
 
