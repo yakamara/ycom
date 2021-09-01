@@ -167,7 +167,7 @@ class rex_ycom_auth
                     $auth_rules = new rex_ycom_auth_rules();
 
                     if (!$auth_rules->check($user, rex_config::get('ycom/auth', 'auth_rule', 'login_try_5_pause'))) {
-                    } elseif ((@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->id))) {
+                    } elseif ((@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->getId()))) {
                         $me = $user;
                         $me->setValue('login_tries', 0);
                         if (isset($params['loginStay']) && !$params['loginStay']) {
@@ -179,6 +179,13 @@ class rex_ycom_auth
                         ++$user->login_tries;
                         $user->save();
                     }
+                }
+
+                if (!$me) {
+                    // logintry with name -> if logged in this try means kill the session
+                    self::clearUserSession();
+                    $sessionUserID = null;
+                    $sessionKey = null;
                 }
             }
 
