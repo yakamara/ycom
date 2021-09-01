@@ -18,22 +18,6 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
             }
         }
 
-        if ($this->params['send']) {
-            $placeholder = rex_i18n::translate('translate:ycom_auth_password_not_updated');
-            if ('' != $this->getValue() && !isset($this->params['warning'][$this->getId()])) {
-                $placeholder = rex_i18n::translate('translate:ycom_auth_password_updated');
-            }
-        } else {
-            $placeholder = rex_i18n::translate('translate:ycom_auth_password_exists');
-            if ('' == $this->getValue()) {
-                $placeholder = rex_i18n::translate('translate:ycom_auth_password_isempty');
-            }
-        }
-
-        if ('' == $this->getElement('placeholder')) {
-            $this->setElement('placeholder', $placeholder);
-        }
-
         $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_password.tpl.php', 'value.password.tpl.php', 'value.text.tpl.php'], ['type' => 'password', 'value' => '', 'script' => $this->getElement('script'), 'rules' => $rules]);
     }
 

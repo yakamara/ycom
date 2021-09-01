@@ -32,7 +32,7 @@ $attributes = [
     'autocomplete' => 'new-password',
 ];
 
-$attributes = $this->getAttributeElements($attributes, ['placeholder', 'autocomplete', 'pattern', 'required', 'disabled', 'readonly']);
+$attributes = $this->getAttributeElements($attributes, ['autocomplete', 'pattern', 'required', 'disabled', 'readonly']);
 
 $span = '';
 $input_group_start = '';
