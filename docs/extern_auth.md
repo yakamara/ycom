@@ -64,3 +64,10 @@ rex_extension::register('YCOM_AUTH_SAML_MATCHING', function (rex_extension_point
 ## CAS
 
 ## OAuth2
+
+## Allgemeines
+
+### Loginseite
+
+Sofern man die externe Authentifikation nicht nutzt, wird die Loginseite meistens so eingestellt, dass nur nicht eingeloggte User diese sehen können. Das ist hier nicht zu empfehlen, da man sich nicht einloggen kann, wenn man über den IdentityProvider zur REDAXO Community kommt und bereits eingeloggt ist. Deswegen sollte die Loginseite verfühgbar, aber nicht sichtbar in der Navigation sein, wenn man eingeloggt ist.
+
