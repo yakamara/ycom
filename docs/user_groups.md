@@ -53,18 +53,13 @@ if($ycom_user) {
 
 > Hinweis: Die Felder lassen sich über den Table Manager in YForm um eigene Felder erweitern.
 
-**Gruppen-Berechtigung eines YCom-Nutzers auslesen:**
+**Berechtigung eines Users an einer Kategorie an einem Artikel auslesen.:**
 
 ```php
 <?php
 
-$article_id = 42; // ID des Artikels
-$ycom_user = rex_ycom_auth::getUser();
-if($ycom_user->checkPerm($article_id)) {
-    // User hat Berechtigung, den Artikel zu sehen  
-} else {
-    // User hat nicht die Berechtigung, den Artikel zu sehen
-};
+$category = rex_category::get($id);
+rex_ycom_auth::articleIsPermitted($category); // => true oder false
 
 ?>
 ```
