@@ -9,7 +9,7 @@ class rex_ycom_media_auth extends \rex_yform_manager_dataset
         '1' => 'translate:ycom_perm_only_logged_in',
     ];
 
-    public static function checkPerm(rex_media_manager $media_manager)
+    public static function checkPerm(rex_media_manager $media_manager):bool
     {
         // check if original media_path
         $media = $media_manager->getMedia();
@@ -23,7 +23,7 @@ class rex_ycom_media_auth extends \rex_yform_manager_dataset
         }
 
         // is rex_media
-        $rex_media = \rex_media::get($media->getMediaFilename());
+        $rex_media = rex_media::get($media->getMediaFilename());
         if (!$rex_media) {
             return false;
         }
@@ -31,7 +31,7 @@ class rex_ycom_media_auth extends \rex_yform_manager_dataset
         return self::checkFrontendPerm($rex_media);
     }
 
-    public static function checkFrontendPerm(rex_media $rex_media)
+    public static function checkFrontendPerm(rex_media $rex_media):bool
     {
         $authType = (int) $rex_media->getValue('ycom_auth_type');
         if (1 != $authType) {
@@ -49,7 +49,6 @@ class rex_ycom_media_auth extends \rex_yform_manager_dataset
         $group = rex_plugin::get('ycom', 'group')->isAvailable();
 
         if ($group) {
-
             $groupType = (int) $rex_media->getValue('ycom_group_type');
 
             $groups = [];
