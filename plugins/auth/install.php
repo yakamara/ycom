@@ -4,9 +4,23 @@ rex_config::set('ycom', 'auth_cookie_ttl', '14');
 rex_config::set('ycom/auth', 'auth_rule', 'login_try_5_pause');
 rex_config::set('ycom', 'login_field', 'email');
 
+// Update from Version < 4
+$articleAuthTypeWasEnum = false;
+$articleTable = rex_sql_table::get(rex::getTable('article'));
+if ($articleTable->hasColumn('ycom_auth_type')) {
+    if ('enum' == substr($articleTable->getColumn('ycom_auth_type')->getType(),0,4)) {
+        $articleAuthTypeWasEnum = true;
+    }
+}
+
 rex_sql_table::get(rex::getTable('article'))
     ->ensureColumn(new rex_sql_column('ycom_auth_type', 'int', false, '0'))
     ->alter();
+
+// Update from Version < 4
+if ($articleAuthTypeWasEnum) {
+    rex_sql::factory()->setQuery('UPDATE rex_article SET `ycom_auth_type` = `ycom_auth_type` -1');
+}
 
 foreach (['saml', 'oauth2', 'cas'] as $settingType) {
     $pathFrom = __DIR__ . '/install/' . $settingType . '.php';
