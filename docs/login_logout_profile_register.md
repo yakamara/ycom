@@ -6,9 +6,9 @@
 2. Im Artikel `Login` den YForm Formbuilder hinzufügen und folgende Formulardefinition eintragen:
 
 ```php
-validate|ycom_auth|login|psw|stayfield|warning_message_enterloginpsw|warning_message_login_failed
+validate|ycom_auth|login|password|stayfield|warning_message_enterloginpsw|warning_message_login_failed
 text|login|Benutzername|
-password|psw|Passwort
+password|password|Passwort
 checkbox|stayfield|eingeloggt bleiben
 ycom_auth_returnto|returnTo|
 ```
@@ -95,6 +95,8 @@ hidden|status|0
 fieldset|label|Login-Daten:
 
 text|email|E-Mail:*|
+text|email_2|E-Mail bestätigen:*|
+
 text|firstname|Vorname:*
 validate|empty|firstname|Bitte geben Sie Ihren Vornamen ein.
 
@@ -116,6 +118,7 @@ validate|empty|email|Bitte geben Sie Ihre e-Mail ein.
 validate|empty|password|Bitte geben Sie ein Passwort ein.
 validate|password_policy|password|Passwort muss mindestens 8 Zeichen lang sein und sowohl Gross- als auch Kleinbuchstaben enthalten|
 validate|compare|password|password_2||Bitte geben Sie zweimal das gleiche Passwort ein
+validate|compare|email|email_2||Bitte geben Sie zweimal die gleiche E-Mail ein
 
 # email als Login verwenden
 action|copy_value|email|login
