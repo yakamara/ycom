@@ -1,22 +1,48 @@
 Changelog
 =========
 
+Version 4.0.5 - xx.09.2021
+--------------------------
+
+### Bugfixes
+* Auth-Plugin
+    - Umbau von select auf Choice bei den Artikelrechten. Nun auch funktional bei YForm >= 4.0.0
+    - Ein erneutes Einloggen obwohl man schon eingeloggt ist, führt nun bei einem Fehlversuch zur Löschung der vorhandenen Session
+* Passwörter
+    - ycom_password-Feld hatte placeholder als attribut und konnte so nicht sinnvoll im Frontend beim Login oder Profil verwendet werden
+* Group-Plugin
+    - Bei Uninstall wurde das Feld ycom_groups in der Usertabelle nicht entfernt
+* Update
+    - von Version < 4 führte früher dazu, dass das article.ycom_auth_type-Feld verfälscht wurden. ENUM to INT
+
+Diverse Dokuanpassungen
+
+Danke an: 
+
+
 Version 4.04 – 31.08.2021
 --------------------------
 
-### Änderungen / Korrekturen
+## Neu
+* Docs umgebaut.
+    * Plugin-Docs entfernt und Inhalte neu strukturiert
+    * Reinstall von YCom entfernt das docs plugin
 
-* YCOM_YFORM_SAVED entfernt da er fehlerhaft und unötig war
-* action_ycom_auth_db optimiert, dass nur noch ein User Objekt benutzt wird und erbt nun von action db
-* Doku angepasst umstrukturiert
+### Bugfixes
 * Ausblenden von nicht erlaubten Backendseiten
-* Bei Weiterleitungen wird nun CacheControl gesetzt um Cachen zu vermeiden
-* Exceptions bei OAuth2 optimiert
+* YCOM_YFORM_SAVED entfernt da er fehlerhaft und unötig war
+* OAuth2
+    * Einige Exceptions wurden nicht abgefangen
+* Auth-Plugin
+    * Fehlerhaften Aufruf der ycom_auth_db action korrigiert,
+    * redirects: Fälschlicherweise wurden die Weiterleitungen ohne CacheControl versendet
+    * returnTo URL bei Logout im AuthPlugin war falsch gesetzt
+    * action_ycom_auth_db war fehlerhaft und ist nun so angepasst, dass nur noch ein User Objekt benutzt wird und erbt nun von action db
+* Group-Plugin
+    * Permissions konnten nicht abgefragt werden, wenn man das Group Plugin deaktiviert hatte
 
-### Bugs
-* Fehlerhaften Aufruf der ycom_auth_db action korrigiert,
-* Permissions konnten nicht abgefragt werden, wenn man das Group Plugin deaktiviert hatte
-* returnTo URL bei Logout im AuthPlugin war falsch gesetzt
+Diverse Dokuanpassungen
+Übersetzungen ergänzt
 
 Danke an: Alex Platter, Christoph Gerber, Wolfgang Bund, Markus Staab, Yves Torres, Andreas Eberhard, Alexander WalterJürgen Weis
 
