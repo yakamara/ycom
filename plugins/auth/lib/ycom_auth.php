@@ -155,8 +155,7 @@ class rex_ycom_auth
             if (!empty($params['loginName'])) {
                 $userQuery =
                     rex_ycom_user::query()
-                        ->where(rex_plugin::get('ycom', 'auth')
-                            ->getConfig('login_field', 'email'), $params['loginName']);
+                        ->where(rex_config::get('ycom/auth', 'login_field', 'email'), $params['loginName']);
 
                 if ($filter) {
                     $filter($userQuery);
@@ -225,7 +224,7 @@ class rex_ycom_auth
 
                     $sessionKey = bin2hex(random_bytes(16));
                     $me->setValue('session_key', $sessionKey);
-                    self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl', 14)));
+                    self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_plugin::get('ycom','auth')->getConfig('auth_cookie_ttl', 14)));
 
                     // session fixation
                     self::regenerateSessionId();
@@ -241,7 +240,7 @@ class rex_ycom_auth
                 if (isset($params['loginStay']) && $params['loginStay']) {
                     $sessionKey = bin2hex(random_bytes(16));
                     $me->setValue('session_key', $sessionKey);
-                    self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_addon::get('ycom')->getConfig('auth_cookie_ttl', 14)));
+                    self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_plugin::get('ycom', 'auth')->getConfig('auth_cookie_ttl', 14)));
                 }
 
                 $me->setValue('last_action_time', date('Y-m-d H:i:s'));

@@ -1,8 +1,8 @@
 <?php
 
-rex_config::set('ycom', 'auth_cookie_ttl', '14');
+rex_config::set('ycom/auth', 'auth_cookie_ttl', '14');
 rex_config::set('ycom/auth', 'auth_rule', 'login_try_5_pause');
-rex_config::set('ycom', 'login_field', 'email');
+rex_config::set('ycom/auth', 'login_field', 'email');
 
 // Update from Version < 4
 $articleAuthTypeWasEnum = false;

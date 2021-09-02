@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version 4.0.5 - xx.09.2021
+Version 4.0.5 - 02.09.2021
 --------------------------
 
 ### Bugfixes
@@ -14,6 +14,8 @@ Version 4.0.5 - xx.09.2021
     - Bei Uninstall wurde das Feld ycom_groups in der Usertabelle nicht entfernt
 * Update
     - von Version < 4 führte früher dazu, dass das article.ycom_auth_type-Feld verfälscht wurden. ENUM to INT
+* Config
+    - login_field und auth_cookie_ttl wurden nicht konsequent in die ycom/auth-Config gespeichert
 
 Diverse Dokuanpassungen
 
