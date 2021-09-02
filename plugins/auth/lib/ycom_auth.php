@@ -73,10 +73,13 @@ class rex_ycom_auth
                     $params = ['returnTo' => $refererURL];
                 }
 
-                if (!self::getUser() && '' != rex_plugin::get('ycom', 'auth')->getConfig('article_id_login')) {
-                    $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_login'), '', $params, '&');
+                $article_id_login = (int) rex_plugin::get('ycom', 'auth')->getConfig('article_id_login');
+                $article_id_jump_denied = (int) rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied');
+
+                if (!self::getUser() && 0 != $article_id_login) {
+                    $params['redirect'] = rex_getUrl($article_id_login, '', $params, '&');
                 } else {
-                    $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied'), '', $params, '&');
+                    $params['redirect'] = rex_getUrl($article_id_jump_denied, '', $params, '&');
                 }
             }
         }
@@ -94,16 +97,17 @@ class rex_ycom_auth
         $params = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_INIT', $params, []));
 
         if (self::getUser()) {
-            $article_id_password = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_password');
-            $article_id_termsofuse = rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_termsofuse');
+            $article_id_password = (int) rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_password');
+            $article_id_termsofuse = (int) rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_termsofuse');
 
             if (rex_plugin::get('ycom', 'auth')->getConfig('article_id_logout') == rex_article::getCurrentId()) {
                 // ignore rest - because logout is always ok .
-            } elseif ('' != $article_id_termsofuse && 1 != self::getUser()->getValue('termsofuse_accepted')) {
+            } elseif (0 != $article_id_termsofuse && 1 != self::getUser()->getValue('termsofuse_accepted')) {
                 if ($article_id_termsofuse != rex_article::getCurrentId()) {
                     $params['redirect'] = rex_getUrl($article_id_termsofuse, '', [], '&');
-                }
-            } elseif ('' != $article_id_password && 1 == self::getUser()->getValue('new_password_required')) {
+                }            dump($params);
+
+            } elseif (0 != $article_id_password && 1 == self::getUser()->getValue('new_password_required')) {
                 if ($article_id_password != rex_article::getCurrentId()) {
                     $params['redirect'] = rex_getUrl($article_id_password, '', [], '&');
                 }
