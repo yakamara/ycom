@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 4.0.6 - 02.09.2021
+--------------------------
+
+### Bugfixes
+* Abhängigkeiten waren noch falsch. Nun auch YForm AB 3.3.1 möglich, also auch Version 4.x, wie auch yrewrite und phpmailer
+
+
 Version 4.0.5 - 02.09.2021
 --------------------------
 
