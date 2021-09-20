@@ -31,7 +31,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         }
 
         if (PHP_SESSION_ACTIVE !== session_status()) {
-            session_start();
+            rex_login::startSession();
         }
 
         $settings = $this->auth_loadSettings();
