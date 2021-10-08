@@ -113,6 +113,7 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
                 $authorizationUrl = $provider->getAuthorizationUrl();
                 rex_ycom_auth::setSessionVar('OAUTH2_oauth2state', $provider->getState());
                 rex_ycom_auth::setSessionVar('OAUTH2_oauth2returnTo', $returnTo);
+                rex_response::sendCacheControl();
                 rex_response::sendRedirect($authorizationUrl);
         }
 

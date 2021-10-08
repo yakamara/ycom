@@ -81,6 +81,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                 $ssoBuiltUrl = $auth->login($returnToUrl, [], false, false, true);
                 rex_ycom_auth::setSessionVar('SAML_AuthNRequestID', $auth->getLastRequestID());
                 rex_ycom_auth::setSessionVar('SAML_ssoDate', date('Y-m-d H:i:s'));
+                rex_response::sendCacheControl();
                 rex_response::sendRedirect($ssoBuiltUrl);
                 break;
 
@@ -118,6 +119,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                     $auth->redirectTo($_POST['RelayState']);
                 }
 
+                rex_response::sendCacheControl();
                 rex_redirect(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_not_ok'));
                 break;
 
@@ -139,6 +141,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 
                 session_write_close(); // wirklich nötig ?
 
+                rex_response::sendCacheControl();
                 rex_response::sendRedirect($sloBuiltUrl);
                 break;
 
@@ -165,6 +168,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                 if (empty($errors)) {
                     // hier wird davon aufgegangen, dass immer ein returnTo gesetzt ist.
                     // \rex_yrewrite::getFullUrlByArticleId(\rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_logout'));
+                    rex_response::sendCacheControl();
                     rex_response::sendRedirect($returnTo);
                 } else {
                     if ($this->params['debug']) {
@@ -178,6 +182,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 
         if (0 == count(rex_ycom_auth::getSessionVar('SAML_Userdata', 'array', []))) {
             // direkt durchschleifen zu SAML AUTH .. Hier könnte man auch eine abfrage machen.
+            rex_response::sendCacheControl();
             rex_response::sendRedirect(rex_getUrl('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sso', 'returnTo' => $returnTo], '&'));
             exit;
         }

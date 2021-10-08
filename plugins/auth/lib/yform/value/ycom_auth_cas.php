@@ -102,6 +102,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         if (2 == $loginStatus) {
             // already logged in
             rex_ycom_user::updateUser($data);
+            rex_response::sendCacheControl();
             \rex_response::sendRedirect($returnTo);
         }
 
@@ -135,6 +136,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
             return '';
         }
 
+        rex_response::sendCacheControl();
         \rex_response::sendRedirect($returnTo);
     }
 
