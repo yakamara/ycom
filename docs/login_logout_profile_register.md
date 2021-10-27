@@ -143,7 +143,7 @@ Diese E-Mail fordert den Nutzer dazu auf, die Anmeldung zu bestätigen. Der endg
 <?php
 $article_id = 999; // Hier die Artikel-ID der Bestätigungsseite eintragen
 
-$article_url = rex_getUrl($article_id,'',array('rex_ycom_activation_key'=>'REX_YFORM_DATA[field=activation_key]','rex_ycom_id'=>'REX_YFORM_DATA[field=email]'));
+$article_url = rex_getUrl($article_id,'',['rex_ycom_activation_key'=>'REX_YFORM_DATA[field=activation_key]','rex_ycom_id'=>'REX_YFORM_DATA[field=email]','&']);
 $full_url = trim(rex::getServer(),'/').trim($article_url,'.');
 ?>
 <p>Bitte klicken Sie diesen Link, um die Anmeldung zu bestätigen:</p>
