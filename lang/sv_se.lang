@@ -60,3 +60,15 @@ ycom_please_enter_email = Var god ange e-post adressen
 last_password_time = Senaste lösenordbyte
 termsofuse_accepted = villkoren bekräftades
 new_password_required = Du måste välja ett nytt lösenord
+
+ycom_docs_intro = Inrättning
+ycom_docs_navigations = Navigationen
+ycom_docs_passwords = Lösenord
+ycom_docs_settings = Inställningar
+ycom_docs_extern_auth = Extern autentisering
+ycom_docs_plugin_media_auth = MediaAuth-Plugin
+ycom_docs_login_logout_profile_register = Login/Logout/Profile/Registrering
+docs = Dokumentation
+ycom_docs_tricks = Tricks
+ycom_docs_user_groups = Läsa ut användare och grupper
+ycom_docs = Dokumentation
