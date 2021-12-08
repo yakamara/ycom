@@ -59,7 +59,7 @@ class rex_yform_validate_ycom_auth extends rex_yform_validate_abstract
         }
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return 'ycom_auth -> prüft ob login und registriert user, beispiel: validate|ycom_auth|loginfield|passwordfield|stayfield|warning_message_enterloginpsw|warning_message_login_failed';
     }

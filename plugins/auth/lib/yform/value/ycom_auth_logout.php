@@ -22,7 +22,7 @@ class rex_yform_value_ycom_auth_logout extends rex_yform_value_abstract
         }
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return 'ycom_auth_logout -> Beispiel: ycom_auth_logout|label|[allowed domains: DomainA,DomainB]|[returnTo]';
     }

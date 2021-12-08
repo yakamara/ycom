@@ -138,7 +138,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         \rex_response::sendRedirect($returnTo);
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return 'ycom_auth_cas|label|error_msg|[allowed returnTo domains: DomainA,DomainB]|[default Userdata as Json{"ycom_groups": 3, "termsofuse_accepted": 1}]';
     }
