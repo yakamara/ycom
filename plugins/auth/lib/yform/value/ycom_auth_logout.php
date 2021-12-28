@@ -17,6 +17,7 @@ class rex_yform_value_ycom_auth_logout extends rex_yform_value_abstract
             rex_ycom_auth::clearUserSession();
 
             if ('' != $returnTo) {
+                rex_response::sendCacheControl();
                 rex_response::sendRedirect($returnTo);
             }
         }
