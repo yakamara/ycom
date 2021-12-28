@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 class rex_yform_action_ycom_auth_db extends rex_yform_action_db
 {
-    public function executeAction()
+    public function executeAction(): void
     {
         /** @var rex_ycom_user $user */
         $user = rex_ycom_auth::getUser();
 
         if (rex::isBackend() || !$user) {
             echo 'error - access denied - user not logged in';
-
-            return false;
+            return;
         }
 
         $action = $this->getElement(2);
@@ -31,11 +30,11 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_db
                 $this->setElement(2, '');
                 $this->setElement(3, 'main_where');
 
-                return parent::executeAction();
+                parent::executeAction();
         }
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return 'action|ycom_auth_db|update(default)/delete';
     }

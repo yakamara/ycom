@@ -187,7 +187,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         return $this->auth_createOrUpdateYComUser($Userdata, $returnTo);
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return 'ycom_auth_saml|label|error_msg|[allowed returnTo domains: DomainA,DomainB]|default Userdata as Json{"ycom_groups": 3, "termsofuse_accepted": 1}|direct_link 0,1';
     }

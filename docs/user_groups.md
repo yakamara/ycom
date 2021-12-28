@@ -38,9 +38,24 @@ if($ycom_user) {
 $ycom_user = rex_ycom_auth::getUser();
 
 if($ycom_user) {
-        $ycom_group = $ycom_user->getRelatedDataset('ycom_groups');
-        $ycom_group->getValue("name"); // Name der Gruppe
+        $ycom_groups = $ycom_user->getRelatedCollection('ycom_groups');
+        foreach($ycom_groups as $ycom_group) {
+            $ycom_group->getValue("name"); // Name der Gruppe
+            dump($ycom_group);
+        }
+}
 
+?>
+```
+**Prüfen ob YCom-Nutzer in einer speziellen Gruppe ist**
+
+```php
+<?php
+
+$ycom_user = rex_ycom_auth::getUser();
+$group_id = 6; // Id einer Gruppe
+
+if($ycom_user) {
         if($ycom_user->isInGroup($group_id)) {
             // User ist in der Gruppe   
         } else {

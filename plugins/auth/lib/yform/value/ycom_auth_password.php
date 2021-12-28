@@ -18,10 +18,16 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
             }
         }
 
-        $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_password.tpl.php', 'value.password.tpl.php', 'value.text.tpl.php'], ['type' => 'password', 'value' => '', 'script' => $this->getElement('script'), 'rules' => $rules]);
+        if ($this->needsOutput() && $this->isViewable()) {
+            if (!$this->isEditable()) {
+                $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_password-view.tpl.php', 'value.password-view.tpl.php', 'value.text-view.tpl.php', 'value.view.tpl.php', 'value.text.tpl.php'], ['value' => '***********']);
+            } else {
+                $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_password.tpl.php', 'value.password.tpl.php', 'value.text.tpl.php'], ['type' => 'password', 'value' => '', 'script' => $this->getElement('script'), 'rules' => $rules]);
+            }
+        }
     }
 
-    public function preAction()
+    public function preAction(): void
     {
         $password = '';
         $hashed_value = '';
@@ -54,12 +60,12 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
         $this->params['value_pool']['email'][$this->getName()] = $password;
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return 'ycom_auth_password -> Beispiel: ycom_auth_password|name|label|[password-rules-as-json]|message|[script 0/1]';
     }
 
-    public function getDefinitions()
+    public function getDefinitions(): array
     {
         return [
             'type' => 'value',

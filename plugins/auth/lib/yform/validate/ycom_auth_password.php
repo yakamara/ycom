@@ -21,7 +21,7 @@ class rex_yform_validate_ycom_auth_password extends rex_yform_validate_abstract
         }
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return 'ycom_auth_password -> validate|ycom_auth_password|pswfield|warning_message';
     }

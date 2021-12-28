@@ -12,7 +12,7 @@ class rex_yform_value_ycom_user_init extends rex_yform_value_abstract
         }
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return 'ycom_user_init -> Beispiel: ycom_user_init|[label]|[name]|error_msg';
     }

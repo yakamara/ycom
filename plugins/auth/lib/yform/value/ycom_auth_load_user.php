@@ -19,7 +19,7 @@ class rex_yform_value_ycom_auth_load_user extends rex_yform_value_abstract
         }
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return 'ycom_auth_load_user -> Beispiel: ycom_auth_load_user|label|opt:field1,field2,field3';
     }
