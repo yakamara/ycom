@@ -40,6 +40,7 @@ trait rex_yform_trait_value_auth_extern
             return $message;
         }
         if ($this->auth_directLink) {
+            rex_response::sendCacheControl();
             rex_response::sendRedirect(rex_getUrl(rex_config::get('ycom/auth', 'article_id_jump_not_ok')));
         }
         return '';
@@ -96,6 +97,7 @@ trait rex_yform_trait_value_auth_extern
         if (2 == $loginStatus) {
             // already logged in
             rex_ycom_user::updateUser($data);
+            rex_response::sendCacheControl();
             rex_response::sendRedirect($returnTo);
         }
 
@@ -132,6 +134,7 @@ trait rex_yform_trait_value_auth_extern
             return '';
         }
 
+        rex_response::sendCacheControl();
         rex_response::sendRedirect($returnTo);
 
         return '';
