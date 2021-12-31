@@ -8,6 +8,7 @@
 $type = $type ?? 'text';
 $class = 'text' == $type ? '' : 'form-' . $type . ' ';
 $script = $script ?? false;
+$rules = $rules ?? [];
 
 if (!isset($value)) {
     $value = $this->getValue();

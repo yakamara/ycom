@@ -44,11 +44,11 @@ class rex_ycom_auth
 
         // set redirect after Login
         if (2 == $login_status) {
-            if ($params['referer']) {
-                $params['redirect'] = urldecode($params['referer']);
-            } else {
-                $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_ok'));
-            }
+            // if ($params['referer']) {
+            //     $params['redirect'] = urldecode($params['referer']);
+            // } else {
+            $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_ok'));
+            // }
         }
 
         // Checking page permissions
@@ -86,10 +86,10 @@ class rex_ycom_auth
             $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_logout'), '', [], '&');
         }
 
-        if (4 == $login_status && '' == $params['redirect']) {
-            $status_params = [self::getRequestKey('auth_request_name') => $params['loginName'], 'returnTo' => $params['referer'], self::getRequestKey('auth_request_stay') => $params['loginStay']];
+        // if (4 == $login_status && '' == $params['redirect']) {
+            // $status_params = [self::getRequestKey('auth_request_name') => $params['loginName'], 'returnTo' => $params['referer'], self::getRequestKey('auth_request_stay') => $params['loginStay']];
             // $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_not_ok'), '', $status_params, '&');
-        }
+        // }
 
         $params['loginStatus'] = $login_status;
         $params = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_INIT', $params, []));
@@ -126,7 +126,11 @@ class rex_ycom_auth
 
         $filter = null;
         if (isset($params['filter']) && '' != $params['filter']) {
-            $filter = static function (rex_yform_manager_query $query) use ($params) {
+            /**
+             * @param rex_yform_manager_query<static> $query
+             * @return void
+             */
+            $filter = static function ($query) use ($params) {
                 if (is_array($params['filter'])) {
                     foreach ($params['filter'] as $filter) {
                         $query->whereRaw($filter);

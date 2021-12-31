@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @var rex_addon $this
+ * @psalm-scope-this rex_addon
+ */
+
 if (rex::isBackend()) {
     rex_extension::register('PACKAGES_INCLUDED', static function ($params) {
         $plugin = rex_plugin::get('yform', 'manager');

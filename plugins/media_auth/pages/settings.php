@@ -1,5 +1,7 @@
 <?php
 
+/** @var rex_addon $this */
+
 echo rex_view::title($this->i18n('ycom_title'));
 
 $table = rex_yform_manager_table::get('rex_ycom_user');

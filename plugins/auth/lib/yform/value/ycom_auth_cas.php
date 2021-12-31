@@ -25,6 +25,18 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
             throw new rex_exception('CAS Settings file not found ['.$casConfigPath.']');
         }
 
+        $settings = [];
+        $settings['debug'] = false;
+        $settings['debugPath'] = rex_path::log('ycom_auth_cas.log');
+        $settings['idp'] = [];
+        $settings['idp']['protocol'] = 'https://';
+        $settings['idp']['ServerVersion'] = '2.0';
+        $settings['idp']['host'] = '';
+        $settings['idp']['port'] = 443;
+        $settings['idp']['uri'] = '/cas';
+        $settings['idp']['CasServerValidation'] = false;
+        $settings['idp']['CasServerCACertPath'] = rex_addon::get('ycom')->getDataPath('cas_cert.pem');
+
         include $casConfigPath;
 
         $returnTos = [];

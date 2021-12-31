@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @psalm-internal rex_yform_manager_dataset
- * @psalm-internal rex_ycom_group
+ * @var rex_addon $this
+ * @psalm-scope-this rex_addon
  */
 
 rex_yform_manager_dataset::setModelClass('rex_ycom_group', rex_ycom_group::class);

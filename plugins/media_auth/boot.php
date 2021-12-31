@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @var rex_addon $this
+ * @psalm-scope-this rex_addon
+ */
+
 rex_extension::register(['MEDIA_IS_PERMITTED'], static function (rex_extension_point $ep) {
     $ycom_ignore = $ep->getParam('ycom_ignore');
     $subject = $ep->getSubject();
