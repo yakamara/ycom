@@ -1,7 +1,14 @@
 <?php
 
+/**
+ * @var rex_yform_value_abstract $this
+ * @psalm-scope-this rex_yform_value_abstract
+ */
+
 $type = $type ?? 'text';
 $class = 'text' == $type ? '' : 'form-' . $type . ' ';
+$script = $script ?? false;
+
 if (!isset($value)) {
     $value = $this->getValue();
 }

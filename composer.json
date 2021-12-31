@@ -1,14 +1,3 @@
 {
-    "name": "yakamara/redaxo_ycom",
-    "require-dev": {
-        "redaxo/source": "^5.8",
-        "yakamara/redaxo_yform": "dev-master"
-    },
-    "autoload-dev": {
-        "classmap": [
-            "lib/",
-            "plugins/",
-            "vendor/yakamara/"
-        ]
-    }
+    "name": "yakamara/redaxo_ycom"
 }

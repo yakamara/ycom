@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @var rex_addon $this
+ * @psalm-scope-this rex_addon
+ */
+
 rex_config::set('ycom/auth', 'auth_cookie_ttl', '14');
 rex_config::set('ycom/auth', 'auth_rule', 'login_try_5_pause');
 rex_config::set('ycom/auth', 'login_field', 'email');
@@ -47,4 +52,5 @@ try {
 }
 
 rex_delete_cache();
+
 rex_yform_manager_table::deleteCache();

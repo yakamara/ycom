@@ -3,7 +3,7 @@
 class rex_ycom_auth
 {
     public static $debug = false;
-    public static $me = null;
+    public static $me;
     public static $perms = [
         '0' => 'translate:ycom_perm_extends',
         '1' => 'translate:ycom_perm_only_logged_in',
@@ -42,7 +42,7 @@ class rex_ycom_auth
         $params['filter'] = ['status > 0'];
         $login_status = self::login($params);
 
-        //# set redirect after Login
+        // set redirect after Login
         if (2 == $login_status) {
             if ($params['referer']) {
                 $params['redirect'] = urldecode($params['referer']);
@@ -51,9 +51,7 @@ class rex_ycom_auth
             }
         }
 
-        /*
-         * Checking page permissions
-         */
+        // Checking page permissions
         $currentId = rex_article::getCurrentId();
         if ($article = rex_article::get($currentId)) {
             if (!$article->isPermitted() && !$params['redirect'] && rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied') != rex_article::getCurrentId()) {
@@ -105,8 +103,8 @@ class rex_ycom_auth
             } elseif (0 != $article_id_termsofuse && 1 != self::getUser()->getValue('termsofuse_accepted')) {
                 if ($article_id_termsofuse != rex_article::getCurrentId()) {
                     $params['redirect'] = rex_getUrl($article_id_termsofuse, '', [], '&');
-                }            dump($params);
-
+                }
+                dump($params);
             } elseif (0 != $article_id_password && 1 == self::getUser()->getValue('new_password_required')) {
                 if ($article_id_password != rex_article::getCurrentId()) {
                     $params['redirect'] = rex_getUrl($article_id_password, '', [], '&');
@@ -224,7 +222,7 @@ class rex_ycom_auth
 
                     $sessionKey = bin2hex(random_bytes(16));
                     $me->setValue('session_key', $sessionKey);
-                    self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_plugin::get('ycom','auth')->getConfig('auth_cookie_ttl', 14)));
+                    self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_plugin::get('ycom', 'auth')->getConfig('auth_cookie_ttl', 14)));
 
                     // session fixation
                     self::regenerateSessionId();

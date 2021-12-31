@@ -1,8 +1,11 @@
 <?php
 
-rex_yform_manager_table::deleteCache();
+/**
+ * @var rex_addon $this
+ * @psalm-scope-this rex_addon
+ */
 
-/** @var rex_addon $this */
+rex_yform_manager_table::deleteCache();
 
 $content = rex_file::get(rex_path::addon('ycom', 'install/tablesets/yform_user.json'));
 rex_yform_manager_table_api::importTablesets($content);

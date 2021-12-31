@@ -1,11 +1,9 @@
 <?php
 
-/**
- * Class rex_ycom_auth_rules.
- */
-
 class rex_ycom_auth_rules
 {
+    private $rules = [];
+
     public function __construct()
     {
         $this->rules = [];
@@ -51,7 +49,10 @@ class rex_ycom_auth_rules
         ];
     }
 
-    public function check(rex_ycom_user $user, $rule_name = 'login_try_5_pause')
+    /**
+     * @throws rex_exception
+     */
+    public function check(rex_ycom_user $user, string $rule_name = 'login_try_5_pause'): bool
     {
         if (!array_key_exists($rule_name, $this->rules)) {
             $rule_name = 'login_try_5_pause';
@@ -90,13 +91,12 @@ class rex_ycom_auth_rules
                     return false;
                 }
                 return true;
-                break;
             default:
                 throw new rex_exception(sprintf('Unknown auth_rule action key "%s".', $rule['action']));
         }
     }
 
-    public function getOptions()
+    public function getOptions(): array
     {
         $options = [];
 

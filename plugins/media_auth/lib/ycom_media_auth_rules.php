@@ -6,6 +6,8 @@
 
 class rex_ycom_media_auth_rules
 {
+    private $rules = [];
+
     public function __construct()
     {
         $this->rules = [];

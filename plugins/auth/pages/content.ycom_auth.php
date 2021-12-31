@@ -2,6 +2,8 @@
 
 $content = '';
 $addon = rex_addon::get('ycom');
+$params = $params ?? [];
+
 
 $article_id = $params['article_id'];
 $clang = $params['clang'];

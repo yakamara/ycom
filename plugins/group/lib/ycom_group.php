@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class rex_ycom_group extends \rex_yform_manager_dataset
 {
     public static $perms = [
