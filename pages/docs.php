@@ -1,28 +1,26 @@
 <?php
 
+/**
+ * @var rex_addon $this
+ * @psalm-scope-this rex_addon
+ */
+
 $mdFiles = [];
 foreach (glob(rex_addon::get('ycom')->getPath('docs').'/*.md') as $file) {
-    $mdFiles[substr(basename($file), 0, -3)] = $file;
+    $mdFiles[mb_substr(basename($file), 0, -3)] = $file;
 }
 
-$currenMDFile = rex_request('mdfile', 'string', 'intro');
+$currenMDFile = rex_request('mdfile', 'string', '01_intro');
 if (!array_key_exists($currenMDFile, $mdFiles)) {
-    $currenMDFile = 'intro';
+    $currenMDFile = '01_intro';
 }
 
 $page = \rex_be_controller::getPageObject('ycom/docs');
 
-uksort($mdFiles, function($a, $b) {
-    $titleA = rex_i18n::msg('ycom_docs_'.$a);
-    $titleB = rex_i18n::msg('ycom_docs_'.$b);
-    if ($titleA == $titleB) {
-        return 0;
-    }
-    return ($titleA < $titleB) ? -1 : 1;
-});
-
 foreach ($mdFiles as $key => $mdFile) {
-    $page->addSubpage((new rex_be_page($key, rex_i18n::msg('ycom_docs_'.$key)))
+    $keyWithoudPrio = mb_substr($key, 3);
+    $currenMDFileWithoudPrio = mb_substr($currenMDFile, 3);
+    $page->addSubpage((new rex_be_page($key, rex_i18n::msg('ycom_docs_'.$keyWithoudPrio)))
         ->setSubPath($mdFile)
         ->setHref('index.php?page=ycom/docs&mdfile='.$key)
         ->setIsActive($key == $currenMDFile)
@@ -31,15 +29,10 @@ foreach ($mdFiles as $key => $mdFile) {
 
 echo rex_view::title($this->i18n('ycom_title'));
 
-[$Toc, $Content] = rex_markdown::factory()->parseWithToc(rex_file::require($mdFiles[$currenMDFile]), 2, 3, false);
-
-preg_match_all('~<code class="language-php">(.*)<\/code>~Usm', $Content, $matches);
-
-foreach($matches[0] as $k => $match) {
-    $code = html_entity_decode($matches[1][$k]);
-    $code = highlight_string($code, true);
-    $Content = str_replace($matches[0][$k], $code, $Content);
-}
+[$Toc, $Content] = rex_markdown::factory()->parseWithToc(rex_file::require($mdFiles[$currenMDFile]), 2, 3, [
+    rex_markdown::SOFT_LINE_BREAKS => false,
+    rex_markdown::HIGHLIGHT_PHP => true,
+]);
 
 $fragment = new rex_fragment();
 $fragment->setVar('content', $Content, false);
@@ -47,7 +40,7 @@ $fragment->setVar('toc', $Toc, false);
 $content = $fragment->parse('core/page/docs.php');
 
 $fragment = new rex_fragment();
-// $fragment->setVar('title', rex_i18n::msg('package_help') . ' ' . $package->getPackageId(), false);
+// $fragment->setVar('title', rex_i18n::msg('package_help') . ' ', false);
 $fragment->setVar('body', $content, false);
 echo $fragment->parse('core/page/section.php');
 

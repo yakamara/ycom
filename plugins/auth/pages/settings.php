@@ -1,5 +1,7 @@
 <?php
 
+echo rex_view::title($this->i18n('ycom_title'));
+
 $info = '';
 $warning = '';
 $content = '';
