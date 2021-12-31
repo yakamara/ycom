@@ -391,13 +391,9 @@ class rex_ycom_auth
         rex_set_session(self::$sessionKey, $sessionVars);
     }
 
-    public static function getSessionVar($key, $varType = 'string', $default = '')
+    public static function getSessionVar($key, string $varType = 'string', $default = '')
     {
         $sessionVars = rex_session(self::$sessionKey, 'array', []);
-
-        if (!is_scalar($varType)) {
-            throw new InvalidArgumentException('Scalar expected for $needle in arrayKeyCast(), got '. gettype($varType) .'!');
-        }
 
         if (array_key_exists($key, $sessionVars)) {
             return rex_type::cast($sessionVars[$key], $varType);

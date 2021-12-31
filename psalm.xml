@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <psalm
-    errorLevel="5"
+    errorLevel="4"
     findUnusedPsalmSuppress="true"
     reportInfo="false"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -16,7 +16,6 @@
     </projectFiles>
     <forbiddenFunctions>
         <function name="dd"/>
-        <function name="dump"/>
     </forbiddenFunctions>
     <plugins>
         <pluginClass class="Redaxo\PsalmPlugin\Plugin" />

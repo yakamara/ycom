@@ -56,12 +56,15 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
             return '';
         }
 
+        /** @psalm-suppress TypeDoesNotContainType */
         if ($settings['debug']) {
             phpCAS::setVerbose(true);
             phpCAS::setDebug($settings['debugPath']);
         }
 
         phpCAS::client($settings['idp']['ServerVersion'], $settings['idp']['host'], $settings['idp']['port'], $settings['idp']['uri'], false);
+
+        /** @psalm-suppress RedundantCondition */
         if (!$settings['idp']['CasServerValidation']) {
             phpCAS::setNoCasServerValidation();
         } else {
