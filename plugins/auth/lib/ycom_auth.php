@@ -157,7 +157,7 @@ class rex_ycom_auth
             if (!empty($params['loginName'])) {
                 $userQuery =
                     rex_ycom_user::query()
-                        ->where(rex_config::get('ycom/auth', 'login_field', 'email'), $params['loginName']);
+                        ->where(rex_config::get('ycom/auth', 'login_field', 'email') ?? 'email', $params['loginName']);
 
                 if ($filter) {
                     $filter($userQuery);
@@ -171,7 +171,7 @@ class rex_ycom_auth
 
                     $auth_rules = new rex_ycom_auth_rules();
 
-                    if (!$auth_rules->check($user, rex_config::get('ycom/auth', 'auth_rule', 'login_try_5_pause'))) {
+                    if (!$auth_rules->check($user, rex_config::get('ycom/auth', 'auth_rule', 'login_try_5_pause') ?? 'login_try_5_pause')) {
                     } elseif ((@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->getId()))) {
                         $me = $user;
                         $me->setValue('login_tries', 0);

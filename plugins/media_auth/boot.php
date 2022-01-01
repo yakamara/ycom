@@ -58,6 +58,9 @@ rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'ME
 
     $group = rex_plugin::get('ycom', 'group')->isAvailable();
 
+    $ycom_group_default = '';
+    $ycom_groups_default = '';
+
     if ($group) {
         $ycom_group_default = rex_request($prefix.'group_type', 'string');
         if (!array_key_exists($ycom_group_default, rex_ycom_group::$perms)) {

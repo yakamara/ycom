@@ -8,7 +8,9 @@
 rex_yform_manager_table::deleteCache();
 
 $content = rex_file::get(rex_path::addon('ycom', 'install/tablesets/yform_user.json'));
-rex_yform_manager_table_api::importTablesets($content);
+if ($content) {
+    rex_yform_manager_table_api::importTablesets($content);
+}
 
 // old plugin docs still exists ? -> delete
 $pluginDocs = __DIR__.'/plugins/docs';

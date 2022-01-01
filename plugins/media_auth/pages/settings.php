@@ -5,7 +5,11 @@
 echo rex_view::title($this->i18n('ycom_title'));
 
 $table = rex_yform_manager_table::get('rex_ycom_user');
-$xform_user_fields = $table->getValueFields();
+if ($table) {
+    $xform_user_fields = $table->getValueFields();
+} else {
+    throw new rex_exception('table `rex_ycom_user` not found');
+}
 
 /**
  * @var rex_package $this

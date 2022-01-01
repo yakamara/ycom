@@ -29,6 +29,7 @@ if (count($notice) > 0) {
 
 $class_group = trim('form-group yform-element ' . $this->getWarningClass());
 
+$class_label = [];
 $class_label[] = 'control-label';
 
 $attributes = [

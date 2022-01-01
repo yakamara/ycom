@@ -25,7 +25,7 @@ class rex_yform_validate_ycom_auth extends rex_yform_validate_abstract
             }
         }
 
-        if ('' == $loginObject->getValue() || '' == $passwordObject->getValue()) {
+        if (!$loginObject || !$passwordObject || '' == $loginObject->getValue() || '' == $passwordObject->getValue()) {
             foreach ($warningObjects as $warningObject) {
                 $this->params['warning'][$warningObject->getId()] = $this->params['error_class'];
                 $this->params['warning_messages'][$warningObject->getId()] = $this->getElement(5);
@@ -44,8 +44,8 @@ class rex_yform_validate_ycom_auth extends rex_yform_validate_abstract
         */
 
         $params = [];
-        $params['loginName'] = ($loginObject) ? $loginObject->getValue() : '';
-        $params['loginPassword'] = ($passwordObject) ? $passwordObject->getValue() : '';
+        $params['loginName'] = $loginObject->getValue();
+        $params['loginPassword'] = $passwordObject->getValue();
         $params['loginStay'] = ($stayObject) ? $stayObject->getValue() : false;
 
         $status = rex_ycom_auth::login($params);

@@ -13,7 +13,8 @@ rex_config::set('ycom/auth', 'login_field', 'email');
 $articleAuthTypeWasEnum = false;
 $articleTable = rex_sql_table::get(rex::getTable('article'));
 if ($articleTable->hasColumn('ycom_auth_type')) {
-    if ('enum' == substr($articleTable->getColumn('ycom_auth_type')->getType(),0,4)) {
+    $Column = $articleTable->getColumn('ycom_auth_type');
+    if ($Column && 'enum' == substr($Column->getType(), 0, 4)) {
         $articleAuthTypeWasEnum = true;
     }
 }

@@ -13,6 +13,7 @@ class rex_yform_value_ycom_auth_returnto extends rex_yform_value_abstract
     {
         $returnTo = $this->getValue();
 
+        $returnTos = [];
         $returnTos[] = (string) $returnTo;
         $returnTos[] = rex_request('returnTo', 'string', '');
         $returnTos[] = $this->getElement(3);

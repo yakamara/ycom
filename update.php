@@ -5,8 +5,7 @@
  * @psalm-scope-this rex_addon
  */
 
-$content = rex_file::get(rex_path::addon('ycom', 'install/tablesets/yform_user.json'));
-rex_yform_manager_table_api::importTablesets($content);
+$this->includeFile(__DIR__.'/install.php');
 
 foreach ($this->getInstalledPlugins() as $plugin) {
     // use path relative to __DIR__ to get correct path in update temp dir
@@ -16,6 +15,3 @@ foreach ($this->getInstalledPlugins() as $plugin) {
         $plugin->includeFile($file);
     }
 }
-
-rex_delete_cache();
-rex_yform_manager_table::deleteCache();

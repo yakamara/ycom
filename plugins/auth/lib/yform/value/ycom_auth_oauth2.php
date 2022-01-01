@@ -71,7 +71,9 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
                         return '';
                     }
 
+                    $accessToken = null;
                     try {
+                        /** @var \League\OAuth2\Client\Token\AccessToken $accessToken */
                         $accessToken = $provider->getAccessToken('authorization_code', [
                             'code' => $code,
                         ]);

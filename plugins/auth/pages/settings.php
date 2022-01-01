@@ -88,7 +88,7 @@ $content .= '
 				<label for="rex-form-article_login_ok">'.$this->i18n('ycom_auth_config_id_jump_ok').' <small>[article_id_jump_ok]</small></label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(5, 'article_id_jump_ok', stripslashes($this->getConfig('article_id_jump_ok'))) .'
+				'. rex_var_link::getWidget(5, 'article_id_jump_ok', $this->getConfig('article_id_jump_ok')) .'
 			</div>
 		</div>
 
@@ -97,7 +97,7 @@ $content .= '
 				<label for="rex-form-article_logout">'.$this->i18n('ycom_auth_config_id_jump_logout').' <small>[article_id_jump_logout]</small></label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(7, 'article_id_jump_logout', stripslashes($this->getConfig('article_id_jump_logout'))) .'
+				'. rex_var_link::getWidget(7, 'article_id_jump_logout', $this->getConfig('article_id_jump_logout')) .'
 			</div>
 		</div>
 
@@ -109,7 +109,7 @@ $content .= '
 				<small><br />'.$this->i18n('ycom_auth_config_id_jump_denied_notice').'</small>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(8, 'article_id_jump_denied', stripslashes($this->getConfig('article_id_jump_denied'))) .'
+				'. rex_var_link::getWidget(8, 'article_id_jump_denied', $this->getConfig('article_id_jump_denied')) .'
 			</div>
 		</div>
 
@@ -118,7 +118,7 @@ $content .= '
 				<label for="rex-form-article_password">'.$this->i18n('ycom_auth_config_id_jump_password').' <small>[article_id_jump_password]</small></label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(9, 'article_id_jump_password', stripslashes($this->getConfig('article_id_jump_password'))) .'
+				'. rex_var_link::getWidget(9, 'article_id_jump_password', $this->getConfig('article_id_jump_password')) .'
 			</div>
 		</div>
 
@@ -127,7 +127,7 @@ $content .= '
 				<label for="rex-form-article_termsofuse">'.$this->i18n('ycom_auth_config_id_jump_termsofuse').' <small>[article_id_jump_termsofuse]</small></label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(10, 'article_id_jump_termsofuse', stripslashes($this->getConfig('article_id_jump_termsofuse'))) .'
+				'. rex_var_link::getWidget(10, 'article_id_jump_termsofuse', $this->getConfig('article_id_jump_termsofuse')) .'
 			</div>
 		</div>
 
@@ -141,7 +141,7 @@ $content .= '
 				<label for="rex-form-article_login">'.$this->i18n('ycom_auth_config_id_login').' <small>[article_id_login]</small></label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(11, 'article_id_login', stripslashes($this->getConfig('article_id_login'))) .'
+				'. rex_var_link::getWidget(11, 'article_id_login', stripslashes($this->getConfig('article_id_login') ?? '')) .'
 			</div>
 		</div>
 
@@ -150,7 +150,7 @@ $content .= '
 				<label for="rex-form-article_login">'.$this->i18n('ycom_auth_config_id_logout').' <small>[article_id_logout]</small></label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(12, 'article_id_logout', stripslashes($this->getConfig('article_id_logout'))) .'
+				'. rex_var_link::getWidget(12, 'article_id_logout', $this->getConfig('article_id_logout')) .'
 			</div>
 		</div>
 
@@ -160,7 +160,7 @@ $content .= '
 				<label for="rex-form-article_register">'.$this->i18n('ycom_auth_config_id_register').' <small>[article_id_register]</small></label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(13, 'article_id_register', stripslashes($this->getConfig('article_id_register'))) .'
+				'. rex_var_link::getWidget(13, 'article_id_register', $this->getConfig('article_id_register')) .'
 			</div>
 		</div>
 
@@ -169,7 +169,7 @@ $content .= '
 				<label for="rex-form-article_password">'.$this->i18n('ycom_auth_config_id_password').' <small>[article_id_password]</small></label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(14, 'article_id_password', stripslashes($this->getConfig('article_id_password'))) .'
+				'. rex_var_link::getWidget(14, 'article_id_password', $this->getConfig('article_id_password')) .'
 			</div>
 		</div>
 
@@ -219,7 +219,7 @@ $content .= '
 				<label for="rex-form-article_login_failed">'.$this->i18n('ycom_auth_config_id_jump_not_ok').' <small>[article_id_jump_not_ok]</small></label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				'. rex_var_link::getWidget(6, 'article_id_jump_not_ok', stripslashes($this->getConfig('article_id_jump_not_ok'))) .'
+				'. rex_var_link::getWidget(6, 'article_id_jump_not_ok', $this->getConfig('article_id_jump_not_ok', '')) .'
 			</div>
 		</div>
 
