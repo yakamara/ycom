@@ -104,7 +104,6 @@ class rex_ycom_auth
                 if ($article_id_termsofuse != rex_article::getCurrentId()) {
                     $params['redirect'] = rex_getUrl($article_id_termsofuse, '', [], '&');
                 }
-                dump($params);
             } elseif (0 != $article_id_password && 1 == self::getUser()->getValue('new_password_required')) {
                 if ($article_id_password != rex_article::getCurrentId()) {
                     $params['redirect'] = rex_getUrl($article_id_password, '', [], '&');
