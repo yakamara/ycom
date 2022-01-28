@@ -4,7 +4,7 @@ Die Einstellungsseite befindet sich im REDAXO-Backend unter `YCom` > `Einstellun
 
 > Hinweis: Nicht alle hier getätigen Einstellungen funktionieren von Haus aus und erfordern ggf. noch weitere Einstellungen in der Struktur, Tempaltes, Modulen oder E-Mail-Tempaltes.
 
-Weiteleitungen          | Erläuterung
+Weiterleitungen          | Erläuterung
 ----------------------- | ------------
 article_id_jump_ok      | Ziel-Artikel, zu dem weitergeleitet wird, wenn der Login erfolgreich war.
 article_id_jump_not_ok  | Ziel-Artikel, zu dem weitergeleitet wird, wenn der Login fehlgeschlagen ist. Dies kann auch der Login-Artikel sein. (nur für SAML-Authentifizierung)
