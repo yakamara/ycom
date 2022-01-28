@@ -10,8 +10,8 @@
 
     "autoload-dev": {
         "classmap": [
-            "lib/",
-            "plugins/"
+            "../lib/",
+            "../plugins/"
         ]
     }
 }
