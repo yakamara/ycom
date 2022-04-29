@@ -1,6 +1,18 @@
 Changelog
 =========
 
+Version 4.0.7 - 23.04.2022
+--------------------------
+
+### Bugfixes und kleinere Anpassungen
+
+* Missing return types ergönzt - YForm 4.x
+* Allgemeine Anpassungen zu YForm 4.x - select, choice, password, groups
+* REDAXO 5.13 mindestens nötig
+* Cache Cpntroll nun bei jedem Redirect
+* phstan entfernt -> psalm
+
+
 Version 4.0.6 - 02.09.2021
 --------------------------
 
