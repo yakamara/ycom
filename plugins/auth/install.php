@@ -5,9 +5,16 @@
  * @psalm-scope-this rex_addon
  */
 
-rex_config::set('ycom/auth', 'auth_cookie_ttl', '14');
-rex_config::set('ycom/auth', 'auth_rule', 'login_try_5_pause');
-rex_config::set('ycom/auth', 'login_field', 'email');
+// Set default settings
+if(!rex_config::has('ycom/auth', 'auth_cookie_ttl')) {
+    rex_config::set('ycom/auth', 'auth_cookie_ttl', '14');
+}
+if(!rex_config::has('ycom/auth', 'auth_rule')) {
+    rex_config::set('ycom/auth', 'auth_rule', 'login_try_5_pause');
+}
+if(!rex_config::has('ycom/auth', 'login_field')) {
+    rex_config::set('ycom/auth', 'login_field', 'email');
+}
 
 // Update from Version < 4
 $articleAuthTypeWasEnum = false;
