@@ -10,3 +10,8 @@ page:
     hidden: false
     subpages:
         settings: { title: 'translate:ycom_auth_settings'}
+
+default_config:
+    auth_cookie_ttl: '14'
+    auth_rule: 'login_try_5_pause'
+    login_field: 'email'
