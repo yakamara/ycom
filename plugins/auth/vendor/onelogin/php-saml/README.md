@@ -10,6 +10,8 @@ and supported by OneLogin Inc.
 Warning
 -------
 
+Version 3.4.0 introduces the 'rejectUnsolicitedResponsesWithInResponseTo' setting parameter, by default disabled, that will allow invalidate unsolicited SAMLResponse. This version as well will reject SAMLResponse if requestId was provided to the validator but the SAMLResponse does not contain a InResponseTo attribute. And an additional setting parameter 'destinationStrictlyMatches', by default disabled, that will force that the Destination URL should strictly match to the address that process the SAMLResponse.
+
 Version 3.3.1 updates xmlseclibs to 3.0.4 (CVE-2019-3465), but php-saml was not directly affected since it implements additional checks that prevent to exploit that vulnerability.
 
 Version 3.3.0 sets strict mode active by default
@@ -88,7 +90,13 @@ Installation
 
 ### Code ###
 
-#### Option 1. Download from github ####
+#### Option 1. clone the repository from  github ####
+
+git clone git@github.com:onelogin/php-saml.git
+
+Then pull the 3.X.X branch/tag
+
+#### Option 2. Download from github ####
 
 The toolkit is hosted on github. You can download it from:
 
@@ -100,7 +108,10 @@ Copy the core of the library inside the php application. (each application has i
 structure so take your time to locate the PHP SAML toolkit in the best place).
 See the "Guide to add SAML support to my app" to know how.
 
-#### Option 2. Composer ####
+Take in mind that the compressed file only contains the main files.
+If you plan to play with the demos, use the Option 1.
+
+#### Option 3. Composer ####
 
 The toolkit supports [composer](https://getcomposer.org/). You can find the `onelogin/php-saml` package at https://packagist.org/packages/onelogin/php-saml
 
@@ -461,7 +472,7 @@ $advancedSettings = array(
         // Set to false and no AuthContext will be sent in the AuthNRequest.
         // Set true or don't present this parameter and you will get an AuthContext 'exact' 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport'.
         // Set an array with the possible auth context values: array('urn:oasis:names:tc:SAML:2.0:ac:classes:Password', 'urn:oasis:names:tc:SAML:2.0:ac:classes:X509').
-        'requestedAuthnContext' => true,
+        'requestedAuthnContext' => false,
 
         // Indicates if the SP will validate all received xmls.
         // (In order to validate the xml, 'strict' and 'wantXMLValidation' must be true).
@@ -470,6 +481,20 @@ $advancedSettings = array(
         // If true, SAMLResponses with an empty value at its Destination
         // attribute will not be rejected for this fact.
         'relaxDestinationValidation' => false,
+
+        // If true, Destination URL should strictly match to the address to
+        // which the response has been sent.
+        // Notice that if 'relaxDestinationValidation' is true an empty Destintation
+        // will be accepted.
+        'destinationStrictlyMatches' => false,
+
+        // If true, the toolkit will not raised an error when the Statement Element
+        // contain atribute elements with name duplicated
+        'allowRepeatAttributeName' => false,
+
+        // If true, SAMLResponses with an InResponseTo value will be rejectd if not
+        // AuthNRequest ID provided to the validation method.
+        'rejectUnsolicitedResponsesWithInResponseTo' => false,
 
         // Algorithm that the toolkit will use on signing process. Options:
         //    'http://www.w3.org/2000/09/xmldsig#rsa-sha1'
@@ -487,6 +512,17 @@ $advancedSettings = array(
         //    'http://www.w3.org/2001/04/xmlenc#sha512'
         // Notice that sha1 is a deprecated algorithm and should not be used
         'digestAlgorithm' => 'http://www.w3.org/2001/04/xmlenc#sha256',
+
+        // Algorithm that the toolkit will use for encryption process. Options:
+        // 'http://www.w3.org/2001/04/xmlenc#tripledes-cbc'
+        // 'http://www.w3.org/2001/04/xmlenc#aes128-cbc'
+        // 'http://www.w3.org/2001/04/xmlenc#aes192-cbc'
+        // 'http://www.w3.org/2001/04/xmlenc#aes256-cbc'
+        // 'http://www.w3.org/2009/xmlenc11#aes128-gcm'
+        // 'http://www.w3.org/2009/xmlenc11#aes192-gcm'
+        // 'http://www.w3.org/2009/xmlenc11#aes256-gcm';
+        // Notice that aes-cbc are not consider secure anymore so should not be used
+        'encryption_algorithm' => 'http://www.w3.org/2009/xmlenc11#aes128-gcm',
 
         // ADFS URL-Encodes SAML data as lowercase, and the toolkit by default uses
         // uppercase. Turn it True for ADFS compatibility on signature verification
@@ -1181,7 +1217,7 @@ Main class of OneLogin PHP Toolkit
  * `getNameId` - Returns the nameID
  * `getNameIdFormat` - Gets the NameID Format provided by the SAML response from the IdP.
  * `getNameIdNameQualifier` - Gets the NameID NameQualifier provided from the SAML Response String.
- * `getNameIdNameSPQualifier` - Gets the NameID SP NameQualifier provided from the SAML Response String.
+ * `getNameIdSPNameQualifier` - Gets the NameID SP NameQualifier provided from the SAML Response String.
  * `getSessionIndex` - Gets the SessionIndex from the AuthnStatement.
  * `getErrors` - Returns if there were any error
  * `getSSOurl` - Gets the SSO url.
@@ -1219,7 +1255,7 @@ SAML 2 Authentication Response class
  * `getNameId` - Gets the NameID provided by the SAML response from the IdP.
  * `getNameIdFormat` - Gets the NameID Format provided by the SAML response from the IdP.
  * `getNameIdNameQualifier` - Gets the NameID NameQualifier provided from the SAML Response String.
- * `getNameIdNameSPQualifier` - Gets the NameID SP NameQualifier provided from the SAML Response String.
+ * `getNameIdSPNameQualifier` - Gets the NameID SP NameQualifier provided from the SAML Response String.
  * `getSessionNotOnOrAfter` - Gets the SessionNotOnOrAfter from the
    AuthnStatement
  * `getSessionIndex` - Gets the SessionIndex from the AuthnStatement.
