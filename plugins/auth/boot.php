@@ -5,7 +5,6 @@
  * @psalm-scope-this rex_addon
  */
 
-include __DIR__.'/vendor/guzzlehttp/psr7/src/functions_include.php';
 include __DIR__.'/vendor/guzzlehttp/promises/src/functions_include.php';
 include __DIR__.'/vendor/guzzlehttp/guzzle/src/functions_include.php';
 
