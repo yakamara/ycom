@@ -4,7 +4,7 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
 {
     public function enterObject()
     {
-        $rules = json_decode($this->getElement('rules'), true);
+        $rules = (is_array($this->getElement('rules')) ? $this->getElement('rules') : json_decode($this->getElement('rules'), true));
         if (!$rules || 0 == count($rules)) {
             $rules = json_decode(rex_yform_validate_password_policy::PASSWORD_POLICY_DEFAULT_RULES, true);
         }
