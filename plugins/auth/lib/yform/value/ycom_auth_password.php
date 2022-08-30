@@ -62,7 +62,7 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
 
     public function getDescription(): string
     {
-        return 'ycom_auth_password -> Beispiel: ycom_auth_password|name|label|[password-rules-as-json]|message|[script 0/1]';
+        return 'ycom_auth_password -> Beispiel: ycom_auth_password|name|label|[password-rules-as-json]|message|[script 0/1]|[attributes]|[notice]';
     }
 
     public function getDefinitions(): array
@@ -76,6 +76,8 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
                 'rules' => ['type' => 'text', 'label' => rex_i18n::msg('ycom_validate_password_policy_rules'), 'notice' => rex_i18n::msg('yform_validate_password_policy_rules_notice', rex_yform_validate_password_policy::PASSWORD_POLICY_DEFAULT_RULES)],
                 'message' => ['type' => 'text', 'label' => rex_i18n::msg('ycom_validate_password_policy_rules_error_message')],
                 'script' => ['type' => 'checkbox', 'label' => rex_i18n::msg('ycom_validate_password_policy_rules_script')],
+                'attributes' => ['type' => 'text',    'label' => rex_i18n::msg('ycom_validate_password_attributes'), 'notice' => rex_i18n::msg('ycom_validate_password_attributes_notice')],
+                'notice' => ['type' => 'text',    'label' => rex_i18n::msg('ycom_validate_password_notice')],
             ],
             'description' => 'Erzeugt den Hash-Wert des Passwortes',
             'dbtype' => 'varchar(255)',

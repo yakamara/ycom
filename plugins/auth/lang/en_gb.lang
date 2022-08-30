@@ -56,6 +56,10 @@ ycom_validate_password_policy_rules_error_message = Error message
 
 ycom_validate_password_policy_rules_script = Activate PasswordCreator
 
+ycom_validate_password_notice = Notice
+ycom_validate_password_attributes = Individual attributes
+ycom_validate_password_attributes_notice = Please enter in JSON format. Ex. {"readonly":"readonly","placeholder":"My placeholder"}
+
 ycom_auth_config_pages = General pages
 ycom_auth_config_id_login = Login page
 ycom_auth_config_id_logout = Logout page

@@ -56,6 +56,10 @@ ycom_validate_password_policy_rules_error_message = Felmeddelande
 
 ycom_validate_password_policy_rules_script = Aktivera Password Creator
 
+ycom_validate_password_notice = Notis
+ycom_validate_password_attributes = Individuella attribut
+ycom_validate_password_attributes_notice = Var god skriv i JSON format.  T.ex. {"readonly":"readonly","placeholder":"My placeholder"}
+
 ycom_auth_config_pages = Allmänna sidor
 ycom_auth_config_id_login = Login sida
 ycom_auth_config_id_logout = Logout-sida
