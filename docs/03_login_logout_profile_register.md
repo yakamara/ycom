@@ -95,7 +95,7 @@ hidden|status|0
 fieldset|label|Login-Daten:
 
 text|email|E-Mail*|
-text|email_2|E-Mail bestätigen*|
+text|email_2|E-Mail bestätigen*||no_db
 
 text|firstname|Vorname*
 validate|empty|firstname|Bitte geben Sie Ihren Vornamen ein.
