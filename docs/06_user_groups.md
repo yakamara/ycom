@@ -68,6 +68,39 @@ if($ycom_user) {
 
 > Hinweis: Die Felder lassen sich über den Table Manager in YForm um eigene Felder erweitern.
 
+**Alle YCom-Gruppen auslesen**
+
+```php
+<?php
+
+$ycom_groups = rex_ycom_group::getGroups();
+    foreach($ycom_groups as $ycom_group) {
+        # dump($ycom_group);
+        $ycom_group->getValue("name"); // Name der Gruppe
+    }
+}
+
+?>
+```
+
+
+**Alle Nutzer einer YCom-Gruppe**
+
+```php
+<?php
+
+$ycom_users = rex_ycom_group::get($id)->getRelatedCollection('ycom_groups');
+
+foreach($ycom_users as $ycom_user) {
+        # dump($ycom_user);
+        echo $ycom_user->getValue('firstname');         // Vorname
+        echo $ycom_user->getValue('name');              // Nachname
+    }
+}
+
+?>
+```
+
 **Berechtigung eines Users an einer Kategorie an einem Artikel auslesen.:**
 
 ```php
