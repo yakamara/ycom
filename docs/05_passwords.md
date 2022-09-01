@@ -141,8 +141,8 @@ action|db_query|update rex_ycom_user set activation_key = ? where email = ?|acti
 Da man durch das Modul gleich eingeloggt wird, kann es sinnvoll sein im Anschluss gleich einen Redirect auszuführen, damit ggf. der Login Status im Menü aktualisiert wird:
 
 ```php
-// bei pw_change_article_id die Id der Passwort-ändern-Seite eintragen
-action|redirect|pw_change_article_id
+// Anstelle der `0` die ID des Passwort-ändern-Artikels eintragen (article_id_jump_password)
+action|redirect|0
 ```
 
 ## Passwortregeln
