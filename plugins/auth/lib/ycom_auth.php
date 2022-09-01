@@ -512,9 +512,17 @@ class rex_ycom_auth
     {
         $returnTosWithDomains = [];
         foreach ($returnTos as $returnTo) {
-            if ('' != $returnTo) {
-                if (!preg_match('/http(s?)\:\/\//i', $returnTo)) {
-                    $returnTo = rex_yrewrite::getFullPath(('/' == substr($returnTo, 0, 1) ? substr($returnTo, 1) : $returnTo));
+            if ("" != $returnTo) {
+                if (!preg_match("/http(s?)\:\/\//i", $returnTo)) {
+                    $frontendUrl = rex_url::frontend();
+                    if (strpos($returnTo, $frontendUrl) !== false) {
+                        $returnTo = str_replace($frontendUrl, "/", $returnTo);
+                    }
+                    $returnTo = rex_yrewrite::getFullPath(
+                        "/" == substr($returnTo, 0, 1)
+                            ? substr($returnTo, 1)
+                            : $returnTo
+                    );
                 }
                 $returnTosWithDomains[] = $returnTo;
             }
