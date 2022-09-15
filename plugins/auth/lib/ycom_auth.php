@@ -415,11 +415,7 @@ class rex_ycom_auth
     public static function setCookieVar($key, $value, $time = null)
     {
         $sessionConfig = rex::getProperty('session', []);
-
-        if (!$time) {
-            $time = time() + 3600;
-        }
-        setcookie($key, $value, $time, '/', $sessionConfig['frontend']['cookie']['domain']); // $sessionConfig['frontend']['cookie']['path']
+        setcookie($key, $value ?? '', $time ?? (time() + 3600), '/', $sessionConfig['frontend']['cookie']['domain'] ?? ''); // $sessionConfig['frontend']['cookie']['path']
         $_COOKIE[$key] = $value;
     }
 
