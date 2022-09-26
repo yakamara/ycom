@@ -2,25 +2,31 @@
 
 class rex_ycom
 {
-    public static $tables = [];
+    /**
+     * @var array<string>
+     */
+    public static array $tables = [];
 
-    public static function addTable($table_name)
+    public static function addTable(string $table_name): void
     {
         self::$tables[] = $table_name;
     }
 
-    public static function getTables()
+    /**
+     * @return string[]
+     */
+    public static function getTables(): array
     {
         return self::$tables;
     }
 
-    public static function parseText($text)
+    public static function parseText(string $text): string
     {
         $text = nl2br(trim($text));
         return '<p>' . $text . '</p>';
     }
 
-    public static function cut($text, $size = 15, $t = ' (...) ')
+    public static function cut(string $text, int $size = 15, string $t = ' (...) '): string
     {
         $s = strlen($text);
         if ($s > $size) {

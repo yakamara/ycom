@@ -11,10 +11,13 @@
 
 class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 {
-    private static $requestAuthFunctions = ['auth', 'logout'];
-    private $casFile = 'cas.php';
+    /**
+     * @var array|string[]
+     */
+    private static array $requestAuthFunctions = ['auth', 'logout'];
+    private string $casFile = 'cas.php';
 
-    public function enterObject()
+    public function enterObject(): void
     {
         if (PHP_SESSION_ACTIVE !== session_status()) {
             session_start();
@@ -53,7 +56,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
             ]);
         }
         if (!in_array($requestAuthFunctions, self::$requestAuthFunctions, true) || 'cas' != $requestAuthMode) {
-            return '';
+            return;
         }
 
         /** @psalm-suppress TypeDoesNotContainType */
@@ -89,7 +92,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 
         if (empty($email)) {
             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_login_failed }}';
-            return null;
+            return;
         }
 
         // ----- create, get user
@@ -124,7 +127,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         $user = \rex_ycom_user::query()->where('email', $data['email'])->findOne();
         if ($user) {
             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_login_failed }}';
-            return '';
+            return;
         }
 
         $user = rex_ycom_user::createUserByEmail($data);
@@ -133,7 +136,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
                 dump($user->getMessages());
             }
             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_create_user }}';
-            return '';
+            return;
         }
 
         $params = [];
@@ -147,11 +150,11 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
                 dump($user);
             }
             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_login_created_user }}';
-            return '';
+            return;
         }
 
         rex_response::sendCacheControl();
-        \rex_response::sendRedirect($returnTo);
+        rex_response::sendRedirect($returnTo);
     }
 
     public function getDescription(): string
@@ -159,8 +162,4 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         return 'ycom_auth_cas|label|error_msg|[allowed returnTo domains: DomainA,DomainB]|[default Userdata as Json{"ycom_groups": 3, "termsofuse_accepted": 1}]';
     }
 
-    public static function auth_cas_clearUserSession()
-    {
-        // rex_ycom_auth::unsetSessionVar('SAML_Userdata');
-    }
 }

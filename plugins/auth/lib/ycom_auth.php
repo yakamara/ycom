@@ -2,26 +2,37 @@
 
 class rex_ycom_auth
 {
-    public static $debug = false;
-    public static $me = null;
+    public static bool $debug = false;
+    /**
+     * @var rex_ycom_user|null
+     */
+    public static $me;
+
+    /**
+     * @var array<string, string>
+     */
     public static $perms = [
         '0' => 'translate:ycom_perm_extends',
         '1' => 'translate:ycom_perm_only_logged_in',
         '2' => 'translate:ycom_perm_only_not_logged_in',
         '3' => 'translate:ycom_perm_all',
     ];
+
+    /**
+     * @var array<string, string>
+     */
     public static $DefaultRequestKeys = [
         'auth_request_stay' => 'rex_ycom_auth_stay',
         //         'auth_request_id' => 'rex_ycom_auth_id',
     ];
-    public static $sessionKey = 'rex_ycom';
+    public static string $sessionKey = 'rex_ycom';
 
-    public static function getRequestKey($requestKey)
+    public static function getRequestKey(string $requestKey): string
     {
         return rex_config::get('ycom', $requestKey, self::$DefaultRequestKeys[$requestKey]);
     }
 
-    public static function init()
+    public static function init(): string
     {
         $params = [];
         // $params['loginStay'] = rex_request(self::getRequestKey('auth_request_stay'), 'string');
@@ -30,7 +41,7 @@ class rex_ycom_auth
 
         $params['redirect'] = '';
 
-        //# Check for Login / Logout
+        // # Check for Login / Logout
         /*
           login_status
           0: not logged in
@@ -87,8 +98,8 @@ class rex_ycom_auth
         }
 
         // if (4 == $login_status && '' == $params['redirect']) {
-            // $status_params = [self::getRequestKey('auth_request_name') => $params['loginName'], 'returnTo' => $params['referer'], self::getRequestKey('auth_request_stay') => $params['loginStay']];
-            // $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_not_ok'), '', $status_params, '&');
+        // $status_params = [self::getRequestKey('auth_request_name') => $params['loginName'], 'returnTo' => $params['referer'], self::getRequestKey('auth_request_stay') => $params['loginStay']];
+        // $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_not_ok'), '', $status_params, '&');
         // }
 
         $params['loginStatus'] = $login_status;
@@ -114,7 +125,7 @@ class rex_ycom_auth
         return $params['redirect'];
     }
 
-    public static function login($params)
+    public static function login(array $params): int
     {
         rex_login::startSession();
 
@@ -129,7 +140,7 @@ class rex_ycom_auth
              * @param rex_yform_manager_query<static> $query
              * @return void
              */
-            $filter = static function ($query) use ($params) {
+            $filter = static function (rex_yform_manager_query $query) use ($params): void {
                 if (is_array($params['filter'])) {
                     foreach ($params['filter'] as $filter) {
                         $query->whereRaw($filter);
@@ -145,7 +156,7 @@ class rex_ycom_auth
         }
 
         if (self::getCookieVar(self::$sessionKey, 'string', null)) {
-            $sessionKey = self::getCookieVar(self::$sessionKey, 'string');
+            $sessionKey = self::getCookieVar(self::$sessionKey);
         }
 
         if (
@@ -171,7 +182,7 @@ class rex_ycom_auth
                     $auth_rules = new rex_ycom_auth_rules();
 
                     if (!$auth_rules->check($user, rex_config::get('ycom/auth', 'auth_rule', 'login_try_5_pause') ?? 'login_try_5_pause')) {
-                    } elseif ((@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->getId()))) {
+                    } elseif (@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->getId())) {
                         $me = $user;
                         $me->setValue('login_tries', 0);
                         if (isset($params['loginStay']) && !$params['loginStay']) {
@@ -275,7 +286,12 @@ class rex_ycom_auth
         return $loginStatus;
     }
 
-    public static function checkPassword($password, $user_id)
+    /**
+     * @param string $password
+     * @param string|int $user_id
+     * @return bool
+     */
+    public static function checkPassword(string $password, $user_id): bool
     {
         if ('' == trim($password)) {
             return false;
@@ -291,13 +307,16 @@ class rex_ycom_auth
         return false;
     }
 
-    public static function setUser($me)
+    public static function setUser(rex_ycom_user $me): void
     {
         \rex_login::startSession();
-        self::setSessionVar(self::$sessionKey, $me->id);
+        self::setSessionVar(self::$sessionKey, $me->getId());
         self::$me = $me;
     }
 
+    /**
+     * @return null|rex_ycom_user
+     */
     public static function getUser()
     {
         return self::$me;
@@ -309,7 +328,7 @@ class rex_ycom_auth
         return self::articleIsPermitted($article);
     }
 
-    public static function articleIsPermitted(&$article, $xs = true)
+    public static function articleIsPermitted(rex_article &$article, $xs = true): bool
     {
         if (!$xs) {
             return false;
@@ -326,8 +345,6 @@ class rex_ycom_auth
             '2' => 'translate:ycom_perm_only_not_logged_in',
             '3' => 'translate:ycom_perm_all'
         ];*/
-
-        /** @var rex_article $article */
 
         $permType = (int) $article->getValue('ycom_auth_type');
 
@@ -383,7 +400,13 @@ class rex_ycom_auth
         // rex_response::setHeader('Clear-Site-Data', '"cache", "cookies", "storage", "executionContexts"');
     }
 
-    public static function setSessionVar($key, $value)
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @throws rex_exception
+     * @return void
+     */
+    public static function setSessionVar(string $key, $value)
     {
         $sessionVars = rex_session(self::$sessionKey, 'array', []);
         $sessionVars[$key] = $value;
@@ -510,7 +533,7 @@ class rex_ycom_auth
         foreach ($returnTos as $returnTo) {
             if ('' != $returnTo) {
                 if (!preg_match('/http(s?)\:\/\//i', $returnTo)) {
-                    $returnTo = rex_yrewrite::getFullPath(('/' == substr($returnTo, 0, 1) ? substr($returnTo, 1) : $returnTo));
+                    $returnTo = rex_yrewrite::getFullPath('/' == substr($returnTo, 0, 1) ? substr($returnTo, 1) : $returnTo);
                 }
                 $returnTosWithDomains[] = $returnTo;
             }

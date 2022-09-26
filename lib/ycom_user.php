@@ -5,12 +5,15 @@ class rex_ycom_user extends \rex_yform_manager_dataset
     public string $password;
     public int $login_tries;
 
+    /**
+     * @return null|rex_ycom_user
+     */
     public static function getMe()
     {
         return rex_ycom_auth::getUser();
     }
 
-    public function isInGroup($group_id)
+    public function isInGroup(int $group_id): bool
     {
         $ycom_groups = $this->getValue('ycom_groups');
 
@@ -27,11 +30,15 @@ class rex_ycom_user extends \rex_yform_manager_dataset
         return false;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
 
+    /**
+     * @param array<string, string|int> $data
+     * @return null|rex_ycom_user|rex_yform_manager_dataset
+     */
     public static function createUserByEmail(array $data)
     {
         $data['status'] = 1;
@@ -52,7 +59,11 @@ class rex_ycom_user extends \rex_yform_manager_dataset
         return null;
     }
 
-    public static function updateUser(array $data)
+    /**
+     * @param array<string, string|int> $data
+     * @return bool
+     */
+    public static function updateUser(array $data): bool
     {
         $data = rex_extension::registerPoint(new rex_extension_point('YCOM_USER_UPDATE', $data, []));
         $user = self::getMe();

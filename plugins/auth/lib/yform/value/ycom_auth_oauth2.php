@@ -18,12 +18,19 @@ use League\OAuth2\Client\Provider\GenericProvider;
 class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
 {
     use rex_yform_trait_value_auth_extern;
-    private $auth_requestFunctions = ['init', 'code', 'state'];
-    private $auth_directLink = false;
-    private $auth_SessionVars = ['OAUTH2_oauth2state'];
-    private $auth_ClassKey = 'oauth2';
 
-    public function enterObject()
+    /**
+     * @var array|string[]
+     */
+    private array $auth_requestFunctions = ['init', 'code', 'state'];
+    private bool $auth_directLink = false;
+    /**
+     * @var array|string[]
+     */
+    private array $auth_SessionVars = ['OAUTH2_oauth2state'];
+    private string $auth_ClassKey = 'oauth2';
+
+    public function enterObject(): void
     {
         if (rex::isFrontend()) {
             $this->auth_directLink = 1 == $this->getElement(5) ? true : false;
@@ -43,14 +50,14 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
             if ($this->auth_directLink) {
                 $requestFunction = 'init';
             } else {
-                return '';
+                return;
             }
         }
 
         if ('' == $settings['redirectUri']) {
             echo 'use this URL for redirect';
             dump(rex_yrewrite::getFullUrlByArticleId(rex_article::getCurrentId(), '', ['rex_ycom_auth_mode' => 'oauth2', 'rex_ycom_auth_func' => 'code'], '&'));
-            return '';
+            return;
         }
 
         $provider = new GenericProvider($settings);
@@ -68,7 +75,7 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
                         }
                         $this->auth_redirectToFailed('{{ oauth.error.state_code }}');
                         $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ oauth.error.state_code }}';
-                        return '';
+                        return;
                     }
 
                     $accessToken = null;
@@ -81,7 +88,7 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
                         if ($accessToken->hasExpired()) {
                             $this->auth_redirectToFailed('{{ oauth.error.access_expired }}');
                             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ oauth.error.access_expired }}';
-                            return '';
+                            return;
                         }
                         $resourceOwner = $provider->getResourceOwner($accessToken);
                         $Userdata = $resourceOwner->toArray();
@@ -93,7 +100,7 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
                         }
                         $this->auth_redirectToFailed('{{ oauth.error.code }}');
                         $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ oauth.error.code }}';
-                        return '';
+                        return;
                     } catch (Exception $e) {
                         if ($this->params['debug']) {
                             dump($accessToken);
@@ -102,12 +109,12 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
                         }
                         $this->auth_redirectToFailed('{{ oauth.error.code }}');
                         $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ oauth.error.code }}';
-                        return '';
+                        return;
                     }
                 } else {
                     $this->auth_redirectToFailed('{{ oauth.error.no_code }}');
                     $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ oauth.error.no_code }}';
-                    return '';
+                    return;
                 }
                 break;
 
@@ -119,7 +126,7 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
                 rex_response::sendRedirect($authorizationUrl);
         }
 
-        return $this->auth_createOrUpdateYComUser($Userdata, $returnTo);
+        $this->auth_createOrUpdateYComUser($Userdata, $returnTo);
     }
 
     public function getDescription(): string

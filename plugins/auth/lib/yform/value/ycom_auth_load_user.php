@@ -2,7 +2,7 @@
 
 class rex_yform_value_ycom_auth_load_user extends rex_yform_value_abstract
 {
-    public function enterObject()
+    public function enterObject(): void
     {
         if (rex_ycom_auth::getUser() && !$this->params['send']) {
             $fields = $this->getElement(2);

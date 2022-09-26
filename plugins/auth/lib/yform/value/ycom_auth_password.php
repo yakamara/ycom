@@ -2,7 +2,7 @@
 
 class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
 {
-    public function enterObject()
+    public function enterObject(): void
     {
         $rules = json_decode($this->getElement('rules'), true);
         if (!$rules || 0 == count($rules)) {
@@ -65,6 +65,9 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
         return 'ycom_auth_password -> Beispiel: ycom_auth_password|name|label|[password-rules-as-json]|message|[script 0/1]';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getDefinitions(): array
     {
         return [

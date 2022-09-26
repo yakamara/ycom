@@ -2,7 +2,7 @@
 
 class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
 {
-    public function enterObject()
+    public function enterObject(): void
     {
         if (rex::isBackend()) {
             $this->params['warning'][] = 1;
@@ -16,7 +16,7 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
         foreach ($e as $v) {
             $w = explode('=', $v);
             $label = $w[0];
-            $value = trim(rex_request($w[1], 'string', ''));
+            $value = trim(rex_request($w[1], 'string'));
             $vars[$label] = $value;
         }
 

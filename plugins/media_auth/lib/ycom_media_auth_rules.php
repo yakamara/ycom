@@ -6,7 +6,10 @@
 
 class rex_ycom_media_auth_rules
 {
-    private $rules = [];
+    /**
+     * @var array<string, array{'info': string, 'action': string[]}>
+     */
+    private array $rules;
 
     public function __construct()
     {
@@ -36,7 +39,7 @@ class rex_ycom_media_auth_rules
         ];
     }
 
-    public function check($rule_name)
+    public function check(string $rule_name): void
     {
         if (!array_key_exists($rule_name, $this->rules)) {
             $rule_name = 'redirect';
@@ -49,11 +52,10 @@ class rex_ycom_media_auth_rules
                 $me = rex_ycom_user::getMe();
                 if ($me) {
                     // logged in
+                    rex_response::setStatus(rex_response::HTTP_UNAUTHORIZED);
                     if (isset($rule['action']['error_article_id'])) {
-                        rex_response::setStatus(rex_response::HTTP_UNAUTHORIZED);
                         rex_redirect($rule['action']['error_article_id']);
                     } else {
-                        rex_response::setStatus(rex_response::HTTP_UNAUTHORIZED);
                         rex_response::sendContent('');
                     }
                     exit;
@@ -71,12 +73,15 @@ class rex_ycom_media_auth_rules
                 break;
 
             default:
-                throw new rex_exception(sprintf('Unknown auth_rule action key "%s".', $rule['action']));
+                throw new rex_exception(sprintf('Unknown auth_rule action key "%s".', $rule['action']['type']));
         }
         exit;
     }
 
-    public function getOptions()
+    /**
+     * @return string[]
+     */
+    public function getOptions(): array
     {
         $options = [];
 

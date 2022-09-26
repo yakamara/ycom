@@ -2,7 +2,7 @@
 
 class rex_yform_value_ycom_auth_logout extends rex_yform_value_abstract
 {
-    public function enterObject()
+    public function enterObject(): void
     {
         $returnTos = [];
         $returnTos[] = rex_request('returnTo', 'string', '');

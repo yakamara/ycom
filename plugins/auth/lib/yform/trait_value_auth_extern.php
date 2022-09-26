@@ -2,7 +2,11 @@
 
 trait rex_yform_trait_value_auth_extern
 {
-    private function auth_loadSettings()
+    /**
+     * @throws rex_exception
+     * @return array|string[]
+     */
+    private function auth_loadSettings(): array
     {
         $SettingFile = $this->auth_ClassKey.'.php';
         $SettingsPath = rex_addon::get('ycom')->getDataPath($SettingFile);
@@ -18,12 +22,12 @@ trait rex_yform_trait_value_auth_extern
     private function auth_getReturnTo()
     {
         $returnTos = [];
-        $returnTos[] = rex_request('returnTo', 'string', ''); // wenn returnTo übergeben wurde, diesen nehmen
+        $returnTos[] = rex_request('returnTo', 'string'); // wenn returnTo übergeben wurde, diesen nehmen
         $returnTos[] = rex_getUrl(rex_config::get('ycom/auth', 'article_id_jump_ok'), '', [], '&'); // Auth Ok -> article_id_jump_ok / Current Language will be selected
         return rex_ycom_auth::getReturnTo($returnTos, ('' == $this->getElement(3)) ? [] : explode(',', $this->getElement(3)));
     }
 
-    private function auth_FormOutput($url)
+    private function auth_FormOutput($url): void
     {
         if ($this->needsOutput()) {
             $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_auth_' . $this->auth_ClassKey. '.tpl.php', 'value.ycom_auth_extern.tpl.php'], [
@@ -33,7 +37,7 @@ trait rex_yform_trait_value_auth_extern
         }
     }
 
-    private function auth_redirectToFailed($message = '')
+    private function auth_redirectToFailed(string $message = ''): string
     {
         if ($this->params['debug']) {
             dump($message);
@@ -46,7 +50,7 @@ trait rex_yform_trait_value_auth_extern
         return '';
     }
 
-    private function auth_createOrUpdateYComUser($Userdata, $returnTo)
+    private function auth_createOrUpdateYComUser(array $Userdata, string $returnTo)
     {
         $defaultUserAttributes = [];
         if ('' != $this->getElement(4)) {

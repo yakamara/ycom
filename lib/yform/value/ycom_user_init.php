@@ -2,7 +2,7 @@
 
 class rex_yform_value_ycom_user_init extends rex_yform_value_abstract
 {
-    public function enterObject()
+    public function enterObject(): void
     {
         if (rex_ycom_auth::getUser()) {
             $this->params['main_table'] = 'rex_ycom_user';

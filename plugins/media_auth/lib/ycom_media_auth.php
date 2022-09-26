@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-class rex_ycom_media_auth extends \rex_yform_manager_dataset
+class rex_ycom_media_auth extends rex_yform_manager_dataset
 {
-    public static $perms = [
+    /**
+     * @var string[]
+     */
+    public static array $perms = [
         '0' => 'translate:ycom_perm_all',
         '1' => 'translate:ycom_perm_only_logged_in',
     ];
@@ -53,7 +56,7 @@ class rex_ycom_media_auth extends \rex_yform_manager_dataset
 
             $groups = [];
             if ('' != $rex_media->getValue('ycom_groups')) {
-                $groups = explode(',', $rex_media->getValue('ycom_groups'));
+                $groups = explode(',', (string) $rex_media->getValue('ycom_groups'));
             }
 
             $userGroups = [];

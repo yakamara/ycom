@@ -2,16 +2,23 @@
 
 declare(strict_types=1);
 
-class rex_ycom_group extends \rex_yform_manager_dataset
+class rex_ycom_group extends rex_yform_manager_dataset
 {
-    public static $perms = [
+    /**
+     * @var string[]
+     */
+    public static array $perms = [
         '0' => 'translate:ycom_group_forallgroups',
         '1' => 'translate:ycom_group_inallgroups',
         '2' => 'translate:ycom_group_inonegroup',
         '3' => 'translate:ycom_group_nogroups',
     ];
 
-    public static function getGroups()
+    /**
+     * @throws rex_exception
+     * @return string[]
+     */
+    public static function getGroups(): array
     {
         $groups = [];
         foreach (self::query()->find() as $group) {
@@ -20,7 +27,13 @@ class rex_ycom_group extends \rex_yform_manager_dataset
         return $groups;
     }
 
-    public static function hasGroupPerm($groupType, $groups = [], $userGroups = [])
+    /**
+     * @param string|int $groupType
+     * @param array<string|int> $groups
+     * @param array<string|int> $userGroups
+     * @return bool
+     */
+    public static function hasGroupPerm($groupType, array $groups = [], array $userGroups = []): bool
     {
         $groupType = (int) $groupType;
 

@@ -19,12 +19,19 @@ use OneLogin\Saml2\Utils;
 class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 {
     use rex_yform_trait_value_auth_extern;
-    private $auth_requestFunctions = ['auth', 'sso', 'acs', 'slo', 'sls'];
-    private $auth_directLink = false;
-    private $auth_SessionVars = ['SAML_Userdata', 'SAML_NameId', 'SAML_SessionIndex', 'SAML_AuthNRequestID', 'SAML_LogoutRequestID', 'SAML_NameIdFormat', 'SAML_ssoDate'];
-    private $auth_ClassKey = 'saml';
 
-    public function enterObject()
+    /**
+     * @var array|string[]
+     */
+    private array $auth_requestFunctions = ['auth', 'sso', 'acs', 'slo', 'sls'];
+    private bool $auth_directLink = false;
+    /**
+     * @var array|string[]
+     */
+    private array $auth_SessionVars = ['SAML_Userdata', 'SAML_NameId', 'SAML_SessionIndex', 'SAML_AuthNRequestID', 'SAML_LogoutRequestID', 'SAML_NameIdFormat', 'SAML_ssoDate'];
+    private string $auth_ClassKey = 'saml';
+
+    public function enterObject(): void
     {
         if (rex::isFrontend()) {
             $this->auth_directLink = 1 == $this->getElement(5);
@@ -45,13 +52,13 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         $returnTo = $this->auth_getReturnTo();
         $this->auth_FormOutput(rex_getUrl('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sso', 'returnTo' => $returnTo]));
 
-        $requestMode = rex_request('rex_ycom_auth_mode', 'string', '');
-        $requestFunction = rex_request('rex_ycom_auth_func', 'string', '');
+        $requestMode = rex_request('rex_ycom_auth_mode', 'string');
+        $requestFunction = rex_request('rex_ycom_auth_func', 'string');
         if (!in_array($requestFunction, $this->auth_requestFunctions, true) || $this->auth_ClassKey != $requestMode) {
             if ($this->auth_directLink) {
                 $requestFunction = 'sso';
             } else {
-                return '';
+                return;
             }
         }
 
@@ -71,7 +78,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                 ],
             ];
             dump($sp);
-            return '';
+            return;
         }
 
         switch ($requestFunction) {
@@ -96,7 +103,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                         dump($e);
                     }
                     $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.acs }}';
-                    return '';
+                    return;
                 }
 
                 $errors = $auth->getErrors();
@@ -105,7 +112,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                         dump($errors);
                     }
                     $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.acs }}';
-                    return '';
+                    return;
                 }
 
                 rex_ycom_auth::setSessionVar('SAML_Userdata', $auth->getAttributes());
@@ -155,7 +162,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                         dump($e);
                     }
                     $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.acs }}';
-                    return '';
+                    return;
                 }
 
                 rex_ycom_auth::clearUserSession();
@@ -173,7 +180,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                         dump($errors);
                     }
                     $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.sls }}';
-                    return '';
+                    return;
                 }
         }
 
@@ -185,7 +192,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 
         $Userdata = rex_ycom_auth::getSessionVar('SAML_Userdata', 'array', []);
 
-        return $this->auth_createOrUpdateYComUser($Userdata, $returnTo);
+        $this->auth_createOrUpdateYComUser($Userdata, $returnTo);
     }
 
     public function getDescription(): string

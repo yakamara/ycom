@@ -2,7 +2,7 @@
 
 class rex_yform_value_ycom_user extends rex_yform_value_abstract
 {
-    public function enterObject()
+    public function enterObject(): void
     {
         $show_value = '';
         $show_label = $this->getElement(6);

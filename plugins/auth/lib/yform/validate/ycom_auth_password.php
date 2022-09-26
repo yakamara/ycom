@@ -2,7 +2,7 @@
 
 class rex_yform_validate_ycom_auth_password extends rex_yform_validate_abstract
 {
-    public function enterObject()
+    public function enterObject(): void
     {
         $Object = $this->getValueObject();
 

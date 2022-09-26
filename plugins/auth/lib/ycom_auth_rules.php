@@ -2,7 +2,10 @@
 
 class rex_ycom_auth_rules
 {
-    private $rules = [];
+    /**
+     * @var array<string, mixed>
+     */
+    private array $rules;
 
     public function __construct()
     {
@@ -95,6 +98,9 @@ class rex_ycom_auth_rules
         }
     }
 
+    /**
+     * @return string[]
+     */
     public function getOptions(): array
     {
         $options = [];
