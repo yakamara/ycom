@@ -83,9 +83,9 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                 rex_ycom_auth::setSessionVar('SAML_ssoDate', date('Y-m-d H:i:s'));
                 rex_response::sendCacheControl();
                 rex_response::sendRedirect($ssoBuiltUrl);
-                break;
 
-            // process login
+                // process login
+                // no break
             case 'acs':
                 $requestID = rex_ycom_auth::getSessionVar('SAML_AuthNRequestID', 'string', null);
 
@@ -123,7 +123,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                 rex_redirect(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_not_ok'));
                 break;
 
-            // init Logout processs with returnTo or redirect from idp
+                // init Logout processs with returnTo or redirect from idp
             case 'slo':
                 $returnToURL = rex_yrewrite::getFullUrlByArticleId('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sls', 'returnTo' => $returnTo], '&');
                 $parameters = [];
@@ -142,9 +142,9 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 
                 rex_response::sendCacheControl();
                 rex_response::sendRedirect($sloBuiltUrl);
-                break;
 
-            // process Logout without returnTo
+                // process Logout without returnTo
+                // no break
             case 'sls':
                 $requestID = rex_ycom_auth::getSessionVar('SAML_LogoutRequestID', 'string', null);
 
@@ -175,14 +175,12 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                     $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.sls }}';
                     return '';
                 }
-                break;
         }
 
         if (0 == count(rex_ycom_auth::getSessionVar('SAML_Userdata', 'array', []))) {
             // direkt durchschleifen zu SAML AUTH .. Hier könnte man auch eine abfrage machen.
             rex_response::sendCacheControl();
             rex_response::sendRedirect(rex_getUrl('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sso', 'returnTo' => $returnTo], '&'));
-            exit;
         }
 
         $Userdata = rex_ycom_auth::getSessionVar('SAML_Userdata', 'array', []);

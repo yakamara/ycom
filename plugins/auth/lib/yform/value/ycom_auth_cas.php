@@ -57,18 +57,17 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         }
 
         /** @psalm-suppress TypeDoesNotContainType */
-        if ($settings['debug']) {
+        if ($settings['debug']) { // @phpstan-ignore-line
             phpCAS::setVerbose(true);
-            phpCAS::setDebug($settings['debugPath']);
         }
 
         phpCAS::client($settings['idp']['ServerVersion'], $settings['idp']['host'], $settings['idp']['port'], $settings['idp']['uri'], false);
 
         /** @psalm-suppress RedundantCondition */
-        if (!$settings['idp']['CasServerValidation']) {
-            phpCAS::setNoCasServerValidation();
-        } else {
+        if ($settings['idp']['CasServerValidation']) { // @phpstan-ignore-line
             phpCAS::setCasServerCACert($settings['idp']['CasServerCACertPath']);
+        } else {
+            phpCAS::setNoCasServerValidation();
         }
 
         // ----- logout
@@ -88,9 +87,9 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 
         $email = phpCAS::getUser();
 
-        if (!$email || '' == $email) {
+        if (empty($email)) {
             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_login_failed }}';
-            return;
+            return null;
         }
 
         // ----- create, get user

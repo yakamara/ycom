@@ -9,7 +9,7 @@ if (rex::isBackend()) {
     rex_extension::register('PACKAGES_INCLUDED', static function ($params) {
         $plugin = rex_plugin::get('yform', 'manager');
 
-        if ($plugin) {
+        if ($plugin->isAvailable()) {
             $pages = $plugin->getProperty('pages');
             $ycom_tables = rex_ycom::getTables();
 

@@ -15,7 +15,7 @@ class rex_ycom_group extends \rex_yform_manager_dataset
     {
         $groups = [];
         foreach (self::query()->find() as $group) {
-            $groups[$group->id] = $group->name;
+            $groups[$group->getId()] = $group->getName();
         }
         return $groups;
     }
@@ -38,7 +38,7 @@ class rex_ycom_group extends \rex_yform_manager_dataset
                 }
                 return true;
 
-            // user in at least one group
+                // user in at least one group
             case 2:
                 foreach ($groups as $group) {
                     if ('' != $group && in_array($group, $userGroups)) {
@@ -47,7 +47,7 @@ class rex_ycom_group extends \rex_yform_manager_dataset
                 }
                 return false;
 
-            // user has no groups
+                // user has no groups
             case 3:
                 if (0 == count($userGroups)) {
                     return true;
@@ -57,5 +57,10 @@ class rex_ycom_group extends \rex_yform_manager_dataset
             default:
                 return false;
         }
+    }
+
+    public function getName(): string
+    {
+        return $this->getValue('name');
     }
 }

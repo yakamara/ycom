@@ -6,7 +6,7 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_db
 {
     public function executeAction(): void
     {
-        /** @var rex_ycom_user $user */
+        /** @var rex_ycom_user|null $user */
         $user = rex_ycom_auth::getUser();
 
         if (rex::isBackend() || !$user) {

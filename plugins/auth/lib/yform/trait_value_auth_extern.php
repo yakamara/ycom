@@ -136,8 +136,6 @@ trait rex_yform_trait_value_auth_extern
 
         rex_response::sendCacheControl();
         rex_response::sendRedirect($returnTo);
-
-        return '';
     }
 
     private function auth_clearUserSession()

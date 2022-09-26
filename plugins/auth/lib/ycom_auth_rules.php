@@ -83,7 +83,6 @@ class rex_ycom_auth_rules
                 $user->setValue('status', -2); // to much login failures
                 $user->save();
                 return false;
-                break;
             case 'pause':
                 $lastLoginDate = new DateTime($user->getValue('last_login_time'));
                 $lastLoginDate->modify('+'.$rule['action']['time'].' seconds');
