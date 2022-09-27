@@ -1,11 +1,11 @@
 package: ycom
-version: '4.0.7'
+version: '4.0.8-dev'
 author: Yakamara Media GmbH & Co. KG, concedra GmbH
 supportpage: https://github.com/yakamara/redaxo_ycom/
 
 page:
     title: 'translate:ycom_navi_title'
-    perm: ycom[]
+    perm: admin[]
     block: ycom
     icon: rex-icon fa-group
     subpages:
