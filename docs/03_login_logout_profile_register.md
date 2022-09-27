@@ -67,12 +67,12 @@ Eingeloggte Nutzer können auf Wunsch ihr Profil bearbeiten.
 ```php
 ycom_auth_load_user|userinfo|email,firstname,name
 objparams|form_showformafterupdate|1
-showvalue|email|E-Mail / Login:
+showvalue|email|E-Mail-Adresse / Login
 
-text|firstname|Vorname:
+text|firstname|Vorname
 validate|empty|firstname|Bitte geben Sie Ihren Vornamen ein.
-text|name|Nachname:
-validate|empty|name|Bitte geben Sie Ihren Namen ein.
+text|name|Nachname
+validate|empty|name|Bitte geben Sie Ihren Nachnamen ein.
 
 action|showtext|<div class="alert alert-success">Profildaten wurden aktualisiert</div>|||1
 action|ycom_auth_db
@@ -82,7 +82,7 @@ action|ycom_auth_db
 
 > Hinweis: Über den Formularcode-Generator in YForm kann man die Pipe-Schreibweise des Formulars auch für andere Felder des Nutzers abrufen.
 
-> Hinweis: Wird als Login nicht die E-Mail-Adresse herangezogen, sondern der Nutzername, lautet die 3. Zeile nicht `showvalue|email|E-Mail / Login:`, sondern `showvalue|login|E-Mail / Login:`.
+> Hinweis: Wird als Login nicht das Feld `email` herangezogen, sondern der Nutzername, lautet die 3. Zeile nicht `showvalue|email|E-Mail-Adresse`, sondern `showvalue|login|Login:`.
 
 ## Registrierung
 
@@ -94,31 +94,29 @@ hidden|status|0
 
 fieldset|label|Login-Daten:
 
-text|email|E-Mail:*|
-text|email_2|E-Mail bestätigen:*|
+text|email|E-Mail*|
+text|email_2|E-Mail bestätigen*||no_db
 
-text|firstname|Vorname:*
+text|firstname|Vorname*
 validate|empty|firstname|Bitte geben Sie Ihren Vornamen ein.
 
-text|name|Nachname:*
-validate|empty|name|Bitte geben Sie Ihren Namen ein.
+text|name|Nachname*
+validate|empty|name|Bitte geben Sie Ihren Nachnamen ein.
 
-ycom_auth_password|password|Ihr Passwort:*|{"length":{"min":6},"letter":{"min":1},"lowercase":{"min":0},"uppercase":{"min":0},"digit":{"min":1},"symbol":{"min":0}}|Das Passwort muss mindestens 6 Zeichen lang sein und mindestens eine Ziffer enthalten
-password|password_2|Passwort bestätigen:*||no_db
+ycom_auth_password|password|Ihr Passwort*|{"length":{"min":10},"letter":{"min":1},"lowercase":{"min":0},"uppercase":{"min":0},"digit":{"min":1},"symbol":{"min":0}}|Das Passwort muss mindestens 10 Zeichen lang sein und eine Ziffer enthalten.
+password|password_2|Passwort bestätigen*||no_db
 
 checkbox|termsofuse_accepted|Ich habe die Nutzungsbedingungen akzeptiert.|0|0|
 
 html|required|<p class="form-required">* Pflichtfelder</p>
 
-captcha|Bitte geben Sie den entsprechenden Sicherheitscode ein. Sollten Sie den Code nicht lesen können klicken Sie bitte auf die Grafik, um einen neuen Code zu generieren.|Sie haben den Sicherheitscode falsch eingegeben.
-
-validate|email|email|Bitte geben Sie die E-Mail ein.
-validate|unique|email|Diese E-Mail existiert schon|rex_ycom_user
-validate|empty|email|Bitte geben Sie Ihre e-Mail ein.
+validate|type|email|Bitte geben Sie die E-Mail-Adresse ein.
+validate|unique|email|Diese E-Mail-Adresse wird bereits verwendet.|rex_ycom_user
+validate|empty|email|Bitte geben Sie Ihre E-Mail-Adresse ein.
 validate|empty|password|Bitte geben Sie ein Passwort ein.
-validate|password_policy|password|Passwort muss mindestens 8 Zeichen lang sein und sowohl Gross- als auch Kleinbuchstaben enthalten|
-validate|compare|password|password_2||Bitte geben Sie zweimal das gleiche Passwort ein
-validate|compare|email|email_2||Bitte geben Sie zweimal die gleiche E-Mail ein
+validate|password_policy|password|Das Passwort muss mindestens 10 Zeichen lang sein und eine Ziffer enthalten.|
+validate|compare|password|password_2||Bitte geben Sie zweimal dasselbe Passwort ein.
+validate|compare|email|email_2||Bitte geben Sie zweimal dieselbe E-Mail-Adresse ein.
 
 # email als Login verwenden
 action|copy_value|email|login
