@@ -15,11 +15,11 @@ Nutzer können selbständig das Passwort ändern.
 3. Das Modul `YForm Formbuilder` hinzufügen und folgendes Formular eintragen
 
 ```php
-ycom_auth_password|password|Ihr Passwort:*|{"length":{"min":6},"letter":{"min":1},"lowercase":{"min":0},"uppercase":{"min":0},"digit":{"min":1},"symbol":{"min":0}}|Das Passwort muss mindestens 6 Zeichen lang sein und mindestens eine Ziffer enthalten
-password|password_2|Passwort wiederholen:||no_db
+ycom_auth_password|password|Ihr Passwort*|{"length":{"min":10},"letter":{"min":1},"lowercase":{"min":0},"uppercase":{"min":0},"digit":{"min":1},"symbol":{"min":0}}|Das Passwort muss mindestens 10 Zeichen lang sein und mindestens eine Ziffer enthalten.
+password|password_2|Passwort wiederholen||no_db
 validate|empty|password|Bitte geben Sie ein Passwort ein.
-validate|compare|password|password_2|!=|Bitte geben Sie zweimal das gleiche Passwort ein
-action|showtext|Ihre Daten wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.|||1
+validate|compare|password|password_2|!=|Bitte geben Sie zweimal dasselbe Passwort ein.
+action|showtext|Ihre Angaben wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.|||1
 action|ycom_auth_db
 hidden|new_password_required|0
 ```
@@ -35,9 +35,9 @@ Nun können Nutzer ihr Passwort selbständig ändern.
 1. Feld für altes Passwort und Validierung hinzufügen
 
 ```php
-password|old_password|Altes Passwort||no_db
-validate|empty|old_password|Bitte altes Passwort angeben.
-validate|ycom_auth_password|old_password|Das alte Passwort ist fehlerhaft!
+password|old_password|Bisheriges Passwort||no_db
+validate|empty|old_password|Bitte das bisherige Passwort angeben.
+validate|ycom_auth_password|old_password|Das bisherige Passwort ist nicht korrekt.
 ```
 
 2. Neues Passwort darf nicht dem alten Passwort entsprechen
@@ -45,21 +45,21 @@ validate|ycom_auth_password|old_password|Das alte Passwort ist fehlerhaft!
 Dafür noch folgende Validierung hinzufügen
 
 ```php
-validate|compare|password|old_password|==|Das neue Passwort darf nicht dem alten Passwort entsprechen.
+validate|compare|password|old_password|==|Das neue Passwort darf nicht dem bisherigen Passwort entsprechen.
 ```
 
 Das ganze Formular sieht dann wie folgt aus:
 ```php
 password|old_password|Altes Passwort||no_db
-ycom_auth_password|password|Ihr Passwort:*|{"length":{"min":6},"letter":{"min":1},"lowercase":{"min":0},"uppercase":{"min":0},"digit":{"min":1},"symbol":{"min":0}}|Das Passwort muss mindestens 6 Zeichen lang sein und mindestens eine Ziffer enthalten
+ycom_auth_password|password|Ihr Passwort:*|{"length":{"min":10},"letter":{"min":1},"lowercase":{"min":0},"uppercase":{"min":0},"digit":{"min":1},"symbol":{"min":0}}|Das Passwort muss mindestens 10 Zeichen lang sein und mindestens eine Ziffer enthalten
 password|password_2|Passwort wiederholen:||no_db
 
-validate|empty|old_password|Bitte altes Passwort angeben.
-validate|ycom_auth_password|old_password|Das alte Passwort ist fehlerhaft!
-validate|compare|password|old_password|==|Das neue Passwort darf nicht dem alten Passwort entsprechen.
+validate|empty|old_password|Bitte das bisherige Passwort angeben.
+validate|ycom_auth_password|old_password|Das bisherige Passwort ist fehlerhaft.
+validate|compare|password|old_password|==|Das neue Passwort darf nicht dem bisherigen Passwort entsprechen.
 validate|empty|password|Bitte geben Sie ein Passwort ein.
-validate|compare|password|password_2|!=|Bitte geben Sie zweimal das gleiche Passwort ein
-action|showtext|Ihre Daten wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.|||1
+validate|compare|password|password_2|!=|Bitte geben Sie zweimal dasselbe Passwort ein
+action|showtext|Ihre Angaben wurden aktualisiert. Das neue Passwort ist ab sofort aktiv.|||1
 action|ycom_auth_db
 hidden|new_password_required|0
 ```
@@ -77,14 +77,14 @@ text|email|E-Mail:|
 
 captcha|Bitte geben Sie den entsprechenden Sicherheitscode ein. Sollten Sie den Code nicht lesen können klicken Sie bitte auf die Grafik, um einen neuen Code zu generieren.|Sie haben den Sicherheitscode falsch eingegeben.
 
-validate|email|email|Bitte geben Sie die E-Mail ein.
-validate|empty|email|Bitte geben Sie Ihre E-Mail ein.
+validate|type|email|Bitte geben Sie Ihre E-Mail-Adresse ein.
+validate|empty|email|Bitte geben Sie Ihre E-Mail-Adresse ein.
 validate|in_table|email|rex_ycom_user|email|Für die angegebene E-Mail-Adresse existiert kein Nutzer.|
 
 action|db_query|update rex_ycom_user set activation_key = ? where email = ?|activation_key,email
 action|tpl2email|resetpassword_de|email|
 
-action|showtext|Sie erhalten eine E-Mail mit einem Link, über den Sie das Passwort neu setzen können.|<p>|</p>|1
+action|showtext|Sie erhalten eine E-Mail mit einem Link, über den Sie das Passwort zurücksetzen können.|<p>|</p>|1
 ```
 
 ### E-Mail-Template `resetpassword_de` für „Passwort zurücksetzen” anlegen
@@ -141,8 +141,8 @@ action|db_query|update rex_ycom_user set activation_key = ? where email = ?|acti
 Da man durch das Modul gleich eingeloggt wird, kann es sinnvoll sein im Anschluss gleich einen Redirect auszuführen, damit ggf. der Login Status im Menü aktualisiert wird:
 
 ```php
-// bei pw_change_article_id die Id der Passwort-ändern-Seite eintragen
-action|redirect|pw_change_article_id
+// Anstelle der `0` die ID des Passwort-ändern-Artikels eintragen (article_id_jump_password)
+action|redirect|0
 ```
 
 ## Passwortregeln
