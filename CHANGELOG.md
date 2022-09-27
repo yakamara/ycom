@@ -1,6 +1,21 @@
 Changelog
 =========
 
+Version 4.0.8 - 27.09.2022
+--------------------------
+
+### Bugfixes und kleinere Anpassungen
+
+* Bibliotheken ycom/auth aktualisiert
+* Default Auth Einstellungen festgezurrt
+* Doku angepasst (Danke Alex Walther)
+* Redirects wenn REDAXO in Unterordnern geht nun (Danke Daniel Weingart)
+* Recht ycom[] entfernt, da dies ein admim[] Recht ist und daher überflüssig
+* Fehler bei json, php Schreibweise und auth_passwort entfernt (Danke Peter Schulze)
+* Attribute sind nun bei auth_password möglich (Danke Norbert Micheel)
+* PHP 8.1 Anpassungen, REXSTAN Findings eingebracht.
+
+
 Version 4.0.7 - 23.04.2022
 --------------------------
 
@@ -44,7 +59,7 @@ Danke an:
 Version 4.04 – 31.08.2021
 --------------------------
 
-## Neu
+### Neu
 * Docs umgebaut.
     * Plugin-Docs entfernt und Inhalte neu strukturiert
     * Reinstall von YCom entfernt das docs plugin
