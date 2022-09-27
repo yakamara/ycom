@@ -28,7 +28,7 @@ if (rex::isBackend()) {
 }
 
 rex_extension::register('YCOM_AUTH_USER_CHECK', static function (rex_extension_point $ep) {
-    if (false == $ep->getSubject()) {
+    if (!$ep->getSubject()) {
         return false;
     }
 
@@ -38,13 +38,10 @@ rex_extension::register('YCOM_AUTH_USER_CHECK', static function (rex_extension_p
         return $ep->getSubject();
     }
 
+    /** @var rex_ycom_user|null $me */
     $me = $ep->getParam('me');
     $type = $article->getValue('ycom_group_type');
-
-    $userGroups = [];
-    if (is_object($me) && '' != $me->ycom_groups) {
-        $userGroups = explode(',', $me->ycom_groups);
-    }
+    $userGroups = ($me) ? $me->getGroups() : [];
 
     $groups = [];
     if ('' != $article->getValue('ycom_groups')) {

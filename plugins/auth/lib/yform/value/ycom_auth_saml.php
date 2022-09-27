@@ -44,7 +44,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         $settings = $this->auth_loadSettings();
         // load external Metadata if possible
         try {
-            $idpSettings = IdPMetadataParser::parseRemoteXML($settings['idp']['entityId']);
+            $idpSettings = IdPMetadataParser::parseRemoteXML($settings['idp']['entityId']); // @phpstan-ignore-line
             $settings = IdPMetadataParser::injectIntoSettings($settings, $idpSettings);
         } catch (Exception $e) {
         }

@@ -36,7 +36,19 @@ class rex_ycom_user extends \rex_yform_manager_dataset
     }
 
     /**
-     * @param array<string, string|int> $data
+     * @return array|string[]
+     */
+    public function getGroups(): array
+    {
+        if (empty($this->getValue('ycom_groups'))) {
+            return [];
+        }
+
+        return explode(',', $this->getValue('ycom_groups'));
+    }
+
+    /**
+     * @param array<string|int, mixed> $data
      * @return null|rex_ycom_user|rex_yform_manager_dataset
      */
     public static function createUserByEmail(array $data)
@@ -51,7 +63,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
 
         $user = self::create();
         foreach ($data as $k => $v) {
-            $user->setValue($k, $v);
+            $user->setValue((string) $k, (string) $v);
         }
         if ($user->save()) {
             return $user;
@@ -60,8 +72,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
     }
 
     /**
-     * @param array<string, string|int> $data
-     * @return bool
+     * @param array<int|string, mixed> $data
      */
     public static function updateUser(array $data): bool
     {
@@ -73,7 +84,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
         }
 
         foreach ($data as $k => $v) {
-            $user->setValue($k, $v);
+            $user->setValue((string) $k, (string) $v);
         }
 
         return $user

@@ -6,7 +6,7 @@
  */
 
 $mdFiles = [];
-foreach (glob(rex_addon::get('ycom')->getPath('docs').'/*.md') as $file) {
+foreach (glob(rex_addon::get('ycom')->getPath('docs').'/*.md') ?: [] as $file) {
     $mdFiles[mb_substr(basename($file), 0, -3)] = $file;
 }
 
@@ -15,7 +15,7 @@ if (!array_key_exists($currenMDFile, $mdFiles)) {
     $currenMDFile = '01_intro';
 }
 
-$page = \rex_be_controller::getPageObject('ycom/docs');
+$page = rex_be_controller::getPageObject('ycom/docs');
 
 if ($page) {
     foreach ($mdFiles as $key => $mdFile) {

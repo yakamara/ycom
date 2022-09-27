@@ -19,7 +19,7 @@ trait rex_yform_trait_value_auth_extern
         return $settings;
     }
 
-    private function auth_getReturnTo()
+    private function auth_getReturnTo(): string
     {
         $returnTos = [];
         $returnTos[] = rex_request('returnTo', 'string'); // wenn returnTo übergeben wurde, diesen nehmen
@@ -27,7 +27,7 @@ trait rex_yform_trait_value_auth_extern
         return rex_ycom_auth::getReturnTo($returnTos, ('' == $this->getElement(3)) ? [] : explode(',', $this->getElement(3)));
     }
 
-    private function auth_FormOutput($url): void
+    private function auth_FormOutput(string $url): void
     {
         if ($this->needsOutput()) {
             $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_auth_' . $this->auth_ClassKey. '.tpl.php', 'value.ycom_auth_extern.tpl.php'], [
@@ -50,7 +50,13 @@ trait rex_yform_trait_value_auth_extern
         return '';
     }
 
-    private function auth_createOrUpdateYComUser(array $Userdata, string $returnTo)
+    /**
+     * @param array<int|string, mixed>  $Userdata
+     * @param string $returnTo
+     * @throws rex_exception
+     * @return void
+     */
+    private function auth_createOrUpdateYComUser(array $Userdata, string $returnTo): void
     {
         $defaultUserAttributes = [];
         if ('' != $this->getElement(4)) {
@@ -110,7 +116,7 @@ trait rex_yform_trait_value_auth_extern
         if ($user) {
             $this->auth_redirectToFailed('{{ ' . $this->auth_ClassKey . '.error.ycom_login_failed }}');
             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ ' . $this->auth_ClassKey . '.error.ycom_login_failed }}';
-            return '';
+            return;
         }
 
         $user = rex_ycom_user::createUserByEmail($data);
@@ -120,7 +126,7 @@ trait rex_yform_trait_value_auth_extern
             }
             $this->auth_redirectToFailed('{{ ' . $this->auth_ClassKey . '.error.ycom_create_user }}');
             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ ' . $this->auth_ClassKey . '.error.ycom_create_user }}';
-            return '';
+            return;
         }
 
         $params = [];
@@ -135,14 +141,14 @@ trait rex_yform_trait_value_auth_extern
             }
             $this->auth_redirectToFailed('{{ ' . $this->auth_ClassKey . '.error.ycom_login_created_user }}');
             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ ' . $this->auth_ClassKey . '.error.ycom_login_created_user }}';
-            return '';
+            return;
         }
 
         rex_response::sendCacheControl();
         rex_response::sendRedirect($returnTo);
     }
 
-    private function auth_clearUserSession()
+    private function auth_clearUserSession(): void
     {
         foreach ($this->auth_SessionVars as $SessionKey) {
             rex_ycom_auth::unsetSessionVar($SessionKey);

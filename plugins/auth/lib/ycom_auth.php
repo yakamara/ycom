@@ -9,7 +9,7 @@ class rex_ycom_auth
     public static $me;
 
     /**
-     * @var array<string, string>
+     * @var array<int|string, mixed>
      */
     public static $perms = [
         '0' => 'translate:ycom_perm_extends',
@@ -125,6 +125,11 @@ class rex_ycom_auth
         return $params['redirect'];
     }
 
+    /**
+     * @param array<int|string, mixed> $params
+     * @throws rex_exception
+     * @return int
+     */
     public static function login(array $params): int
     {
         rex_login::startSession();
@@ -297,7 +302,7 @@ class rex_ycom_auth
             return false;
         }
 
-        $user = rex_ycom_user::get($user_id);
+        $user = rex_ycom_user::get((int) $user_id);
         if ($user) {
             if (rex_login::passwordVerify($password, $user->getPassword())) {
                 return true;
@@ -323,12 +328,12 @@ class rex_ycom_auth
     }
 
     /** @deprecated */
-    public static function checkPerm(&$article)
+    public static function checkPerm(rex_article &$article): bool
     {
         return self::articleIsPermitted($article);
     }
 
-    public static function articleIsPermitted(rex_article &$article, $xs = true): bool
+    public static function articleIsPermitted(rex_article &$article, bool $xs = true): bool
     {
         if (!$xs) {
             return false;
@@ -389,7 +394,7 @@ class rex_ycom_auth
         return $xs;
     }
 
-    public static function clearUserSession()
+    public static function clearUserSession(): void
     {
         rex_set_session(self::$sessionKey, null);
         self::setCookieVar(self::$sessionKey, null);
@@ -406,14 +411,21 @@ class rex_ycom_auth
      * @throws rex_exception
      * @return void
      */
-    public static function setSessionVar(string $key, $value)
+    public static function setSessionVar(string $key, $value): void
     {
         $sessionVars = rex_session(self::$sessionKey, 'array', []);
         $sessionVars[$key] = $value;
         rex_set_session(self::$sessionKey, $sessionVars);
     }
 
-    public static function getSessionVar($key, string $varType = 'string', $default = '')
+    /**
+     * @param string $key
+     * @param string $varType
+     * @param mixed $default
+     * @throws rex_exception
+     * @return array|bool|float|int|mixed|object|string
+     */
+    public static function getSessionVar(string $key, string $varType = 'string', $default = '')
     {
         $sessionVars = rex_session(self::$sessionKey, 'array', []);
 
@@ -428,31 +440,47 @@ class rex_ycom_auth
         return $default;
     }
 
-    public static function unsetSessionVar($key)
+    public static function unsetSessionVar(string $key): void
     {
         $sessionVars = rex_session(self::$sessionKey, 'array', []);
         unset($sessionVars[$key]);
         rex_set_session(self::$sessionKey, $sessionVars);
     }
 
-    public static function setCookieVar($key, $value, $time = null)
+    /**
+     * @param string $key
+     * @param string|null $value
+     * @param int|null $time
+     * @return void
+     */
+    public static function setCookieVar(string $key, $value, $time = null): void
     {
         $sessionConfig = rex::getProperty('session', []);
         setcookie($key, $value ?? '', $time ?? (time() + 3600), '/', $sessionConfig['frontend']['cookie']['domain'] ?? ''); // $sessionConfig['frontend']['cookie']['path']
         $_COOKIE[$key] = $value;
     }
 
-    public static function getCookieVar($key, $varType = 'string', $default = '')
+    /**
+     * @param string $key
+     * @param string $varType
+     * @param mixed $default
+     * @return mixed
+     */
+    public static function getCookieVar(string $key, string $varType = 'string', $default = '')
     {
         return rex_cookie($key, $varType, $default);
     }
 
-    public static function deleteUser(int $id)
+    public static function deleteUser(int $id): bool
     {
-        rex_ycom_user::query()->where('id', $id)->find()->delete();
-        return true;
+        return rex_ycom_user::query()->where('id', $id)->find()->delete();
     }
 
+    /**
+     * @param array<string, string> $params
+     * @param callable|null $filter
+     * @return null|false|rex_ycom_user
+     */
     public static function loginWithParams($params, callable $filter = null)
     {
         $userQuery = rex_ycom_user::query();
@@ -484,7 +512,7 @@ class rex_ycom_auth
         return self::getUser();
     }
 
-    protected static function regenerateSessionId()
+    protected static function regenerateSessionId(): void
     {
         if ('' != session_id()) {
             session_regenerate_id(true);
@@ -492,13 +520,13 @@ class rex_ycom_auth
         $_SESSION['REX_SESSID'] = session_id();
     }
 
-    public static function cleanReferer($url)
+    public static function cleanReferer(string $refererURL): string
     {
-        if ('' === $url) {
+        if ('' === $refererURL) {
             return '';
         }
 
-        $url = parse_url($url);
+        $url = parse_url($refererURL) ?: []; // @phpstan-ignore-line
         $returnUrl = '';
 
         if (isset($url['host']) && rex_addon::get('yrewrite')->isInstalled()) {
@@ -527,7 +555,12 @@ class rex_ycom_auth
         return $returnUrl;
     }
 
-    public static function getReturnTo(array $returnTos, array $allowedDomains)
+    /**
+     * @param string[] $returnTos
+     * @param string[] $allowedDomains
+     * @return string
+     */
+    public static function getReturnTo(array $returnTos, array $allowedDomains): string
     {
         $returnTosWithDomains = [];
         foreach ($returnTos as $returnTo) {

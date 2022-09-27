@@ -35,9 +35,7 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
         if (isset($this->params['sql_object'])) {
             $hashed_value = $this->params['sql_object']->getValue($this->getName());
 
-            if ('' == $this->getValue()) {
-                // kein neuer wert
-                $password = '';
+            if ('' == $this->getValue()) { // kein neuer wert
             } elseif ($hashed_value == $this->getValue()) {
             } else {
                 $password = $this->getValue();
