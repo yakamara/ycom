@@ -128,7 +128,6 @@ class rex_ycom_auth
     /**
      * @param array<int|string, mixed> $params
      * @throws rex_exception
-     * @return int
      */
     public static function login(array $params): int
     {
@@ -292,9 +291,7 @@ class rex_ycom_auth
     }
 
     /**
-     * @param string $password
      * @param string|int $user_id
-     * @return bool
      */
     public static function checkPassword(string $password, $user_id): bool
     {
@@ -406,10 +403,8 @@ class rex_ycom_auth
     }
 
     /**
-     * @param string $key
      * @param mixed $value
      * @throws rex_exception
-     * @return void
      */
     public static function setSessionVar(string $key, $value): void
     {
@@ -419,8 +414,6 @@ class rex_ycom_auth
     }
 
     /**
-     * @param string $key
-     * @param string $varType
      * @param mixed $default
      * @throws rex_exception
      * @return array|bool|float|int|mixed|object|string
@@ -448,10 +441,8 @@ class rex_ycom_auth
     }
 
     /**
-     * @param string $key
      * @param string|null $value
      * @param int|null $time
-     * @return void
      */
     public static function setCookieVar(string $key, $value, $time = null): void
     {
@@ -461,8 +452,6 @@ class rex_ycom_auth
     }
 
     /**
-     * @param string $key
-     * @param string $varType
      * @param mixed $default
      * @return mixed
      */
@@ -478,7 +467,6 @@ class rex_ycom_auth
 
     /**
      * @param array<string, string> $params
-     * @param callable|null $filter
      * @return null|false|rex_ycom_user
      */
     public static function loginWithParams($params, callable $filter = null)
@@ -526,7 +514,7 @@ class rex_ycom_auth
             return '';
         }
 
-        $url = parse_url($refererURL) ?: []; // @phpstan-ignore-line
+        $url = parse_url($refererURL) ?: []; /** @phpstan-ignore-line */
         $returnUrl = '';
 
         if (isset($url['host']) && rex_addon::get('yrewrite')->isInstalled()) {
@@ -558,7 +546,6 @@ class rex_ycom_auth
     /**
      * @param string[] $returnTos
      * @param string[] $allowedDomains
-     * @return string
      */
     public static function getReturnTo(array $returnTos, array $allowedDomains): string
     {
@@ -566,6 +553,10 @@ class rex_ycom_auth
         foreach ($returnTos as $returnTo) {
             if ('' != $returnTo) {
                 if (!preg_match('/http(s?)\:\/\//i', $returnTo)) {
+                    $frontendUrl = rex_url::frontend();
+                    if (false !== strpos($returnTo, $frontendUrl)) {
+                        $returnTo = str_replace($frontendUrl, '/', $returnTo);
+                    }
                     $returnTo = rex_yrewrite::getFullPath('/' == substr($returnTo, 0, 1) ? substr($returnTo, 1) : $returnTo);
                 }
                 $returnTosWithDomains[] = $returnTo;
