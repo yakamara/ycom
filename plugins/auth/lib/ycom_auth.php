@@ -330,7 +330,12 @@ class rex_ycom_auth
         return self::articleIsPermitted($article);
     }
 
-    public static function articleIsPermitted(rex_article &$article, bool $xs = true): bool
+    /**
+     * @param rex_article|rex_category $article
+     * @param bool $xs
+     * @return bool
+     */
+    public static function articleIsPermitted(&$article, bool $xs = true): bool
     {
         if (!$xs) {
             return false;
