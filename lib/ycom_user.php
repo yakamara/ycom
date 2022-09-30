@@ -2,8 +2,8 @@
 
 class rex_ycom_user extends \rex_yform_manager_dataset
 {
-    public string $password;
-    public int $login_tries;
+    public string $password = '';
+    public int $login_tries = 0;
 
     /**
      * @return null|rex_ycom_user
@@ -32,7 +32,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
 
     public function getPassword(): string
     {
-        return $this->password;
+        return $this->getValue('password');
     }
 
     /**
