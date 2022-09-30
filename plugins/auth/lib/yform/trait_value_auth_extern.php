@@ -121,7 +121,7 @@ trait rex_yform_trait_value_auth_extern
 
         $user = rex_ycom_user::createUserByEmail($data);
         if (!$user || count($user->getMessages()) > 0) {
-            if ($this->params['debug']) {
+            if ($user && $this->params['debug']) {
                 dump($user->getMessages());
             }
             $this->auth_redirectToFailed('{{ ' . $this->auth_ClassKey . '.error.ycom_create_user }}');

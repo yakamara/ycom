@@ -22,6 +22,7 @@ class rex_ycom_group extends rex_yform_manager_dataset
     {
         $groups = [];
         foreach (self::query()->find() as $group) {
+            /** @var rex_ycom_group $group */
             $groups[$group->getId()] = $group->getName();
         }
         return $groups;

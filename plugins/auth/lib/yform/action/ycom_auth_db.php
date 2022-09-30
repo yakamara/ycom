@@ -25,7 +25,7 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_db
             case 'update':
             default:
                 $this->params['main_table'] = rex_ycom_user::table()->getTableName();
-                $this->params['main_where'] = 'id='.(int) rex_ycom_user::getMe()->getId();
+                $this->params['main_where'] = 'id='.(int) (rex_ycom_user::getMe() ? rex_ycom_user::getMe()->getId() : 0);
 
                 $this->setElement(2, '');
                 $this->setElement(3, 'main_where');

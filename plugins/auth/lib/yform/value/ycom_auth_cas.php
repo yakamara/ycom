@@ -132,7 +132,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 
         $user = rex_ycom_user::createUserByEmail($data);
         if (!$user || count($user->getMessages()) > 0) {
-            if ($this->params['debug']) {
+            if ($user && $this->params['debug']) {
                 dump($user->getMessages());
             }
             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_create_user }}';
