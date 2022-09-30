@@ -44,7 +44,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         $settings = $this->auth_loadSettings();
         // load external Metadata if possible
         try {
-            $idpSettings = IdPMetadataParser::parseRemoteXML($settings['idp']['entityId']); // @phpstan-ignore-line
+            $idpSettings = IdPMetadataParser::parseRemoteXML($settings['idp']['entityId']); /** @phpstan-ignore-line */
             $settings = IdPMetadataParser::injectIntoSettings($settings, $idpSettings);
         } catch (Exception $e) {
         }
@@ -156,7 +156,10 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                 $requestID = rex_ycom_auth::getSessionVar('SAML_LogoutRequestID', 'string', null);
 
                 try {
-                    $auth->processSLO(false, $requestID); // true => keep local session
+                    $auth->processSLO(false, $requestID, false, static function () {
+                        rex_ycom_auth::clearUserSession();
+                        self::auth_clearUserSession();
+                    }); // true => keep local session
                 } catch (Throwable $e) {
                     if ($this->params['debug']) {
                         dump($e);
