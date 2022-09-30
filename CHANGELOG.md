@@ -14,6 +14,7 @@ Version 4.0.8 - 27.09.2022
 * Fehler bei json, php Schreibweise und auth_passwort entfernt (Danke Peter Schulze)
 * Attribute sind nun bei auth_password möglich (Danke Norbert Micheel)
 * PHP 8.1 Anpassungen, REXSTAN Findings eingebracht.
+* SLO Session auflösen angepasst, vorher wurde komplette _SESSION gelöscht,
 
 
 Version 4.0.7 - 23.04.2022
