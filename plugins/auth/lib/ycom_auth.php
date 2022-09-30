@@ -324,7 +324,12 @@ class rex_ycom_auth
         return self::$me;
     }
 
-    /** @deprecated */
+    /**
+     * @param rex_article|rex_category $article
+     * @return bool
+     *
+     * @deprecated
+     */
     public static function checkPerm(rex_article &$article): bool
     {
         return self::articleIsPermitted($article);
