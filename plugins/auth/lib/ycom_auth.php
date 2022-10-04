@@ -326,7 +326,6 @@ class rex_ycom_auth
 
     /**
      * @param rex_article|rex_category $article
-     * @return bool
      *
      * @deprecated
      */
@@ -337,8 +336,6 @@ class rex_ycom_auth
 
     /**
      * @param rex_article|rex_category $article
-     * @param bool $xs
-     * @return bool
      */
     public static function articleIsPermitted(&$article, bool $xs = true): bool
     {

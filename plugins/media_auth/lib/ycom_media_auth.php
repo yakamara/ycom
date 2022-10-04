@@ -59,9 +59,11 @@ class rex_ycom_media_auth extends rex_yform_manager_dataset
                 $groups = explode(',', (string) $rex_media->getValue('ycom_groups'));
             }
 
-            $userGroups = [];
-            if ('' != $me->getValue('ycom_groups')) {
-                $userGroups = explode(',', $me->getValue('ycom_groups'));
+            $userGroups = $me->getValue('ycom_groups');
+            if (empty($userGroups)) {
+                $userGroups = [];
+            } else {
+                $userGroups = explode(',', $userGroups);
             }
 
             return rex_ycom_group::hasGroupPerm($groupType, $groups, $userGroups);

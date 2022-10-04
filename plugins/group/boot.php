@@ -32,6 +32,7 @@ rex_extension::register('YCOM_AUTH_USER_CHECK', static function (rex_extension_p
         return false;
     }
 
+    /** @var rex_article|rex_category $article */
     $article = $ep->getParam('article');
 
     if (1 != $article->getValue('ycom_auth_type')) {
