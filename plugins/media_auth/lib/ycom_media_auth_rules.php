@@ -62,11 +62,13 @@ class rex_ycom_media_auth_rules
                 }
                 rex_response::sendCacheControl();
                 rex_redirect($rule['action']['article_id'], '', ['returnTo' => $_SERVER['REQUEST_URI']]);
-                break;
+
+                // no break
             case 'redirect_wo_returnto':
                 rex_response::sendCacheControl();
                 rex_redirect($rule['action']['article_id'], '', []);
-                break;
+
+                // no break
             case 'header':
                 rex_response::setStatus($rule['action']['header']);
                 rex_response::sendContent('');

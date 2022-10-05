@@ -126,7 +126,6 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 
                 rex_response::sendCacheControl();
                 rex_redirect(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_not_ok'));
-                break;
 
                 // init Logout processs with returnTo or redirect from idp
             case 'slo':
