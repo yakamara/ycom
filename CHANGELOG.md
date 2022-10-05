@@ -1,6 +1,14 @@
 Changelog
 =========
 
+Version 4.0.9 - 05.10.2022
+--------------------------
+
+### Bugfixes und kleinere Anpassungen
+
+* Fehler in der articleIsPermitted,checkPerm Typübergabe angepasst 
+* session_start -> rex_login::startSession (Danke Alex Walther)
+
 Version 4.0.8 - 30.09.2022
 --------------------------
 
