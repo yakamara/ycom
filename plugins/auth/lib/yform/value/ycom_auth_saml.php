@@ -30,9 +30,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
             $this->auth_directLink = 1 == $this->getElement(5);
         }
 
-        if (PHP_SESSION_ACTIVE !== session_status()) {
-            rex_login::startSession();
-        }
+        rex_login::startSession();
 
         $settings = $this->auth_loadSettings();
         // load external Metadata if possible

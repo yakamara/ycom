@@ -29,9 +29,7 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
             $this->auth_directLink = 1 == $this->getElement(5) ? true : false;
         }
 
-        if (PHP_SESSION_ACTIVE !== session_status()) {
-            rex_login::startSession();
-        }
+        rex_login::startSession();
 
         $settings = $this->auth_loadSettings();
         $returnTo = $this->auth_getReturnTo();

@@ -16,9 +16,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 
     public function enterObject()
     {
-        if (PHP_SESSION_ACTIVE !== session_status()) {
-            rex_login::startSession();
-        }
+        rex_login::startSession();
 
         $casConfigPath = \rex_addon::get('ycom')->getDataPath($this->casFile);
         if (!file_exists($casConfigPath)) {
