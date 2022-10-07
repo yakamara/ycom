@@ -1,6 +1,14 @@
 Changelog
 =========
 
+Version 4.0.10 - 07.10.2022
+--------------------------
+
+### Bugfixes und kleinere Anpassungen
+
+* .tools Ordner entfernt, weil Bibliotheken übernommen wurden und andere überschrieben haben
+
+
 Version 4.0.9 - 05.10.2022
 --------------------------
 
