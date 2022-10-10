@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 4.0.11 - 10.10.2022
+--------------------------
+
+### Bugfixes und kleinere Anpassungen
+
+* Vendor psd/log wieder auf Version 1 gesetzt - war sonst inkompatibel zu rex_logger
+
 Version 4.0.10 - 07.10.2022
 --------------------------
 
