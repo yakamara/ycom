@@ -1,8 +1,8 @@
 {
     "require": {
-        "onelogin/php-saml": "^3.3",
-        "apereo/phpcas": "^1.3",
-        "league/oauth2-client": "^2.5",
+        "onelogin/php-saml": "^3",
+        "apereo/phpcas": "^1",
+        "league/oauth2-client": "^2",
         "psr/log": "^1"
     }
 }
