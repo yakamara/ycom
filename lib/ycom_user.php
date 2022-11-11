@@ -15,7 +15,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
 
     public function isInGroup(int $group_id): bool
     {
-        $ycom_groups = $this->getValue('ycom_groups');
+        $ycom_groups = strval($this->getValue('ycom_groups'));
 
         if ('' == $group_id) {
             return true;

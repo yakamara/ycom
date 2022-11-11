@@ -10,6 +10,7 @@ rex_ycom::addTable('rex_ycom_group');
 
 if (rex::isBackend()) {
     rex_extension::register('YCOM_ARTICLE_PERM_SELECT', static function (rex_extension_point $ep) {
+        /** @var rex_yform $yform */
         $yform = $ep->getSubject();
         $yform->setValueField('choice', [
             'name' => 'ycom_group_type',
@@ -41,12 +42,13 @@ rex_extension::register('YCOM_AUTH_USER_CHECK', static function (rex_extension_p
 
     /** @var rex_ycom_user|null $me */
     $me = $ep->getParam('me');
-    $type = $article->getValue('ycom_group_type');
+    $type = (string) $article->getValue('ycom_group_type');
     $userGroups = ($me) ? $me->getGroups() : [];
+    $articleGroups = (string) $article->getValue('ycom_groups');
 
     $groups = [];
-    if ('' != $article->getValue('ycom_groups')) {
-        $groups = explode(',', $article->getValue('ycom_groups'));
+    if ('' != $articleGroups) {
+        $groups = explode(',', $articleGroups);
     }
 
     return rex_ycom_group::hasGroupPerm($type, $groups, $userGroups);

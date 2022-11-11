@@ -22,7 +22,7 @@ class rex_yform_value_ycom_user extends rex_yform_value_abstract
             $this->params['form_output'][$this->getId()] = '
                 <p class="formtext">
                     <label class="text ' . $wc . '" for="' . $this->getFieldId() . '" >' . $this->getElement(3) . '</label>
-                    <input type="text" class="text inp_disabled" disabled="disabled"  id="' . $this->getFieldId() . '" value="' . htmlspecialchars($show_value) . '" />
+                    <input type="text" class="text inp_disabled" disabled="disabled"  id="' . $this->getFieldId() . '" value="' . htmlspecialchars(strval($show_value)) . '" />
                 </p>';
         }
 

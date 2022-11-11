@@ -16,13 +16,13 @@ rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) 
 
 if (!rex::isBackend()) {
     rex_extension::register('PACKAGES_INCLUDED', static function (rex_extension_point $ep) {
-        if (($redirect = rex_ycom_auth::init())) {
+        if ($redirect = rex_ycom_auth::init()) {
             rex_response::sendCacheControl();
             rex_response::sendRedirect($redirect);
         }
     });
 
-    /* @deprecated use EP ART_IS_PERMITTED and CAT_IS_PERMITTED instead´*/
+    /* @deprecated use EP ART_IS_PERMITTED and CAT_IS_PERMITTED instead´ */
     rex_extension::register('YREWRITE_ARTICLE_PERM', static function (rex_extension_point $ep) {
         $params = $ep->getParams();
         return rex_ycom_auth::articleIsPermitted($params['article']);
@@ -30,7 +30,7 @@ if (!rex::isBackend()) {
 
     rex_extension::register(['ART_IS_PERMITTED', 'CAT_IS_PERMITTED'], static function (rex_extension_point $ep) {
         $params = $ep->getParams();
-        return rex_ycom_auth::articleIsPermitted($params['element'], $ep->getSubject());
+        return rex_ycom_auth::articleIsPermitted($params['element'], $ep->getSubject() ? true : false);
     });
 
     rex_extension::register('YCOM_AUTH_MATCHING', static function (rex_extension_point $ep) {
@@ -44,10 +44,10 @@ if (!rex::isBackend()) {
                 $data = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_OAUTH2_MATCHING', $data, ['Userdata' => $Userdata]));
                 break;
             case 'saml':
-                $data =  rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_SAML_MATCHING', $data, ['Userdata' => $Userdata]));
+                $data = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_SAML_MATCHING', $data, ['Userdata' => $Userdata]));
                 break;
             case 'cas':
-                $data =  rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_CAS_MATCHING', $data, ['Userdata' => $Userdata]));
+                $data = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_CAS_MATCHING', $data, ['Userdata' => $Userdata]));
                 break;
         }
 
