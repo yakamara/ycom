@@ -15,6 +15,15 @@ page:
             pjax: false
             itemclass: pull-right
             icon: rex-icon fa-info-circle
+        log:
+            title: 'translate:ycom_log'
+            perm: admin[]
+            itemclass: pull-right
+
+pages:
+    system/log/ycom_user:
+        title: translate:ycom_user_log
+        perm: admin
 
 requires:
     packages:

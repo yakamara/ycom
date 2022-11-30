@@ -18,12 +18,19 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_db
 
         switch ($action) {
             case 'delete':
+                rex_ycom_log::log($user, rex_ycom_log::TYPE_DELETE, [
+                    'self delete',
+                ]);
                 rex_ycom_auth::deleteUser($user->getValue('id'));
                 rex_ycom_auth::clearUserSession();
 
                 break;
             case 'update':
             default:
+                rex_ycom_log::log($user, rex_ycom_log::TYPE_UPDATE, [
+                    'self update',
+                ]);
+
                 $this->params['main_table'] = rex_ycom_user::table()->getTableName();
                 $this->params['main_where'] = 'id='.(int) (rex_ycom_user::getMe() ? rex_ycom_user::getMe()->getId() : 0);
 
