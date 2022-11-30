@@ -50,7 +50,9 @@ class rex_ycom_auth
           3: has logged out
           4: login failed
         */
-        $params['filter'] = ['status > 0'];
+        $params['filter'] = [
+            'status > 0'
+        ];
         $login_status = self::login($params);
 
         // set redirect after Login
