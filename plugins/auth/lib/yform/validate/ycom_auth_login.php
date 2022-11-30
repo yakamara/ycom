@@ -54,4 +54,12 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
     {
         return 'ycom_auth_login -> prüft ob leer, beispiel: validate|ycom_auth_login|label1=request1,label2=request2|status>0|warning_message|opt:load_field1,load_field2,load_field3|[no_db] ';
     }
+
+    public function preAction(): void
+    {
+        $me = rex_ycom_user::getMe();
+        if ($me) {
+            rex_ycom_log::log($me, rex_ycom_log::TYPE_LOGIN);
+        }
+    }
 }

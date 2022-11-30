@@ -72,3 +72,17 @@ docs = Dokumentation
 ycom_docs_tricks = Tricks
 ycom_docs_user_groups = User und Gruppen auslesen
 ycom_docs = Dokumentation
+
+ycom_log = Log
+ycom_user_log = YCom-User-Log
+ycom_user_log_title = Log-Übersicht
+ycom_user_log_warning_logisinactive = YCom-User-Log ist inaktiv. Wir empfehlen es zu aktivieren. <a href="{0}">aktivieren</a>
+ycom_user_log_warning_logisactive  = YCom-User-Log ist aktiv. <a href="{0}">deaktivieren</a>
+ycom_user_log_activated = YCom-User-Log wurde aktiviert
+ycom_user_log_deactivated = YCom-User-Log wurde deaktiviert
+ycom_user_log_time = Zeitstempel
+ycom_user_log_user_id = User-Id
+ycom_user_log_email = E-Mail
+ycom_user_log_type = Type
+ycom_user_log_params = Params
+ycom_user_log_ip = IP

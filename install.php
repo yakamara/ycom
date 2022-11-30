@@ -8,7 +8,7 @@
 rex_yform_manager_table::deleteCache();
 
 $content = rex_file::get(rex_path::addon('ycom', 'install/tablesets/yform_user.json'));
-if ($content) {
+if (is_string($content) && '' != $content) {
     rex_yform_manager_table_api::importTablesets($content);
 }
 
