@@ -21,7 +21,8 @@ if ($page) {
     foreach ($mdFiles as $key => $mdFile) {
         $keyWithoudPrio = mb_substr($key, 3);
         $currenMDFileWithoudPrio = mb_substr($currenMDFile, 3);
-        $page->addSubpage((new rex_be_page($key, rex_i18n::msg('ycom_docs_'.$keyWithoudPrio)))
+        $page->addSubpage(
+            (new rex_be_page($key, rex_i18n::msg('ycom_docs_'.$keyWithoudPrio)))
             ->setSubPath($mdFile)
             ->setHref('index.php?page=ycom/docs&mdfile='.$key)
             ->setIsActive($key == $currenMDFile)
@@ -42,7 +43,6 @@ $fragment->setVar('toc', $Toc, false);
 $content = $fragment->parse('core/page/docs.php');
 
 $fragment = new rex_fragment();
-// $fragment->setVar('title', rex_i18n::msg('package_help') . ' ', false);
+$fragment->setVar('title', rex_i18n::msg('package_help') . ' ', false);
 $fragment->setVar('body', $content, false);
 echo $fragment->parse('core/page/section.php');
-

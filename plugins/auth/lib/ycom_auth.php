@@ -51,7 +51,7 @@ class rex_ycom_auth
           4: login failed
         */
         $params['filter'] = [
-            'status > 0'
+            'status > 0',
         ];
         $login_status = self::login($params);
 
@@ -449,11 +449,7 @@ class rex_ycom_auth
         rex_set_session(self::$sessionKey, $sessionVars);
     }
 
-    /**
-     * @param string|null $value
-     * @param int|null $time
-     */
-    public static function setCookieVar(string $key, $value, $time = null): void
+    public static function setCookieVar(string $key, string $value = null, int $time = null): void
     {
         $sessionConfig = rex::getProperty('session', []);
         setcookie($key, $value ?? '', $time ?? (time() + 3600), '/', $sessionConfig['frontend']['cookie']['domain'] ?? ''); // $sessionConfig['frontend']['cookie']['path']
@@ -558,6 +554,7 @@ class rex_ycom_auth
      */
     public static function getReturnTo(array $returnTos, array $allowedDomains): string
     {
+        $return = '';
         $returnTosWithDomains = [];
         foreach ($returnTos as $returnTo) {
             if ('' != $returnTo) {
@@ -579,16 +576,18 @@ class rex_ycom_auth
         foreach ($returnTosWithDomains as $returnTosWithDomain) {
             if ('' != $returnTosWithDomain) {
                 if (0 == count($allowedDomains)) {
-                    return $returnTosWithDomain;
+                    $return = $returnTosWithDomain;
+                    break;
                 }
                 foreach ($allowedDomains as $allowedDomain) {
                     if (substr($returnTosWithDomain, 0, strlen($allowedDomain)) == $allowedDomain) {
-                        return $returnTosWithDomain;
+                        $return = $returnTosWithDomain;
+                        break;
                     }
                 }
             }
         }
 
-        return '';
+        return $return;
     }
 }
