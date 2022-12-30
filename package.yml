@@ -28,7 +28,7 @@ pages:
 requires:
     php: '>=7.4'
     packages:
-        yform: '>=4.0.0'
+        yform: '>=4.0.4'
         yrewrite: '>=2.6'
     redaxo: '^5.13.0'
 
