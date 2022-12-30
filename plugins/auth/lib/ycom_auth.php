@@ -197,8 +197,20 @@ class rex_ycom_auth
                         // session fixation
                         self::regenerateSessionId();
                     } else {
-                        ++$user->login_tries;
-                        $user->save();
+                        $user->setValue('login_tries', $user->getValue('login_tries') + 1);
+                        // rex_sql -> no validations on fields wanted, or datestamp updates
+                        rex_sql::factory()
+                            ->setTable(rex_ycom_user::table())
+                            ->setWhere(['id' => $user->getId()])
+                            ->setValue('login_tries', $user->getValue('login_tries'))
+                            ->update();
+
+                        rex_ycom_log::log($user, rex_ycom_log::TYPE_LOGIN_FAILED, [
+                            (string) json_encode([
+                                'SERVER' => $_SERVER,
+                                'REQUEST' => $_REQUEST,
+                            ]),
+                        ]);
                     }
                 }
 
