@@ -1,6 +1,23 @@
 Changelog
 =========
 
+Version 4.1.0 - x.x.2022
+--------------------------
+
+### Neu
+
+* Userlog ergänzt. Erscheint auch in System unter Logdateien
+* min Version 7.4
+
+### Bugfixes und kleinere Anpassungen
+
+* Validate email type im import set angepasst
+* dummy composer.json angelegt
+* Update/Install wurden doppelt ausgeführt
+* CodeStyle und REXSTAN Abgleich
+* Statusabfrage beim Login wurde nicht in allen Fällen richtig abgefragt
+* login_tries bei einem Failed Login aktualisiert und validierte das ganze Userobjekt, jetzt nur noch die Anzahl der login_tries
+
 Version 4.0.11 - 10.10.2022
 --------------------------
 
