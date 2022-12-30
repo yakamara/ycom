@@ -74,9 +74,9 @@ if($ycom_user) {
 <?php
 
 $ycom_groups = rex_ycom_group::getGroups();
-    foreach($ycom_groups as $ycom_group) {
-        # dump($ycom_group);
-        $ycom_group->getValue("name"); // Name der Gruppe
+    foreach($ycom_groups as $ycom_group_id => $ycom_group_name) {
+        dump($ycom_group_id); // ID der Gruppe
+        dump($ycom_group_name); // Name der Gruppe
     }
 }
 
