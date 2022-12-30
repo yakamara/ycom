@@ -26,6 +26,7 @@ pages:
         perm: admin
 
 requires:
+    php: '>=7.4'
     packages:
         yform: '>=4.0.0'
         yrewrite: '>=2.6'
