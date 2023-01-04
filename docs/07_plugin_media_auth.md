@@ -15,6 +15,41 @@ Dazu ist das YRrewrite-Plugin `media_auth` nötig, das alle Medien auf ihre Bere
 3. Unter YCom / Einstellungen unter dem Tab "Medien" Authentifizierung aktivieren
 4. Im Medienpool den Dateien entsprechende Rechte geben.
 
+## optional: Mediendateien nach Upload schützen
+
+Nutze den EP `MEDIA_ADDED`, um Medienuploads in eine bestimmte Kategorie standardmäßig zu schützen. Anbei ein Beispiel, das man an seine eigenen Anforderungen anpassen kann.
+
+In die `boot.php` deines Addons oder des Project-Addons notieren:
+
+```php
+if (rex::isBackend() && rex::getUser()) {
+    rex_extension::register('MEDIA_ADDED', ['project','media_added'], rex_extension::LATE);
+}
+```
+
+In deinem Addon-Code oder Project-Addon notieren, hier: `lib/project.php`:
+
+```php
+<?php
+class project
+{
+    public static function media_added($ep)
+    {
+        $mediafile = &$ep->getParams();
+        $media = rex_media::get($mediafile['filename']);
+
+        if ($media->getCategory()->getId() == 1 || $media->getCategory()->getParent()->getId() == 1) {
+            $sql = rex_sql::factory();
+            $sql->setWhere('filename="'.$mediafile['filename'].'"');
+            $sql->setTable('rex_media');
+            $sql->setValue('ycom_auth_type', 1);
+            $sql->update();
+        }
+        $media = rex_media::get($mediafile['filename']);
+    }
+}
+```
+
 ## Fehlerbehebung
 
 * **Das Schützen der Datei funktioniert nicht**: Sicherstellen, dass YRewrite installiert ist, aktiviert ist und die `.htaccess` im Hauptverzeichnis folgende Zeile enthält: 
