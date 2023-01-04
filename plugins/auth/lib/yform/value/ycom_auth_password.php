@@ -29,8 +29,8 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
 
     public function preAction(): void
     {
-        $password = '';
-        $hashed_value = '';
+        $password = null;
+        $hashed_value = null;
 
         if (isset($this->params['sql_object'])) {
             $hashed_value = $this->params['sql_object']->getValue($this->getName());
@@ -53,9 +53,12 @@ class rex_yform_value_ycom_auth_password extends rex_yform_value_abstract
             }
         }
 
-        self::enterObject();
-        $this->params['value_pool']['sql'][$this->getName()] = $hashed_value;
-        $this->params['value_pool']['email'][$this->getName()] = $password;
+        if ($password) {
+            $this->params['value_pool']['email'][$this->getName()] = $password;
+        }
+        if ($hashed_value) {
+            $this->params['value_pool']['sql'][$this->getName()] = $hashed_value;
+        }
     }
 
     public function getDescription(): string
