@@ -7,6 +7,7 @@ Version 4.1.0 - x.x.2022
 ### Neu
 
 * Userlog ergänzt. Erscheint auch in System unter Logdateien
+* Activation Key Unique in Usertabelle ergönzt
 * min Version 7.4
 
 ### Bugfixes und kleinere Anpassungen
@@ -17,6 +18,10 @@ Version 4.1.0 - x.x.2022
 * CodeStyle und REXSTAN Abgleich
 * Statusabfrage beim Login wurde nicht in allen Fällen richtig abgefragt
 * login_tries bei einem Failed Login aktualisiert und validierte das ganze Userobjekt, jetzt nur noch die Anzahl der login_tries
+* Dokuanpassungen
+* Importset von Altlasten bereinigt. Neuer Tableset Export über yform übernommen
+
+Danke an Alex Walther, Daniel Springer, Norbert Micheel, Peter Schulze und überhaupt :)
 
 Version 4.0.11 - 10.10.2022
 --------------------------
