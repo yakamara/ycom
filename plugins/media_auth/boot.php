@@ -23,10 +23,13 @@ rex_extension::register(['MEDIA_MANAGER_BEFORE_SEND'], function (rex_extension_p
     if ($ycom_ignore) {
         return;
     }
-    $redirect = rex_ycom_auth::init();
-    if (!rex_ycom_media_auth::checkPerm($ep->getSubject())) {
-        $rules = new rex_ycom_media_auth_rules();
-        $rules->check($this->getConfig('media_auth_rule'));
+    $plugin = rex_plugin::get('ycom','media_auth');
+    if ($plugin->isAvailable()) {
+        $redirect = rex_ycom_auth::init();
+        if (!rex_ycom_media_auth::checkPerm($ep->getSubject())) {
+            $rules = new rex_ycom_media_auth_rules();
+            $rules->check($plugin->getConfig('media_auth_rule'));
+        }
     }
 });
 

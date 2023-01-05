@@ -39,10 +39,15 @@ class rex_ycom_media_auth_rules
         ];
     }
 
-    public function check(string $rule_name): void
+    /**
+     * @param string|null $rule_name
+     * @throws rex_exception
+     * @return void
+     */
+    public function check($rule_name): void
     {
         if (!array_key_exists($rule_name, $this->rules)) {
-            $rule_name = 'redirect';
+            $rule_name = 'header_perm_denied';
         }
 
         $rule = $this->rules[$rule_name];
@@ -71,6 +76,7 @@ class rex_ycom_media_auth_rules
                 // no break
             case 'header':
                 rex_response::setStatus($rule['action']['header']);
+                rex_response::sendCacheControl();
                 rex_response::sendContent('');
                 break;
 
