@@ -22,7 +22,7 @@ Version 4.1.0 - 5.1.2023
 * Importset von Altlasten bereinigt. Neuer Tableset Export über yform übernommen
 * MediaAuthConfig wurde falsch geladen
 
-Danke an Alex Walther, Daniel Springer, Norbert Micheel, Oliver Kreischerm, Peter Schulze und überhaupt :)
+Danke an Alex Walther, Daniel Springer, Norbert Micheel, Oliver Kreischer, Peter Schulze und überhaupt :)
 
 Version 4.0.11 - 10.10.2022
 --------------------------
