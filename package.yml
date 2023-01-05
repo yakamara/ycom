@@ -1,6 +1,6 @@
 package: ycom
-version: '4.0.11'
-author: Yakamara Media GmbH & Co. KG, concedra GmbH
+version: '4.1.0'
+author: Yakamara Media GmbH & Co. KG
 supportpage: https://github.com/yakamara/redaxo_ycom/
 
 page:

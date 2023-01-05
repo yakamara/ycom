@@ -1,6 +1,6 @@
 package: ycom/auth
-version: '4.0.11'
-author: Yakamara Media GmbH & Co. KG / concedra GmbH
+version: '4.1.0'
+author: Yakamara Media GmbH & Co. KG
 title: 'Auth'
 nav_icon: fa-minus
 description: 'translate:ycom_auth_plugin'
