@@ -37,7 +37,7 @@ if ($rexUser) {
     $permission_info = '';
     if (!$rexUser->hasPerm('ycomArticlePermissions[]')) {
         $yform->setObjectparams('submit_btn_show', false);
-        $permission_info .= '<script>$( document ).ready(function() { $("#rex-page-sidebar-ycom_auth-perm :input").attr("disabled", true); }); </script>';
+        $permission_info .= '<script nonce="' . rex_response::getNonce() . '">$( document ).ready(function() { $("#rex-page-sidebar-ycom_auth-perm :input").attr("disabled", true); }); </script>';
         $permission_info .= '<div><p class="alert alert-danger">'.$addon->i18n('no_permission_to_edit').'</p></div>';
     } else {
         $yform->setActionField('db', [rex::getTable('article'), 'id = ' . $article_id]);
