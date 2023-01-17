@@ -51,7 +51,14 @@ if ($script) {
     $funcName = uniqid('rex_ycom_password_create'.$this->getId());
     $span = '<span class="input-group-btn">
     <button type="button" class="btn btn-default getNewPass" onclick="'.$funcName.'refresh('.$this->getId().')"><span class="fa fa-refresh"></span></button>
-    </span>'; ?><script type="text/javascript" nonce="<?php echo rex_response::getNonce(); ?>">
+    </span>';
+
+    $nonce = '';
+    if (method_exists('rex_response', 'getNonce')) {
+        $nonce = ' nonce="' . rex_response::getNonce() . '"';
+    }
+
+    ?><script type="text/javascript"<?php echo $nonce; ?>>
 
         // Credit to @Blender https://stackoverflow.com/users/464744/blender
         String.prototype.pick = function(min, max) {
