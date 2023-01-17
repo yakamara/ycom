@@ -283,6 +283,10 @@ class rex_ycom_auth
 
                 $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN', $me, []));
                 $me->save();
+
+                rex_response::sendCacheControl('no-store');
+                rex_response::setHeader('Pragma', 'no-cache');
+                
             } else {
                 $loginStatus = 0; // not logged in
 
