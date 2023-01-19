@@ -29,6 +29,8 @@ if ('update' == rex_request('func', 'string')) {
     $this->setConfig('auth_rule', rex_request('auth_rule', 'string'));
     $this->setConfig('auth_cookie_ttl', rex_request('auth_cookie_ttl', 'int'));
     $this->setConfig('login_field', stripslashes(str_replace('"', '', rex_request('login_field', 'string'))));
+    $this->setConfig('session_max_overall_duration', rex_request('session_max_overall_duration', 'int'));
+    $this->setConfig('session_duration', rex_request('session_duration', 'int'));
 
     echo rex_view::success($this->i18n('ycom_auth_settings_updated'));
 }
@@ -85,19 +87,21 @@ $content .= '
 
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_login_ok">'.$this->i18n('ycom_auth_config_id_jump_ok').' <small>[article_id_jump_ok]</small></label>
+				<label for="rex-form-article_login_ok">'.$this->i18n('ycom_auth_config_id_jump_ok').'</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(5, 'article_id_jump_ok', intval($this->getConfig('article_id_jump_ok'))) .'
+				<small>[article_id_jump_ok]</small>
 			</div>
 		</div>
 
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_logout">'.$this->i18n('ycom_auth_config_id_jump_logout').' <small>[article_id_jump_logout]</small></label>
+				<label for="rex-form-article_logout">'.$this->i18n('ycom_auth_config_id_jump_logout').'</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(7, 'article_id_jump_logout', intval($this->getConfig('article_id_jump_logout'))) .'
+				<small>[article_id_jump_logout]</small>
 			</div>
 		</div>
 
@@ -106,28 +110,31 @@ $content .= '
 				<label for="rex-form-article_denied">'.$this->i18n('ycom_auth_config_id_jump_denied').'
 				<small>[article_id_jump_denied]</small>
 				</label>
-				<small><br />'.$this->i18n('ycom_auth_config_id_jump_denied_notice').'</small>
+
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(8, 'article_id_jump_denied', intval($this->getConfig('article_id_jump_denied'))) .'
+				<small>'.$this->i18n('ycom_auth_config_id_jump_denied_notice').'</small>
 			</div>
 		</div>
 
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_password">'.$this->i18n('ycom_auth_config_id_jump_password').' <small>[article_id_jump_password]</small></label>
+				<label for="rex-form-article_password">'.$this->i18n('ycom_auth_config_id_jump_password').'</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(9, 'article_id_jump_password', intval($this->getConfig('article_id_jump_password'))) .'
+				<small>[article_id_jump_password]</small>
 			</div>
 		</div>
 
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_termsofuse">'.$this->i18n('ycom_auth_config_id_jump_termsofuse').' <small>[article_id_jump_termsofuse]</small></label>
+				<label for="rex-form-article_termsofuse">'.$this->i18n('ycom_auth_config_id_jump_termsofuse').'</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(10, 'article_id_jump_termsofuse', intval($this->getConfig('article_id_jump_termsofuse'))) .'
+				<small>[article_id_jump_termsofuse]</small>
 			</div>
 		</div>
 
@@ -138,38 +145,42 @@ $content .= '
 
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_login">'.$this->i18n('ycom_auth_config_id_login').' <small>[article_id_login]</small></label>
+				<label for="rex-form-article_login">'.$this->i18n('ycom_auth_config_id_login').'</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(11, 'article_id_login', intval($this->getConfig('article_id_login'))) .'
+				<small>[article_id_login]</small>
 			</div>
 		</div>
 
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_login">'.$this->i18n('ycom_auth_config_id_logout').' <small>[article_id_logout]</small></label>
+				<label for="rex-form-article_login">'.$this->i18n('ycom_auth_config_id_logout').'</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(12, 'article_id_logout', intval($this->getConfig('article_id_logout'))) .'
+				<small>[article_id_logout]</small>
 			</div>
 		</div>
 
 
         <div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_register">'.$this->i18n('ycom_auth_config_id_register').' <small>[article_id_register]</small></label>
+				<label for="rex-form-article_register">'.$this->i18n('ycom_auth_config_id_register').'</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(13, 'article_id_register', intval($this->getConfig('article_id_register'))) .'
+				<small>[article_id_register]</small>
 			</div>
 		</div>
 
         <div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_password">'.$this->i18n('ycom_auth_config_id_password').' <small>[article_id_password]</small></label>
+				<label for="rex-form-article_password">'.$this->i18n('ycom_auth_config_id_password').'</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(14, 'article_id_password', $this->getConfig('article_id_password')) .'
+				<small>[article_id_password]</small>
 			</div>
 		</div>
 
@@ -201,14 +212,35 @@ $content .= '
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row abstand">
                 <div class="col-xs-12 col-sm-6">
                     <label for="auth_cookie_ttl_select">' . $this->i18n('ycom_auth_config_auth_cookie_ttl') . '</label>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                 '.$sel_authcookiettl->get().'
+                </div>
             </div>
-        </div>
+
+            <div class="row abstand">
+                <div class="col-xs-12 col-sm-6">
+                    <label for="auth_session_max_overall_duration">' . $this->i18n('ycom_auth_config_session_max_overall_duration') . '</label>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <input class="form-control" type="text" name="session_max_overall_duration" value="' . $this->getConfig('session_max_overall_duration', 21600) . '" />
+                    <small>[session_max_overall_duration]</small>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <label for="auth_session_duration">' . $this->i18n('ycom_auth_config_session_duration') . '</label>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <input class="form-control" type="text" name="session_duration" value="' . $this->getConfig('session_duration', 3600) . '" />
+                    <small>[session_duration]</small>
+                </div>
+            </div>
+
     </fieldset>
 
     <fieldset>
@@ -216,10 +248,11 @@ $content .= '
 
         <div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_login_failed">'.$this->i18n('ycom_auth_config_id_jump_not_ok').' <small>[article_id_jump_not_ok]</small></label>
+				<label for="rex-form-article_login_failed">'.$this->i18n('ycom_auth_config_id_jump_not_ok').'</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				'. rex_var_link::getWidget(6, 'article_id_jump_not_ok', $this->getConfig('article_id_jump_not_ok', '')) .'
+				<small>[article_id_jump_not_ok]</small>
 			</div>
 		</div>
 

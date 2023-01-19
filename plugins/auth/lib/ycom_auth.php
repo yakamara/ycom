@@ -166,7 +166,17 @@ class rex_ycom_auth
         }
 
         if (
-            (!empty($params['loginName']) && ((isset($params['ignorePassword']) && $params['ignorePassword']) || !empty($params['loginPassword'])))
+            (
+                !empty($params['loginName']) &&
+                (
+                    (
+                        isset($params['ignorePassword']) &&
+                        $params['ignorePassword']
+                    )
+                    ||
+                    !empty($params['loginPassword'])
+                )
+            )
             || $sessionUserID
             || $sessionKey
         ) {
@@ -180,6 +190,9 @@ class rex_ycom_auth
                 }
 
                 $loginUsers = $userQuery->find();
+
+                dump($userQuery);
+                dump($loginUsers);
 
                 if (1 == count($loginUsers)) {
                     /** @var rex_ycom_user $user */
@@ -263,7 +276,42 @@ class rex_ycom_auth
                 }
             }
 
-            if ($me) {
+            try {
+                if (!$me) {
+                    throw new Exception('no user found');
+                }
+
+                /** @var rex_plugin $ycom_auth_plugin */
+                $ycom_auth_plugin = rex_plugin::get('ycom', 'auth');
+                $dt_current = new DateTimeImmutable();
+
+                // ----- Session duration - last action - check
+                $session_last_action_time = self::getSessionVar('session_last_action_time', 'string', date('Y-m-d H:i:s'));
+                $dt_last_action_time = new DateTimeImmutable($session_last_action_time);
+                $dt_last_action_time_duration = $dt_last_action_time->add(new DateInterval('PT'.(int) $ycom_auth_plugin->getConfig('session_duration', 3600).'S'));
+
+                if ($dt_last_action_time_duration < $dt_current) {
+                    self::clearUserSession();
+                    throw new Exception('active session expired');
+                }
+
+                self::setSessionVar('session_last_action_time', date('Y-m-d H:i:s'));
+
+                // ----- Session Overall duration check
+
+                $session_start_time = self::getSessionVar('session_start_time', 'string', null);
+                if (!$session_start_time) {
+                    $session_start_time = date('Y-m-d H:i:s');
+                    self::setSessionVar('session_start_time', $session_start_time);
+                }
+                $dt_start_time = new DateTimeImmutable($session_start_time);
+                $dt_start_time_duration = $dt_start_time->add(new DateInterval('PT'.(int) $ycom_auth_plugin->getConfig('session_max_overall_duration', 21600).'S'));
+
+                if ($dt_start_time_duration < $dt_current) {
+                    self::clearUserSession();
+                    throw new Exception('max session duration reached');
+                }
+
                 self::setUser($me);
                 $loginStatus = 1; // is logged in
 
@@ -286,8 +334,7 @@ class rex_ycom_auth
 
                 rex_response::sendCacheControl('no-store');
                 rex_response::setHeader('Pragma', 'no-cache');
-                
-            } else {
+            } catch (Throwable $e) {
                 $loginStatus = 0; // not logged in
 
                 if (!empty($params['loginName'])) {
