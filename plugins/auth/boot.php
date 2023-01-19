@@ -14,7 +14,7 @@ rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) 
     rex_yform::addTemplatePath($this->getPath('ytemplates'));
 });
 
-if (!rex::isBackend()) {
+if (rex::isFrontend()) {
     rex_extension::register('PACKAGES_INCLUDED', static function (rex_extension_point $ep) {
         if ($redirect = rex_ycom_auth::init()) {
             rex_response::sendCacheControl();
