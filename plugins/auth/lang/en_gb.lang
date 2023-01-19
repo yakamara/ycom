@@ -65,6 +65,9 @@ ycom_auth_config_id_password = Reset password
 ycom_auth_config_auth_cookie_ttl = Cookie lifespan for "remain signed in"
 ycom_days = {0} days
 
+ycom_auth_config_session_max_overall_duration = Session duration overall in seconds
+ycom_auth_config_session_duration = Session duration when inactive in seconds
+
 ycom_auth_config_extern = authentication (SAML/CAS/OAUTH2)
 
 ycom_auth_howtoread_configvalues = Values can be read via: rex_config::get('ycom/auth','article_id_login', null);

@@ -65,6 +65,10 @@ ycom_auth_config_id_password = Passwort zurücksetzen
 ycom_auth_config_auth_cookie_ttl = Cookie-Laufzeit für `eingeloggt bleiben`
 ycom_days = {0} Tage
 
+ycom_auth_config_session_max_overall_duration = Maximale Gesamtsessiondauer in Sekunden (danach läuft die Session immer ab)
+ycom_auth_config_session_duration = Maximale Sessiondauer bei Inaktivität in Sekunden
+
+
 ycom_auth_config_extern = Authentifizierung (SAML/CAS/OAUTH2)
 
 ycom_auth_howtoread_configvalues = Werte sind über: rex_config::get('ycom/auth','article_id_login', null); auslesbar
