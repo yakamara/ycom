@@ -191,9 +191,6 @@ class rex_ycom_auth
 
                 $loginUsers = $userQuery->find();
 
-                dump($userQuery);
-                dump($loginUsers);
-
                 if (1 == count($loginUsers)) {
                     /** @var rex_ycom_user $user */
                     $user = $loginUsers[0];
