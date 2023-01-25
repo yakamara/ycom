@@ -18,12 +18,22 @@ rex_extension::register(['MEDIA_IS_PERMITTED'], static function (rex_extension_p
     return \rex_ycom_media_auth::checkFrontendPerm($rex_media);
 });
 
-rex_extension::register(['MEDIA_MANAGER_BEFORE_SEND'], function (rex_extension_point $ep) {
+rex_extension::register(['MEDIA_MANAGER_BEFORE_SEND'], static function (rex_extension_point $ep) {
     $ycom_ignore = $ep->getParam('ycom_ignore');
+
+    /** @var rex_media_manager $media_manager */
+    $media_manager = $ep->getSubject();
+    $media = $media_manager->getMedia();
+
+    if (rex_path::media() != dirname($media->getMediaPath())) {
+        $ep->setParam('ycom_ignore', true);
+    }
+
     if ($ycom_ignore) {
         return;
     }
-    $plugin = rex_plugin::get('ycom','media_auth');
+
+    $plugin = rex_plugin::get('ycom', 'media_auth');
     if ($plugin->isAvailable()) {
         $redirect = rex_ycom_auth::init();
         if (!rex_ycom_media_auth::checkPerm($ep->getSubject())) {
