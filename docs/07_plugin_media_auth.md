@@ -56,3 +56,18 @@ class project
 `RewriteRule ^media/(.*) %{ENV:BASE}/index.php?rex_media_type=default&rex_media_file=$1&%{QUERY_STRING} [B]`
 
 * **Bestimmte Dateitypen werden im Frontend nicht mehr korrekt dargestellt / heruntergeladen**: Bitte hier melden: [YRewrite GitHub](https://github.com/yakamara/redaxo_yrewrite/issues/235)
+
+
+## Überprüfung von Medien, welche im MediaManager einen eigene Pfad haben
+
+```
+rex_extension::register(['MEDIA_MANAGER_BEFORE_SEND'], function (rex_extension_point $ep) {
+    /** @var rex_media_manager $mm */
+    $mm = $ep->getSubject();
+    $originalMediaPath = dirname($mm->getMedia()->getSourcePath());
+    $deinPfad = '.../testbilder/';
+    if ($originalMediaPath == $deinPfad) {
+        // eigene überprüfung
+    }
+}, rex_extension::EARLY);
+```
