@@ -8,6 +8,7 @@ class rex_ycom_log
     public const TYPE_UPDATE = 'update';
     public const TYPE_CLICK = 'click';
     public const TYPE_LOGIN_FAILED = 'login_failed';
+    public const TYPE_LOGIN_NOT_FOUND = 'login_not_found';
     public const TYPE_REGISTERD = 'registerd';
     public const TYPE_DELETE = 'delete';
     public const TYPES = [self::TYPE_ACCESS, self::TYPE_LOGIN, self::TYPE_LOGOUT, self::TYPE_UPDATE, self::TYPE_CLICK, self::TYPE_LOGIN_FAILED, self::TYPE_REGISTERD, self::TYPE_DELETE];
@@ -43,7 +44,7 @@ class rex_ycom_log
                 self::$active = (1 === $addon->getConfig('log')) ? true : false;
             }
         }
-        return (self::$active) ? true: false;
+        return (self::$active) ? true : false;
     }
 
     public static function logFolder(): string
@@ -62,7 +63,7 @@ class rex_ycom_log
     }
 
     /**
-     * @param rex_ycom_user $user
+     * @param rex_ycom_user|string $user
      * @param array<int, string> $params
      */
     public static function log($user, string $type = '', array $params = []): void
@@ -74,11 +75,23 @@ class rex_ycom_log
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
 
+        $id = '';
+        $login = '';
+        if (is_string($user)) {
+            /** @var string $user */
+            $id = '';
+            $login = $user;
+        } else if ('rex_ycom_user' == get_class($user)) {
+            /** @var rex_ycom_user $user */
+            $id = $user->getId();
+            $login = $user->getValue('login');
+        }
+
         $log = new rex_log_file(self::logFile(), self::$maxFileSize);
         $data = [
             $ip,
-            $user->getId(),
-            $user->getValue('email'),
+            $id,
+            $login,
             $type,
             implode(',', $params),
         ];

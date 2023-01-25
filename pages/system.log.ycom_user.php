@@ -36,7 +36,7 @@ $content = '
                         <th>' . rex_i18n::msg('ycom_user_log_time') . '</th>
                         <th>' . rex_i18n::msg('ycom_user_log_ip') . '</th>
                         <th>' . rex_i18n::msg('ycom_user_log_user_id') . '</th>
-                        <th>' . rex_i18n::msg('ycom_user_log_email') . '</th>
+                        <th>' . rex_i18n::msg('ycom_auth_config_login_field') . '</th>
                         <th>' . rex_i18n::msg('ycom_user_log_type') . '</th>
                         <th>' . rex_i18n::msg('ycom_user_log_params') . '</th>
                     </tr>

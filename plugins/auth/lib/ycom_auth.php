@@ -222,6 +222,13 @@ class rex_ycom_auth
                             ]),
                         ]);
                     }
+                } else {
+                    rex_ycom_log::log($params['loginName'], rex_ycom_log::TYPE_LOGIN_NOT_FOUND, [
+                        (string) json_encode([
+                            'SERVER' => $_SERVER,
+                            'REQUEST' => $_REQUEST,
+                        ]),
+                    ]);
                 }
 
                 if (!$me) {
