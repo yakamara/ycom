@@ -19,6 +19,25 @@ rex_sql_table::get(rex::getTable('article'))
     ->ensureColumn(new rex_sql_column('ycom_auth_type', 'int', false, '0'))
     ->alter();
 
+rex_sql_table::get(rex::getTable('ycom_user_session'))
+    ->ensureColumn(new rex_sql_column('session_id', 'varchar(255)'))
+    ->ensureColumn(new rex_sql_column('user_id', 'int(10) unsigned'))
+    ->ensureColumn(new rex_sql_column('ip', 'varchar(39)')) // max for ipv6
+    ->ensureColumn(new rex_sql_column('useragent', 'varchar(255)'))
+    ->ensureColumn(new rex_sql_column('starttime', 'datetime'))
+    ->ensureColumn(new rex_sql_column('last_activity', 'datetime'))
+    ->setPrimaryKey('session_id')
+    ->ensureForeignKey(
+        new rex_sql_foreign_key(
+            'ycom_user_session_id',
+            rex::getTable('ycom_user'),
+            ['user_id' => 'id'],
+            rex_sql_foreign_key::CASCADE,
+            rex_sql_foreign_key::CASCADE
+        )
+    )
+    ->ensure();
+
 // Update from Version < 4
 if ($articleAuthTypeWasEnum) {
     rex_sql::factory()->setQuery('UPDATE rex_article SET `ycom_auth_type` = `ycom_auth_type` -1');

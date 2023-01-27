@@ -11,6 +11,7 @@ class rex_ycom_log
     public const TYPE_LOGIN_NOT_FOUND = 'login_not_found';
     public const TYPE_REGISTERD = 'registerd';
     public const TYPE_DELETE = 'delete';
+    public const TYPE_SESSION_EXPIRED = 'session_expired';
     public const TYPES = [self::TYPE_ACCESS, self::TYPE_LOGIN, self::TYPE_LOGOUT, self::TYPE_UPDATE, self::TYPE_CLICK, self::TYPE_LOGIN_FAILED, self::TYPE_REGISTERD, self::TYPE_DELETE];
     /**
      * @var null|bool

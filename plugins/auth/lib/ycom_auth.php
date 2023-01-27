@@ -25,7 +25,7 @@ class rex_ycom_auth
         'auth_request_stay' => 'rex_ycom_auth_stay',
         //         'auth_request_id' => 'rex_ycom_auth_id',
     ];
-    public static string $sessionKey = 'rex_ycom';
+    public static string $sessionKey = 'ycom_login';
 
     public static function getRequestKey(string $requestKey): string
     {
@@ -133,13 +133,6 @@ class rex_ycom_auth
      */
     public static function login(array $params): int
     {
-        rex_login::startSession();
-
-        $loginStatus = 0; // not logged in
-        $sessionKey = null;
-        $sessionUserID = null;
-        $me = null;
-
         $filter = null;
         if (isset($params['filter']) && '' != $params['filter']) {
             /**
@@ -157,13 +150,20 @@ class rex_ycom_auth
             };
         }
 
-        if (self::getSessionVar(self::$sessionKey, 'string', null)) {
-            $sessionUserID = self::getSessionVar(self::$sessionKey, 'string', null);
+        rex_login::startSession();
+
+        $loginStatus = 0; // not logged in
+        // $sessionKey = null;
+        $sessionUserID = null;
+        $me = null;
+
+        if (self::getSessionVar('UID', 'string', null)) {
+            $sessionUserID = self::getSessionVar('UID', 'string', null);
         }
 
-        if (self::getCookieVar(self::$sessionKey, 'string', null)) {
-            $sessionKey = self::getCookieVar(self::$sessionKey);
-        }
+        // if (self::getCookieVar(self::$sessionKey, 'string', null)) {
+        //     $sessionKey = self::getCookieVar(self::$sessionKey);
+        // }
 
         if (
             (
@@ -178,7 +178,7 @@ class rex_ycom_auth
                 )
             )
             || $sessionUserID
-            || $sessionKey
+            // || $sessionKey
         ) {
             if (!empty($params['loginName'])) {
                 $userQuery =
@@ -201,11 +201,15 @@ class rex_ycom_auth
                     } elseif (@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->getId())) {
                         $me = $user;
                         $me->setValue('login_tries', 0);
-                        if (isset($params['loginStay']) && !$params['loginStay']) {
-                            $me->setValue('session_key', '');
-                        }
+                        // if (isset($params['loginStay']) && !$params['loginStay']) {
+                        //     $me->setValue('session_key', '');
+                        // }
                         // session fixation
-                        self::regenerateSessionId();
+                        // self::regenerateSessionId();
+
+                        rex_ycom_user_session::getInstance()->storeCurrentSession($me);
+                        rex_ycom_user_session::clearExpiredSessions();
+
                     } else {
                         $user->setValue('login_tries', $user->getValue('login_tries') + 1);
                         // rex_sql -> no validations on fields wanted, or datestamp updates
@@ -235,7 +239,7 @@ class rex_ycom_auth
                     // logintry with name -> if logged in this try means kill the session
                     self::clearUserSession();
                     $sessionUserID = null;
-                    $sessionKey = null;
+                    // $sessionKey = null;
                 }
             }
 
@@ -255,87 +259,64 @@ class rex_ycom_auth
                 }
             }
 
-            if (!$me && $sessionKey) {
-                $userQuery =
-                    rex_ycom_user::query()
-                        ->where('session_key', $sessionKey);
-
-                if ($filter) {
-                    $filter($userQuery);
-                }
-
-                $loginUsers = $userQuery->find();
-
-                if (1 == count($loginUsers)) {
-                    $me = $loginUsers[0];
-
-                    $sessionKey = bin2hex(random_bytes(16));
-                    $me->setValue('session_key', $sessionKey);
-                    self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_plugin::get('ycom', 'auth')->getConfig('auth_cookie_ttl', 14)));
-
-                    // session fixation
-                    self::regenerateSessionId();
-                } else {
-                    self::clearUserSession();
-                }
-            }
+            // if (!$me && $sessionKey) {
+            //     $userQuery =
+            //         rex_ycom_user::query()
+            //             ->where('session_key', $sessionKey);
+            //
+            //     if ($filter) {
+            //         $filter($userQuery);
+            //     }
+            //
+            //     $loginUsers = $userQuery->find();
+            //
+            //     if (1 == count($loginUsers)) {
+            //         $me = $loginUsers[0];
+            //
+            //         $sessionKey = bin2hex(random_bytes(16));
+            //         $me->setValue('session_key', $sessionKey);
+            //         self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_plugin::get('ycom', 'auth')->getConfig('auth_cookie_ttl', 14)));
+            //
+            //         // session fixation
+            //         self::regenerateSessionId();
+            //     } else {
+            //         self::clearUserSession();
+            //     }
+            // }
 
             try {
                 if (!$me) {
                     throw new Exception('no user found');
                 }
 
-                /** @var rex_plugin $ycom_auth_plugin */
-                $ycom_auth_plugin = rex_plugin::get('ycom', 'auth');
-                $dt_current = new DateTimeImmutable();
-
-                // ----- Session duration - last action - check
-                $session_last_action_time = self::getSessionVar('session_last_action_time', 'string', date('Y-m-d H:i:s'));
-                $dt_last_action_time = new DateTimeImmutable($session_last_action_time);
-                $dt_last_action_time_duration = $dt_last_action_time->add(new DateInterval('PT'.(int) $ycom_auth_plugin->getConfig('session_duration', 3600).'S'));
-
-                if ($dt_last_action_time_duration < $dt_current) {
+                rex_ycom_user_session::clearExpiredSessions();
+                if (0 === count(rex_sql::factory()->getArray('SELECT 1 FROM '.rex::getTable('ycom_user_session').' where session_id = ?', [session_id()]))) {
+                    rex_ycom_log::log($me, rex_ycom_log::TYPE_SESSION_EXPIRED);
                     self::clearUserSession();
-                    throw new Exception('active session expired');
-                }
-
-                self::setSessionVar('session_last_action_time', date('Y-m-d H:i:s'));
-
-                // ----- Session Overall duration check
-
-                $session_start_time = self::getSessionVar('session_start_time', 'string', null);
-                if (!$session_start_time) {
-                    $session_start_time = date('Y-m-d H:i:s');
-                    self::setSessionVar('session_start_time', $session_start_time);
-                }
-                $dt_start_time = new DateTimeImmutable($session_start_time);
-                $dt_start_time_duration = $dt_start_time->add(new DateInterval('PT'.(int) $ycom_auth_plugin->getConfig('session_max_overall_duration', 21600).'S'));
-
-                if ($dt_start_time_duration < $dt_current) {
-                    self::clearUserSession();
-                    throw new Exception('max session duration reached');
+                    throw new Exception('session expired or missing');
                 }
 
                 self::setUser($me);
                 $loginStatus = 1; // is logged in
 
-                if (isset($params['loginStay']) && $params['loginStay']) {
-                    $sessionKey = bin2hex(random_bytes(16));
-                    $me->setValue('session_key', $sessionKey);
-                    self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_plugin::get('ycom', 'auth')->getConfig('auth_cookie_ttl', 14)));
-                }
+                // if (isset($params['loginStay']) && $params['loginStay']) {
+                //     $sessionKey = bin2hex(random_bytes(16));
+                //     $me->setValue('session_key', $sessionKey);
+                //     self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_plugin::get('ycom', 'auth')->getConfig('auth_cookie_ttl', 14)));
+                // }
 
-                $me->setValue('last_action_time', date('Y-m-d H:i:s'));
+                $me->setValue('last_action_time', rex_sql::datetime(time()));
 
                 if (!empty($params['loginName'])) {
                     $loginStatus = 2; // has just logged in
                     $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN_SUCCESS', $me, []));
-                    $me->setValue('last_login_time', date('Y-m-d H:i:s'));
+                    $me->setValue('last_login_time', rex_sql::datetime(time()));
                 }
 
                 $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN', $me, []));
                 $me->save();
 
+                rex_ycom_user_session::getInstance()->updateLastActivity($me);
                 rex_response::sendCacheControl('no-store');
                 rex_response::setHeader('Pragma', 'no-cache');
             } catch (Throwable $e) {
@@ -381,7 +362,7 @@ class rex_ycom_auth
     public static function setUser(rex_ycom_user $me): void
     {
         \rex_login::startSession();
-        self::setSessionVar(self::$sessionKey, $me->getId());
+        self::setSessionVar('UID', $me->getId());
         self::$me = $me;
     }
 
@@ -470,9 +451,13 @@ class rex_ycom_auth
     public static function clearUserSession(): void
     {
         rex_set_session(self::$sessionKey, null);
-        self::setCookieVar(self::$sessionKey, null);
-        self::setCookieVar(self::$sessionKey, '', time() - 3600);
+        // self::setCookieVar(self::$sessionKey, null);
+        // self::setCookieVar(self::$sessionKey, '', time() - 3600);
         self::$me = null;
+
+        rex_ycom_user_session::getInstance()
+            ->clearCurrentSession()
+            ->clearExpiredSessions();
 
         // TODO: Gecachte Medien löschen ?
         // rex_response::setHeader('Clear-Site-Data', '"cache", "cookies", "storage", "executionContexts"');
@@ -516,21 +501,21 @@ class rex_ycom_auth
         rex_set_session(self::$sessionKey, $sessionVars);
     }
 
-    public static function setCookieVar(string $key, string $value = null, int $time = null): void
-    {
-        $sessionConfig = rex::getProperty('session', []);
-        setcookie($key, $value ?? '', $time ?? (time() + 3600), '/', $sessionConfig['frontend']['cookie']['domain'] ?? ''); // $sessionConfig['frontend']['cookie']['path']
-        $_COOKIE[$key] = $value;
-    }
+    // public static function setCookieVar(string $key, string $value = null, int $time = null): void
+    // {
+    //     $sessionConfig = rex::getProperty('session', []);
+    //     setcookie($key, $value ?? '', $time ?? (time() + 3600), '/', $sessionConfig['frontend']['cookie']['domain'] ?? ''); // $sessionConfig['frontend']['cookie']['path']
+    //     $_COOKIE[$key] = $value;
+    // }
 
     /**
      * @param mixed $default
      * @return mixed
      */
-    public static function getCookieVar(string $key, string $varType = 'string', $default = '')
-    {
-        return rex_cookie($key, $varType, $default);
-    }
+    // public static function getCookieVar(string $key, string $varType = 'string', $default = '')
+    // {
+    //     return rex_cookie($key, $varType, $default);
+    // }
 
     public static function deleteUser(int $id): bool
     {
@@ -572,13 +557,13 @@ class rex_ycom_auth
         return self::getUser();
     }
 
-    protected static function regenerateSessionId(): void
-    {
-        if ('' != session_id()) {
-            session_regenerate_id(true);
-        }
-        $_SESSION['REX_SESSID'] = session_id();
-    }
+    // protected static function regenerateSessionId(): void
+    // {
+    //     if ('' != session_id()) {
+    //         session_regenerate_id(true);
+    //     }
+    //     $_SESSION['REX_SESSID'] = session_id();
+    // }
 
     public static function cleanReferer(string $refererURL): string
     {
