@@ -76,4 +76,24 @@ if (rex::isFrontend()) {
             return $subject.$content;
         });
     }, rex_extension::EARLY);
+
+    rex_extension::register('YFORM_DATA_LIST_ACTION_BUTTONS', static function (rex_extension_point $ep) {
+        $params = $ep->getParams();
+        /** @var rex_yform_manager_table $table */
+        $table = $params['table'];
+        if ('rex_ycom_user' == $table->getTableName()) {
+            if (rex::getUser() && rex::getUser()->isAdmin()) {
+                $actionButtons = $ep->getSubject();
+                $actionButtons['ycom_impersonate'] = [
+                    'params' => [],
+                    'content' => '<i class="rex-icon rex-icon-sign-in"></i> ' . rex_i18n::msg('ycom_impersonate'),
+                    'attributes' => [
+                        'onclick' => "return confirm(' " . rex_i18n::msg('ycom_impersonate_alert') . "')",
+                    ],
+                    'url' => rex_url::backendController(['page' => 'ycom/auth/sessions', 'user_id' => '___id___', 'func' => 'create_session']),
+                ];
+                return $actionButtons;
+            }
+        }
+    });
 }
