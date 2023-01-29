@@ -47,8 +47,6 @@ switch ($func) {
         }
 }
 
-dump($_SESSION);
-
 $list = rex_list::factory('SELECT session_id, ip, user_id, useragent, starttime, last_activity from '.rex::getTablePrefix().'ycom_user_session');
 
 $list->addColumn('remove_session', '<i class="rex-icon rex-icon-delete"></i>', 0, ['<th class="rex-table-icon"></th>', '<td class="rex-table-icon">###VALUE###</td>']);
