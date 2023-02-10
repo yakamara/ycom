@@ -42,6 +42,8 @@ class rex_ycom_log
             $addon = rex_addon::get('ycom');
             if ($addon->isAvailable()) {
                 self::$active = (1 === $addon->getConfig('log')) ? true : false;
+            } else {
+                self::$active = false;
             }
         }
         return (self::$active) ? true : false;
@@ -68,6 +70,10 @@ class rex_ycom_log
      */
     public static function log($user, string $type = '', array $params = []): void
     {
+        if (!self::isActive()) {
+            return;
+        }
+
         $ip = $_SERVER['REMOTE_ADDR'];
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
