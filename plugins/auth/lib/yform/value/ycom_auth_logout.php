@@ -8,7 +8,7 @@ class rex_yform_value_ycom_auth_logout extends rex_yform_value_abstract
             /** @var rex_ycom_user|null $user */
             $user = rex_ycom_auth::getUser();
 
-            if (rex::isBackend() || !$user) {
+            if (rex::isBackend() || null === $user) {
                 echo 'error - access denied - user not logged in';
                 return;
             }

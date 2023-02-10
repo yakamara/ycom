@@ -69,7 +69,7 @@ class rex_yform_validate_ycom_auth extends rex_yform_validate_abstract
     public function preAction(): void
     {
         $me = rex_ycom_user::getMe();
-        if ($me) {
+        if (null !== $me) {
             rex_ycom_log::log($me, rex_ycom_log::TYPE_LOGIN);
         }
     }
