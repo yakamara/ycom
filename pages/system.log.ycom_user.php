@@ -25,9 +25,9 @@ switch ($func) {
 
 if (!rex_ycom_log::isActive()) {
     echo rex_view::warning(rex_i18n::rawMsg('ycom_user_log_warning_logisinactive', $activationLink));
-    return;
+} else {
+    echo rex_view::warning(rex_i18n::rawMsg('ycom_user_log_warning_logisactive', $deactivationLink));
 }
-echo rex_view::warning(rex_i18n::rawMsg('ycom_user_log_warning_logisactive', $deactivationLink));
 
 $content = '
             <table class="table table-hover">
