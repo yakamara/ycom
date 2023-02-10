@@ -46,7 +46,7 @@ class rex_ycom_media_auth_rules
      */
     public function check($rule_name): void
     {
-        if (!array_key_exists($rule_name, $this->rules)) {
+        if (!array_key_exists($rule_name ?? '', $this->rules)) {
             $rule_name = 'header_perm_denied';
         }
 

@@ -25,7 +25,7 @@ rex_extension::register(['MEDIA_MANAGER_BEFORE_SEND'], static function (rex_exte
     $media_manager = $ep->getSubject();
     $media = $media_manager->getMedia();
 
-    if (rex_path::media() != dirname($media->getMediaPath())) {
+    if (rex_path::media() != dirname($media->getMediaPath() ?? '')) {
         $ep->setParam('ycom_ignore', true);
     }
 

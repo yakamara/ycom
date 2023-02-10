@@ -15,7 +15,7 @@ if (rex::isBackend()) {
 
             if (isset($pages) && is_array($pages)) {
                 foreach ($pages as $page) {
-                    if (in_array($page->getKey(), $ycom_tables)) {
+                    if (in_array($page->getKey(), $ycom_tables, true)) {
                         $page->setBlock('ycom');
                         // $page->setRequiredPermissions('ycom[]');
                     }
