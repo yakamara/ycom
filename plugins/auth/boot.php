@@ -14,6 +14,12 @@ rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) 
     rex_yform::addTemplatePath($this->getPath('ytemplates'));
 });
 
+rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) {
+    rex_yform::addTemplatePath($this->getPath('ytemplates'));
+});
+
+rex_extension::register('SESSION_REGENERATED', [rex_ycom_user_session::class, 'sessionRegenerated']);
+
 if (rex::isFrontend()) {
     rex_extension::register('PACKAGES_INCLUDED', static function (rex_extension_point $ep) {
         if ($redirect = rex_ycom_auth::init()) {

@@ -12,15 +12,9 @@ switch ($func) {
         // delete session.
         $session_id = rex_request('session_id', 'string', '');
         $user_id = rex_request::get('user_id', 'int', 0);
-
-        rex_ycom_user_session::getInstance()->removeSession($user_id, $session_id);
-
-        rex_sql::factory()->setQuery('delete from '.rex::getTablePrefix().'ycom_user_session where session_id=:session_id', [
-            'session_id' => $session_id,
-        ]);
-
+        rex_ycom_user_session::getInstance()->removeSession($session_id, $user_id);
         echo rex_view::success($this->i18n('session_removed'));
-        // no break
+        break;
     case 'create_session':
         $user_id = rex_request::get('user_id', 'int', null);
         $ycom_user = rex_ycom_user::get($user_id);
@@ -45,6 +39,7 @@ switch ($func) {
                 ]);
             }
         }
+        break;
 }
 
 $list = rex_list::factory('SELECT session_id, ip, user_id, useragent, starttime, last_activity from '.rex::getTablePrefix().'ycom_user_session');

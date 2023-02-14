@@ -204,12 +204,12 @@ class rex_ycom_auth
                         // if (isset($params['loginStay']) && !$params['loginStay']) {
                         //     $me->setValue('session_key', '');
                         // }
+
                         // session fixation
-                        // self::regenerateSessionId();
+                        rex_login::regenerateSessionId();
 
                         rex_ycom_user_session::getInstance()->storeCurrentSession($me);
                         rex_ycom_user_session::clearExpiredSessions();
-
                     } else {
                         $user->setValue('login_tries', $user->getValue('login_tries') + 1);
                         // rex_sql -> no validations on fields wanted, or datestamp updates
@@ -278,7 +278,7 @@ class rex_ycom_auth
             //         self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_plugin::get('ycom', 'auth')->getConfig('auth_cookie_ttl', 14)));
             //
             //         // session fixation
-            //         self::regenerateSessionId();
+            //         rex_login::regenerateSessionId();
             //     } else {
             //         self::clearUserSession();
             //     }
@@ -556,14 +556,6 @@ class rex_ycom_auth
 
         return self::getUser();
     }
-
-    // protected static function regenerateSessionId(): void
-    // {
-    //     if ('' != session_id()) {
-    //         session_regenerate_id(true);
-    //     }
-    //     $_SESSION['REX_SESSID'] = session_id();
-    // }
 
     public static function cleanReferer(string $refererURL): string
     {
