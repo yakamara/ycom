@@ -59,7 +59,7 @@ if (rex::isFrontend()) {
 
         return $data;
     }, rex_extension::EARLY);
-} else {
+} elseif (rex::isBackend()) {
     rex_view::addCssFile($this->getAssetsUrl('styles.css'));
 
     rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) {

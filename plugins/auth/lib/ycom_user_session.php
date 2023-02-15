@@ -4,29 +4,40 @@ class rex_ycom_user_session
 {
     use rex_singleton_trait;
 
-    public function storeCurrentSession(rex_ycom_user $user): void
+    public function storeCurrentSession(rex_ycom_user $user, ?string $cookieKey = null): void
     {
         $sessionId = session_id();
         if (false === $sessionId || '' === $sessionId) {
             return;
         }
 
-        // $userId = rex_ycom_auth::getSessionVar(rex_login::SESSION_IMPERSONATOR, null);
-        // if (null === $userId) {
-        //     $userId = rex_ycom_auth::getSessionVar(rex_login::SESSION_USER_ID);
+        // $updateByCookieKey = false;
+        // if (null !== $cookieKey) {
+        //     $sql = rex_sql::factory()
+        //         ->setTable(rex::getTable('ycom_user_session'))
+        //         ->setWhere(['cookie_key' => $cookieKey])
+        //         ->select();
+        //     if ($sql->getRows()) {
+        //         if ($user->getId() !== (int) $sql->getValue('user_id')) {
+        //             throw new rex_exception('YCom Cookie key "'.$cookieKey.'" does not belong to current user "'.$user->getId().'", it belongs to user "'.(string) $sql->getValue('user_id').'"');
+        //         }
+        //         $updateByCookieKey = true;
+        //     }
         // }
+        //
+        //
+        // dump($user);
 
         rex_sql::factory()
             ->setTable(rex::getTable('ycom_user_session'))
             ->setValue('session_id', session_id())
+            ->setValue('cookie_key', $cookieKey)
             ->setValue('user_id', $user->getId())
             ->setValue('ip', rex_request::server('REMOTE_ADDR', 'string'))
             ->setValue('useragent', rex_request::server('HTTP_USER_AGENT', 'string'))
             ->setValue('starttime', rex_sql::datetime(time()))
             ->setValue('last_activity', rex_sql::datetime(time()))
             ->insertOrUpdate();
-
-        // $login->setSessionVar(self::SESSION_VAR_LAST_DB_UPDATE, time());
     }
 
     public function clearCurrentSession(): self
@@ -64,7 +75,7 @@ class rex_ycom_user_session
     {
         rex_sql::factory()
             ->setTable(rex::getTable('ycom_user_session'))
-            ->setWhere('(UNIX_TIMESTAMP(last_activity) < :last or UNIX_TIMESTAMP(starttime) < :start)', [
+            ->setWhere('(UNIX_TIMESTAMP(last_activity) < :last or UNIX_TIMESTAMP(starttime) < :start) AND cookie_key IS NULL', [
                 ':last' => (time() - ((int) rex_plugin::get('ycom', 'auth')->getConfig('session_duration', 3600))),
                 ':start' => (time() - ((int) rex_plugin::get('ycom', 'auth')->getConfig('session_max_overall_duration', 21600))),
             ])

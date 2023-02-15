@@ -127,6 +127,14 @@ class rex_ycom_auth
         return $params['redirect'];
     }
 
+    public static function logout(rex_ycom_user $me): void
+    {
+        rex_ycom_log::log($me, rex_ycom_log::TYPE_LOGOUT);
+        rex_response::cleanOutputBuffers();
+        self::clearUserSession();
+        self::$me = null;
+    }
+
     /**
      * @param array<int|string, mixed> $params
      * @throws rex_exception
@@ -152,38 +160,31 @@ class rex_ycom_auth
 
         rex_login::startSession();
 
+        /*
+         login_status
+         0: not logged in
+         1: logged in
+         2: has just logged in
+         3: has just logged out
+         4: login failed
+       */
+
         $loginStatus = 0; // not logged in
-        // $sessionKey = null;
-        $sessionUserID = null;
+        $loginFieldName = (string) rex_config::get('ycom/auth', 'login_field', 'email');
         $me = null;
+        $sessionUserID = self::getSessionVar('UID', 'string', null);
+        $cookieKey = rex_cookie(self::getStayLoggedInCookieName(), 'string', null);
 
-        if (self::getSessionVar('UID', 'string', null)) {
-            $sessionUserID = self::getSessionVar('UID', 'string', null);
-        }
+        // ----- Login OVER CookieKey and SessionKey
+        // Sobald ein Login durchgeführt wird, werden sessionkey und cookiekey
+        // ignoriert und überschrieben
 
-        // if (self::getCookieVar(self::$sessionKey, 'string', null)) {
-        //     $sessionKey = self::getCookieVar(self::$sessionKey);
-        // }
-
-        if (
-            (
-                !empty($params['loginName']) &&
-                (
-                    (
-                        isset($params['ignorePassword']) &&
-                        $params['ignorePassword']
-                    )
-                    ||
-                    !empty($params['loginPassword'])
-                )
-            )
-            || $sessionUserID
-            // || $sessionKey
-        ) {
-            if (!empty($params['loginName'])) {
+        if (isset($params['loginName']) && '' != $params['loginName']) {
+            try {
+                $loginStatus = 2; // has just logged in
                 $userQuery =
                     rex_ycom_user::query()
-                        ->where(rex_config::get('ycom/auth', 'login_field', 'email') ?? 'email', $params['loginName']);
+                        ->where($loginFieldName, $params['loginName']);
 
                 if ($filter) {
                     $filter($userQuery);
@@ -191,59 +192,78 @@ class rex_ycom_auth
 
                 $loginUsers = $userQuery->find();
 
-                if (1 == count($loginUsers)) {
-                    /** @var rex_ycom_user $user */
-                    $user = $loginUsers[0];
+                if (1 != count($loginUsers)) {
+                    throw new rex_exception('Login failed');
+                }
 
-                    $auth_rules = new rex_ycom_auth_rules();
+                /** @var rex_ycom_user $loginUser */
+                $loginUser = $loginUsers[0];
 
-                    if (!$auth_rules->check($user, rex_config::get('ycom/auth', 'auth_rule', 'login_try_5_pause') ?? 'login_try_5_pause')) {
-                    } elseif (@$params['ignorePassword'] || self::checkPassword($params['loginPassword'], $user->getId())) {
-                        $me = $user;
-                        $me->setValue('login_tries', 0);
-                        // if (isset($params['loginStay']) && !$params['loginStay']) {
-                        //     $me->setValue('session_key', '');
-                        // }
+                $auth_rules = new rex_ycom_auth_rules();
+                $authRuleConfig = rex_config::get('ycom/auth', 'auth_rule', 'login_try_5_pause') ?? 'login_try_5_pause';
+                if (!$auth_rules->check($loginUser, $authRuleConfig)) {
+                    throw new rex_exception('Login failed - Auth Rules');
+                }
 
-                        // session fixation
-                        rex_login::regenerateSessionId();
+                if (
+                    (null !== $params['ignorePassword'] && $params['ignorePassword'])
+                    ||
+                    (null !== $params['loginPassword'] && '' != $params['loginPassword'] && self::checkPassword($params['loginPassword'], $loginUser->getId()))
+                ) {
+                    $me = $loginUser;
 
-                        rex_ycom_user_session::getInstance()->storeCurrentSession($me);
-                        rex_ycom_user_session::clearExpiredSessions();
-                    } else {
-                        $user->setValue('login_tries', $user->getValue('login_tries') + 1);
-                        // rex_sql -> no validations on fields wanted, or datestamp updates
-                        rex_sql::factory()
-                            ->setTable(rex_ycom_user::table())
-                            ->setWhere(['id' => $user->getId()])
-                            ->setValue('login_tries', $user->getValue('login_tries'))
-                            ->update();
+                    rex_sql::factory()
+                        ->setTable(rex_ycom_user::table())
+                        ->setWhere(['id' => $me->getId()])
+                        ->setValue('login_tries', 0)
+                        ->setValue('last_action_time', rex_sql::datetime(time()))
+                        ->setValue('last_login_time', rex_sql::datetime(time()))
+                        ->update();
 
-                        rex_ycom_log::log($user, rex_ycom_log::TYPE_LOGIN_FAILED, [
-                            (string) json_encode([
-                                'SERVER' => $_SERVER,
-                                'REQUEST' => $_REQUEST,
-                            ]),
-                        ]);
+                    $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN_SUCCESS', $me, []));
+                    self::setUser($me);
+
+                    // session fixation
+                    rex_login::regenerateSessionId();
+
+                    // stay logged in if selected
+                    $cookieKey = null;
+                    if (isset($params['loginStay']) && $params['loginStay']) {
+                        $cookieKey = base64_encode(random_bytes(64));
+                        self::setStayLoggedInCookie($cookieKey);
                     }
-                } else {
-                    rex_ycom_log::log($params['loginName'], rex_ycom_log::TYPE_LOGIN_NOT_FOUND, [
-                        (string) json_encode([
-                            'SERVER' => $_SERVER,
-                            'REQUEST' => $_REQUEST,
-                        ]),
+                    rex_ycom_user_session::getInstance()->storeCurrentSession($me, $cookieKey);
+
+                    rex_ycom_log::log($me, rex_ycom_log::TYPE_LOGIN_SUCCESS, [
+                        'stayloggedin' => $params['loginStay'] ?? '-',
                     ]);
+                } else {
+                    throw new rex_exception('Login failed . Password wrong or not set or not ignored');
                 }
+            } catch (throwable $e) {
+                $loginStatus = 4; // login failed
+                rex_ycom_user_session::clearExpiredSessions();
+                rex_response::clearCookie(self::getStayLoggedInCookieName());
 
-                if (!$me) {
-                    // logintry with name -> if logged in this try means kill the session
-                    self::clearUserSession();
-                    $sessionUserID = null;
-                    // $sessionKey = null;
-                }
+                rex_ycom_log::log(
+                    $params['loginName'],
+                    rex_ycom_log::TYPE_LOGIN_FAILED,
+                    [
+                        'EXCEPTION' => $e->getMessage(),
+                        'SERVER' => $_SERVER,
+                        'REQUEST' => $_REQUEST,
+                    ],
+                );
             }
+            // login try -> no session or cookie login
+            $cookieKey = null;
+            $sessionUserID = null;
+        }
 
-            if (!$me && $sessionUserID) {
+        // ----- Login via SessionKey
+
+        if ($sessionUserID) {
+            try {
                 $userQuery =
                     rex_ycom_user::query()
                         ->where('id', $sessionUserID);
@@ -254,90 +274,80 @@ class rex_ycom_auth
 
                 $loginUsers = $userQuery->find();
 
-                if (1 == count($loginUsers)) {
-                    $me = $loginUsers[0];
-                }
-            }
-
-            // if (!$me && $sessionKey) {
-            //     $userQuery =
-            //         rex_ycom_user::query()
-            //             ->where('session_key', $sessionKey);
-            //
-            //     if ($filter) {
-            //         $filter($userQuery);
-            //     }
-            //
-            //     $loginUsers = $userQuery->find();
-            //
-            //     if (1 == count($loginUsers)) {
-            //         $me = $loginUsers[0];
-            //
-            //         $sessionKey = bin2hex(random_bytes(16));
-            //         $me->setValue('session_key', $sessionKey);
-            //         self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_plugin::get('ycom', 'auth')->getConfig('auth_cookie_ttl', 14)));
-            //
-            //         // session fixation
-            //         rex_login::regenerateSessionId();
-            //     } else {
-            //         self::clearUserSession();
-            //     }
-            // }
-
-            try {
-                if (!$me) {
-                    throw new Exception('no user found');
+                if (1 != count($loginUsers)) {
+                    rex_ycom_log::log($me, rex_ycom_log::TYPE_LOGIN_NOT_FOUND);
+                    throw new rex_exception('session user id not found');
                 }
 
                 rex_ycom_user_session::clearExpiredSessions();
                 if (0 === count(rex_sql::factory()->getArray('SELECT 1 FROM '.rex::getTable('ycom_user_session').' where session_id = ?', [session_id()]))) {
-                    rex_ycom_log::log($me, rex_ycom_log::TYPE_SESSION_EXPIRED);
-                    self::clearUserSession();
-                    throw new Exception('session expired or missing');
+                    throw new rex_exception('session expired or missing');
                 }
 
+                /** @var rex_ycom_user $me */
+                $me = $loginUsers[0];
                 self::setUser($me);
                 $loginStatus = 1; // is logged in
-
-                // if (isset($params['loginStay']) && $params['loginStay']) {
-                //     $sessionKey = bin2hex(random_bytes(16));
-                //     $me->setValue('session_key', $sessionKey);
-                //     self::setCookieVar(self::$sessionKey, $sessionKey, time() + (3600 * 24 * rex_plugin::get('ycom', 'auth')->getConfig('auth_cookie_ttl', 14)));
-                // }
-
-                $me->setValue('last_action_time', rex_sql::datetime(time()));
-
-                if (!empty($params['loginName'])) {
-                    $loginStatus = 2; // has just logged in
-                    $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN_SUCCESS', $me, []));
-                    $me->setValue('last_login_time', rex_sql::datetime(time()));
-                }
-
-                $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN', $me, []));
-                $me->save();
-
-                rex_ycom_user_session::getInstance()->updateLastActivity($me);
-                rex_response::sendCacheControl('no-store');
-                rex_response::setHeader('Pragma', 'no-cache');
-            } catch (Throwable $e) {
-                $loginStatus = 0; // not logged in
-
-                if (!empty($params['loginName'])) {
-                    $loginStatus = 4; // login failed
-                }
-
-                $loginStatus = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN_FAILED', $loginStatus, $params));
+            } catch (throwable $e) {
+                $loginStatus = 4; // login failed
+                self::clearUserSession();
+                rex_ycom_log::log(
+                    $sessionUserID,
+                    rex_ycom_log::TYPE_SESSION_FAILED,
+                    [
+                        'EXCEPTION' => $e->getMessage(),
+                        'SERVER' => $_SERVER,
+                        'REQUEST' => $_REQUEST,
+                    ],
+                );
             }
         }
 
-        if (isset($params['logout']) && $params['logout'] && isset($me)) {
-            $loginStatus = 3;
-            rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGOUT', $me, []));
-            unset($me);
-            self::clearUserSession();
+        if (null !== $me) {
+            $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN', $me, []));
+            $me->save();
+
+            rex_ycom_user_session::getInstance()->updateLastActivity($me);
+            rex_response::sendCacheControl('no-store');
+            rex_response::setHeader('Pragma', 'no-cache');
         }
 
         return $loginStatus;
+    }
+
+    /**
+     * @param array<string, string> $params
+     * @return null|false|rex_ycom_user
+     */
+    public static function loginWithParams($params, callable $filter = null)
+    {
+        $userQuery = rex_ycom_user::query();
+        foreach ($params as $l => $v) {
+            $userQuery->where($l, $v);
+        }
+
+        if ($filter) {
+            $filter($userQuery);
+        }
+
+        $Users = $userQuery->find();
+
+        if (1 != count($Users)) {
+            return false;
+        }
+
+        $user = $Users[0];
+
+        $loginField = rex_config::get('ycom/auth', 'login_field', 'email');
+
+        $params = [];
+        $params['loginName'] = $user->$loginField;
+        $params['loginPassword'] = $user->password;
+        $params['ignorePassword'] = true;
+
+        self::login($params);
+
+        return self::getUser();
     }
 
     /**
@@ -374,14 +384,9 @@ class rex_ycom_auth
         return self::$me;
     }
 
-    /**
-     * @param rex_article|rex_category $article
-     *
-     * @deprecated
-     */
-    public static function checkPerm(&$article): bool
+    public static function deleteUser(int $id): bool
     {
-        return self::articleIsPermitted($article);
+        return rex_ycom_user::query()->where('id', $id)->find()->delete();
     }
 
     /**
@@ -450,17 +455,11 @@ class rex_ycom_auth
 
     public static function clearUserSession(): void
     {
-        rex_set_session(self::$sessionKey, null);
-        // self::setCookieVar(self::$sessionKey, null);
-        // self::setCookieVar(self::$sessionKey, '', time() - 3600);
         self::$me = null;
-
         rex_ycom_user_session::getInstance()
             ->clearCurrentSession()
             ->clearExpiredSessions();
-
-        // TODO: Gecachte Medien löschen ?
-        // rex_response::setHeader('Clear-Site-Data', '"cache", "cookies", "storage", "executionContexts"');
+        self::unsetSessionVars();
     }
 
     /**
@@ -501,60 +500,9 @@ class rex_ycom_auth
         rex_set_session(self::$sessionKey, $sessionVars);
     }
 
-    // public static function setCookieVar(string $key, string $value = null, int $time = null): void
-    // {
-    //     $sessionConfig = rex::getProperty('session', []);
-    //     setcookie($key, $value ?? '', $time ?? (time() + 3600), '/', $sessionConfig['frontend']['cookie']['domain'] ?? ''); // $sessionConfig['frontend']['cookie']['path']
-    //     $_COOKIE[$key] = $value;
-    // }
-
-    /**
-     * @param mixed $default
-     * @return mixed
-     */
-    // public static function getCookieVar(string $key, string $varType = 'string', $default = '')
-    // {
-    //     return rex_cookie($key, $varType, $default);
-    // }
-
-    public static function deleteUser(int $id): bool
+    public static function unsetSessionVars(): void
     {
-        return rex_ycom_user::query()->where('id', $id)->find()->delete();
-    }
-
-    /**
-     * @param array<string, string> $params
-     * @return null|false|rex_ycom_user
-     */
-    public static function loginWithParams($params, callable $filter = null)
-    {
-        $userQuery = rex_ycom_user::query();
-        foreach ($params as $l => $v) {
-            $userQuery->where($l, $v);
-        }
-
-        if ($filter) {
-            $filter($userQuery);
-        }
-
-        $Users = $userQuery->find();
-
-        if (1 != count($Users)) {
-            return false;
-        }
-
-        $user = $Users[0];
-
-        $loginField = rex_config::get('ycom/auth', 'login_field', 'email');
-
-        $params = [];
-        $params['loginName'] = $user->$loginField;
-        $params['loginPassword'] = $user->password;
-        $params['ignorePassword'] = true;
-
-        self::login($params);
-
-        return self::getUser();
+        rex_set_session(self::$sessionKey, []);
     }
 
     public static function cleanReferer(string $refererURL): string
@@ -633,5 +581,44 @@ class rex_ycom_auth
         }
 
         return $return;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getStayLoggedInCookieName()
+    {
+        $instname = rex::getProperty('instname');
+        if (!$instname) {
+            throw new rex_exception('Property "instname" is empty');
+        }
+
+        return sha1('rex_ycom_user_' . $instname);
+    }
+
+    private static function setStayLoggedInCookie(string $cookiekey): void
+    {
+        $sessionConfig = rex::getProperty('session', [])['frontend']['cookie'] ?? [];
+
+        rex_response::sendCookie(self::getStayLoggedInCookieName(), $cookiekey, [
+            'expires' => strtotime('+1 year'),
+            'secure' => $sessionConfig['secure'] ?? false,
+            'samesite' => $sessionConfig['samesite'] ?? 'lax',
+        ]);
+    }
+
+    private static function deleteStayLoggedInCookie(): void
+    {
+        rex_response::clearCookie(self::getStayLoggedInCookieName());
+    }
+
+    /**
+     * @param rex_article|rex_category $article
+     *
+     * @deprecated
+     */
+    public static function checkPerm(&$article): bool
+    {
+        return self::articleIsPermitted($article);
     }
 }

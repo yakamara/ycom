@@ -18,7 +18,7 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_db
 
         switch ($action) {
             case 'delete':
-                rex_ycom_log::log($user, rex_ycom_log::TYPE_DELETE, [
+                rex_ycom_log::log($user, rex_ycom_log::TYPE_LOGIN_DELETED, [
                     'self delete',
                 ]);
                 rex_ycom_auth::deleteUser($user->getValue('id'));
@@ -27,7 +27,7 @@ class rex_yform_action_ycom_auth_db extends rex_yform_action_db
                 break;
             case 'update':
             default:
-                rex_ycom_log::log($user, rex_ycom_log::TYPE_UPDATE, [
+                rex_ycom_log::log($user, rex_ycom_log::TYPE_LOGIN_UPDATED, [
                     'self update',
                 ]);
 

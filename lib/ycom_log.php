@@ -3,18 +3,18 @@
 class rex_ycom_log
 {
     public const TYPE_ACCESS = 'access';
-    public const TYPE_LOGIN = 'login';
     public const TYPE_LOGOUT = 'logout';
-    public const TYPE_UPDATE = 'update';
     public const TYPE_CLICK = 'click';
     public const TYPE_LOGIN_FAILED = 'login_failed';
     public const TYPE_LOGIN_NOT_FOUND = 'login_not_found';
+    public const TYPE_LOGIN_SUCCESS = 'login_success';
+    public const TYPE_LOGIN_UPDATED = 'login_updated';
+    public const TYPE_LOGIN_DELETED = 'login_deleted';
     public const TYPE_REGISTERD = 'registerd';
-    public const TYPE_DELETE = 'delete';
-    public const TYPE_SESSION_EXPIRED = 'session_expired';
+    public const TYPE_SESSION_FAILED = 'session_failed';
     public const TYPE_IMPERSONATE = 'session_impersonate';
 
-    public const TYPES = [self::TYPE_ACCESS, self::TYPE_LOGIN, self::TYPE_LOGOUT, self::TYPE_UPDATE, self::TYPE_CLICK, self::TYPE_LOGIN_FAILED, self::TYPE_REGISTERD, self::TYPE_DELETE];
+    public const TYPES = [self::TYPE_SESSION_FAILED, self::TYPE_ACCESS, self::TYPE_LOGIN_SUCCESS, self::TYPE_LOGOUT, self::TYPE_LOGIN_UPDATED, self::TYPE_CLICK, self::TYPE_LOGIN_FAILED, self::TYPE_REGISTERD, self::TYPE_LOGIN_DELETED, self::TYPE_LOGIN_NOT_FOUND];
     /**
      * @var null|bool
      */
@@ -69,7 +69,7 @@ class rex_ycom_log
 
     /**
      * @param rex_ycom_user|string $user
-     * @param array<int, string> $params
+     * @param array<string|int, array<string, mixed>> $params
      */
     public static function log($user, string $type = '', array $params = []): void
     {
@@ -78,10 +78,10 @@ class rex_ycom_log
         }
 
         $ip = $_SERVER['REMOTE_ADDR'];
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        if (null !== $_SERVER['HTTP_CLIENT_IP']) {
+            $ip = (string) $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (null !== $_SERVER['HTTP_X_FORWARDED_FOR']) {
+            $ip = (string) $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
 
         $id = '';
@@ -90,7 +90,7 @@ class rex_ycom_log
             /** @var string $user */
             $id = '';
             $login = $user;
-        } else if ('rex_ycom_user' == get_class($user)) {
+        } elseif ('rex_ycom_user' == get_class($user)) {
             /** @var rex_ycom_user $user */
             $id = $user->getId();
             $login = $user->getValue('login');
@@ -102,7 +102,7 @@ class rex_ycom_log
             $id,
             $login,
             $type,
-            implode(',', $params),
+            (string) json_encode($params),
         ];
         $log->add($data);
     }
