@@ -7,7 +7,7 @@ class rex_yform_validate_ycom_auth_password extends rex_yform_validate_abstract
         $Object = $this->getValueObject();
 
         $user = rex_ycom_auth::getUser();
-        if (!$user) {
+        if (null === $user) {
             // no user available -> error
             $this->params['warning'][$Object->getId()] = $this->params['error_class'];
             $this->params['warning_messages'][$Object->getId()] = $this->getElement(3);

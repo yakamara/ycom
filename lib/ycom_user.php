@@ -15,14 +15,14 @@ class rex_ycom_user extends \rex_yform_manager_dataset
 
     public function isInGroup(int $group_id): bool
     {
-        $ycom_groups = strval($this->getValue('ycom_groups'));
+        $ycom_groups = (string) ($this->getValue('ycom_groups'));
 
         if ('' == $group_id) {
             return true;
         }
         if ('' != $ycom_groups) {
             $ycom_groups_array = explode(',', $ycom_groups);
-            if (in_array($group_id, $ycom_groups_array)) {
+            if (in_array($group_id, $ycom_groups_array, true)) {
                 return true;
             }
         }
@@ -40,7 +40,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
      */
     public function getGroups(): array
     {
-        if (empty($this->getValue('ycom_groups'))) {
+        if ('' == $this->getValue('ycom_groups')) {
             return [];
         }
 
@@ -79,7 +79,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
         $data = rex_extension::registerPoint(new rex_extension_point('YCOM_USER_UPDATE', $data, []));
         $user = self::getMe();
 
-        if (!$user) {
+        if (null === $user) {
             return false;
         }
 

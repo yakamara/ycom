@@ -30,7 +30,7 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
 
         rex_ycom_auth::loginWithParams($vars, $filter);
 
-        if (!rex_ycom_auth::getUser()) {
+        if (null === rex_ycom_auth::getUser()) {
             $this->params['warning'][] = 1;
             $this->params['warning_messages'][] = rex_i18n::translate($this->getElement(4));
         } else {

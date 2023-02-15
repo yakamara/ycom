@@ -12,9 +12,10 @@ class rex_ycom_log
     public const TYPE_LOGIN_DELETED = 'login_deleted';
     public const TYPE_REGISTERD = 'registerd';
     public const TYPE_SESSION_FAILED = 'session_failed';
+    public const TYPE_COOKIE_FAILED = 'cookie_failed';
     public const TYPE_IMPERSONATE = 'session_impersonate';
 
-    public const TYPES = [self::TYPE_SESSION_FAILED, self::TYPE_ACCESS, self::TYPE_LOGIN_SUCCESS, self::TYPE_LOGOUT, self::TYPE_LOGIN_UPDATED, self::TYPE_CLICK, self::TYPE_LOGIN_FAILED, self::TYPE_REGISTERD, self::TYPE_LOGIN_DELETED, self::TYPE_LOGIN_NOT_FOUND];
+    public const TYPES = [self::TYPE_COOKIE_FAILED, self::TYPE_SESSION_FAILED, self::TYPE_ACCESS, self::TYPE_LOGIN_SUCCESS, self::TYPE_LOGOUT, self::TYPE_LOGIN_UPDATED, self::TYPE_CLICK, self::TYPE_LOGIN_FAILED, self::TYPE_REGISTERD, self::TYPE_LOGIN_DELETED, self::TYPE_LOGIN_NOT_FOUND];
     /**
      * @var null|bool
      */
@@ -69,7 +70,7 @@ class rex_ycom_log
 
     /**
      * @param rex_ycom_user|string $user
-     * @param array<string|int, array<string, mixed>> $params
+     * @param array<string|int, string|array<string, mixed>> $params
      */
     public static function log($user, string $type = '', array $params = []): void
     {

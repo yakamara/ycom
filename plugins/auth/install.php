@@ -10,7 +10,7 @@ $articleAuthTypeWasEnum = false;
 $articleTable = rex_sql_table::get(rex::getTable('article'));
 if ($articleTable->hasColumn('ycom_auth_type')) {
     $Column = $articleTable->getColumn('ycom_auth_type');
-    if ($Column && 'enum' == substr($Column->getType(), 0, 4)) {
+    if (null !== $Column && 'enum' == substr($Column->getType(), 0, 4)) {
         $articleAuthTypeWasEnum = true;
     }
 }
@@ -28,6 +28,7 @@ rex_sql_table::get(rex::getTable('ycom_user_session'))
     ->ensureColumn(new rex_sql_column('last_activity', 'datetime'))
     ->ensureColumn(new rex_sql_column('last_activity', 'datetime'))
     ->ensureColumn(new rex_sql_column('cookie_key', 'varchar(255)', true))
+    ->ensureIndex(new rex_sql_index('cookie_key', ['cookie_key'], rex_sql_index::UNIQUE))
     ->setPrimaryKey('session_id')
     ->ensureForeignKey(
         new rex_sql_foreign_key(

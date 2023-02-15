@@ -132,6 +132,7 @@ class rex_ycom_auth
         rex_ycom_log::log($me, rex_ycom_log::TYPE_LOGOUT);
         rex_response::cleanOutputBuffers();
         self::clearUserSession();
+        self::deleteStayLoggedInCookie();
         self::$me = null;
     }
 
@@ -178,7 +179,6 @@ class rex_ycom_auth
         // ----- Login OVER CookieKey and SessionKey
         // Sobald ein Login durchgeführt wird, werden sessionkey und cookiekey
         // ignoriert und überschrieben
-
         if (isset($params['loginName']) && '' != $params['loginName']) {
             try {
                 $loginStatus = 2; // has just logged in
@@ -221,7 +221,6 @@ class rex_ycom_auth
                         ->update();
 
                     $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN_SUCCESS', $me, []));
-                    self::setUser($me);
 
                     // session fixation
                     rex_login::regenerateSessionId();
@@ -261,8 +260,7 @@ class rex_ycom_auth
         }
 
         // ----- Login via SessionKey
-
-        if ($sessionUserID) {
+        if (null !== $sessionUserID) {
             try {
                 $userQuery =
                     rex_ycom_user::query()
@@ -275,8 +273,7 @@ class rex_ycom_auth
                 $loginUsers = $userQuery->find();
 
                 if (1 != count($loginUsers)) {
-                    rex_ycom_log::log($me, rex_ycom_log::TYPE_LOGIN_NOT_FOUND);
-                    throw new rex_exception('session user id not found');
+                    throw new rex_exception('session `'.$sessionUserID.'` - user not found');
                 }
 
                 rex_ycom_user_session::clearExpiredSessions();
@@ -303,9 +300,60 @@ class rex_ycom_auth
             }
         }
 
+        // ----- Login via CookieKey
+        if (null !== $cookieKey && null === $me) {
+            try {
+                $cookieUser = rex_sql::factory()->setQuery('select user_id from ' . rex::getTable('ycom_user_session') . ' where cookie_key = ?', [$cookieKey]);
+                if (1 !== $cookieUser->getRows()) {
+                    throw new rex_exception('cookiekey `'.$cookieKey.'` not found');
+                }
+                $userQuery =
+                    rex_ycom_user::query()
+                        ->where('id', $cookieUser->getValue('user_id'));
+
+                if ($filter) {
+                    $filter($userQuery);
+                }
+
+                $loginUsers = $userQuery->find();
+
+                if (1 !== count($loginUsers)) {
+                    throw new rex_exception('cookiekey `'.$cookieKey.'` - user width id=`'. $cookieUser->getValue('user_id').'` not found');
+                }
+
+                /** @var rex_ycom_user $me */
+                $me = $loginUsers[0];
+
+                rex_ycom_user_session::getInstance()->storeCurrentSession($me, $cookieKey);
+
+                rex_ycom_log::log(
+                    $me,
+                    rex_ycom_log::TYPE_LOGIN_SUCCESS,
+                    [
+                        'Login via CookieKey',
+                    ]
+                );
+            } catch (throwable $e) {
+                $loginStatus = 4; // login failed
+                self::clearUserSession();
+                rex_response::clearCookie(self::getStayLoggedInCookieName());
+                rex_ycom_log::log(
+                    '-',
+                    rex_ycom_log::TYPE_COOKIE_FAILED,
+                    [
+                        'EXCEPTION' => $e->getMessage(),
+                        'SERVER' => $_SERVER,
+                        'REQUEST' => $_REQUEST,
+                    ],
+                );
+            }
+        }
+
         if (null !== $me) {
             $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN', $me, []));
             $me->save();
+
+            self::setUser($me);
 
             rex_ycom_user_session::getInstance()->updateLastActivity($me);
             rex_response::sendCacheControl('no-store');

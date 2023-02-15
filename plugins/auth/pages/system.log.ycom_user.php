@@ -54,7 +54,7 @@ foreach (new LimitIterator($file, 0, 30) as $entry) {
                   <td data-title="' . rex_i18n::msg('ycom_user_log_user_id') . '">' . rex_escape($data[1]) . '</td>
                   <td data-title="' . rex_i18n::msg('ycom_user_log_type') . '">' . rex_escape($data[2]) . '</td>
                   <td data-title="' . rex_i18n::msg('ycom_user_log_email') . '">' . rex_escape($data[3]) . '</td>
-                  <td data-title="' . rex_i18n::msg('ycom_user_log_params') . '">' . rex_escape((string) ($data[4] ?? '')) . '</td>
+                  <td data-title="' . rex_i18n::msg('ycom_user_log_params') . '">' . rex_escape(($data[4] ?? '')) . '</td>
                 </tr>';
 }
 

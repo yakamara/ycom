@@ -8,7 +8,7 @@ class rex_yform_value_ycom_user extends rex_yform_value_abstract
         $show_label = $this->getElement(6);
 
         $this->setValue(-1);
-        if (rex_ycom_user::getMe()) {
+        if (null !== rex_ycom_user::getMe()) {
             $this->setValue(rex_ycom_user::getMe()->getValue($this->getElement(2)));
             $show_value = rex_ycom_user::getMe()->getValue($show_label);
         }

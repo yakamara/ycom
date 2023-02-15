@@ -11,23 +11,6 @@ class rex_ycom_user_session
             return;
         }
 
-        // $updateByCookieKey = false;
-        // if (null !== $cookieKey) {
-        //     $sql = rex_sql::factory()
-        //         ->setTable(rex::getTable('ycom_user_session'))
-        //         ->setWhere(['cookie_key' => $cookieKey])
-        //         ->select();
-        //     if ($sql->getRows()) {
-        //         if ($user->getId() !== (int) $sql->getValue('user_id')) {
-        //             throw new rex_exception('YCom Cookie key "'.$cookieKey.'" does not belong to current user "'.$user->getId().'", it belongs to user "'.(string) $sql->getValue('user_id').'"');
-        //         }
-        //         $updateByCookieKey = true;
-        //     }
-        // }
-        //
-        //
-        // dump($user);
-
         rex_sql::factory()
             ->setTable(rex::getTable('ycom_user_session'))
             ->setValue('session_id', session_id())
@@ -104,6 +87,9 @@ class rex_ycom_user_session
             ->delete();
     }
 
+    /**
+     * @param rex_extension_point<null> $ep
+     */
     public static function sessionRegenerated(rex_extension_point $ep): void
     {
         rex_sql::factory()
