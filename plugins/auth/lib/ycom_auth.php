@@ -350,7 +350,9 @@ class rex_ycom_auth
         }
 
         if (null !== $me) {
+            /** @var rex_ycom_user $me */
             $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN', $me, []));
+            $me->setHistoryEnabled(false);
             $me->save();
 
             self::setUser($me);
