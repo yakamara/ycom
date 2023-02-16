@@ -55,7 +55,7 @@ class rex_ycom_media_auth_rules
         switch ($rule['action']['type']) {
             case 'redirect':
                 $me = rex_ycom_user::getMe();
-                if ($me) {
+                if (null !== $me) {
                     // logged in
                     rex_response::setStatus(rex_response::HTTP_UNAUTHORIZED);
                     if (isset($rule['action']['error_article_id'])) {

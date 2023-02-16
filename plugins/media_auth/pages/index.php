@@ -15,6 +15,6 @@ echo rex_view::title($this->i18n('title')); // $this->i18n('title') ist eine Kur
 // die von anderen Addons/Plugins hinzugefügt wurden
 
 $currentPage = rex_be_controller::getCurrentPageObject();
-if ($currentPage) {
+if (null !== $currentPage) {
     include $currentPage->getSubPath();
 }

@@ -17,7 +17,7 @@ if (!array_key_exists($currenMDFile, $mdFiles)) {
 
 $page = rex_be_controller::getPageObject('ycom/docs');
 
-if ($page) {
+if (null !== $page) {
     foreach ($mdFiles as $key => $mdFile) {
         $keyWithoudPrio = mb_substr($key, 3);
         $currenMDFileWithoudPrio = mb_substr($currenMDFile, 3);
