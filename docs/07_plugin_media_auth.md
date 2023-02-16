@@ -41,7 +41,7 @@ class project
         if ($media->getCategory()->getId() == 1 || $media->getCategory()->getParent()->getId() == 1) {
             $sql = rex_sql::factory();
             $sql->setWhere('filename="'.$mediafile['filename'].'"');
-            $sql->setTable('rex_media');
+            $sql->setTable(rex::getTablePrefix() . 'media');
             $sql->setValue('ycom_auth_type', 1);
             $sql->update();
         }

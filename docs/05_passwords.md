@@ -213,7 +213,7 @@ für das **xxxxxx** bitte den Feldnamen des neuen Passwortes eintragen.
 if (\rex::isBackend() || \rex::isFrontend()) {
     rex_extension::register('REX_YFORM_SAVED', function ($ep): void {
         $params = $ep->getParams();
-        if ('rex_ycom_user' == $params['table'] && isset($params['id']) && 0 < $params['id']) {
+        if (rex::getTablePrefix() . 'ycom_user' == $params['table'] && isset($params['id']) && 0 < $params['id']) {
             $password = $params['form']->getParam('value_pool')['email']['password'];
             $password_hashed = $params['form']->getParam('value_pool')['sql']['password'];
             if ($password != $password_hashed && '' != $password) {

@@ -13,7 +13,7 @@ $modules = [
     // 		"profilechange"	=> array(	"key" => "profilechange", 	"search" => "module:ycom_auth_profilechange",	"name" => "ycom:auth - Profile"),
 ];
 
-$table = rex_yform_manager_table::get('rex_ycom_user');
+$table = rex_yform_manager_table::get(rex::getTablePrefix() . 'ycom_user');
 
 if ('update' == rex_request('func', 'string')) {
     $this->setConfig('article_id_jump_ok', rex_request('article_id_jump_ok', 'int'));
