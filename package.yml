@@ -15,22 +15,13 @@ page:
             pjax: false
             itemclass: pull-right
             icon: rex-icon fa-info-circle
-        log:
-            title: 'translate:ycom_log'
-            perm: admin[]
-            itemclass: pull-right
-
-pages:
-    system/log/ycom_user:
-        title: translate:ycom_user_log
-        perm: admin
 
 requires:
-    php: '>=7.4'
+    php: '>=8.1'
     packages:
-        yform: '>=4.0.4'
+        yform: '>=4.1.0'
         yrewrite: '>=2.6'
-    redaxo: '^5.14.2'
+    redaxo: '^5.15'
 
 system_plugins:
     - auth

@@ -28,13 +28,11 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
             };
         }
 
-        rex_ycom_auth::clearUserSession();
         rex_ycom_auth::loginWithParams($vars, $filter);
 
-        if (!rex_ycom_auth::getUser()) {
+        if (null === rex_ycom_auth::getUser()) {
             $this->params['warning'][] = 1;
             $this->params['warning_messages'][] = rex_i18n::translate($this->getElement(4));
-            rex_ycom_auth::clearUserSession();
         } else {
             // Load fields for eMail or DB
             $fields = $this->getElement(5);
@@ -53,13 +51,5 @@ class rex_yform_validate_ycom_auth_login extends rex_yform_validate_abstract
     public function getDescription(): string
     {
         return 'ycom_auth_login -> prüft ob leer, beispiel: validate|ycom_auth_login|label1=request1,label2=request2|status>0|warning_message|opt:load_field1,load_field2,load_field3|[no_db] ';
-    }
-
-    public function preAction(): void
-    {
-        $me = rex_ycom_user::getMe();
-        if ($me) {
-            rex_ycom_log::log($me, rex_ycom_log::TYPE_LOGIN);
-        }
     }
 }

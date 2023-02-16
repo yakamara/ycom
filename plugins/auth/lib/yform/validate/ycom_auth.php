@@ -48,7 +48,7 @@ class rex_yform_validate_ycom_auth extends rex_yform_validate_abstract
         $params['loginPassword'] = $passwordObject->getValue();
         $params['loginStay'] = ($stayObject) ? $stayObject->getValue() : false;
         $params['filter'] = [
-            'status > 0'
+            'status > 0',
         ];
         $status = rex_ycom_auth::login($params);
 
@@ -57,20 +57,11 @@ class rex_yform_validate_ycom_auth extends rex_yform_validate_abstract
                 $this->params['warning'][$warningObject->getId()] = $this->params['error_class'];
                 $this->params['warning_messages'][$warningObject->getId()] = $this->getElement(6);
             }
-            rex_ycom_auth::clearUserSession();
         }
     }
 
     public function getDescription(): string
     {
         return 'ycom_auth -> prüft ob login und registriert user, beispiel: validate|ycom_auth|loginfield|passwordfield|stayfield|warning_message_enterloginpsw|warning_message_login_failed';
-    }
-
-    public function preAction(): void
-    {
-        $me = rex_ycom_user::getMe();
-        if (null !== $me) {
-            rex_ycom_log::log($me, rex_ycom_log::TYPE_LOGIN);
-        }
     }
 }

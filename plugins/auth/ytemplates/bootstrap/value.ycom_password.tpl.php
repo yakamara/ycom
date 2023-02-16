@@ -54,9 +54,7 @@ if ($script) {
     </span>';
 
     $nonce = '';
-    if (method_exists('rex_response', 'getNonce')) {
-        $nonce = ' nonce="' . rex_response::getNonce() . '"';
-    }
+    $nonce = ' nonce="' . rex_response::getNonce() . '"';
 
     ?><script type="text/javascript"<?php echo $nonce; ?>>
 

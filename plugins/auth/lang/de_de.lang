@@ -61,14 +61,18 @@ ycom_auth_config_id_login = LogIn-Seite
 ycom_auth_config_id_logout = LogOut-Seite
 ycom_auth_config_id_register = Register-Seite
 ycom_auth_config_id_password = Passwort zurücksetzen
-
 ycom_auth_config_auth_cookie_ttl = Cookie-Laufzeit für `eingeloggt bleiben`
-ycom_days = {0} Tage
-
 ycom_auth_config_session_max_overall_duration = Maximale Gesamtsessiondauer in Sekunden (danach läuft die Session immer ab)
 ycom_auth_config_session_duration = Maximale Sessiondauer bei Inaktivität in Sekunden
-
-
 ycom_auth_config_extern = Authentifizierung (SAML/CAS/OAUTH2)
 
 ycom_auth_howtoread_configvalues = Werte sind über: rex_config::get('ycom/auth','article_id_login', null); auslesbar
+
+ycom_days = {0} Tage
+ycom_user_id = User-Id
+ycom_current_sessions = Aktuelle Sessions
+ycom_impersonate = Im Frontend automatisch anmelden
+ycom_impersonate_alert = Eine Session für den User (id=___id___) erstellen und sich damit einloggen?
+
+ycom_session_added_ready_to_login = Session wurde angelegt. Bitte hier einloggen: <a href="{0}" target="_blank" rel="noopener noreferrer">{0}</a>
+ycom_session_could_not_been_added = Session konnte nicht angelegt werden, weil der User inaktiv ist.

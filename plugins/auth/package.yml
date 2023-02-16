@@ -9,7 +9,17 @@ page:
     title: 'translate:ycom_auth_title'
     hidden: false
     subpages:
-        settings: { title: 'translate:ycom_auth_settings'}
+        settings:
+            title: 'translate:ycom_auth_settings'
+        sessions:
+            title: 'translate:ycom_current_sessions'
+        log:
+            title: 'translate:ycom_log'
+
+pages:
+    system/log/ycom_user:
+        title: translate:ycom_user_log
+        perm: admin
 
 default_config:
     auth_cookie_ttl: '14'

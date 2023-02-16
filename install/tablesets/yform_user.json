@@ -260,21 +260,6 @@
             },
             {
                 "table_name": "rex_ycom_user",
-                "prio": 16,
-                "type_id": "value",
-                "type_name": "generate_key",
-                "db_type": "",
-                "list_hidden": 1,
-                "search": 1,
-                "name": "session_key",
-                "label": "translate:session_key",
-                "not_required": "",
-                "only_empty": "1",
-                "no_db": "",
-                "show_value": "1"
-            },
-            {
-                "table_name": "rex_ycom_user",
                 "prio": 17,
                 "type_id": "value",
                 "type_name": "checkbox",
