@@ -1,51 +1,37 @@
-// hide group fields in article edit page if not needed
-function change_ycom_article_fields() {
-    if($('#yform-ycom_auth-perm-field-0 option:selected').val() != 1) {
-        $('#yform-ycom_auth-perm-field-1').closest('.form-group').hide();
-        $('#yform-ycom_auth-perm-field-2').closest('.form-group').hide();
-    }
-    else {
-        $('#yform-ycom_auth-perm-field-1').closest('.form-group').show();
-        if($('#yform-ycom_auth-perm-field-1 option:selected').val() == 1 || $('#yform-ycom_auth-perm-field-1 option:selected').val() == 2) {
-            $('#yform-ycom_auth-perm-field-2').closest('.form-group').show();
-        }
-        else {
-            $('#yform-ycom_auth-perm-field-2').closest('.form-group').hide();
-        }
-    }
-}
-
-function change_ycom_media_fields() {
-
-    if($('select[name="ycom_auth_type"] option:selected').val() != 1) {
-        $('select[name="ycom_group_type"]').closest('.form-group').hide();
-        $('select[name="ycom_groups[]"]').closest('.form-group').hide();
-    } else {
-        $('select[name="ycom_group_type"]').closest('.form-group').show();
-        if($('select[name="ycom_group_type"] option:selected').val() == 1 || $('select[name="ycom_group_type"] option:selected').val() == 2) {
-            $('select[name="ycom_groups[]"]').closest('.form-group').show();
-        } else {
-            $('select[name="ycom_groups[]"]').closest('.form-group').hide();
-        }
-    }
-}
-
 $(document).on('rex:ready', function () {
 
-    change_ycom_article_fields();
-    $('#yform-ycom_auth-perm-field-0').on('change', function() {
-        change_ycom_article_fields();
+    // YCom-Artikel Rechte
+    $('#yform-ycom_auth-perm-ycom_auth_type select,#yform-ycom_auth-perm-ycom_group_type select').on('change', function() {
+        if($('#yform-ycom_auth-perm-ycom_auth_type select option:selected').val() !== "1") {
+            $('#yform-ycom_auth-perm-ycom_group_type').hide();
+            $('#yform-ycom_auth-perm-ycom_groups').hide();
+        } else {
+            $('#yform-ycom_auth-perm-ycom_group_type').show();
+            let group_type = $('#yform-ycom_auth-perm-ycom_group_type option:selected').val();
+            if(group_type === "1" || group_type === "2") {
+                $('#yform-ycom_auth-perm-ycom_groups').show();
+            } else {
+                $('#yform-ycom_auth-perm-ycom_groups').hide();
+            }
+        }
     });
-    $('#yform-ycom_auth-perm-field-1').on('change', function() {
-        change_ycom_article_fields();
-    });
+    $('#yform-ycom_auth-perm-ycom_auth_type select').trigger('change');
 
-    change_ycom_media_fields();
-    $('select[name="ycom_auth_type"]').on('change', function() {
-        change_ycom_media_fields();
-    });
-    $('select[name="ycom_group_type"]').on('change', function() {
-        change_ycom_media_fields();
-    });
+    // Medienpool Rechte
+    $('select[name="ycom_auth_type"],select[name="ycom_group_type"]').on('change', function() {
 
+        if($('select[name="ycom_auth_type"] option:selected').val() !== "1") {
+            $('select[name="ycom_group_type"]').closest('.form-group').hide();
+            $('select[name="ycom_groups[]"]').closest('.form-group').hide();
+        } else {
+            $('select[name="ycom_group_type"]').closest('.form-group').show();
+            let group_type_selected = $('select[name="ycom_group_type"] option:selected').val();
+            if(group_type_selected === "1" || group_type_selected === "2") {
+                $('select[name="ycom_groups[]"]').closest('.form-group').show();
+            } else {
+                $('select[name="ycom_groups[]"]').closest('.form-group').hide();
+            }
+        }
+    });
+    $('select[name="ycom_auth_type"]').trigger('change');
 });
