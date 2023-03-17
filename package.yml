@@ -1,5 +1,5 @@
 package: ycom
-version: '4.2.0-dev'
+version: '4.2.0'
 author: Yakamara Media GmbH & Co. KG
 supportpage: https://github.com/yakamara/redaxo_ycom/
 
@@ -19,9 +19,9 @@ page:
 requires:
     php: '>=8.1'
     packages:
-        yform: '>=4.1.0'
+        yform: '^4.1.0'
         yrewrite: '>=2.6'
-    redaxo: '^5.15'
+    redaxo: '^5.15.0'
 
 system_plugins:
     - auth

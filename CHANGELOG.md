@@ -1,6 +1,35 @@
 Changelog
 =========
 
+Version 4.2.0 - x.3.2023
+--------------------------
+
+### Neu
+
+* Sobald man eingeloggt ist, werden immer no-store und no-cache Header gesetzt 
+* Nonces ergänzt, um für bessere CSP Header vorbereitet zu sein
+* session_max_overall_duration ergänzt
+* session_duration ergänzt
+* nun von YForm 4.1 abhängig und REDAXO 5.15
+* Sessionmanagement umgestellt auf echte eigene Sessions pro Gerät
+  * Seperate Session IDs über die Datenbank
+  * Userimpersonate für Admins
+  * Sessions aus dem Backend löschbar
+  * Eingeloggt bleiben nun auch über mehrere Geräte hinweg
+
+
+### Bugfixes und kleinere Anpassungen
+ 
+* Überprüfung Media-Path korrigiert
+* CodeStyle und REXSTAN Abgleich
+* Log ergänzt um URL
+* Dokumentation angepasst
+* Logdeaktivierung funktionierte nicht, nur die Ansicht wurde deaktiviert
+* session_regenerate Handling korrigiert. Backend und Frontend waren nicht kompatibel und löschten sich gegenseitig die Sessions
+* history wird beim Userobjektaufruf deaktiviert, damit nicht jeder Zugriff zu einem Historyeintrag führt
+* Doppelte Importe verhindert. Es gab dadurch doppelte Felder. Gruppen werden nun immer mit angelegt
+* JS angepasst und flexibler gestaltet
+
 Version 4.1.0 - 5.1.2023
 --------------------------
 
