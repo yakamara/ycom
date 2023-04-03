@@ -16,6 +16,9 @@ rex_sql_table::get(rex::getTable('article'))
     ->removeColumn('ycom_groups')
     ->alter();
 
+rex_sql_table::get(rex::getTable('ycom_user_session'))
+    ->drop();
+
 rex_sql_table::get(rex::getTable('ycom_user'))
     ->drop();
 
