@@ -2,6 +2,12 @@
 
 class rex_ycom_auth
 {
+    const STATUS_NOT_LOGGED_IN = 0;
+    const STATUS_IS_LOGGED_IN = 1;
+    const STATUS_HAS_LOGGED_IN = 2;
+    const STATUS_HAS_LOGGED_OUT = 3;
+    const STATUS_LOGIN_FAILED = 4;
+
     public static bool $debug = false;
     /**
      * @var rex_ycom_user|null
@@ -56,7 +62,7 @@ class rex_ycom_auth
         $login_status = self::login($params);
 
         // set redirect after Login
-        if (2 == $login_status) {
+        if (self::STATUS_HAS_LOGGED_IN == $login_status) {
             // if ($params['referer']) {
             //     $params['redirect'] = urldecode($params['referer']);
             // } else {
@@ -95,7 +101,7 @@ class rex_ycom_auth
             }
         }
 
-        if (3 == $login_status && '' == $params['redirect']) {
+        if (self::STATUS_HAS_LOGGED_OUT == $login_status && '' == $params['redirect']) {
             $params['redirect'] = rex_getUrl(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_logout'), '', [], '&');
         }
 
@@ -137,7 +143,21 @@ class rex_ycom_auth
     }
 
     /**
-     * @param array<int|string, mixed> $params
+     * Use provided credentials from `$params` to check the login status. Returns the login status, one of
+     * -  {@see rex_ycom_auth::STATUS_NOT_LOGGED_IN STATUS_NOT_LOGGED_IN}
+     * -  {@see rex_ycom_auth::STATUS_IS_LOGGED_IN STATUS_IS_LOGGED_IN}
+     * -  {@see rex_ycom_auth::STATUS_HAS_LOGGED_IN STATUS_HAS_LOGGED_IN}
+     * -  {@see rex_ycom_auth::STATUS_HAS_LOGGED_OUT STATUS_HAS_LOGGED_OUT}
+     * -  {@see rex_ycom_auth::STATUS_LOGIN_FAILED STATUS_LOGIN_FAILED}
+     *
+     * @param array{
+     *     filter: array|string,
+     *     loginName: string,
+     *     loginPassword: string,
+     *     ignorePassword: bool|string,
+     *     loginStay: bool|string,
+     *     } $params
+     *
      * @throws rex_exception
      */
     public static function login(array $params): int
@@ -170,7 +190,7 @@ class rex_ycom_auth
          4: login failed
        */
 
-        $loginStatus = 0; // not logged in
+        $loginStatus = self::STATUS_NOT_LOGGED_IN; // not logged in
         $loginFieldName = (string) rex_config::get('ycom/auth', 'login_field', 'email');
         $me = null;
         $sessionUserID = self::getSessionVar('UID', 'string', null);
@@ -181,7 +201,7 @@ class rex_ycom_auth
         // ignoriert und überschrieben
         if (isset($params['loginName']) && '' != $params['loginName']) {
             try {
-                $loginStatus = 2; // has just logged in
+                $loginStatus = self::STATUS_HAS_LOGGED_IN; // has just logged in
                 $userQuery =
                     rex_ycom_user::query()
                         ->where($loginFieldName, $params['loginName']);
@@ -240,7 +260,7 @@ class rex_ycom_auth
                     throw new rex_exception('Login failed . Password wrong or not set or not ignored');
                 }
             } catch (throwable $e) {
-                $loginStatus = 4; // login failed
+                $loginStatus = self::STATUS_LOGIN_FAILED; // login failed
                 rex_ycom_user_session::clearExpiredSessions();
                 rex_response::clearCookie(self::getStayLoggedInCookieName());
 
@@ -284,9 +304,9 @@ class rex_ycom_auth
                 /** @var rex_ycom_user $me */
                 $me = $loginUsers[0];
                 self::setUser($me);
-                $loginStatus = 1; // is logged in
+                $loginStatus = self::STATUS_IS_LOGGED_IN; // is logged in
             } catch (throwable $e) {
-                $loginStatus = 4; // login failed
+                $loginStatus = self::STATUS_LOGIN_FAILED; // login failed
                 self::clearUserSession();
                 rex_ycom_log::log(
                     $sessionUserID,
@@ -334,7 +354,7 @@ class rex_ycom_auth
                     ]
                 );
             } catch (throwable $e) {
-                $loginStatus = 4; // login failed
+                $loginStatus = self::STATUS_LOGIN_FAILED; // login failed
                 self::clearUserSession();
                 rex_response::clearCookie(self::getStayLoggedInCookieName());
                 rex_ycom_log::log(
