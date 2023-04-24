@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version 4.2.0 - x.3.2023
+Version 4.2.0 - 24.04.2023
 --------------------------
 
 ### Neu
@@ -29,6 +29,8 @@ Version 4.2.0 - x.3.2023
 * history wird beim Userobjektaufruf deaktiviert, damit nicht jeder Zugriff zu einem Historyeintrag führt
 * Doppelte Importe verhindert. Es gab dadurch doppelte Felder. Gruppen werden nun immer mit angelegt
 * JS angepasst und flexibler gestaltet
+
+Danke @thorol, Dominik Grothaus
 
 Version 4.1.0 - 5.1.2023
 --------------------------
