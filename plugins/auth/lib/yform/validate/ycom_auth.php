@@ -52,7 +52,7 @@ class rex_yform_validate_ycom_auth extends rex_yform_validate_abstract
         ];
         $status = rex_ycom_auth::login($params);
 
-        if (2 != $status) {
+        if (rex_ycom_auth::STATUS_HAS_LOGGED_IN != $status) {
             foreach ($warningObjects as $warningObject) {
                 $this->params['warning'][$warningObject->getId()] = $this->params['error_class'];
                 $this->params['warning_messages'][$warningObject->getId()] = $this->getElement(6);

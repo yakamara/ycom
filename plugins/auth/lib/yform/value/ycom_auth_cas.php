@@ -114,7 +114,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         $params['ignorePassword'] = true;
 
         $loginStatus = \rex_ycom_auth::login($params);
-        if (2 == $loginStatus) {
+        if (rex_ycom_auth::STATUS_HAS_LOGGED_IN == $loginStatus) {
             // already logged in
             rex_ycom_user::updateUser($data);
             rex_response::sendCacheControl();
@@ -142,7 +142,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         $params['ignorePassword'] = true;
         $loginStatus = \rex_ycom_auth::login($params);
 
-        if (2 != $loginStatus) {
+        if (rex_ycom_auth::STATUS_HAS_LOGGED_IN != $loginStatus) {
             if ($this->params['debug']) {
                 dump($loginStatus);
                 dump($user);
