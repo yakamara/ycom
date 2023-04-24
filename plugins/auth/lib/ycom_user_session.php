@@ -93,7 +93,6 @@ class rex_ycom_user_session
     public static function sessionRegenerated(rex_extension_point $ep): void
     {
         rex_sql::factory()
-            ->setDebug()
             ->setTable(rex::getTable('ycom_user_session'))
             ->setWhere('session_id = :my_session_id', [':my_session_id' => rex_type::string($ep->getParam('previous_id'))])
             ->setValue('session_id', rex_type::string($ep->getParam('new_id')))
