@@ -206,9 +206,9 @@ class rex_ycom_auth
                 }
 
                 if (
-                    (null !== $params['ignorePassword'] && $params['ignorePassword'])
+                    (isset($params['ignorePassword']) && $params['ignorePassword'])
                     ||
-                    (null !== $params['loginPassword'] && '' != $params['loginPassword'] && self::checkPassword($params['loginPassword'], $loginUser->getId()))
+                    (isset($params['loginPassword']) && '' != $params['loginPassword'] && self::checkPassword($params['loginPassword'], $loginUser->getId()))
                 ) {
                     $me = $loginUser;
 
