@@ -19,7 +19,7 @@ page:
 requires:
     php: '>=8.1'
     packages:
-        yform: '^4.1.0'
+        yform: '^4.1.1'
         yrewrite: '>=2.6'
     redaxo: '^5.15.0'
 
