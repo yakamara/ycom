@@ -56,4 +56,4 @@ if ($ycom_user) {
 	// Benutzter besitzt die nötige Berechtigung nicht
 }
 ```
-> Siehe auch: [User und Gruppen auslesen](user.details.md)
+> Siehe auch: [User und Gruppen auslesen](index.php?page=ycom/docs&mdfile=06_user_groups)
