@@ -22,7 +22,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
         }
         if ('' != $ycom_groups) {
             $ycom_groups_array = explode(',', $ycom_groups);
-            if (in_array($group_id, $ycom_groups_array, true)) {
+            if (in_array((string) $group_id, $ycom_groups_array, true)) {
                 return true;
             }
         }
