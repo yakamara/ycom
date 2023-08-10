@@ -110,9 +110,8 @@ checkbox|termsofuse_accepted|Ich habe die Nutzungsbedingungen akzeptiert.|0|0|
 
 html|required|<p class="form-required">* Pflichtfelder</p>
 
-validate|type|email|Bitte geben Sie die E-Mail-Adresse ein.
+validate|type|email|email|Bitte geben Sie korrekte E-Mail-Adresse ein.
 validate|unique|email|Diese E-Mail-Adresse wird bereits verwendet.|rex_ycom_user
-validate|empty|email|Bitte geben Sie Ihre E-Mail-Adresse ein.
 validate|empty|password|Bitte geben Sie ein Passwort ein.
 validate|compare|password|password_2||Bitte geben Sie zweimal dasselbe Passwort ein.
 validate|compare|email|email_2||Bitte geben Sie zweimal dieselbe E-Mail-Adresse ein.
