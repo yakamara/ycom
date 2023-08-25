@@ -2,11 +2,11 @@
 
 class rex_ycom_auth
 {
-    const STATUS_NOT_LOGGED_IN = 0;
-    const STATUS_IS_LOGGED_IN = 1;
-    const STATUS_HAS_LOGGED_IN = 2;
-    const STATUS_HAS_LOGGED_OUT = 3;
-    const STATUS_LOGIN_FAILED = 4;
+    public const STATUS_NOT_LOGGED_IN = 0;
+    public const STATUS_IS_LOGGED_IN = 1;
+    public const STATUS_HAS_LOGGED_IN = 2;
+    public const STATUS_HAS_LOGGED_OUT = 3;
+    public const STATUS_LOGIN_FAILED = 4;
 
     public static bool $debug = false;
     /**
@@ -148,7 +148,7 @@ class rex_ycom_auth
      * -  {@see rex_ycom_auth::STATUS_IS_LOGGED_IN STATUS_IS_LOGGED_IN}
      * -  {@see rex_ycom_auth::STATUS_HAS_LOGGED_IN STATUS_HAS_LOGGED_IN}
      * -  {@see rex_ycom_auth::STATUS_HAS_LOGGED_OUT STATUS_HAS_LOGGED_OUT}
-     * -  {@see rex_ycom_auth::STATUS_LOGIN_FAILED STATUS_LOGIN_FAILED}
+     * -  {@see rex_ycom_auth::STATUS_LOGIN_FAILED STATUS_LOGIN_FAILED}.
      *
      * @param array{
      *     filter: array|string,
@@ -227,19 +227,10 @@ class rex_ycom_auth
 
                 if (
                     (isset($params['ignorePassword']) && $params['ignorePassword'])
-                    ||
-                    (isset($params['loginPassword']) && '' != $params['loginPassword'] && self::checkPassword($params['loginPassword'], $loginUser->getId()))
+                    || (isset($params['loginPassword']) && '' != $params['loginPassword'] && self::checkPassword($params['loginPassword'], $loginUser->getId()))
                 ) {
                     $me = $loginUser;
-
-                    rex_sql::factory()
-                        ->setTable(rex_ycom_user::table())
-                        ->setWhere(['id' => $me->getId()])
-                        ->setValue('login_tries', 0)
-                        ->setValue('last_action_time', rex_sql::datetime(time()))
-                        ->setValue('last_login_time', rex_sql::datetime(time()))
-                        ->update();
-
+                    $me->setValue('last_login_time', rex_sql::datetime(time()));
                     $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN_SUCCESS', $me, []));
 
                     // session fixation
@@ -372,6 +363,7 @@ class rex_ycom_auth
         if (null !== $me) {
             /** @var rex_ycom_user $me */
             $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN', $me, []));
+            $me->setValue('last_action_time', rex_sql::datetime(time()));
             $me->setHistoryEnabled(false);
             $me->save();
 
@@ -533,7 +525,6 @@ class rex_ycom_auth
     }
 
     /**
-     * @param mixed $value
      * @throws rex_exception
      */
     public static function setSessionVar(string $key, $value): void
@@ -544,7 +535,6 @@ class rex_ycom_auth
     }
 
     /**
-     * @param mixed $default
      * @throws rex_exception
      * @return array|bool|float|int|mixed|object|string
      */
@@ -622,7 +612,7 @@ class rex_ycom_auth
             if ('' != $returnTo) {
                 if (!preg_match('/http(s?)\:\/\//i', $returnTo)) {
                     $frontendUrl = rex_url::frontend();
-                    if (false !== strpos($returnTo, $frontendUrl)) {
+                    if (str_contains($returnTo, $frontendUrl)) {
                         $returnTo = str_replace($frontendUrl, '/', $returnTo);
                     }
                     $returnTo = rex_yrewrite::getFullPath('/' == substr($returnTo, 0, 1) ? substr($returnTo, 1) : $returnTo);
