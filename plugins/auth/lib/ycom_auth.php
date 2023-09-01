@@ -222,6 +222,7 @@ class rex_ycom_auth
                 $auth_rules = new rex_ycom_auth_rules();
                 $authRuleConfig = rex_config::get('ycom/auth', 'auth_rule', 'login_try_5_pause') ?? 'login_try_5_pause';
                 if (!$auth_rules->check($loginUser, $authRuleConfig)) {
+                    $loginUser->increaseLoginTries()->save();
                     throw new rex_exception('Login failed - Auth Rules');
                 }
 
@@ -248,6 +249,7 @@ class rex_ycom_auth
                         'stayloggedin' => $params['loginStay'] ?? '-',
                     ]);
                 } else {
+                    $loginUser->increaseLoginTries()->save();
                     throw new rex_exception('Login failed . Password wrong or not set or not ignored');
                 }
             } catch (throwable $e) {

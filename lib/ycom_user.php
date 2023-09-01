@@ -15,7 +15,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
 
     public function isInGroup(int $group_id): bool
     {
-        $ycom_groups = (string) ($this->getValue('ycom_groups'));
+        $ycom_groups = (string) $this->getValue('ycom_groups');
 
         if ('' == $group_id) {
             return true;
@@ -89,5 +89,11 @@ class rex_ycom_user extends \rex_yform_manager_dataset
 
         return $user
             ->save();
+    }
+
+    public function increaseLoginTries(): self
+    {
+        $this->setValue('login_tries', $this->getValue('login_tries') + 1);
+        return $this;
     }
 }
