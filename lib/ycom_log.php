@@ -76,7 +76,7 @@ class rex_ycom_log
             return;
         }
 
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $_SERVER['REMOTE_ADDR'] ?? '';
         if (isset($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = (string) $_SERVER['HTTP_CLIENT_IP'];
         } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
