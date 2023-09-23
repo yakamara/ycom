@@ -74,8 +74,8 @@ jobs:
           redaxo_cms/redaxo/bin/console package:install 'phpmailer'
           redaxo_cms/redaxo/bin/console install:download 'yform' '4.*'
           redaxo_cms/redaxo/bin/console package:install 'yform'
-          redaxo_cms/redaxo/bin/console install:download 'rewrite' '2.*'
-          redaxo_cms/redaxo/bin/console package:install 'rewrite'
+          redaxo_cms/redaxo/bin/console install:download 'yrewrite' '2.*'
+          redaxo_cms/redaxo/bin/console package:install 'yrewrite'
           redaxo_cms/redaxo/bin/console package:install '${{ github.event.repository.name }}'
 
       # install dependencies from composer.json
