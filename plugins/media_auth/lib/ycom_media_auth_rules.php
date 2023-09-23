@@ -6,9 +6,7 @@
 
 class rex_ycom_media_auth_rules
 {
-    /**
-     * @var array<string, array{'info': string, 'action': string[]}>
-     */
+    /** @var array<string, array{'info': string, 'action': string[]}> */
     private array $rules;
 
     public function __construct()
@@ -42,7 +40,6 @@ class rex_ycom_media_auth_rules
     /**
      * @param string|null $rule_name
      * @throws rex_exception
-     * @return void
      */
     public function check($rule_name): void
     {

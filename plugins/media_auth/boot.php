@@ -64,7 +64,7 @@ rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'ME
 
     // ----- form field
 
-    $ycom_auth_default = rex_request($prefix.'auth_type', 'string');
+    $ycom_auth_default = rex_request($prefix . 'auth_type', 'string');
     if (!array_key_exists($ycom_auth_default, rex_ycom_media_auth::$perms)) {
         $ycom_auth_default = key(rex_ycom_media_auth::$perms);
     }
@@ -75,11 +75,11 @@ rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'ME
     $ycom_groups_default = '';
 
     if ($group) {
-        $ycom_group_default = rex_request($prefix.'group_type', 'string');
+        $ycom_group_default = rex_request($prefix . 'group_type', 'string');
         if (!array_key_exists($ycom_group_default, rex_ycom_group::$perms)) {
             $ycom_group_default = key(rex_ycom_group::$perms);
         }
-        $ycom_groups_default = rex_request($prefix.'groups', 'array');
+        $ycom_groups_default = rex_request($prefix . 'groups', 'array');
     }
 
     // ----- handle save
@@ -90,17 +90,17 @@ rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'ME
         $media->setWhere('id=:mediaid', ['mediaid' => $params['id']]);
 
         if (isset($params['activeItem'])) {
-            $params['activeItem']->setValue($prefix.'auth_type', $ycom_auth_default);
+            $params['activeItem']->setValue($prefix . 'auth_type', $ycom_auth_default);
             if ($group) {
-                $params['activeItem']->setValue($prefix.'group_type', $ycom_group_default);
-                $params['activeItem']->setValue($prefix.'groups', implode(',', $ycom_groups_default));
+                $params['activeItem']->setValue($prefix . 'group_type', $ycom_group_default);
+                $params['activeItem']->setValue($prefix . 'groups', implode(',', $ycom_groups_default));
             }
         }
-        $media->setValue($prefix.'auth_type', $ycom_auth_default);
+        $media->setValue($prefix . 'auth_type', $ycom_auth_default);
 
         if ($group) {
-            $media->setValue($prefix.'group_type', $ycom_group_default);
-            $media->setValue($prefix.'groups', implode(',', $ycom_groups_default));
+            $media->setValue($prefix . 'group_type', $ycom_group_default);
+            $media->setValue($prefix . 'groups', implode(',', $ycom_groups_default));
         }
         $media->update();
     }
@@ -118,11 +118,11 @@ rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'ME
     }
 
     if (isset($params['activeItem'])) {
-        $ycom_auth_type_sel->setSelected($params['activeItem']->getValue($prefix.'auth_type'));
+        $ycom_auth_type_sel->setSelected($params['activeItem']->getValue($prefix . 'auth_type'));
     }
 
     $e = [];
-    $e['label'] = '<label>'.rex_i18n::msg('ycom_auth_perm').'</label>';
+    $e['label'] = '<label>' . rex_i18n::msg('ycom_auth_perm') . '</label>';
     $e['field'] = $ycom_auth_type_sel->get();
 
     $fragment = new rex_fragment();
@@ -143,11 +143,11 @@ rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'ME
         }
 
         if (isset($params['activeItem'])) {
-            $ycom_group_type_sel->setSelected($params['activeItem']->getValue($prefix.'group_type'));
+            $ycom_group_type_sel->setSelected($params['activeItem']->getValue($prefix . 'group_type'));
         }
 
         $e = [];
-        $e['label'] = '<label>'.rex_i18n::msg('ycom_group_type').'</label>';
+        $e['label'] = '<label>' . rex_i18n::msg('ycom_group_type') . '</label>';
         $e['field'] = $ycom_group_type_sel->get();
 
         $fragment = new rex_fragment();
@@ -168,15 +168,15 @@ rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'ME
         }
 
         if (isset($params['activeItem'])) {
-            if ('' != $params['activeItem']->getValue($prefix.'groups')) {
-                foreach (explode(',', $params['activeItem']->getValue($prefix.'groups')) as $id) {
+            if ('' != $params['activeItem']->getValue($prefix . 'groups')) {
+                foreach (explode(',', $params['activeItem']->getValue($prefix . 'groups')) as $id) {
                     $ycom_groups_sel->setSelected($id);
                 }
             }
         }
 
         $e = [];
-        $e['label'] = '<label>'.rex_i18n::msg('ycom_groups').'</label>';
+        $e['label'] = '<label>' . rex_i18n::msg('ycom_groups') . '</label>';
         $e['field'] = $ycom_groups_sel->get();
 
         $fragment = new rex_fragment();
@@ -184,5 +184,5 @@ rex_extension::register(['MEDIA_FORM_ADD', 'MEDIA_FORM_EDIT', 'MEDIA_ADDED', 'ME
         $field .= $fragment->parse('core/form/form.php');
     }
 
-    return $ep->getSubject().$field;
+    return $ep->getSubject() . $field;
 });

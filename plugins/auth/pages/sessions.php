@@ -38,7 +38,7 @@ switch ($func) {
                             'be_user_login' => $be_user->getValue('login'),
                             'be_user_name' => $be_user->getValue('name'),
                             'be_user_email' => $be_user->getValue('email'),
-                        ]
+                        ],
                     );
                 }
             }
@@ -46,7 +46,7 @@ switch ($func) {
         break;
 }
 
-$list = rex_list::factory('SELECT session_id, cookie_key, ip, user_id, useragent, starttime, last_activity from '.rex::getTablePrefix().'ycom_user_session ORDER BY last_activity DESC');
+$list = rex_list::factory('SELECT session_id, cookie_key, ip, user_id, useragent, starttime, last_activity from ' . rex::getTablePrefix() . 'ycom_user_session ORDER BY last_activity DESC');
 
 $list->addColumn('remove_session', '<i class="rex-icon rex-icon-delete"></i>', 0, ['<th class="rex-table-icon"></th>', '<td class="rex-table-icon">###VALUE###</td>']);
 $list->setColumnParams('remove_session', ['func' => 'remove_session', 'session_id' => '###session_id###', 'user_id' => '###user_id###']);
@@ -60,7 +60,7 @@ $list->setColumnLabel('last_activity', rex_i18n::msg('last_activity'));
 
 $list->setColumnFormat('session_id', 'custom', static function () use ($list) {
     return rex_escape((string) $list->getValue('session_id'))
-        . ($list->getValue('cookie_key') ? ' <span class="label label-warning">'.rex_i18n::msg('stay_logged_in').'</span>' : '');
+        . ($list->getValue('cookie_key') ? ' <span class="label label-warning">' . rex_i18n::msg('stay_logged_in') . '</span>' : '');
 });
 
 $list->setColumnFormat('last_activity', 'custom', static function () use ($list) {

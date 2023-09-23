@@ -2,7 +2,7 @@
 
 $content = '';
 $addon = rex_addon::get('ycom');
-$params = $params ?? [];
+$params ??= [];
 
 $article_id = $params['article_id'];
 $clang = $params['clang'];
@@ -44,7 +44,7 @@ if ($rexUser) {
         }
 
         $permission_info .= '<script' . $nonce . '>$( document ).ready(function() { $("#rex-page-sidebar-ycom_auth-perm :input").attr("disabled", true); }); </script>';
-        $permission_info .= '<div><p class="alert alert-danger">'.$addon->i18n('no_permission_to_edit').'</p></div>';
+        $permission_info .= '<div><p class="alert alert-danger">' . $addon->i18n('no_permission_to_edit') . '</p></div>';
     } else {
         $yform->setActionField('db', [rex::getTable('article'), 'id = ' . $article_id]);
         $yform->setObjectparams('submit_btn_label', $addon->i18n('ycom_auth_update_perm'));
@@ -58,7 +58,7 @@ if ($rexUser) {
         rex_article_cache::delete($article_id, $clang);
     }
 
-    $form = '<section id="rex-page-sidebar-ycom_auth-perm" data-pjax-container="#rex-page-sidebar-ycom_auth-perm" data-pjax-no-history="1">'.$permission_info.$form.'</section>';
+    $form = '<section id="rex-page-sidebar-ycom_auth-perm" data-pjax-container="#rex-page-sidebar-ycom_auth-perm" data-pjax-no-history="1">' . $permission_info . $form . '</section>';
 }
 
 return $form;

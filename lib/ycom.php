@@ -2,9 +2,7 @@
 
 class rex_ycom
 {
-    /**
-     * @var array<string>
-     */
+    /** @var array<string> */
     public static array $tables = [];
 
     public static function addTable(string $table_name): void

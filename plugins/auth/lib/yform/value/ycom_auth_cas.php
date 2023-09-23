@@ -11,9 +11,7 @@
 
 class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 {
-    /**
-     * @var array|string[]
-     */
+    /** @var array|string[] */
     private static array $requestAuthFunctions = ['auth', 'logout'];
     private string $casFile = 'cas.php';
 
@@ -23,7 +21,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 
         $casConfigPath = \rex_addon::get('ycom')->getDataPath($this->casFile);
         if (!file_exists($casConfigPath)) {
-            throw new rex_exception('CAS Settings file not found ['.$casConfigPath.']');
+            throw new rex_exception('CAS Settings file not found [' . $casConfigPath . ']');
         }
 
         $settings = [];
@@ -108,10 +106,11 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 
         // not logged in - check if available
         $params = [];
-        $params['loginName'] = $data['email'];
+        $params['loginName'] = (string) $data['email'];
         $params['loginStay'] = true;
         $params['filter'] = 'status > 0';
         $params['ignorePassword'] = true;
+        $params['loginPassword'] = '';
 
         $loginStatus = \rex_ycom_auth::login($params);
         if (rex_ycom_auth::STATUS_HAS_LOGGED_IN == $loginStatus) {
@@ -140,6 +139,9 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         $params = [];
         $params['loginName'] = $user->getValue('email');
         $params['ignorePassword'] = true;
+        $params['loginStay'] = false;
+        $params['filter'] = [];
+        $params['loginPassword'] = '';
         $loginStatus = \rex_ycom_auth::login($params);
 
         if (rex_ycom_auth::STATUS_HAS_LOGGED_IN != $loginStatus) {
@@ -159,5 +161,4 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
     {
         return 'ycom_auth_cas|label|error_msg|[allowed returnTo domains: DomainA,DomainB]|[default Userdata as Json{"ycom_groups": 3, "termsofuse_accepted": 1}]';
     }
-
 }

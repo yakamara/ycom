@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 class rex_ycom_group extends rex_yform_manager_dataset
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     public static array $perms = [
         '0' => 'translate:ycom_group_forallgroups',
         '1' => 'translate:ycom_group_inallgroups',
@@ -32,7 +30,6 @@ class rex_ycom_group extends rex_yform_manager_dataset
      * @param string|int $groupType
      * @param array<string|int> $groups
      * @param array<string|int> $userGroups
-     * @return bool
      */
     public static function hasGroupPerm($groupType, array $groups = [], array $userGroups = []): bool
     {

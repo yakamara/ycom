@@ -2,8 +2,8 @@
 
 $addon = rex_addon::get('ycom');
 $func = rex_request('func', 'string');
-$activationLink = rex_url::currentBackendPage().'&func=ycom_user_activate_log';
-$deactivationLink = rex_url::currentBackendPage().'&func=ycom_user_deactivate_log';
+$activationLink = rex_url::currentBackendPage() . '&func=ycom_user_activate_log';
+$deactivationLink = rex_url::currentBackendPage() . '&func=ycom_user_deactivate_log';
 $logFile = rex_ycom_log::logFile();
 
 switch ($func) {
@@ -48,13 +48,13 @@ foreach (new LimitIterator($file, 0, 30) as $entry) {
     $data = $entry->getData();
     $class = 'ERROR' == trim($data[0]) ? 'rex-state-error' : 'rex-mailer-log-ok';
     $content .= '
-                <tr class="'.$class.'">
+                <tr class="' . $class . '">
                   <td data-title="' . rex_i18n::msg('phpmailer_log_date') . '" class="rex-table-tabular-nums">' . rex_formatter::intlDateTime($entry->getTimestamp(), [IntlDateFormatter::SHORT, IntlDateFormatter::MEDIUM]) . '</td>
                   <td data-title="' . rex_i18n::msg('ycom_user_log_user_ip') . '">' . rex_escape($data[0]) . '</td>
                   <td data-title="' . rex_i18n::msg('ycom_user_log_user_id') . '">' . rex_escape($data[1]) . '</td>
                   <td data-title="' . rex_i18n::msg('ycom_user_log_type') . '">' . rex_escape($data[2]) . '</td>
                   <td data-title="' . rex_i18n::msg('ycom_user_log_email') . '">' . rex_escape($data[3]) . '</td>
-                  <td data-title="' . rex_i18n::msg('ycom_user_log_params') . '">' . rex_escape(($data[4] ?? '')) . '</td>
+                  <td data-title="' . rex_i18n::msg('ycom_user_log_params') . '">' . rex_escape($data[4] ?? '') . '</td>
                 </tr>';
 }
 

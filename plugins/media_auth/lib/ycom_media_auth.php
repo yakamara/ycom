@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 class rex_ycom_media_auth extends rex_yform_manager_dataset
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     public static array $perms = [
         '0' => 'translate:ycom_perm_all',
         '1' => 'translate:ycom_perm_only_logged_in',
     ];
 
-    public static function checkPerm(rex_media_manager $media_manager):bool
+    public static function checkPerm(rex_media_manager $media_manager): bool
     {
         // check if original media_path
         $media = $media_manager->getMedia();
@@ -34,7 +32,7 @@ class rex_ycom_media_auth extends rex_yform_manager_dataset
         return self::checkFrontendPerm($rex_media);
     }
 
-    public static function checkFrontendPerm(rex_media $rex_media):bool
+    public static function checkFrontendPerm(rex_media $rex_media): bool
     {
         $authType = (int) $rex_media->getValue('ycom_auth_type');
         if (1 != $authType) {
