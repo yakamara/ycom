@@ -19,14 +19,10 @@ class rex_yform_value_ycom_auth_oauth2_twitch extends rex_yform_value_abstract
 {
     use rex_yform_trait_value_auth_oauth2_twitch;
 
-    /**
-     * @var array|string[]
-     */
+    /** @var array|string[] */
     private array $auth_requestFunctions = ['init', 'code', 'state'];
     private bool $auth_directLink = false;
-    /**
-     * @var array|string[]
-     */
+    /** @var array|string[] */
     private array $auth_SessionVars = ['OAUTH2_oauth2state'];
     private string $auth_ClassKey = 'oauth2_twitch';
 

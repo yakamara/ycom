@@ -5,7 +5,7 @@
  * @psalm-scope-this rex_yform_value_abstract
  */
 
-$url = $url ?? '';
-$name = $name ?? '';
+$url ??= '';
+$name ??= '';
 
-echo '<a class="'. $this->name .'" href="'.$url.'">' . $this->name . '</a>';
+echo '<a class="' . $this->name . '" href="' . $url . '">' . $this->name . '</a>';
