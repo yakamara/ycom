@@ -103,6 +103,7 @@ trait rex_yform_trait_value_auth_oauth2_google
         // not logged in - check if available
         $params = [
             'loginName' => $data['email'],
+            'loginPassword' => '',
             'loginStay' => true,
             'filter' => 'status > 0',
             'ignorePassword' => true,
@@ -137,6 +138,8 @@ trait rex_yform_trait_value_auth_oauth2_google
         $params = [];
         $params['loginName'] = $user->getValue('email');
         $params['ignorePassword'] = true;
+        $params['loginStay'] = false;
+        $params['filter'] = 'status > 0';
         $loginStatus = rex_ycom_auth::login($params);
 
         if (2 != $loginStatus) {
