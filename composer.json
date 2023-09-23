@@ -5,7 +5,8 @@
         "apereo/phpcas": "^1",
         "league/oauth2-client": "^2",
         "psr/log": "^1",
-        "vertisan/oauth2-twitch-helix": "^2.0"
+        "vertisan/oauth2-twitch-helix": "^2.0",
+        "league/oauth2-google": "^4.0"
     },
     "replace": {
         "psr/container": "*",

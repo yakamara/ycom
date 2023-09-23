@@ -46,7 +46,7 @@ if ($articleAuthTypeWasEnum) {
     rex_sql::factory()->setQuery('UPDATE rex_article SET `ycom_auth_type` = `ycom_auth_type` -1');
 }
 
-foreach (['saml', 'oauth2', 'oauth2_twitch', 'cas'] as $settingType) {
+foreach (['saml', 'oauth2', 'oauth2_twitch', 'oauth2_google', 'cas'] as $settingType) {
     $pathFrom = __DIR__ . '/install/' . $settingType . '.php';
     $pathTo = rex_addon::get('ycom')->getDataPath($settingType . '.php');
     if (!file_exists($pathTo)) {

@@ -52,6 +52,9 @@ if (rex::isFrontend()) {
             case 'oauth2_twitch':
                 $data = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_OAUTH2_TWITCH_MATCHING', $data, ['Userdata' => $Userdata]));
                 break;
+            case 'oauth2_google':
+                $data = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_OAUTH2_GOOGLE_MATCHING', $data, ['Userdata' => $Userdata]));
+                break;
             case 'saml':
                 $data = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_SAML_MATCHING', $data, ['Userdata' => $Userdata]));
                 break;

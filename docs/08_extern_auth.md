@@ -95,6 +95,43 @@ ycom_auth_oauth2_twitch|twitch|error_msg|[allowed returnTo domains: DomainA,Doma
 
 Zusätzlice Scopes lassen sich in der Datei `oauth2_twitch.php` als Array in der Variable `scopes` eintragen. Die Scopes müssen mit einem Komma getrennt werden. Weitere Scopes findet man hier: https://dev.twitch.tv/docs/authentication/scopes/ - z.B. `user:read:email` um die E-Mail-Adresse des Users zu erhalten (diese bringt der Provider aber bereits nativ mit).
 
+## OAuth2 mit Google
+
+Mit der OAuth2 Authentifizierung via Google ist es möglich, sich mit einem Google-Account in der YCOM zu registrieren und einzuloggen. Dazu muss dieser Provider entsprechend vorbereitet sein.
+
+### Einrichtung
+
+Im ersten Schritt muss man eine App anlegen bei Google. Hierfür einmal zu https://console.developers.google.com/ wechseln. Dort über den Button "Projekt auswählen" eine neues Projekt erstellen. Anschließend die App bearbeiten und die folgenden Einstellungen vornehmen:
+
+- OAuth Zustimmungsbildschirm: Einstellungen vornehmen
+-- Anwendungsname: Name der App
+-- Nutzersupport-E-Mail: E-Mail-Adresse für Support
+-- Anwendungslogo: Logo der App
+-- Startseite der App: Deine Domain
+-- Kontaktdaten des Entwicklers: E-Mail-Adresse für Support
+-- Autorisierte Domains: Deine Domain (optional für GSuite Nutzer)
+-- Bereiche:
+--- ./auth/userinfo.email (E-Mail-Adresse des Users)
+--- ./auth/userinfo.profile (Profilinformationen des Users)
+
+Anschließend auf Anmeldedaten klicken und die folgenden Einstellungen vornehmen:
+- Anmeldedaten erstellen: OAuth 2.0 Client IDs erstellen
+-- Autorisierte JavaScript-Quellen: Deine Domain
+-- Autorisierte Weiterleitungs-URIs: https://your-url.com/maybe-a-subpage/?rex_ycom_auth_mode=oauth2_google&rex_ycom_auth_func=code
+
+Danach kann die Client ID und der Clientschlüssel kopiert oder als JSON Datei heruntergeladen werden.
+
+In den Ordner `redaxo/data/addons/ycom/` sollte bereits die Datei `oauth2_google.php` kopiert worden sein. Diese Datei muss nun entsprechend angepasst werden mit den kopierten Daten.
+
+Damit die Authentifizierung funktioniert, muss im Loginformular von YCOM folgender String (angepasst auf die eigenen Bedürfnisse) eingefügt werden:
+
+```php
+ycom_auth_oauth2_google|label|error_msg|[allowed returnTo domains: DomainA,DomainB]|default Userdata as Json{"ycom_groups": 3, "termsofuse_accepted": 1}|direct_link 0,1
+```
+
+#### GSuite / Google Workspace Nutzer
+In der Datei `oauth2_google.php` kann die Variable `hostedDomain` mit der Domain des GSuite / Google Workspace Accounts befüllt werden. Damit wird die Anmeldung auf Nutzer mit dieser Domain beschränkt.
+
 
 ## Allgemeines
 
