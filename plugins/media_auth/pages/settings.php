@@ -45,7 +45,7 @@ $content = '
                 <label for="auth_rules_select">' . $this->i18n('ycom_auth_config_media_auth_rules') . '</label>
             </div>
             <div class="col-xs-12 col-sm-8">
-            '.$sel_authrules->get().'
+            ' . $sel_authrules->get() . '
             </div>
         </div>
 
@@ -53,7 +53,7 @@ $content = '
 
 	<div class="row">
 		<div class="col-xs-12 col-sm-8 col-sm-push-4">
-			<button class="btn btn-save right" type="submit" name="config-submit" value="1" title="'.$this->i18n('ycom_auth_config_save').'">'.$this->i18n('ycom_auth_config_save').'</button>
+			<button class="btn btn-save right" type="submit" name="config-submit" value="1" title="' . $this->i18n('ycom_auth_config_save') . '">' . $this->i18n('ycom_auth_config_save') . '</button>
 		</div>
 	</div>
 

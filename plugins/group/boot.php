@@ -5,8 +5,8 @@
  * @psalm-scope-this rex_addon
  */
 
-rex_yform_manager_dataset::setModelClass(rex::getTablePrefix().'ycom_group', rex_ycom_group::class);
-rex_ycom::addTable(rex::getTablePrefix().'ycom_group');
+rex_yform_manager_dataset::setModelClass(rex::getTablePrefix() . 'ycom_group', rex_ycom_group::class);
+rex_ycom::addTable(rex::getTablePrefix() . 'ycom_group');
 
 if (rex::isBackend()) {
     rex_extension::register('YCOM_ARTICLE_PERM_SELECT', static function (rex_extension_point $ep) {

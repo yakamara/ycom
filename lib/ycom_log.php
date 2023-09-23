@@ -16,9 +16,7 @@ class rex_ycom_log
     public const TYPE_IMPERSONATE = 'session_impersonate';
 
     public const TYPES = [self::TYPE_COOKIE_FAILED, self::TYPE_SESSION_FAILED, self::TYPE_ACCESS, self::TYPE_LOGIN_SUCCESS, self::TYPE_LOGOUT, self::TYPE_LOGIN_UPDATED, self::TYPE_CLICK, self::TYPE_LOGIN_FAILED, self::TYPE_REGISTERD, self::TYPE_LOGIN_DELETED, self::TYPE_LOGIN_NOT_FOUND];
-    /**
-     * @var null|bool
-     */
+    /** @var null|bool */
     private static $active;
     private static int $maxFileSize = 20000000; // 20 Mb Default
 
@@ -69,7 +67,7 @@ class rex_ycom_log
     }
 
     /**
-     * @param rex_ycom_user|string $user
+     * @param rex_ycom_user|string|rex_yform_manager_dataset $user
      * @param array<string|int, string|array<string, mixed>> $params
      */
     public static function log($user, string $type = '', array $params = []): void
@@ -91,7 +89,7 @@ class rex_ycom_log
             /** @var string $user */
             $id = '';
             $login = $user;
-        } elseif ('rex_ycom_user' == get_class($user)) {
+        } elseif ('rex_ycom_user' == $user::class) {
             /** @var rex_ycom_user $user */
             $id = $user->getId();
             $login = $user->getValue('login');

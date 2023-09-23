@@ -5,8 +5,8 @@
  * @psalm-scope-this rex_addon
  */
 
-include __DIR__.'/vendor/guzzlehttp/promises/src/functions_include.php';
-include __DIR__.'/vendor/guzzlehttp/guzzle/src/functions_include.php';
+// include __DIR__.'/vendor/guzzlehttp/promises/src/functions_include.php';
+// include __DIR__.'/vendor/guzzlehttp/guzzle/src/functions_include.php';
 
 rex_perm::register('ycomArticlePermissions[]', null, rex_perm::OPTIONS);
 
@@ -79,7 +79,7 @@ if (rex::isFrontend()) {
             $fragment->setVar('collapsed', false);
             $content = $fragment->parse('core/page/section.php');
 
-            return $subject.$content;
+            return $subject . $content;
         });
     }, rex_extension::EARLY);
 

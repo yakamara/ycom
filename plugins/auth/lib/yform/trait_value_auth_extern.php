@@ -8,10 +8,10 @@ trait rex_yform_trait_value_auth_extern
      */
     private function auth_loadSettings(): array
     {
-        $SettingFile = $this->auth_ClassKey.'.php';
+        $SettingFile = $this->auth_ClassKey . '.php';
         $SettingsPath = rex_addon::get('ycom')->getDataPath($SettingFile);
         if (!file_exists($SettingsPath)) {
-            throw new rex_exception($this->auth_ClassKey . '-Settings file not found ['.$SettingsPath.']');
+            throw new rex_exception($this->auth_ClassKey . '-Settings file not found [' . $SettingsPath . ']');
         }
 
         $settings = [];
@@ -30,9 +30,9 @@ trait rex_yform_trait_value_auth_extern
     private function auth_FormOutput(string $url): void
     {
         if ($this->needsOutput()) {
-            $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_auth_' . $this->auth_ClassKey. '.tpl.php', 'value.ycom_auth_extern.tpl.php'], [
+            $this->params['form_output'][$this->getId()] = $this->parse(['value.ycom_auth_' . $this->auth_ClassKey . '.tpl.php', 'value.ycom_auth_extern.tpl.php'], [
                 'url' => $url,
-                'name' => '{{ ' . $this->auth_ClassKey. '_auth }}',
+                'name' => '{{ ' . $this->auth_ClassKey . '_auth }}',
             ]);
         }
     }
@@ -52,16 +52,14 @@ trait rex_yform_trait_value_auth_extern
 
     /**
      * @param array<int|string, mixed>  $Userdata
-     * @param string $returnTo
      * @throws rex_exception
-     * @return void
      */
     private function auth_createOrUpdateYComUser(array $Userdata, string $returnTo): void
     {
         $defaultUserAttributes = [];
         if ('' != $this->getElement(4)) {
             if (null == $defaultUserAttributes = json_decode($this->getElement(4), true)) {
-                throw new rex_exception($this->auth_ClassKey . '-DefaultUserAttributes is not a json'.$this->getElement(4));
+                throw new rex_exception($this->auth_ClassKey . '-DefaultUserAttributes is not a json' . $this->getElement(4));
             }
         }
 
@@ -101,6 +99,7 @@ trait rex_yform_trait_value_auth_extern
             'loginStay' => true,
             'filter' => 'status > 0',
             'ignorePassword' => true,
+            'loginPassword' => '',
         ];
 
         $loginStatus = rex_ycom_auth::login($params);
@@ -132,6 +131,9 @@ trait rex_yform_trait_value_auth_extern
         $params = [];
         $params['loginName'] = $user->getValue('email');
         $params['ignorePassword'] = true;
+        $params['loginStay'] = false;
+        $params['filter'] = [];
+        $params['loginPassword'] = '';
         $loginStatus = rex_ycom_auth::login($params);
 
         if (rex_ycom_auth::STATUS_HAS_LOGGED_IN != $loginStatus) {

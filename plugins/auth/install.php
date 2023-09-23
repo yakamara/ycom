@@ -36,8 +36,8 @@ rex_sql_table::get(rex::getTable('ycom_user_session'))
             rex::getTable('ycom_user'),
             ['user_id' => 'id'],
             rex_sql_foreign_key::CASCADE,
-            rex_sql_foreign_key::CASCADE
-        )
+            rex_sql_foreign_key::CASCADE,
+        ),
     )
     ->ensure();
 
@@ -56,7 +56,7 @@ foreach (['saml', 'oauth2', 'cas'] as $settingType) {
 
 // termofuse -> termsofuse. Version < 3.0
 try {
-    rex_sql_table::get(rex::getTablePrefix().'ycom_user')
+    rex_sql_table::get(rex::getTablePrefix() . 'ycom_user')
         ->ensureColumn(new rex_sql_column('termsofuse_accepted', 'tinyint(1)', false, '0'))
         ->removeColumn('session_key')
         ->alter();
@@ -66,7 +66,7 @@ try {
         ->setQuery('delete from `' . rex_yform_manager_field::table() . '` where `table_name`="rex_ycom_user" and `type_id`="value" and `type_name`="checkbox" and `name`="termofuse_accepted"', [])
         ->setQuery('update `rex_config` set `key`="article_id_jump_termsofuse" where `key`="article_id_jump_termofuse" and `namespace`="ycom/auth"', [])
         ->setQuery('delete from `' . rex_yform_manager_field::table() . '` where `table_name`="rex_ycom_user" and `type_id`="value" and `type_name`="generate_key" and `name`="session_key"');
-    ;
+
 } catch (rex_sql_exception $e) {
     dump($e);
     exit;

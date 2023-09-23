@@ -6,7 +6,7 @@
  */
 
 $mdFiles = [];
-foreach (glob(rex_addon::get('ycom')->getPath('docs').'/*.md') ?: [] as $file) {
+foreach (glob(rex_addon::get('ycom')->getPath('docs') . '/*.md') ?: [] as $file) {
     $mdFiles[mb_substr(basename($file), 0, -3)] = $file;
 }
 
@@ -22,10 +22,10 @@ if (null !== $page) {
         $keyWithoudPrio = mb_substr($key, 3);
         $currenMDFileWithoudPrio = mb_substr($currenMDFile, 3);
         $page->addSubpage(
-            (new rex_be_page($key, rex_i18n::msg('ycom_docs_'.$keyWithoudPrio)))
+            (new rex_be_page($key, rex_i18n::msg('ycom_docs_' . $keyWithoudPrio)))
             ->setSubPath($mdFile)
-            ->setHref('index.php?page=ycom/docs&mdfile='.$key)
-            ->setIsActive($key == $currenMDFile)
+            ->setHref('index.php?page=ycom/docs&mdfile=' . $key)
+            ->setIsActive($key == $currenMDFile),
         );
     }
 }

@@ -1,2 +1,24 @@
 {
+    "name": "yakamara/yform",
+    "require": {
+        "onelogin/php-saml": "^3",
+        "apereo/phpcas": "^1",
+        "league/oauth2-client": "^2",
+        "psr/log": "^1"
+    },
+    "replace": {
+        "psr/container": "*",
+        "psr/http-message": "*",
+        "psr/log": "*"
+    },
+    "require-dev": {
+        "redaxo/php-cs-fixer-config": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.14",
+        "phpunit/phpunit": "^9.5"
+    },
+    "scripts": {
+        "cs-dry": "php-cs-fixer fix -v --ansi --dry-run --config=.php-cs-fixer.dist.php",
+        "cs-fix": "php-cs-fixer fix -v --ansi --config=.php-cs-fixer.dist.php",
+        "test": "phpunit --testdox -vvv"
+    }
 }

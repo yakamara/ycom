@@ -42,5 +42,4 @@ class rex_yform_value_ycom_auth_returnto extends rex_yform_value_abstract
     {
         return 'ycom_auth_returnto|label|[allowed domains: DomainA,DomainB]|[URL]';
     }
-
 }

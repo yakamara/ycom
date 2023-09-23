@@ -2,9 +2,7 @@
 
 class rex_ycom_auth_rules
 {
-    /**
-     * @var array<string, mixed>
-     */
+    /** @var array<string, mixed> */
     private array $rules;
 
     public function __construct()
@@ -88,7 +86,7 @@ class rex_ycom_auth_rules
                 return false;
             case 'pause':
                 $lastLoginDate = new DateTime($user->getValue('last_login_time'));
-                $lastLoginDate->modify('+'.$rule['action']['time'].' seconds');
+                $lastLoginDate->modify('+' . $rule['action']['time'] . ' seconds');
                 if (date('YmdHis') < $lastLoginDate->format('YmdHis')) {
                     return false;
                 }

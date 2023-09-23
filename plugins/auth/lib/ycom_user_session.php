@@ -4,7 +4,12 @@ class rex_ycom_user_session
 {
     use rex_singleton_trait;
 
-    public function storeCurrentSession(rex_ycom_user $user, ?string $cookieKey = null): void
+    /**
+     * @param rex_ycom_user|rex_yform_manager_dataset $user
+     * @throws rex_exception
+     * @throws rex_sql_exception
+     */
+    public function storeCurrentSession($user, ?string $cookieKey = null): void
     {
         $sessionId = session_id();
         if (false === $sessionId || '' === $sessionId) {

@@ -44,9 +44,10 @@ class rex_yform_validate_ycom_auth extends rex_yform_validate_abstract
         */
 
         $params = [];
-        $params['loginName'] = $loginObject->getValue();
-        $params['loginPassword'] = $passwordObject->getValue();
-        $params['loginStay'] = ($stayObject) ? $stayObject->getValue() : false;
+        $params['loginName'] = (string) $loginObject->getValue();
+        $params['loginPassword'] = (string) $passwordObject->getValue();
+        $params['loginStay'] = ($stayObject) ? (bool) $stayObject->getValue() : false;
+        $params['ignorePassword'] = false;
         $params['filter'] = [
             'status > 0',
         ];

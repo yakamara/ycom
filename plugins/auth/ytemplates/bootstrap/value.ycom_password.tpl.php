@@ -5,10 +5,10 @@
  * @psalm-scope-this rex_yform_value_abstract
  */
 
-$type = $type ?? 'text';
+$type ??= 'text';
 $class = 'text' == $type ? '' : 'form-' . $type . ' ';
-$script = $script ?? false;
-$rules = $rules ?? [];
+$script ??= false;
+$rules ??= [];
 
 if (!isset($value)) {
     $value = $this->getValue();
@@ -48,15 +48,15 @@ $input_group_start = '';
 $input_group_end = '';
 
 if ($script) {
-    $funcName = uniqid('rex_ycom_password_create'.$this->getId());
+    $funcName = uniqid('rex_ycom_password_create' . $this->getId());
     $span = '<span class="input-group-btn">
-    <button type="button" class="btn btn-default getNewPass" onclick="'.$funcName.'refresh('.$this->getId().')"><span class="fa fa-refresh"></span></button>
+    <button type="button" class="btn btn-default getNewPass" onclick="' . $funcName . 'refresh(' . $this->getId() . ')"><span class="fa fa-refresh"></span></button>
     </span>';
 
     $nonce = '';
     $nonce = ' nonce="' . rex_response::getNonce() . '"';
 
-    ?><script type="text/javascript"<?php echo $nonce; ?>>
+    ?><script type="text/javascript"<?= $nonce ?>>
 
         // Credit to @Blender https://stackoverflow.com/users/464744/blender
         String.prototype.pick = function(min, max) {
@@ -92,7 +92,7 @@ if ($script) {
             return array.join('');
         };
 
-        function <?= $funcName.'refresh' ?>(input) {
+        function <?= $funcName . 'refresh' ?>(input) {
 
             var rules = {
                 letter:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
@@ -106,7 +106,7 @@ if ($script) {
             rules.all = rules.uppercase + rules.lowercase + rules.digit + rules.symbol;
 
             var ruleset = '';
-            var myRules = <?php echo json_encode($rules); ?>;
+            var myRules = <?= json_encode($rules) ?>;
             var myPassword = '';
 
             if (typeof myRules.uppercase === "object") {
@@ -233,7 +233,7 @@ if ($script) {
 
             }
 
-            var item = document.getElementsByName('<?php echo $this->getFieldName(); ?>').item(0);
+            var item = document.getElementsByName('<?= $this->getFieldName() ?>').item(0);
             var name = item.getAttribute('name');
             var type = item.getAttribute('value');
 
@@ -247,10 +247,10 @@ if ($script) {
 }
 
 echo '
-<div class="'.$class_group.'" id="'.$this->getHTMLId().'">
-<label class="'.implode(' ', $class_label).'" for="'.$this->getFieldId().'">'.$this->getLabel().'</label>
+<div class="' . $class_group . '" id="' . $this->getHTMLId() . '">
+<label class="' . implode(' ', $class_label) . '" for="' . $this->getFieldId() . '">' . $this->getLabel() . '</label>
 ' . $input_group_start . '
-    <input '.implode(' ', $attributes).' />' .
+    <input ' . implode(' ', $attributes) . ' />' .
     $notice .
     $span . '
 ' . $input_group_end . '
