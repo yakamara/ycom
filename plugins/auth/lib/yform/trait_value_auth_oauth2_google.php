@@ -140,6 +140,7 @@ trait rex_yform_trait_value_auth_oauth2_google
         $params['ignorePassword'] = true;
         $params['loginStay'] = false;
         $params['filter'] = 'status > 0';
+        $params['loginPassword'] = '';
         $loginStatus = rex_ycom_auth::login($params);
 
         if (2 != $loginStatus) {
