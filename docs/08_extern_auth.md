@@ -65,6 +65,37 @@ rex_extension::register('YCOM_AUTH_SAML_MATCHING', function (rex_extension_point
 
 ## OAuth2
 
+## OAuth2 mit twitch
+
+Mit der OAuth2 Authentifizierung via twitch ist es möglich, sich mit einem twitch-Account in der YCOM zu registrieren und einzuloggen.
+Dazu muss dieser Provider entsprechend vorbereitet sein.
+
+### Einrichtung
+
+Im ersten Schritt muss man eine App anlegen bei twitch. Hierfür einmal zu https://dev.twitch.tv/console/apps wechseln. Dort über den Button "Deine Anwendung registrieren" eine neue App erstellen - Kategorie "Website integration" auswählen.
+
+Anschließend die App bearbeiten und die folgenden Einstellungen vornehmen:
+
+- Name: Name der App
+- OAuth Redirect URLs: https://your-url.com/maybe-a-subpage/?rex_ycom_auth_mode=oauth2_twitch&rex_ycom_auth_func=code
+- Category: Website Integration
+
+Anschließend die App speichern und die Client-ID kopieren.
+Dann ein neues Secret erzeugen und dieses ebenfalls kopieren / sichern.
+
+In den Ordner `redaxo/data/addons/ycom/` sollte bereits die Datei `oauth2_twitch.php` kopiert worden sein. Diese Datei muss nun entsprechend angepasst werden mit den kopierten Daten.
+
+Damit die Authentifizierung funktioniert, muss im Loginformular von YCOM folgender String (angepasst auf die eigenen Bedürfnisse) eingefügt werden:
+
+```php
+ycom_auth_oauth2_twitch|twitch|error_msg|[allowed returnTo domains: DomainA,DomainB]|{"ycom_groups": 1, "termsofuse_accepted": 1}|direct_link 0,1
+```
+
+#### Scope
+
+Zusätzlice Scopes lassen sich in der Datei `oauth2_twitch.php` als Array in der Variable `scopes` eintragen. Die Scopes müssen mit einem Komma getrennt werden. Weitere Scopes findet man hier: https://dev.twitch.tv/docs/authentication/scopes/ - z.B. `user:read:email` um die E-Mail-Adresse des Users zu erhalten (diese bringt der Provider aber bereits nativ mit).
+
+
 ## Allgemeines
 
 ### Loginseite
