@@ -627,7 +627,7 @@ class rex_ycom_auth
                 foreach ($allowedDomains as $allowedDomain) {
                     if (substr($returnTosWithDomain, 0, strlen($allowedDomain)) == $allowedDomain) {
                         $return = $returnTosWithDomain;
-                        break;
+                        break 2;
                     }
                 }
             }
