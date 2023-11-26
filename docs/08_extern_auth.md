@@ -77,7 +77,7 @@ $user = rex_ycom_auth::loginWithParams(['login' => $user_id])
 
 Voraussetzung: Der gewünschte YCom-User muss existieren.
 
-Zusätzlich lässt sich bei Bedarf dieser innerhalb des Extension Points `` nutzen, hierzu exemplarisch, bei dem **ohne zusätzlichen Schutz** eine Möglichkeit, die die Nutzung des EP skizziert. Es wird dringend davon abgeraten, diesen Code 1:1 zu implementieren.
+Zusätzlich lässt sich bei Bedarf dieser innerhalb des Extension Points `YCOM_AUTH_USER_CHECK` nutzen, hierzu exemplarisch, bei dem **ohne zusätzlichen Schutz** eine Möglichkeit, die die Nutzung des EP skizziert. Es wird dringend davon abgeraten, diesen Code 1:1 zu implementieren.
 
 ```php
 rex_extension::register('YCOM_AUTH_USER_CHECK', function ($ep) {
