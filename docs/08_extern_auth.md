@@ -67,6 +67,34 @@ rex_extension::register('YCOM_AUTH_SAML_MATCHING', function (rex_extension_point
 
 ## Allgemeines
 
+### Programmatisches Einloggen an der Authentifizierung vorbei
+
+Hat man einen eigenen Authentifizierungsmechanismus implementiert, so genügt es, den gewünschten YCom-User über dessen ID einzuloggen:
+
+```php
+$user = rex_ycom_auth::loginWithParams(['login' => $user_id])
+```
+
+Voraussetzung: Der gewünschte YCom-User muss existieren.
+
+Zusätzlich lässt sich bei Bedarf dieser innerhalb des Extension Points `` nutzen, hierzu exemplarisch, bei dem **ohne zusätzlichen Schutz** eine Möglichkeit, die die Nutzung des EP skizziert. Es wird dringend davon abgeraten, diesen Code 1:1 zu implementieren.
+
+```php
+rex_extension::register('YCOM_AUTH_USER_CHECK', function ($ep) {
+    if (rex_backend_login::hasSession() && $beUser = rex_backend_login::createUser()) {
+        if ($beUser->isAdmin() || $beUser->hasPerm('ycom[]')) {
+            $user_id = rex_get('ycom_user_id', 'int', 0);
+            if (($user_id >= 1 && !rex_ycom_auth::getUser()) || $user_id && rex_ycom_auth::getUser() && $ycom_user->id != $user_id) {
+                if ($ycom_user = rex_ycom_auth::loginWithParams(['id' => $user_id])) {
+                    $addon->setProperty('ycom_impersonate', true);
+                    return true;
+                }
+            }
+        }
+    }
+});
+```
+
 ### Loginseite
 
 Sofern man die externe Authentifikation nicht nutzt, wird die Loginseite meistens so eingestellt, dass nur nicht eingeloggte User diese sehen können. Das ist hier nicht zu empfehlen, da man sich nicht einloggen kann, wenn man über den IdentityProvider zur REDAXO Community kommt und bereits eingeloggt ist. Deswegen sollte die Loginseite verfühgbar, aber nicht sichtbar in der Navigation sein, wenn man eingeloggt ist.
