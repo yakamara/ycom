@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version 4.2.1 - 24.04.2023
+Version 4.2.1 - 29.11.2023
 --------------------------
 
 ### Bugfixes und kleinere Anpassungen
