@@ -5,12 +5,32 @@
 1. In der Struktur einen Artikel `Login` erstellen
 2. Im Artikel `Login` den YForm Formbuilder hinzufügen und folgende Formulardefinition eintragen:
 
-```php
+```text
 validate|ycom_auth|login|password|stayfield|warning_message_enterloginpsw|warning_message_login_failed
 text|login|Benutzername|
 password|password|Passwort
 checkbox|stayfield|eingeloggt bleiben
 ycom_auth_returnto|returnTo|
+```
+
+```php
+<?php
+$form = rex_yform::factory();
+
+$form->setValidateField('ycom_auth', ['login', 'password', null, 'warning_message_enterloginpsw', 'warning_message_login_failed']);
+
+$form->setObjectparams('form_name', 'login_form');
+$form->setObjectparams('form_action', rex_getUrl());
+
+$form->setValueField('text', ['login', 'Benutzername']);
+$form->setValueField('password', ['password', 'Passwort']);
+
+$form->setValidateField('empty', ['login', 'Bitte geben Sie Ihren Benutzernamen ein']);
+$form->setValidateField('empty', ['password', 'Bitte geben Sie Ihr Passwort ein']);
+
+$form->setActionField('ycom_auth_returnto', ['returnTo']);
+
+echo $form->getForm();
 ```
 
 3. Im REDAXO-Backend unter `YCom` > `Einstellungen` den Artikel unter `Login` verknüpfen.
@@ -24,7 +44,7 @@ Dieses Feld sorgt dafür, dass man entsprechend weitergeleitet wird.  Im Normalf
 
 Beispiel:
 
-```php
+```text
 ycom_auth_returnto|returnTo|[Liste Domains, kommasepariert, für Freigabe https://domain1.de, https://domain2.de ]|[oder feste URL auf die IMMER geleitet wird]
 ```
 
@@ -39,8 +59,20 @@ ycom_auth_returnto|returnTo|[Liste Domains, kommasepariert, für Freigabe https:
 1. In der Struktur einen Artikel `Logout` erstellen
 2. Im Artikel `Logout` den YForm Formbuilder hinzufügen und folgende Formulardefinition eintragen:
 
-```php
+```text
 ycom_auth_logout|label|
+```
+
+```php
+<?php
+$form = rex_yform::factory();
+
+$form->setObjectparams('form_name', 'logout_form');
+$form->setObjectparams('form_action', rex_getUrl());
+
+$form->setActionField('ycom_auth_logout', ['logout']);
+
+echo $form->getForm();
 ```
 
 3. Im REDAXO-Backend unter `YCom` > `Einstellungen` den Artikel unter `Logout` verknüpfen.
