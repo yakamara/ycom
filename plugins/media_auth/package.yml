@@ -1,5 +1,5 @@
 package: ycom/media_auth
-version: '4.2.0'
+version: '4.2.1'
 author: Yakamara Media GmbH & Co. KG
 title: 'MediaAuth'
 nav_icon: fa-minus

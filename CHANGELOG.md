@@ -1,6 +1,21 @@
 Changelog
 =========
 
+Version 4.2.1 - 24.04.2023
+--------------------------
+
+### Bugfixes und kleinere Anpassungen
+
+* Doku angepasst
+* last login und last action Speicherung behoben
+* Login Versuche wurden nicht mehr getrackt #462
+* fix isInGroup() Funktion korrigiert #460
+* workflow und phpstan level 5 CS
+* Find first hit in returnTos funktinierte nicht immer richtig 
+
+Danke Alex Walter, Norbert Micheel, Dominik Grothaus
+
+
 Version 4.2.0 - 24.04.2023
 --------------------------
 
