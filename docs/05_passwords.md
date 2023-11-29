@@ -75,8 +75,6 @@ generate_key|activation_key
 
 text|email|E-Mail:|
 
-captcha|Bitte geben Sie den entsprechenden Sicherheitscode ein. Sollten Sie den Code nicht lesen können klicken Sie bitte auf die Grafik, um einen neuen Code zu generieren.|Sie haben den Sicherheitscode falsch eingegeben.
-
 validate|type|email|email|Bitte geben Sie Ihre E-Mail-Adresse ein.
 validate|empty|email|Bitte geben Sie Ihre E-Mail-Adresse ein.
 validate|in_table|email|rex_ycom_user|email|Für die angegebene E-Mail-Adresse existiert kein Nutzer.|
