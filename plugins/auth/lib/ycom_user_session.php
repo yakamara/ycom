@@ -68,6 +68,14 @@ class rex_ycom_user_session
                 ':start' => (time() - ((int) rex_plugin::get('ycom', 'auth')->getConfig('session_max_overall_duration', 21600))),
             ])
             ->delete();
+
+        rex_sql::factory()
+            ->setTable(rex::getTable('ycom_user_session'))
+            ->setWhere('cookie_key IS NOT NULL')
+            ->setWhere(' (UNIX_TIMESTAMP(last_activity)   ) < :last', [
+                ':last' => (time() - ((int) rex_plugin::get('ycom', 'auth')->getConfig('auth_cookie_ttl', 7) * 24 * 60 * 60)),
+            ])
+            ->delete();
     }
 
     public function removeSession(string $sessionId, string $userId): bool
