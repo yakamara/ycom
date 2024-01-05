@@ -13,7 +13,7 @@ Version 4.2.1 - 29.11.2023
 * workflow und phpstan level 5 CS
 * Find first hit in returnTos funktinierte nicht immer richtig 
 
-Danke Alex Walter, Norbert Micheel, Dominik Grothaus
+Danke Alex Walther, Norbert Micheel, Dominik Grothaus
 
 
 Version 4.2.0 - 24.04.2023
