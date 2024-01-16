@@ -34,6 +34,10 @@ class rex_yform_validate_ycom_auth extends rex_yform_validate_abstract
             return;
         }
 
+        if (0 < count($this->params['warning'])) {
+            return;
+        }
+
         /*
           login_status
           0: not logged in
