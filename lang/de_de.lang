@@ -26,6 +26,7 @@ rex_ycom_user = User
 email = E-Mail
 status = Status
 firstname = Vorname
+image = Bild
 activation_key = Aktivierungsschlüssel
 session_key = Sessionschlüssel
 last_login_time = Letzter erfolgreicher Login

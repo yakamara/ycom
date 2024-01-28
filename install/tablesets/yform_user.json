@@ -390,6 +390,24 @@
                 "attributes": "",
                 "relation_table": "",
                 "filter": ""
+            },
+            {
+                "table_name": "rex_ycom_user",
+                "prio": 25,
+                "type_id": "value",
+                "type_name": "text",
+                "db_type": "",
+                "list_hidden": 1,
+                "search": 1,
+                "name": "user_image",
+                "label": "translate:image",
+                "not_required": "",
+                "default": "",
+                "no_db": "",
+                "notice": "",
+                "attributes": "",
+                "prepend": "",
+                "append": ""
             }
         ]
     },
