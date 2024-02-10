@@ -5,7 +5,9 @@
  * @psalm-scope-this rex_addon
  */
 
-rex_yform_manager_dataset::setModelClass(rex::getTablePrefix() . 'ycom_group', rex_ycom_group::class);
+ if(rex_config::get('ycom', 'auto_model_class') === true) {
+    rex_yform_manager_dataset::setModelClass(rex::getTablePrefix() . 'ycom_group', rex_ycom_group::class);
+}
 rex_ycom::addTable(rex::getTablePrefix() . 'ycom_group');
 
 if (rex::isBackend()) {

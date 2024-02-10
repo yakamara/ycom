@@ -26,3 +26,6 @@ requires:
 system_plugins:
     - auth
     - group
+
+default_config:
+    auto_model_class: "true"

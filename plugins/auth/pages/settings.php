@@ -31,6 +31,7 @@ if ('update' == rex_request('func', 'string')) {
     $this->setConfig('login_field', stripslashes(str_replace('"', '', rex_request('login_field', 'string'))));
     $this->setConfig('session_max_overall_duration', rex_request('session_max_overall_duration', 'int'));
     $this->setConfig('session_duration', rex_request('session_duration', 'int'));
+	$this->setConfig('auto_model_class', rex_request('session_duration', 'bool'));
 
     echo rex_view::success($this->i18n('ycom_auth_settings_updated'));
 }
@@ -70,6 +71,14 @@ $sel_authcookiettl->addOption($this->i18n('ycom_days', 7), '7');
 $sel_authcookiettl->addOption($this->i18n('ycom_days', 14), '14');
 $sel_authcookiettl->addOption($this->i18n('ycom_days', 30), '30');
 $sel_authcookiettl->addOption($this->i18n('ycom_days', 90), '90');
+
+$sel_auto_model_class = new rex_select();
+$sel_auto_model_class->setId('auto_model_class');
+$sel_auto_model_class->setName('auto_model_class');
+$sel_auto_model_class->setSize(1);
+$sel_auto_model_class->addOption('Ja', '1');
+$sel_auto_model_class->addOption('Nein', '0');
+$sel_auto_model_class->setSelected($this->getConfig('auto_model_class'));
 
 $content .= '
 <form action="index.php" method="post" id="ycom_auth_settings">
@@ -200,6 +209,7 @@ $content .= '
 		</div>
 	</fieldset>
 
+
     <fieldset>
             <legend>' . $this->i18n('ycom_auth_config_security') . '</legend>
 
@@ -258,6 +268,20 @@ $content .= '
 
     </fieldset>
 
+	
+	<fieldset>
+		<legend>' . $this->i18n('ycom_auto_model_class') . '</legend>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				' . $this->i18n('ycom_auto_model_class') . '
+			</div>
+			<div class="col-xs-12 col-sm-6">
+			 	<div class="select-style">
+	              	' . $sel_auto_model_class->get() . '
+			  	</div>
+			</div>
+		</div>
+	</fieldset>
 
 	<div class="row">
 		<div class="col-xs-12 col-sm-6 col-sm-push-6">
