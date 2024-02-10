@@ -28,4 +28,4 @@ system_plugins:
     - group
 
 default_config:
-    auto_model_class: "true"
+    auto_model_class: true
