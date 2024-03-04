@@ -28,7 +28,7 @@ $form->setValueField('password', ['password', 'Passwort']);
 $form->setValidateField('empty', ['login', 'Bitte geben Sie Ihren Benutzernamen ein']);
 $form->setValidateField('empty', ['password', 'Bitte geben Sie Ihr Passwort ein']);
 
-$form->setActionField('ycom_auth_returnto', ['returnTo']);
+$form->setValueField('ycom_auth_returnto', ['returnTo']);
 
 echo $form->getForm();
 ```
