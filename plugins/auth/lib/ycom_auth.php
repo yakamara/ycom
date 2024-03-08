@@ -223,7 +223,9 @@ class rex_ycom_auth
                     || ('' != $params['loginPassword'] && self::checkPassword($params['loginPassword'], $loginUser->getId()))
                 ) {
                     $me = $loginUser;
-                    $me->setValue('last_login_time', rex_sql::datetime(time()));
+                    $me
+                        ->setValue('last_login_time', rex_sql::datetime(time()))
+                        ->setValue('login_tries', 0);
                     $me = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_LOGIN_SUCCESS', $me, []));
 
                     // session fixation
