@@ -1,5 +1,5 @@
 {
-    "name": "yakamara/yform",
+    "name": "yakamara/ycom",
     "require": {
         "onelogin/php-saml": "^3",
         "apereo/phpcas": "^1",
