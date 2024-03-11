@@ -70,7 +70,7 @@ $form = rex_yform::factory();
 $form->setObjectparams('form_name', 'logout_form');
 $form->setObjectparams('form_action', rex_getUrl());
 
-$form->setActionField('ycom_auth_logout', ['logout']);
+$form->setValueField('ycom_auth_logout', ['logout']);
 
 echo $form->getForm();
 ```
