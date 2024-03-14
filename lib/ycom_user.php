@@ -17,7 +17,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
     {
         $ycom_groups = (string) $this->getValue('ycom_groups');
 
-        if ('' === $group_id) {
+        if (1 > $group_id) {
             return true;
         }
         if ('' !== $ycom_groups) {
