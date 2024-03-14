@@ -111,4 +111,12 @@ class rex_ycom_user_session
             ->setValue('session_id', rex_type::string($ep->getParam('new_id')))
             ->update();
     }
+
+    public static function deleteAllSessions(): bool
+    {
+        $sql = rex_sql::factory()
+            ->setTable(rex::getTable('ycom_user_session'))
+            ->delete();
+        return $sql->getRows() > 0;
+    }
 }

@@ -76,3 +76,5 @@ ycom_impersonate_alert = Eine Session für den User (id=___id___) erstellen und 
 
 ycom_session_added_ready_to_login = Session wurde angelegt. Bitte hier einloggen: <a href="{0}" target="_blank" rel="noopener noreferrer">{0}</a>
 ycom_session_could_not_been_added = Session konnte nicht angelegt werden, weil der User inaktiv ist.
+ycom_user_session_delete_all_sessions_link = Alle Sessions <a href="{0}">löschen</a>
+ycom_sessions_deleted = {0} Session/s wurden gelöscht

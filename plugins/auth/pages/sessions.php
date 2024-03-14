@@ -8,6 +8,10 @@ rex_ycom_user_session::clearExpiredSessions();
 
 $func = rex_request('func', 'string', '');
 switch ($func) {
+    case 'ycom_user_delete_sessions':
+        $amount = (int) rex_ycom_user_session::deleteAllSessions();
+        echo rex_view::success($this->i18n('sessions_deleted', $amount));
+        break;
     case 'remove_session':
         // delete session.
         $session_id = (string) rex_request('session_id', 'string', '');
@@ -45,6 +49,8 @@ switch ($func) {
         }
         break;
 }
+
+echo rex_view::warning(rex_i18n::rawMsg('ycom_user_session_delete_all_sessions_link', rex_url::currentBackendPage() . '&func=ycom_user_delete_sessions'));
 
 $list = rex_list::factory('SELECT session_id, cookie_key, ip, user_id, useragent, starttime, last_activity from ' . rex::getTablePrefix() . 'ycom_user_session ORDER BY last_activity DESC');
 
