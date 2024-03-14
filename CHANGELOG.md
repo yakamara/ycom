@@ -1,6 +1,24 @@
 Changelog
 =========
 
+Version 4.3.0 - 14.03.2024
+--------------------------
+
+### Anpassungen
+
+* composer update
+* Dokuanpassungen
+* github actions ergänzt
+* logs laufen nun über factory log (redaxo 5.17)
+* Alle Sessions können nun auf einen Schlag gelöscht werden
+* Diverse CS Anpassungen
+
+### Bug
+
+* Cookiesessions werden nun gelöscht wenn Cookielaufzeit auf letzte Aktion zutrifft
+
+Danke Norbert Micheel, Marco Hanke, Stefan Dannfald
+
 Version 4.2.1 - 29.11.2023
 --------------------------
 
