@@ -95,7 +95,7 @@ class rex_ycom_log
             $login = $user->getValue('login');
         }
 
-        $log = new rex_log_file(self::logFile(), self::$maxFileSize);
+        $log = rex_log_file::factory(self::logFile(), self::$maxFileSize);
         $data = [
             $ip,
             $id,
