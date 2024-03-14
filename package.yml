@@ -23,6 +23,10 @@ requires:
         yrewrite: '>=2.6'
     redaxo: '^5.17.0'
 
+installer_ignore:
+    - .tools
+    - .github
+
 system_plugins:
     - auth
     - group
