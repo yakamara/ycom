@@ -23,16 +23,20 @@ class ExecutableFinder
 
     /**
      * Replaces default suffixes of executable.
+     *
+     * @return void
      */
-    public function setSuffixes(array $suffixes): void
+    public function setSuffixes(array $suffixes)
     {
         $this->suffixes = $suffixes;
     }
 
     /**
      * Adds new possible suffix to check for executable.
+     *
+     * @return void
      */
-    public function addSuffix(string $suffix): void
+    public function addSuffix(string $suffix)
     {
         $this->suffixes[] = $suffix;
     }

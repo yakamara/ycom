@@ -47,7 +47,10 @@ class ProcessFailedException extends RuntimeException
         $this->process = $process;
     }
 
-    public function getProcess(): Process
+    /**
+     * @return Process
+     */
+    public function getProcess()
     {
         return $this->process;
     }

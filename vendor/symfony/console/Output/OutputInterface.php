@@ -36,23 +36,29 @@ interface OutputInterface
      * @param bool $newline Whether to add a newline
      * @param int  $options A bitmask of options (one of the OUTPUT or VERBOSITY constants),
      *                      0 is considered the same as self::OUTPUT_NORMAL | self::VERBOSITY_NORMAL
+     *
+     * @return void
      */
-    public function write(string|iterable $messages, bool $newline = false, int $options = 0): void;
+    public function write(string|iterable $messages, bool $newline = false, int $options = 0);
 
     /**
      * Writes a message to the output and adds a newline at the end.
      *
      * @param int $options A bitmask of options (one of the OUTPUT or VERBOSITY constants),
      *                     0 is considered the same as self::OUTPUT_NORMAL | self::VERBOSITY_NORMAL
+     *
+     * @return void
      */
-    public function writeln(string|iterable $messages, int $options = 0): void;
+    public function writeln(string|iterable $messages, int $options = 0);
 
     /**
      * Sets the verbosity of the output.
      *
      * @param self::VERBOSITY_* $level
+     *
+     * @return void
      */
-    public function setVerbosity(int $level): void;
+    public function setVerbosity(int $level);
 
     /**
      * Gets the current verbosity of the output.
@@ -83,15 +89,20 @@ interface OutputInterface
 
     /**
      * Sets the decorated flag.
+     *
+     * @return void
      */
-    public function setDecorated(bool $decorated): void;
+    public function setDecorated(bool $decorated);
 
     /**
      * Gets the decorated flag.
      */
     public function isDecorated(): bool;
 
-    public function setFormatter(OutputFormatterInterface $formatter): void;
+    /**
+     * @return void
+     */
+    public function setFormatter(OutputFormatterInterface $formatter);
 
     /**
      * Returns current output formatter instance.

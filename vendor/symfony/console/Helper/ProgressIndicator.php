@@ -70,8 +70,10 @@ class ProgressIndicator
 
     /**
      * Sets the current indicator message.
+     *
+     * @return void
      */
-    public function setMessage(?string $message): void
+    public function setMessage(?string $message)
     {
         $this->message = $message;
 
@@ -80,8 +82,10 @@ class ProgressIndicator
 
     /**
      * Starts the indicator output.
+     *
+     * @return void
      */
-    public function start(string $message): void
+    public function start(string $message)
     {
         if ($this->started) {
             throw new LogicException('Progress indicator already started.');
@@ -98,8 +102,10 @@ class ProgressIndicator
 
     /**
      * Advances the indicator.
+     *
+     * @return void
      */
-    public function advance(): void
+    public function advance()
     {
         if (!$this->started) {
             throw new LogicException('Progress indicator has not yet been started.');
@@ -123,8 +129,10 @@ class ProgressIndicator
 
     /**
      * Finish the indicator with message.
+     *
+     * @return void
      */
-    public function finish(string $message): void
+    public function finish(string $message)
     {
         if (!$this->started) {
             throw new LogicException('Progress indicator has not yet been started.');
@@ -148,8 +156,10 @@ class ProgressIndicator
      * Sets a placeholder formatter for a given name.
      *
      * This method also allow you to override an existing placeholder.
+     *
+     * @return void
      */
-    public static function setPlaceholderFormatterDefinition(string $name, callable $callable): void
+    public static function setPlaceholderFormatterDefinition(string $name, callable $callable)
     {
         self::$formatters ??= self::initPlaceholderFormatters();
 

@@ -116,8 +116,10 @@ class StopwatchEvent
 
     /**
      * Stops all non already stopped periods.
+     *
+     * @return void
      */
-    public function ensureStopped(): void
+    public function ensureStopped()
     {
         while (\count($this->started)) {
             $this->stop();

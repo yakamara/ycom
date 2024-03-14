@@ -175,8 +175,11 @@ class Question
      *
      * @return $this
      */
-    public function setAutocompleterCallback(?callable $callback): static
+    public function setAutocompleterCallback(?callable $callback = null): static
     {
+        if (1 > \func_num_args()) {
+            trigger_deprecation('symfony/console', '6.2', 'Calling "%s()" without any arguments is deprecated, pass null explicitly instead.', __METHOD__);
+        }
         if ($this->hidden && null !== $callback) {
             throw new LogicException('A hidden question cannot use the autocompleter.');
         }
@@ -191,8 +194,11 @@ class Question
      *
      * @return $this
      */
-    public function setValidator(?callable $validator): static
+    public function setValidator(?callable $validator = null): static
     {
+        if (1 > \func_num_args()) {
+            trigger_deprecation('symfony/console', '6.2', 'Calling "%s()" without any arguments is deprecated, pass null explicitly instead.', __METHOD__);
+        }
         $this->validator = null === $validator ? null : $validator(...);
 
         return $this;
@@ -260,7 +266,10 @@ class Question
         return $this->normalizer;
     }
 
-    protected function isAssoc(array $array): bool
+    /**
+     * @return bool
+     */
+    protected function isAssoc(array $array)
     {
         return (bool) \count(array_filter(array_keys($array), 'is_string'));
     }

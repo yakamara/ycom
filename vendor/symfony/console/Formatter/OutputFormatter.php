@@ -83,7 +83,10 @@ class OutputFormatter implements WrappableOutputFormatterInterface
         $this->styleStack = new OutputFormatterStyleStack();
     }
 
-    public function setDecorated(bool $decorated): void
+    /**
+     * @return void
+     */
+    public function setDecorated(bool $decorated)
     {
         $this->decorated = $decorated;
     }
@@ -93,7 +96,10 @@ class OutputFormatter implements WrappableOutputFormatterInterface
         return $this->decorated;
     }
 
-    public function setStyle(string $name, OutputFormatterStyleInterface $style): void
+    /**
+     * @return void
+     */
+    public function setStyle(string $name, OutputFormatterStyleInterface $style)
     {
         $this->styles[strtolower($name)] = $style;
     }
@@ -117,7 +123,10 @@ class OutputFormatter implements WrappableOutputFormatterInterface
         return $this->formatAndWrap($message, 0);
     }
 
-    public function formatAndWrap(?string $message, int $width): string
+    /**
+     * @return string
+     */
+    public function formatAndWrap(?string $message, int $width)
     {
         if (null === $message) {
             return '';

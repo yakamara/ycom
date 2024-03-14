@@ -113,7 +113,10 @@ class ArrayInput extends Input
         return implode(' ', $params);
     }
 
-    protected function parse(): void
+    /**
+     * @return void
+     */
+    protected function parse()
     {
         foreach ($this->parameters as $key => $value) {
             if ('--' === $key) {
