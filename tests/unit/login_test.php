@@ -18,7 +18,6 @@ class rex_ycom_login_test extends TestCase
         ];
 
         $status = rex_ycom_auth::login($params);
-        static::assertEquals(rex_ycom_auth::STATUS_LOGIN_FAILED, $status);
-
+        self::assertEquals(rex_ycom_auth::STATUS_LOGIN_FAILED, $status);
     }
 }

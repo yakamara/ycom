@@ -97,7 +97,7 @@ class rex_ycom_auth_rules
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getOptions(): array
     {

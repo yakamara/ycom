@@ -11,7 +11,7 @@ class rex_ycom
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     public static function getTables(): array
     {

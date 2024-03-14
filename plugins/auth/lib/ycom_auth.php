@@ -371,7 +371,7 @@ class rex_ycom_auth
 
     /**
      * @param array<string, string> $params
-     * @return null|false|rex_ycom_user
+     * @return false|rex_ycom_user|null
      */
     public static function loginWithParams($params, ?callable $filter = null)
     {
@@ -428,13 +428,13 @@ class rex_ycom_auth
 
     public static function setUser(rex_ycom_user $me): void
     {
-        \rex_login::startSession();
+        rex_login::startSession();
         self::setSessionVar('UID', $me->getId());
         self::$me = $me;
     }
 
     /**
-     * @return null|rex_ycom_user
+     * @return rex_ycom_user|null
      */
     public static function getUser()
     {
@@ -596,8 +596,8 @@ class rex_ycom_auth
     }
 
     /**
-     * @param string[] $returnTos
-     * @param string[] $allowedDomains
+     * @param array<string> $returnTos
+     * @param array<string> $allowedDomains
      */
     public static function getReturnTo(array $returnTos, array $allowedDomains): string
     {

@@ -11,7 +11,7 @@
 
 class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 {
-    /** @var array|string[] */
+    /** @var array|array<string> */
     private static array $requestAuthFunctions = ['auth', 'logout'];
     private string $casFile = 'cas.php';
 
@@ -19,7 +19,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
     {
         rex_login::startSession();
 
-        $casConfigPath = \rex_addon::get('ycom')->getDataPath($this->casFile);
+        $casConfigPath = rex_addon::get('ycom')->getDataPath($this->casFile);
         if (!file_exists($casConfigPath)) {
             throw new rex_exception('CAS Settings file not found [' . $casConfigPath . ']');
         }
@@ -112,16 +112,16 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         $params['ignorePassword'] = true;
         $params['loginPassword'] = '';
 
-        $loginStatus = \rex_ycom_auth::login($params);
+        $loginStatus = rex_ycom_auth::login($params);
         if (rex_ycom_auth::STATUS_HAS_LOGGED_IN == $loginStatus) {
             // already logged in
             rex_ycom_user::updateUser($data);
             rex_response::sendCacheControl();
-            \rex_response::sendRedirect($returnTo);
+            rex_response::sendRedirect($returnTo);
         }
 
         // if user not found, check if exists, but no permission
-        $user = \rex_ycom_user::query()->where('email', $data['email'])->findOne();
+        $user = rex_ycom_user::query()->where('email', $data['email'])->findOne();
         if ($user) {
             $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.ycom_login_failed }}';
             return;
@@ -142,7 +142,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
         $params['loginStay'] = false;
         $params['filter'] = [];
         $params['loginPassword'] = '';
-        $loginStatus = \rex_ycom_auth::login($params);
+        $loginStatus = rex_ycom_auth::login($params);
 
         if (rex_ycom_auth::STATUS_HAS_LOGGED_IN != $loginStatus) {
             if ($this->params['debug']) {

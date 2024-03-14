@@ -15,7 +15,7 @@ rex_extension::register(['MEDIA_IS_PERMITTED'], static function (rex_extension_p
         return false;
     }
     $rex_media = $ep->getParam('element');
-    return \rex_ycom_media_auth::checkFrontendPerm($rex_media);
+    return rex_ycom_media_auth::checkFrontendPerm($rex_media);
 });
 
 rex_extension::register(['MEDIA_MANAGER_BEFORE_SEND'], static function (rex_extension_point $ep) {

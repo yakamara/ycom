@@ -6,7 +6,7 @@
 
 class rex_ycom_media_auth_rules
 {
-    /** @var array<string, array{'info': string, 'action': string[]}> */
+    /** @var array<string, array{'info': string, 'action': array<string>}> */
     private array $rules;
 
     public function __construct()
@@ -84,7 +84,7 @@ class rex_ycom_media_auth_rules
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getOptions(): array
     {

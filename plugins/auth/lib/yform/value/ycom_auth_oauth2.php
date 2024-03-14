@@ -14,15 +14,16 @@
 
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\GenericProvider;
+use League\OAuth2\Client\Token\AccessToken;
 
 class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
 {
     use rex_yform_trait_value_auth_extern;
 
-    /** @var array|string[] */
+    /** @var array|array<string> */
     private array $auth_requestFunctions = ['init', 'code', 'state'];
     private bool $auth_directLink = false;
-    /** @var array|string[] */
+    /** @var array|array<string> */
     private array $auth_SessionVars = ['OAUTH2_oauth2state'];
     private string $auth_ClassKey = 'oauth2';
 
@@ -74,7 +75,7 @@ class rex_yform_value_ycom_auth_oauth2 extends rex_yform_value_abstract
 
                     $accessToken = null;
                     try {
-                        /** @var \League\OAuth2\Client\Token\AccessToken $accessToken */
+                        /** @var AccessToken $accessToken */
                         $accessToken = $provider->getAccessToken('authorization_code', [
                             'code' => $code,
                         ]);

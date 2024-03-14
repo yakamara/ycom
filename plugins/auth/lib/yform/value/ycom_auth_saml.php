@@ -20,10 +20,10 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
 {
     use rex_yform_trait_value_auth_extern;
 
-    /** @var array|string[] */
+    /** @var array|array<string> */
     private array $auth_requestFunctions = ['auth', 'sso', 'acs', 'slo', 'sls'];
     private bool $auth_directLink = false;
-    /** @var array|string[] */
+    /** @var array|array<string> */
     private array $auth_SessionVars = ['SAML_Userdata', 'SAML_NameId', 'SAML_SessionIndex', 'SAML_AuthNRequestID', 'SAML_LogoutRequestID', 'SAML_NameIdFormat', 'SAML_ssoDate'];
     private string $auth_ClassKey = 'saml';
 

@@ -4,7 +4,7 @@ trait rex_yform_trait_value_auth_extern
 {
     /**
      * @throws rex_exception
-     * @return array|string[]
+     * @return array|array<string>
      */
     private function auth_loadSettings(): array
     {

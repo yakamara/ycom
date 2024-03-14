@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class rex_ycom_media_auth extends rex_yform_manager_dataset
 {
-    /** @var string[] */
+    /** @var array<string> */
     public static array $perms = [
         '0' => 'translate:ycom_perm_all',
         '1' => 'translate:ycom_perm_only_logged_in',

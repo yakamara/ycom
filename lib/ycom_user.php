@@ -1,12 +1,12 @@
 <?php
 
-class rex_ycom_user extends \rex_yform_manager_dataset
+class rex_ycom_user extends rex_yform_manager_dataset
 {
     public string $password = '';
     public int $login_tries = 0;
 
     /**
-     * @return null|rex_ycom_user
+     * @return rex_ycom_user|null
      */
     public static function getMe()
     {
@@ -36,7 +36,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
     }
 
     /**
-     * @return array|string[]
+     * @return array|array<string>
      */
     public function getGroups(): array
     {
@@ -49,7 +49,7 @@ class rex_ycom_user extends \rex_yform_manager_dataset
 
     /**
      * @param array<string|int, mixed> $data
-     * @return null|rex_ycom_user|rex_yform_manager_dataset
+     * @return rex_ycom_user|rex_yform_manager_dataset|null
      */
     public static function createUserByEmail(array $data)
     {
