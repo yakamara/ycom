@@ -1,0 +1,63 @@
+name: Upstream
+
+on:
+    pull_request:
+        types: [ opened, synchronize, reopened, ready_for_review ]
+
+jobs:
+    upstream_run:
+        name: ${{ matrix.repo }}@${{ matrix.branch }}
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+
+        concurrency:
+            group: upstream-check-${{github.event_name}}-${{ matrix.repo }}-${{ matrix.branch }}-${{ github.head_ref || github.run_id }}
+            cancel-in-progress: true
+
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    -   repo: redaxo/redaxo
+                        branch: main
+                        php: '8.1'
+                    -   repo: redaxo/redaxo
+                        branch: 6.x
+                        php: '8.3'
+                    -   repo: yakamara/yform
+                        branch: master
+                        php: '8.1'
+
+        if: github.event.pull_request.draft == false
+        steps:
+            -   uses: actions/checkout@v4
+                with:
+                    repository: ${{ matrix.repo }}
+                    ref: ${{ matrix.branch }}
+  
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    coverage: none
+  
+            -   name: set redaxo/php-cs-fixer-config to current branch
+                run: composer require redaxo/php-cs-fixer-config:dev-${{ github.head_ref }} --no-scripts --no-update --dev
+  
+            -   name: allow php-cs-fixer version required by redaxo/php-cs-fixer-config
+                run: composer require friendsofphp/php-cs-fixer:\* --no-scripts --no-update --dev
+  
+            -   uses: ramsey/composer-install@v3
+                if: hashFiles('composer.lock') != ''
+                with:
+                    dependency-versions: 'highest' # to trigger 'composer update' instead of 'composer install' but limited to redaxo/php-cs-fixer-config updates only
+                    composer-options: 'redaxo/php-cs-fixer-config --prefer-dist --no-progress --with-all-dependencies'
+  
+            -   uses: ramsey/composer-install@v3
+                if: hashFiles('composer.lock') == ''
+                with:
+                    dependency-versions: 'highest' # to trigger 'composer update'
+                    composer-options: '--prefer-dist --no-progress --with-all-dependencies'
+  
+            -   name: run php-cs-fixer
+                run: vendor/bin/php-cs-fixer check -v --ansi --diff || exit 0
