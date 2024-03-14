@@ -10,7 +10,7 @@ $articleAuthTypeWasEnum = false;
 $articleTable = rex_sql_table::get(rex::getTable('article'));
 if ($articleTable->hasColumn('ycom_auth_type')) {
     $Column = $articleTable->getColumn('ycom_auth_type');
-    if (null !== $Column && 'enum' == substr($Column->getType(), 0, 4)) {
+    if (null !== $Column && 'enum' === substr($Column->getType(), 0, 4)) {
         $articleAuthTypeWasEnum = true;
     }
 }

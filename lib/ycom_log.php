@@ -2,21 +2,21 @@
 
 class rex_ycom_log
 {
-    public const TYPE_ACCESS = 'access';
-    public const TYPE_LOGOUT = 'logout';
-    public const TYPE_CLICK = 'click';
-    public const TYPE_LOGIN_FAILED = 'login_failed';
-    public const TYPE_LOGIN_NOT_FOUND = 'login_not_found';
-    public const TYPE_LOGIN_SUCCESS = 'login_success';
-    public const TYPE_LOGIN_UPDATED = 'login_updated';
-    public const TYPE_LOGIN_DELETED = 'login_deleted';
-    public const TYPE_REGISTERD = 'registerd';
-    public const TYPE_SESSION_FAILED = 'session_failed';
-    public const TYPE_COOKIE_FAILED = 'cookie_failed';
-    public const TYPE_IMPERSONATE = 'session_impersonate';
+    public const TYPE_ACCESS = 'access'; /** @api */
+    public const TYPE_LOGOUT = 'logout'; /** @api */
+    public const TYPE_CLICK = 'click'; /** @api */
+    public const TYPE_LOGIN_FAILED = 'login_failed'; /** @api */
+    public const TYPE_LOGIN_NOT_FOUND = 'login_not_found'; /** @api */
+    public const TYPE_LOGIN_SUCCESS = 'login_success'; /** @api */
+    public const TYPE_LOGIN_UPDATED = 'login_updated'; /** @api */
+    public const TYPE_LOGIN_DELETED = 'login_deleted'; /** @api */
+    public const TYPE_REGISTERD = 'registerd'; /** @api */
+    public const TYPE_SESSION_FAILED = 'session_failed'; /** @api */
+    public const TYPE_COOKIE_FAILED = 'cookie_failed'; /** @api */
+    public const TYPE_IMPERSONATE = 'session_impersonate'; /** @api */
 
     public const TYPES = [self::TYPE_COOKIE_FAILED, self::TYPE_SESSION_FAILED, self::TYPE_ACCESS, self::TYPE_LOGIN_SUCCESS, self::TYPE_LOGOUT, self::TYPE_LOGIN_UPDATED, self::TYPE_CLICK, self::TYPE_LOGIN_FAILED, self::TYPE_REGISTERD, self::TYPE_LOGIN_DELETED, self::TYPE_LOGIN_NOT_FOUND];
-    /** @var null|bool */
+    /** @var bool|null */
     private static $active;
     private static int $maxFileSize = 20000000; // 20 Mb Default
 

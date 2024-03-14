@@ -87,7 +87,7 @@ if (rex::isFrontend()) {
         $params = $ep->getParams();
         /** @var rex_yform_manager_table $table */
         $table = $params['table'];
-        if (rex::getTablePrefix() . 'ycom_user' == $table->getTableName()) {
+        if (rex::getTablePrefix() . 'ycom_user' === $table->getTableName()) {
             if (rex::getUser() && rex::getUser()->isAdmin()) {
                 $actionButtons = $ep->getSubject();
                 $actionButtons['ycom_impersonate'] = [

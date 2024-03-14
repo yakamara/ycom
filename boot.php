@@ -32,6 +32,6 @@ if (rex::isBackend()) {
 rex_ycom::addTable(rex::getTablePrefix() . 'ycom_user');
 rex_yform_manager_dataset::setModelClass(rex::getTablePrefix() . 'ycom_user', rex_ycom_user::class);
 
-if (rex::isBackend() && ('index.php?page=content/edit' == rex_url::currentBackendPage() || 'mediapool' == rex_be_controller::getCurrentPagePart(1))) {
+if (rex::isBackend() && ('index.php?page=content/edit' === rex_url::currentBackendPage() || 'mediapool' === rex_be_controller::getCurrentPagePart(1))) {
     rex_view::addJsFile($this->getAssetsUrl('ycom_backend.js'));
 }

@@ -25,7 +25,7 @@ if (null !== $page) {
             (new rex_be_page($key, rex_i18n::msg('ycom_docs_' . $keyWithoudPrio)))
             ->setSubPath($mdFile)
             ->setHref('index.php?page=ycom/docs&mdfile=' . $key)
-            ->setIsActive($key == $currenMDFile),
+            ->setIsActive($key === $currenMDFile),
         );
     }
 }

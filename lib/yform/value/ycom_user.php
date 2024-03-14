@@ -18,7 +18,7 @@ class rex_yform_value_ycom_user extends rex_yform_value_abstract
             $wc = $this->params['warning'][$this->getId()];
         }
 
-        if ('hidden' != trim($this->getElement(4))) {
+        if ('hidden' !== trim($this->getElement(4))) {
             $this->params['form_output'][$this->getId()] = '
                 <p class="formtext">
                     <label class="text ' . $wc . '" for="' . $this->getFieldId() . '" >' . $this->getElement(3) . '</label>
@@ -27,7 +27,7 @@ class rex_yform_value_ycom_user extends rex_yform_value_abstract
         }
 
         $this->params['value_pool']['email'][$this->getElement(1)] = stripslashes($this->getValue());
-        if ('no_db' != $this->getElement(5)) {
+        if ('no_db' !== $this->getElement(5)) {
             $this->params['value_pool']['sql'][$this->getElement(1)] = $this->getValue();
         }
     }
