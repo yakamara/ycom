@@ -21,7 +21,7 @@ requires:
     packages:
         yform: '^4.1.1'
         yrewrite: '>=2.6'
-    redaxo: '^5.15.0'
+    redaxo: '^5.17.0'
 
 system_plugins:
     - auth
