@@ -74,4 +74,13 @@ class rex_ycom_group extends rex_yform_manager_dataset
     {
         return $this->getValue('name');
     }
+
+    /** @api */
+    public function setName(mixed $value) : self
+    {
+        $this->setValue("name", $value);
+        return $this;
+    }
+
+
 }
