@@ -13,7 +13,7 @@ page:
             title: 'translate:ycom_docs'
             perm: admin[]
             pjax: false
-            itemclass: pull-right
+            itemClass: pull-right
             icon: rex-icon fa-info-circle
 
 requires:
