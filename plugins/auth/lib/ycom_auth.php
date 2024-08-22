@@ -586,7 +586,13 @@ class rex_ycom_auth
             $returnUrl .= '?' . $url['query'];
         }
 
-        $referer_to_logout = strpos($returnUrl, rex_getUrl(rex_config::get('ycom/auth', 'article_id_logout', '')));
+        $article_id_logout = rex_config::get('ycom/auth', 'article_id_logout', '');
+        if ($article_id_logout > 0) {
+            $referer_to_logout = strpos($returnUrl, rex_getUrl(rex_config::get('ycom/auth', 'article_id_logout', '')));
+        } else {
+            $referer_to_logout = false;
+        }
+
         if (false === $referer_to_logout) {
         } else {
             $returnUrl = '';
