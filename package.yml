@@ -15,6 +15,7 @@ page:
             pjax: false
             itemclass: pull-right
             icon: rex-icon fa-info-circle
+            href: ?page=ycom/docs
 
 requires:
     php: '>=8.2'
