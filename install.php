@@ -9,6 +9,11 @@ rex_yform_manager_table::deleteCache();
 
 $content = rex_file::get(rex_path::addon('ycom', 'install/tablesets/yform_user.json'));
 if (is_string($content) && '' !== $content) {
+    // vorher noch ycom_auth_password einbinden, da bei Install diese nicht bekannt ist.
+    if (!class_exists('rex_yform_value_ycom_auth_password')) {
+        include rex_path::addon('ycom', 'plugins/auth/lib/yform/value/ycom_auth_password.php');
+    }
+
     rex_yform_manager_table_api::importTablesets($content);
 }
 
