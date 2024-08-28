@@ -7,8 +7,8 @@
 
 ```text
 validate|ycom_auth|login|password|stayfield|warning_message_enterloginpsw|warning_message_login_failed
-text|login|Benutzername|
-password|password|Passwort
+text|login|Benutzername|||{"autocomplete":"username"}
+password|password|Passwort|||{"autocomplete":"current-password"}
 checkbox|stayfield|eingeloggt bleiben
 ycom_auth_returnto|returnTo|
 ```
@@ -22,8 +22,8 @@ $form->setValidateField('ycom_auth', ['login', 'password', null, 'warning_messag
 $form->setObjectparams('form_name', 'login_form');
 $form->setObjectparams('form_action', rex_getUrl());
 
-$form->setValueField('text', ['login', 'Benutzername']);
-$form->setValueField('password', ['password', 'Passwort']);
+$form->setValueField('text', ['login', 'Benutzername', '', '', '{"autocomplete":"username"}']);
+$form->setValueField('password', ['password', 'Passwort', '', '', '{"autocomplete":"current-password"}']);
 
 $form->setValidateField('empty', ['login', 'Bitte geben Sie Ihren Benutzernamen ein']);
 $form->setValidateField('empty', ['password', 'Bitte geben Sie Ihr Passwort ein']);
@@ -136,7 +136,7 @@ text|name|Nachname*
 validate|empty|name|Bitte geben Sie Ihren Nachnamen ein.
 
 ycom_auth_password|password|Ihr Passwort*|{"length":{"min":10},"letter":{"min":1},"lowercase":{"min":0},"uppercase":{"min":0},"digit":{"min":1},"symbol":{"min":0}}|Das Passwort muss mindestens 10 Zeichen lang sein und eine Ziffer enthalten.
-password|password_2|Passwort bestätigen*||no_db
+password|password_2|Passwort bestätigen*||no_db|{"autocomplete":"new-password"}
 
 checkbox|termsofuse_accepted|Ich habe die Nutzungsbedingungen akzeptiert.|0|0|
 

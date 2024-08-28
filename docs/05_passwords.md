@@ -35,7 +35,7 @@ Nun können Nutzer ihr Passwort selbständig ändern.
 1. Feld für altes Passwort und Validierung hinzufügen
 
 ```php
-password|old_password|Bisheriges Passwort||no_db
+password|old_password|Bisheriges Passwort||no_db|{"autocomplete":"current-password"}
 validate|empty|old_password|Bitte das bisherige Passwort angeben.
 validate|ycom_auth_password|old_password|Das bisherige Passwort ist nicht korrekt.
 ```

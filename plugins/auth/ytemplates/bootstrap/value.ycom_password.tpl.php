@@ -38,8 +38,11 @@ $attributes = [
     'type' => $type,
     'id' => $this->getFieldId(),
     'value' => $value,
-    'autocomplete' => 'new-password',
 ];
+
+if (rex::isFrontend()) {
+    $attributes['autocomplete'] = 'new-password';
+}
 
 $attributes = $this->getAttributeElements($attributes, ['autocomplete', 'pattern', 'required', 'disabled', 'readonly']);
 
@@ -50,13 +53,22 @@ $input_group_end = '';
 if ($script) {
     $funcName = uniqid('rex_ycom_password_create' . $this->getId());
     $span = '<span class="input-group-btn">
-    <button type="button" class="btn btn-default getNewPass" onclick="' . $funcName . 'refresh(' . $this->getId() . ')"><span class="fa fa-refresh"></span></button>
+    <button type="button" class="btn btn-default getNewPass rex-ycom-password-refresh-button" data-myRules=\'' . json_encode($rules) . '\' data-myField="' . rex_escape($this->getFieldName()) . '"><span class="fa fa-refresh"></span></button>
     </span>';
 
     $nonce = '';
     $nonce = ' nonce="' . rex_response::getNonce() . '"';
 
     ?><script type="text/javascript"<?= $nonce ?>>
+
+        $(document).on('rex:ready', function () {
+            $(".rex-ycom-password-refresh-button").each(function() {
+                $(this).off("click");
+                $(this).on("click", function() {
+                    rex_ycom_password_refresh(this);
+                });
+            });
+        });
 
         // Credit to @Blender https://stackoverflow.com/users/464744/blender
         String.prototype.pick = function(min, max) {
@@ -92,153 +104,155 @@ if ($script) {
             return array.join('');
         };
 
-        function <?= $funcName . 'refresh' ?>(input) {
+        if (typeof rex_ycom_password_refresh !== 'function') {
+            function rex_ycom_password_refresh(button) {
 
-            var rules = {
-                letter:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-                uppercase:"ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-                lowercase: "abcdefghijklmnopqrstuvwxyz",
-                digit: "0123456789",
-                symbol: "!@#$%^&*()_+{}:\"<>?\|[];',./`~",
-                all: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}:\"<>?|[];',./`~",
-            };
-            rules.letter = rules.uppercase + rules.lowercase;
-            rules.all = rules.uppercase + rules.lowercase + rules.digit + rules.symbol;
+                var rules = {
+                    letter: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+                    uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                    lowercase: "abcdefghijklmnopqrstuvwxyz",
+                    digit: "0123456789",
+                    symbol: "!@#$%^&*()_+{}:\"<>?\|[];',./`~",
+                    all: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}:\"<>?|[];',./`~",
+                };
+                rules.letter = rules.uppercase + rules.lowercase;
+                rules.all = rules.uppercase + rules.lowercase + rules.digit + rules.symbol;
 
-            var ruleset = '';
-            var myRules = <?= json_encode($rules) ?>;
-            var myPassword = '';
+                var ruleset = '';
+                var myRules = JSON.parse(decodeURIComponent(button.getAttribute('data-myRules')));
+                var myPassword = '';
 
-            if (typeof myRules.uppercase === "object") {
-                min = myRules.uppercase.min;
-                if (typeof myRules.uppercase.min === "undefined") {
-                    min = 1;
+                if (typeof myRules.uppercase === "object") {
+                    min = myRules.uppercase.min;
+                    if (typeof myRules.uppercase.min === "undefined") {
+                        min = 1;
+                    }
+                    max = myRules.uppercase.max;
+                    if (typeof myRules.uppercase.max === "undefined") {
+                        max = min;
+                    }
+                    generate = myRules.uppercase.generate;
+                    if (typeof myRules.uppercase.generate !== "undefined") {
+                        min = generate;
+                        max = generate;
+                    }
+                    ruleset += rules.uppercase;
+                    myPassword += rules.uppercase.pick(min, max);
                 }
-                max = myRules.uppercase.max;
-                if (typeof myRules.uppercase.max === "undefined") {
-                    max = min;
+                if (typeof myRules.lowercase === "object") {
+                    min = myRules.lowercase.min;
+                    if (typeof myRules.lowercase.min === "undefined") {
+                        min = 1;
+                    }
+                    max = myRules.lowercase.max;
+                    if (typeof myRules.lowercase.max === "undefined") {
+                        max = min;
+                    }
+                    generate = myRules.lowercase.generate;
+                    if (typeof myRules.lowercase.generate !== "undefined") {
+                        min = generate;
+                        max = generate;
+                    }
+                    ruleset += rules.lowercase;
+                    myPassword += rules.lowercase.pick(min, max);
                 }
-                generate = myRules.uppercase.generate;
-                if (typeof myRules.uppercase.generate !== "undefined") {
-                    min = generate;
-                    max = generate;
+                if (typeof myRules.letter === "object") {
+                    min = myRules.letter.min;
+                    if (typeof myRules.letter.min === "undefined") {
+                        min = 1;
+                    }
+                    max = myRules.letter.max;
+                    if (typeof myRules.letter.max === "undefined") {
+                        max = min;
+                    }
+                    if (min > myPassword.length) {
+                        min = min - myPassword.length;
+                    } else {
+                        min = 0;
+                    }
+                    if (max > myPassword.length) {
+                        max = max - myPassword.length;
+                    } else {
+                        min = 0;
+                    }
+                    generate = myRules.letter.generate;
+                    if (typeof myRules.letter.max !== "undefined") {
+                        min = generate;
+                        max = generate;
+                    }
+                    myPassword += ruleset.pick(min, max);
+
                 }
-                ruleset += rules.uppercase;
-                myPassword += rules.uppercase.pick(min,max);
+                if (typeof myRules.digit === "object") {
+                    min = myRules.digit.min;
+                    if (typeof myRules.digit.min === "undefined") {
+                        min = 1;
+                    }
+                    max = myRules.digit.max;
+                    if (typeof myRules.digit.max === "undefined") {
+                        max = min;
+                    }
+                    generate = myRules.digit.generate;
+                    if (typeof myRules.digit.max !== "undefined") {
+                        min = generate;
+                        max = generate;
+                    }
+                    ruleset += rules.digit;
+                    myPassword += rules.digit.pick(min, max);
+                }
+                if (typeof myRules.symbol === "object") {
+                    min = myRules.symbol.min;
+                    if (typeof myRules.symbol.min === "undefined") {
+                        min = 1;
+                    }
+                    max = myRules.symbol.max;
+                    if (typeof myRules.symbol.max === "undefined") {
+                        max = min;
+                    }
+                    generate = myRules.symbol.generate;
+                    if (typeof myRules.symbol.max !== "undefined") {
+                        min = generate;
+                        max = generate;
+                    }
+                    ruleset += rules.symbol;
+                    myPassword += rules.symbol.pick(min, max);
+                }
+
+                if (typeof myRules.length === "object") {
+                    min = myRules.length.min;
+                    if (typeof myRules.length.min === "undefined") {
+                        min = 1;
+                    }
+                    max = myRules.length.max;
+                    if (typeof myRules.length.max === "undefined") {
+                        max = min;
+                    }
+                    if (min > myPassword.length) {
+                        min = min - myPassword.length;
+                    } else {
+                        min = 0;
+                    }
+                    if (max > myPassword.length) {
+                        max = max - myPassword.length;
+                    } else {
+                        min = 0;
+                    }
+                    generate = myRules.length.generate;
+                    if (typeof myRules.length.max !== "undefined") {
+                        min = generate;
+                        max = generate;
+                    }
+                    myPassword += ruleset.pick(min, max);
+
+                }
+
+                var item = document.getElementsByName(button.getAttribute('data-myField')).item(0);
+                var name = item.getAttribute('name');
+                var type = item.getAttribute('value');
+
+                item.value = myPassword;
+
             }
-            if (typeof myRules.lowercase === "object") {
-                min = myRules.lowercase.min;
-                if (typeof myRules.lowercase.min === "undefined") {
-                    min = 1;
-                }
-                max = myRules.lowercase.max;
-                if (typeof myRules.lowercase.max === "undefined") {
-                    max = min;
-                }
-                generate = myRules.lowercase.generate;
-                if (typeof myRules.lowercase.generate !== "undefined") {
-                    min = generate;
-                    max = generate;
-                }
-                ruleset += rules.lowercase;
-                myPassword += rules.lowercase.pick(min,max);
-            }
-            if (typeof myRules.letter === "object") {
-                min = myRules.letter.min;
-                if (typeof myRules.letter.min === "undefined") {
-                    min = 1;
-                }
-                max = myRules.letter.max;
-                if (typeof myRules.letter.max === "undefined") {
-                    max = min;
-                }
-                if (min > myPassword.length) {
-                    min = min - myPassword.length;
-                } else {
-                    min = 0;
-                }
-                if (max > myPassword.length) {
-                    max = max - myPassword.length;
-                } else {
-                    min = 0;
-                }
-                generate = myRules.letter.generate;
-                if (typeof myRules.letter.max !== "undefined") {
-                    min = generate;
-                    max = generate;
-                }
-                myPassword += ruleset.pick(min,max);
-
-            }
-            if (typeof myRules.digit === "object") {
-                min = myRules.digit.min;
-                if (typeof myRules.digit.min === "undefined") {
-                    min = 1;
-                }
-                max = myRules.digit.max;
-                if (typeof myRules.digit.max === "undefined") {
-                    max = min;
-                }
-                generate = myRules.digit.generate;
-                if (typeof myRules.digit.max !== "undefined") {
-                    min = generate;
-                    max = generate;
-                }
-                ruleset += rules.digit;
-                myPassword += rules.digit.pick(min,max);
-            }
-            if (typeof myRules.symbol === "object") {
-                min = myRules.symbol.min;
-                if (typeof myRules.symbol.min === "undefined") {
-                    min = 1;
-                }
-                max = myRules.symbol.max;
-                if (typeof myRules.symbol.max === "undefined") {
-                    max = min;
-                }
-                generate = myRules.symbol.generate;
-                if (typeof myRules.symbol.max !== "undefined") {
-                    min = generate;
-                    max = generate;
-                }
-                ruleset += rules.symbol;
-                myPassword += rules.symbol.pick(min,max);
-            }
-
-            if (typeof myRules.length === "object") {
-                min = myRules.length.min;
-                if (typeof myRules.length.min === "undefined") {
-                    min = 1;
-                }
-                max = myRules.length.max;
-                if (typeof myRules.length.max === "undefined") {
-                    max = min;
-                }
-                if (min > myPassword.length) {
-                    min = min - myPassword.length;
-                } else {
-                    min = 0;
-                }
-                if (max > myPassword.length) {
-                    max = max - myPassword.length;
-                } else {
-                    min = 0;
-                }
-                generate = myRules.length.generate;
-                if (typeof myRules.length.max !== "undefined") {
-                    min = generate;
-                    max = generate;
-                }
-                myPassword += ruleset.pick(min,max);
-
-            }
-
-            var item = document.getElementsByName('<?= $this->getFieldName() ?>').item(0);
-            var name = item.getAttribute('name');
-            var type = item.getAttribute('value');
-
-            item.value = myPassword;
-
         }
     </script><?php
 

@@ -1,6 +1,18 @@
 Changelog
 =========
 
+Version 4.3.1 - xx.03.2024
+
+### Anpassungen
+
+* Referer to logout greift nur noch, wenn Article Logout vorhanden ist. Danke Julian Aliabadi, https://github.com/goldfoot
+* Verlinkung auf Docs angepasst
+* rexstan Satisfaction erhöht. Danke https://github.com/TobiasKrais
+* Doppelte Registrierung des yform template path entfernt. Danke https://github.com/tyrant88
+* Fehler bei Installation behoben. Passwortfeld wurde vorher nur nach Reinstall angelegt. 
+* Passwort autocomplete varianten eingebaut und in Doku sinnvoll ergänzt
+* CSP Header anpassungen. Passwortscript -CSP-fähig und relationsfähig gemacht.
+
 Version 4.3.0 - 14.03.2024
 --------------------------
 
