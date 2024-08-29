@@ -173,14 +173,11 @@ class rex_ycom_user extends rex_yform_manager_dataset
 
     /* Nutzungsbedingungen bestätigt */
     /** @api */
-    public function getTermsofuseAccepted(bool $asBool = false) : mixed {
-        if($asBool) {
-            return (bool) $this->getValue("termsofuse_accepted");
-        }
-        return $this->getValue("termsofuse_accepted");
+    public function getTermsofuseAccepted() : bool {
+        return (bool) $this->getValue("termsofuse_accepted");
     }
     /** @api */
-    public function setTermsofuseAccepted(int $value = 1) : self {
+    public function setTermsofuseAccepted(bool $value = true) : self {
         $this->setValue("termsofuse_accepted", $value);
         return $this;
     }
