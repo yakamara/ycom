@@ -184,14 +184,11 @@ class rex_ycom_user extends rex_yform_manager_dataset
             
     /* Neues Passwort muss gesetzt werden */
     /** @api */
-    public function getNewPasswordRequired(bool $asBool = false) : mixed {
-        if($asBool) {
-            return (bool) $this->getValue("new_password_required");
-        }
-        return $this->getValue("new_password_required");
+    public function getNewPasswordRequired() : bool {
+        return (bool) $this->getValue("new_password_required");
     }
     /** @api */
-    public function setNewPasswordRequired(int $value = 1) : self {
+    public function setNewPasswordRequired(bool $value = true) : self {
         $this->setValue("new_password_required", $value);
         return $this;
     }
