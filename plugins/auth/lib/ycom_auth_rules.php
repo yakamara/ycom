@@ -81,13 +81,14 @@ class rex_ycom_auth_rules
 
         switch ($rule['action']['type']) {
             case 'deactivate':
+                $user->increaseLoginTries();
                 $user->setValue('status', -2); // to much login failures
                 $user->save();
                 return false;
             case 'pause':
-                $lastLoginDate = new DateTime($user->getValue('last_login_time'));
-                $lastLoginDate->modify('+' . $rule['action']['time'] . ' seconds');
-                if (date('YmdHis') < $lastLoginDate->format('YmdHis')) {
+                $lastLoginTryDate = new DateTime($user->getValue('last_login_try_time'));
+                $lastLoginTryDate->modify('+' . $rule['action']['time'] . ' seconds');
+                if (date('YmdHis') < $lastLoginTryDate->format('YmdHis')) {
                     return false;
                 }
                 return true;

@@ -29,6 +29,7 @@ firstname = First name
 activation_key = Activation key
 session_key = Session key
 last_login_time = Last sign in
+last_login_try_time = Last sign in try
 last_action_time = Last action
 termination_time = Kündigungszeitpunkt
 login_failed = Failed sign in attempts

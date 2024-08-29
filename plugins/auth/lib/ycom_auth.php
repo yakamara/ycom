@@ -211,12 +211,14 @@ class rex_ycom_auth
                 /** @var rex_ycom_user $loginUser */
                 $loginUser = $loginUsers[0];
 
+                // Check Only AuthRules
                 $auth_rules = new rex_ycom_auth_rules();
                 $authRuleConfig = rex_config::get('ycom/auth', 'auth_rule', 'login_try_5_pause') ?? 'login_try_5_pause';
                 if (!$auth_rules->check($loginUser, $authRuleConfig)) {
-                    $loginUser->increaseLoginTries()->save();
                     throw new rex_exception('Login failed - Auth Rules');
                 }
+
+                $loginUser->setValue('last_login_try_time', rex_sql::datetime(time()));
 
                 if (
                     $params['ignorePassword']
