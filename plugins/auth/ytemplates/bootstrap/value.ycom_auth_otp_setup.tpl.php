@@ -76,6 +76,7 @@ if (in_array($func, $otpOptions)) {
 
             break;
         case 'totp':
+        default:
             $defaultOption = 'totp';
             $otpMethod = new rex_ycom_otp_method_totp();
             break;

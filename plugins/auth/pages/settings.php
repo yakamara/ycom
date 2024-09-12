@@ -30,7 +30,7 @@ if ('update' == rex_request('func', 'string')) {
     $this->setConfig('session_max_overall_duration', rex_request('session_max_overall_duration', 'int'));
     $this->setConfig('session_duration', rex_request('session_duration', 'int'));
 
-    foreach(rex_ycom_auth::getInjections() as $injection) {
+    foreach (rex_ycom_auth::getInjections() as $injection) {
         $injection->triggerSaveSettings();
     }
 
@@ -240,7 +240,7 @@ $content .= '
 
     </fieldset>';
 
-foreach(rex_ycom_auth::getInjections() as $injection) {
+foreach (rex_ycom_auth::getInjections() as $injection) {
     $content .= $injection->getSettingsContent();
 }
 
