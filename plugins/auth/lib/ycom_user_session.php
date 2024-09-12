@@ -28,6 +28,21 @@ class rex_ycom_user_session
             ->insertOrUpdate();
     }
 
+    /**
+     * @param rex_ycom_user|rex_yform_manager_dataset $user
+     * @throws rex_exception
+     * @throws rex_sql_exception
+     */
+    public function getCurrentSession($user): ?array
+    {
+        $Sessions = rex_sql::factory()
+            ->setTable(rex::getTable('ycom_user_session'))
+            ->setWhere('session_id = ? and user_id = ?', [session_id(), $user->getId()])
+            ->select()
+            ->getArray();
+        return (0 == count($Sessions)) ? null : $Sessions[0];
+    }
+
     public function clearCurrentSession(): self
     {
         $sessionId = session_id();
@@ -57,6 +72,22 @@ class rex_ycom_user_session
             ->setValue('useragent', rex_request::server('HTTP_USER_AGENT', 'string'))
             ->setValue('last_activity', rex_sql::datetime(time()))
         ->insertOrUpdate();
+    }
+
+    public function setOTPverified(rex_ycom_user $user, $sessionId = null): void
+    {
+        if (null === $sessionId) {
+            $sessionId = session_id();
+            if (false === $sessionId || '' === $sessionId) {
+                return;
+            }
+        }
+
+        rex_sql::factory()
+            ->setTable(rex::getTable('ycom_user_session'))
+            ->setValue('otp_verified', 1)
+            ->setWhere('session_id = :session_id and user_id = :user_id', ['session_id' => $sessionId, 'user_id' => $user->getId()])
+            ->update();
     }
 
     public static function clearExpiredSessions(): void

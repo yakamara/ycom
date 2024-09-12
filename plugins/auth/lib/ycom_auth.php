@@ -27,6 +27,18 @@ class rex_ycom_auth
     ];
     public static string $sessionKey = 'ycom_login';
 
+    public static array $injections = [];
+
+    public static function addInjection(rex_ycom_injection_abtract $injection): void
+    {
+        self::$injections[] = $injection;
+    }
+
+    public static function getInjections(): array
+    {
+        return self::$injections;
+    }
+
     public static function getRequestKey(string $requestKey): string
     {
         return rex_config::get('ycom', $requestKey, self::$DefaultRequestKeys[$requestKey]);
@@ -110,19 +122,13 @@ class rex_ycom_auth
         $params['loginStatus'] = $login_status;
         $params = rex_extension::registerPoint(new rex_extension_point('YCOM_AUTH_INIT', $params, []));
 
-        if (self::getUser()) {
-            $article_id_password = (int) rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_password');
-            $article_id_termsofuse = (int) rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_termsofuse');
-
-            if (rex_plugin::get('ycom', 'auth')->getConfig('article_id_logout') == rex_article::getCurrentId()) {
-                // ignore rest - because logout is always ok .
-            } elseif (0 != $article_id_termsofuse && 1 != self::getUser()->getValue('termsofuse_accepted')) {
-                if ($article_id_termsofuse != rex_article::getCurrentId()) {
-                    $params['redirect'] = rex_getUrl($article_id_termsofuse, '', [], '&');
-                }
-            } elseif (0 != $article_id_password && 1 == self::getUser()->getValue('new_password_required')) {
-                if ($article_id_password != rex_article::getCurrentId()) {
-                    $params['redirect'] = rex_getUrl($article_id_password, '', [], '&');
+        if (rex_plugin::get('ycom', 'auth')->getConfig('article_id_logout') == rex_article::getCurrentId()) {
+            // ignore rest - because logout is always ok .
+        } else {
+            foreach(self::getInjections() as $injection) {
+                $rewrite = $injection->getRewrite();
+                if ($rewrite && '' != $rewrite) {
+                    return $rewrite;
                 }
             }
         }

@@ -78,3 +78,18 @@ ycom_session_added_ready_to_login = Session wurde angelegt. Bitte hier einloggen
 ycom_session_could_not_been_added = Session konnte nicht angelegt werden, weil der User inaktiv ist.
 ycom_user_session_delete_all_sessions_link = Alle Sessions <a href="{0}">löschen</a>
 ycom_sessions_deleted = {0} Session/s wurden gelöscht
+
+otp_auth_config = OneTimePassword (OTP) Einstellungen. E-Mail und Authentikator
+otp_article_id = ... zum OTP-Artikel
+otp_auth_enforce = Einschränkungen
+otp_auth_enforce_all = Erzwungen für alle YCom Benutzer
+otp_auth_enforce_disabled = Keine Einschränkungen (Optional für jeden)
+otp_auth_options = Optionen
+otp_auth_option_all = Alle Möglichkeiten erlauben
+otp_auth_option_totp_only = Nur Time-Based One-Time Passwort erlauben
+otp_auth_option_email_only = Nur One-Time Passwort über E-Mail erlauben
+otp_auth_email_period = Zeitintervall bei E-Mail Authentifizierung
+otp_auth_totp_period = Zeitintervall bei Authentikatoren (nicht veränderbar)
+otp_auth_totp_period_info = {0} Sekunden
+otp_auth_logintries = Anzahl der erlaubten Fehlversuche (nicht veränderbar)
+otp_auth_logintries_info = {0} Versuche

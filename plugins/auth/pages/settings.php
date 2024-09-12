@@ -20,8 +20,6 @@ if ('update' == rex_request('func', 'string')) {
     $this->setConfig('article_id_jump_not_ok', rex_request('article_id_jump_not_ok', 'int'));
     $this->setConfig('article_id_jump_logout', rex_request('article_id_jump_logout', 'int'));
     $this->setConfig('article_id_jump_denied', rex_request('article_id_jump_denied', 'int'));
-    $this->setConfig('article_id_jump_password', rex_request('article_id_jump_password', 'int'));
-    $this->setConfig('article_id_jump_termsofuse', rex_request('article_id_jump_termsofuse', 'int'));
     $this->setConfig('article_id_login', rex_request('article_id_login', 'int'));
     $this->setConfig('article_id_logout', rex_request('article_id_logout', 'int'));
     $this->setConfig('article_id_register', rex_request('article_id_register', 'int'));
@@ -31,6 +29,10 @@ if ('update' == rex_request('func', 'string')) {
     $this->setConfig('login_field', stripslashes(str_replace('"', '', rex_request('login_field', 'string'))));
     $this->setConfig('session_max_overall_duration', rex_request('session_max_overall_duration', 'int'));
     $this->setConfig('session_duration', rex_request('session_duration', 'int'));
+
+    foreach(rex_ycom_auth::getInjections() as $injection) {
+        $injection->triggerSaveSettings();
+    }
 
     echo rex_view::success($this->i18n('ycom_auth_settings_updated'));
 }
@@ -74,8 +76,9 @@ $sel_authcookiettl->addOption($this->i18n('ycom_days', 90), '90');
 $content .= '
 <form action="index.php" method="post" id="ycom_auth_settings">
     <input type="hidden" name="page" value="ycom/auth/settings" />
-    <input type="hidden" name="func" value="update" />
+    <input type="hidden" name="func" value="update" />';
 
+$content .= '
 	<fieldset>
 		<legend>' . $this->i18n('ycom_auth_config_forwarder') . '</legend>
 
@@ -117,27 +120,6 @@ $content .= '
 				<small>' . $this->i18n('ycom_auth_config_id_jump_denied_notice') . '</small>
 			</div>
 		</div>
-
-		<div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_password">' . $this->i18n('ycom_auth_config_id_jump_password') . '</label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				' . rex_var_link::getWidget(9, 'article_id_jump_password', (int) $this->getConfig('article_id_jump_password')) . '
-				<small>[article_id_jump_password]</small>
-			</div>
-		</div>
-
-		<div class="row abstand">
-			<div class="col-xs-12 col-sm-6">
-				<label for="rex-form-article_termsofuse">' . $this->i18n('ycom_auth_config_id_jump_termsofuse') . '</label>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				' . rex_var_link::getWidget(10, 'article_id_jump_termsofuse', (int) $this->getConfig('article_id_jump_termsofuse')) . '
-				<small>[article_id_jump_termsofuse]</small>
-			</div>
-		</div>
-
     </fieldset>
 
 	<fieldset>
@@ -251,14 +233,18 @@ $content .= '
 				<label for="rex-form-article_login_failed">' . $this->i18n('ycom_auth_config_id_jump_not_ok') . '</label>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				' . rex_var_link::getWidget(6, 'article_id_jump_not_ok', $this->getConfig('article_id_jump_not_ok', '')) . '
+				' . rex_var_link::getWidget(15, 'article_id_jump_not_ok', $this->getConfig('article_id_jump_not_ok', '')) . '
 				<small>[article_id_jump_not_ok]</small>
 			</div>
 		</div>
 
-    </fieldset>
+    </fieldset>';
 
+foreach(rex_ycom_auth::getInjections() as $injection) {
+    $content .= $injection->getSettingsContent();
+}
 
+$content .= '
 	<div class="row">
 		<div class="col-xs-12 col-sm-6 col-sm-push-6">
 			<button class="btn btn-save right" type="submit" name="config-submit" value="1" title="' . $this->i18n('ycom_auth_config_save') . '">' . $this->i18n('ycom_auth_config_save') . '</button>
@@ -266,7 +252,6 @@ $content .= '
 	</div>
 
 	</form>
-
   ';
 
 $fragment = new rex_fragment();
