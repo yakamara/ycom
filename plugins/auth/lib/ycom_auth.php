@@ -125,7 +125,7 @@ class rex_ycom_auth
         if (rex_plugin::get('ycom', 'auth')->getConfig('article_id_logout') == rex_article::getCurrentId()) {
             // ignore rest - because logout is always ok .
         } else {
-            foreach(self::getInjections() as $injection) {
+            foreach (self::getInjections() as $injection) {
                 $rewrite = $injection->getRewrite();
                 if ($rewrite && '' != $rewrite) {
                     return $rewrite;
