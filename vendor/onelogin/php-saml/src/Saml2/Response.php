@@ -2,15 +2,13 @@
 /**
  * This file is part of php-saml.
  *
- * (c) OneLogin Inc
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
  * @package OneLogin
- * @author  OneLogin Inc <saml-info@onelogin.com>
- * @license MIT https://github.com/onelogin/php-saml/blob/master/LICENSE
- * @link    https://github.com/onelogin/php-saml
+ * @author  Sixto Martin <sixto.martin.garcia@gmail.com>
+ * @license MIT https://github.com/SAML-Toolkits/php-saml/blob/master/LICENSE
+ * @link    https://github.com/SAML-Toolkits/php-saml
  */
 
 namespace OneLogin\Saml2;
@@ -628,8 +626,8 @@ class Response
 
         $nameIdData = array();
 
+        $security = $this->_settings->getSecurityData();
         if (!isset($nameId)) {
-            $security = $this->_settings->getSecurityData();
             if ($security['wantNameId']) {
                 throw new ValidationError(
                     "NameID not found in the assertion of the Response",
@@ -637,7 +635,7 @@ class Response
                 );
             }
         } else {
-            if ($this->_settings->isStrict() && empty($nameId->nodeValue)) {
+            if ($this->_settings->isStrict() && $security['wantNameId'] && empty($nameId->nodeValue)) {
                 throw new ValidationError(
                     "An empty NameID value found",
                     ValidationError::EMPTY_NAMEID
@@ -814,7 +812,7 @@ class Response
                 continue;
             }
             $attributeKeyName = $attributeKeyNode->nodeValue;
-            if (in_array($attributeKeyName, array_keys($attributes))) {
+            if (in_array($attributeKeyName, array_keys($attributes), true)) {
                 if (!$allowRepeatAttributeName) {
                     throw new ValidationError(
                         "Found an Attribute element with duplicated ".$keyName,
@@ -830,7 +828,7 @@ class Response
                 }
             }
 
-            if (in_array($attributeKeyName, array_keys($attributes))) {
+            if (in_array($attributeKeyName, array_keys($attributes), true)) {
                 $attributes[$attributeKeyName] = array_merge($attributes[$attributeKeyName], $attributeValues);
             } else {
                 $attributes[$attributeKeyName] = $attributeValues;

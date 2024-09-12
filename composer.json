@@ -4,7 +4,8 @@
         "onelogin/php-saml": "^3",
         "apereo/phpcas": "^1",
         "league/oauth2-client": "^2",
-        "psr/log": "^1"
+        "psr/log": "^1",
+        "spomky-labs/otphp": "^11.0"
     },
     "replace": {
         "psr/container": "*",
