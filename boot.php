@@ -5,22 +5,30 @@
  * @psalm-scope-this rex_addon
  */
 
-// include __DIR__.'/vendor/guzzlehttp/promises/src/functions_include.php';
-// include __DIR__.'/vendor/guzzlehttp/guzzle/src/functions_include.php';
-//
-
 rex_ycom_auth::addInjection(new rex_ycom_injection_otp(), 1);
 rex_ycom_auth::addInjection(new rex_ycom_injection_passwordchange(), 4);
 rex_ycom_auth::addInjection(new rex_ycom_injection_termsofuse(), 8);
 
 if (rex::isBackend()) {
     rex_extension::register('PACKAGES_INCLUDED', static function ($params) {
+        $addon = rex_addon::get('yform');
         $plugin = rex_plugin::get('yform', 'manager');
-
         if ($plugin->isAvailable()) {
+            // YForm <= 5
             $pages = $plugin->getProperty('pages');
             $ycom_tables = rex_ycom::getTables();
-
+            if (isset($pages) && is_array($pages)) {
+                foreach ($pages as $page) {
+                    if (in_array($page->getKey(), $ycom_tables, true)) {
+                        $page->setBlock('ycom');
+                        // $page->setRequiredPermissions('ycom[]');
+                    }
+                }
+            }
+        } else {
+            // YForm >= 5
+            $pages = $addon->getProperty('pages');
+            $ycom_tables = rex_ycom::getTables();
             if (isset($pages) && is_array($pages)) {
                 foreach ($pages as $page) {
                     if (in_array($page->getKey(), $ycom_tables, true)) {

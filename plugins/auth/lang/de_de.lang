@@ -93,3 +93,8 @@ otp_auth_totp_period = Zeitintervall bei Authentikatoren (nicht veränderbar)
 otp_auth_totp_period_info = {0} Sekunden
 otp_auth_logintries = Anzahl der erlaubten Fehlversuche (nicht veränderbar)
 otp_auth_logintries_info = {0} Versuche
+
+otp_tries = OTP Fehlversuche
+otp_tries_info = Erlaubte Fehlversuche werden im Plugin <a href="index.php?page=ycom/auth/settings">YCom/Auth</a> definiert
+otp_last_try_time = OTP Letzter Versuch
+otp_config = OTP Config

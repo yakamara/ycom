@@ -99,7 +99,8 @@ class rex_ycom_user extends rex_yform_manager_dataset
 
     public function increaseOTPTries(): self
     {
-        $this->setValue('otp_tries', $this->getValue('otp_tries') + 1);
+        $otp_tries = (int) $this->getValue('otp_tries');
+        $this->setValue('otp_tries', $otp_tries + 1);
         $this->setValue('otp_last_try_time', time());
         return $this;
     }
