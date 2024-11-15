@@ -22,16 +22,16 @@ final class rex_ycom_otp_password
     public function challenge(): void
     {
         $user = rex_ycom_auth::getUser();
-        $uri = str_replace('&amp;', '&', (string) rex_ycom_otp_password_config::forCurrentUser()->provisioningUri);
+        $uri = str_replace('&amp;', '&', (string) rex_ycom_otp_password_config::forCurrentUser()->getProvisioningUri());
         $this->getMethod()->challenge($uri, $user);
     }
 
     /**
      * @param string $otp
      */
-    public function verify($otp): bool
+    public function verify(string $otp): bool
     {
-        $uri = str_replace('&amp;', '&', (string) rex_ycom_otp_password_config::forCurrentUser()->provisioningUri);
+        $uri = str_replace('&amp;', '&', (string) rex_ycom_otp_password_config::forCurrentUser()->getProvisioningUri());
         $verified = $this->getMethod()->verify($uri, $otp);
         return $verified;
     }
@@ -81,7 +81,7 @@ final class rex_ycom_otp_password
     public function getMethod()
     {
         if (null === $this->method) {
-            $methodType = rex_ycom_otp_password_config::forCurrentUser()->method;
+            $methodType = rex_ycom_otp_password_config::forCurrentUser()->getMethod();
 
             if ('totp' === $methodType) {
                 $this->method = new rex_ycom_otp_method_totp();

@@ -66,7 +66,7 @@ class rex_yform_value_ycom_auth_otp extends rex_yform_value_abstract
 
     public function getDescription(): string
     {
-        return 'ycom_auth_otp -> Beispiel: ycom_auth_otp|setup oder ycom_auth_otp|verify';
+        return 'ycom_auth_otp -> Beispiel: ycom_auth_otp';
     }
 
     /**

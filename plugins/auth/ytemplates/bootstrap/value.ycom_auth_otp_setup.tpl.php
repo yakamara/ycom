@@ -41,8 +41,9 @@ if ($otp->isEnabled() && $config->enabled) {
     if ('disable' == $func) {
         $OTPInstance = rex_ycom_otp_password::getInstance();
         $OTPMethod = $OTPInstance->getMethod();
-        $config = rex_ycom_otp_password_config::loadFromDb($OTPMethod, $user);
-        $config->disable();
+        rex_ycom_otp_password_config::loadFromDb($OTPMethod, $user)
+            ->disable()
+            ->save();
         $func = '';
 
         $this->params['warning'][$this->getId()] = $this->params['error_class'];
@@ -67,13 +68,6 @@ if (in_array($func, $otpOptions)) {
         case 'email':
             $defaultOption = 'email';
             $otpMethod = new rex_ycom_otp_method_email();
-
-            if (null === $myOTP || 'resend' == rex_request('otp-func-email', 'string')) {
-                $this->params['warning'][$this->getId()] = $this->params['error_class'];
-                $this->params['warning_messages'][$this->getId()] = '{ ycom_otp_email_check }';
-                rex_ycom_otp_password::getInstance()->challenge();
-            }
-
             break;
         case 'totp':
         default:
@@ -82,18 +76,32 @@ if (in_array($func, $otpOptions)) {
             break;
     }
 
-    // initial starten wenn beim user nicht vorhanden oder noch nicht enabled.
     if (null === $myOTP) {
-        $passwordConfig = rex_ycom_otp_password_config::loadFromDb($otpMethod, $user);
-        $passwordConfig->updateMethod($otpMethod);
+        rex_ycom_otp_password_config::loadFromDb($otpMethod, $user)
+            ->updateMethod($otpMethod)
+            ->save();
+        $user->loadData(); // Refresh OTP with new DB Data
         $this->params['warning'][$this->getId()] = $this->params['error_class'];
-    } else {
-        if ($otp->verify($myOTP)) {
-            $config = rex_ycom_otp_password_config::loadFromDb($otpMethod, $user);
-            $config->enable();
+    }
 
-            $user->resetOTPTries()->save();
-            rex_ycom_user_session::getInstance()->setOTPverified($user);
+    if ('email' === $func && (null === $myOTP || 'resend' == rex_request('otp-func-email', 'string'))) {
+        $this->params['warning'][$this->getId()] = $this->params['error_class'];
+        $this->params['warning_messages'][$this->getId()] = '{ ycom_otp_email_check }';
+        rex_ycom_otp_password::getInstance()->challenge();
+    }
+
+    // initial starten wenn beim user nicht vorhanden oder noch nicht enabled.
+    if (is_string($myOTP) && '' !== $myOTP) {
+        if ($otp->verify($myOTP)) {
+            rex_ycom_otp_password_config::loadFromDb($otpMethod, $user)
+                ->enable()
+                ->save();
+            $user->loadData();
+            $user
+                ->resetOTPTries()
+                ->save();
+            rex_ycom_user_session::getInstance()
+                ->setOTPverified($user);
             $article_jump_ok = (int) rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_ok');
             rex_response::sendRedirect(rex_getUrl($article_jump_ok, rex_clang::getCurrentId()));
         } else {
@@ -103,8 +111,7 @@ if (in_array($func, $otpOptions)) {
     }
 
     if ('totp' == $func) {
-        $config = rex_ycom_otp_password_config::loadFromDb($otpMethod, $user);
-        $uri = $config->provisioningUri;
+        $uri = rex_ycom_otp_password_config::loadFromDb($otpMethod, $user)->getProvisioningUri();
 
         ?>
         <div class="row">

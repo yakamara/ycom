@@ -40,7 +40,10 @@ final class rex_ycom_otp_password_config
 
         $json = (string) $userSql->getValue('otp_config');
         $config = self::fromJson($json, $user);
-        $config->init($method);
+        $config->method = $method instanceof rex_ycom_otp_method_email ? 'email' : 'totp';
+        if (null === $config->getProvisioningUri()) {
+            $config->setProvisioningUri($method->getProvisioningUri($user));
+        }
         return $config;
     }
 
@@ -63,33 +66,13 @@ final class rex_ycom_otp_password_config
             }
         }
 
+        $method = new rex_ycom_otp_method_totp();
+
         $default = new self($user);
-        $default->init(new rex_ycom_otp_method_totp());
+        $default->method = $method instanceof rex_ycom_otp_method_email ? 'email' : 'totp';
+        $default->provisioningUri = $method->getProvisioningUri($user);
+
         return $default;
-    }
-
-    private function init(rex_ycom_otp_method_interface $method): void
-    {
-        $this->method = $method instanceof rex_ycom_otp_method_email ? 'email' : 'totp';
-        if (null === $this->provisioningUri) {
-            $this->provisioningUri = $method->getProvisioningUri($this->user);
-        }
-
-        $this->save();
-    }
-
-    public function enable(): void
-    {
-        $this->enabled = true;
-
-        if (null === $this->provisioningUri) {
-            throw new Exception('Missing provisioning url');
-        }
-        if (null === $this->method) {
-            throw new Exception('Missing method');
-        }
-
-        $this->save();
     }
 
     public function isEnabled(): bool
@@ -97,22 +80,48 @@ final class rex_ycom_otp_password_config
         return $this->enabled ? true : false;
     }
 
-    public function disable(): void
+    public function enable(): self
+    {
+        $this->enabled = true;
+        return $this;
+    }
+
+    public function disable(): self
     {
         $this->enabled = false;
         $this->provisioningUri = null;
-        $this->save();
+        return $this;
     }
 
-    public function updateMethod(rex_ycom_otp_method_interface $method): void
+    public function updateMethod(rex_ycom_otp_method_interface $method): self
     {
         $this->method = $method instanceof rex_ycom_otp_method_email ? 'email' : 'totp';
         $this->provisioningUri = $method->getProvisioningUri($this->user);
-        $this->save();
+        return $this;
     }
 
-    private function save(): void
+    public function getProvisioningUri()
     {
+        return $this->provisioningUri;
+    }
+
+    public function setProvisioningUri($provisioningUri): self
+    {
+        $this->provisioningUri = $provisioningUri;
+        return $this;
+    }
+
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    public function save(): void
+    {
+        echo '<pre>';
+        debug_print_backtrace();
+        echo '</pre>';
+
         $userSql = rex_sql::factory();
         $userSql->setTable(rex::getTablePrefix() . 'ycom_user');
         $userSql->setWhere(['id' => $this->user->getId()]);
