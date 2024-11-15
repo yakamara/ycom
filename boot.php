@@ -9,9 +9,9 @@
 // include __DIR__.'/vendor/guzzlehttp/guzzle/src/functions_include.php';
 //
 
-rex_ycom_auth::addInjection(new rex_ycom_injection_termsofuse());
-rex_ycom_auth::addInjection(new rex_ycom_injection_passwordchange());
-rex_ycom_auth::addInjection(new rex_ycom_injection_otp());
+rex_ycom_auth::addInjection(new rex_ycom_injection_otp(), 1);
+rex_ycom_auth::addInjection(new rex_ycom_injection_passwordchange(), 4);
+rex_ycom_auth::addInjection(new rex_ycom_injection_termsofuse(), 8);
 
 if (rex::isBackend()) {
     rex_extension::register('PACKAGES_INCLUDED', static function ($params) {

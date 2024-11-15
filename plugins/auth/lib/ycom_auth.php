@@ -29,14 +29,22 @@ class rex_ycom_auth
 
     public static array $injections = [];
 
-    public static function addInjection(rex_ycom_injection_abtract $injection): void
+    public static function addInjection(rex_ycom_injection_abtract $injection, int $level = 1): void
     {
-        self::$injections[] = $injection;
+        self::$injections[$level][] = $injection; // $level][
     }
 
     public static function getInjections(): array
     {
-        return self::$injections;
+        $injections = [];
+        ksort(self::$injections);
+
+        foreach (self::$injections as $level => $injection) {
+            foreach ($injection as $inj) {
+                $injections[] = $inj;
+            }
+        }
+        return $injections;
     }
 
     public static function getRequestKey(string $requestKey): string
@@ -125,6 +133,8 @@ class rex_ycom_auth
         if (rex_plugin::get('ycom', 'auth')->getConfig('article_id_logout') == rex_article::getCurrentId()) {
             // ignore rest - because logout is always ok .
         } else {
+            // dd(self::getInjections());
+
             foreach (self::getInjections() as $injection) {
                 $rewrite = $injection->getRewrite();
                 if ($rewrite && '' != $rewrite) {
