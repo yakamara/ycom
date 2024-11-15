@@ -166,6 +166,19 @@ ersetzt werden durch:
 hidden|termsofuse_accepted|1
 ```
 
+Man kann auch die Nutzungsbedingungen in einem eigenen Artikel hinterlegen und diesen dann erneut abfragen, z. B. wenn diese sich geändert haben.
+
+```php
+objparams|form_showformafterupdate|0
+
+ycom_auth_load_user|userinfo|email,termsofuse_accepted
+hidden|termsofuse_accepted|1
+php|termsofusecheck|phplabel|<?php if (rex::isFrontend() && rex_ycom_auth::getUser()->getValue('termsofuse_accepted') == 1) { rex_response::sendRedirect('/'); } ?>
+html|termofuseinfo|{{ termsandconditions  }}
+action|showtext|<div class="alert alert-success">{{ termofuse_accepted }}</div>|||1
+action|ycom_auth_db
+```
+
 #### E-Mail-Template `access_request_de` für die Bestätigung erstellen
 
 Diese E-Mail fordert den Nutzer dazu auf, die Anmeldung zu bestätigen. Der endgültige Link sieht bspw. aus wie folgt: <code>https://www.redaxo.org/anmeldung/bestaetigen/?rex_ycom_activation_key=ACTIVATION_KEY&rex_ycom_id=YCOM_LOGIN</code>

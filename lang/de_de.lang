@@ -74,6 +74,7 @@ docs = Dokumentation
 ycom_docs_tricks = Tricks
 ycom_docs_user_groups = User und Gruppen auslesen
 ycom_docs = Dokumentation
+ycom_docs_otp = 2FA (Zwei-Faktor-Authentifizierung)
 
 ycom_log = Log
 ycom_user_log = YCom-User-Log
