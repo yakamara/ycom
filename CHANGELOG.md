@@ -1,7 +1,12 @@
 Changelog
 =========
 
-Version 4.3.1 - xx.03.2024
+Version 4.4.0 - xx.03.2024
+--------------------------
+
+### Neu
+
+* OTP (OneTimePassword / 2FA) ergänzt. Email und (Google) Authenticator
 
 ### Anpassungen
 
@@ -12,6 +17,7 @@ Version 4.3.1 - xx.03.2024
 * Fehler bei Installation behoben. Passwortfeld wurde vorher nur nach Reinstall angelegt. 
 * Passwort autocomplete varianten eingebaut und in Doku sinnvoll ergänzt
 * CSP Header anpassungen. Passwortscript -CSP-fähig und relationsfähig gemacht.
+* Fehler bei den AuthRules behoben. Danke https://github.com/nsd0hmasri für den Hinweis
 
 Version 4.3.0 - 14.03.2024
 --------------------------
