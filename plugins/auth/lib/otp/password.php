@@ -26,9 +26,6 @@ final class rex_ycom_otp_password
         $this->getMethod()->challenge($uri, $user);
     }
 
-    /**
-     * @param string $otp
-     */
     public function verify(string $otp): bool
     {
         $uri = str_replace('&amp;', '&', (string) rex_ycom_otp_password_config::forCurrentUser()->getProvisioningUri());
