@@ -6,46 +6,26 @@ Zunächst muss die Konfiguration in den YCom Einstellungen vorgenommen werden. D
 
 ## Benötigte Artikel
 
-Es werden 2 REDAXO Artikel benötigt. Ein Setup-Artikel um die OTP Authentifizierung zu aktivieren und einen Artikel für die Überprüfung des OTP Codes. Diese werden immer entsprechende der aktuellen Usersituation aufgerufen. Z.B. wenn wenn ein User sich gerade eingeloggt hat und eine OTP Authentifizierungen erzwungen wird, wird auf den Setup oder die Verifizierung weitergeleitet.
+Es wird 1 REDAXO Artikel benötigt. Dieser führt das initale SetUp und auch die Verifizierung durch. Dieser Artikel muss in der Einstellungseite verlinkt sein
 
 ### Artikel für das OTP Setup
 
-Im OTP Artikel das YForm Builder Modul verwenden und diesen YFormCode einsetzen.
+Im OTP Artikel das YForm Builder Modul verwenden und diesen YFormCode einsetzen. Rechte müssen auf "Zugriff für eingeloggte User" gesetzt sein.
 
 ```
 ycom_auth_otp|setup
 ```
 
-### Artikel für die OTP Verifizierung
-
-Im OTP Artikel das YForm Builder Modul verwenden und diesen YFormCode einsetzen.
-
-```
-ycom_auth_otp|verify
-```
-
-
-
-
-
-
-
-
-
-
-
 ## Einleitung
 
 Die 2-Faktor-Authentifizierung (2FA) ist eine zusätzliche Sicherheitsebene für Ihr Konto. Sie schützt Ihr Konto vor unbefugtem Zugriff, selbst wenn Ihr Passwort kompromittiert wurde.
 
-Die 2FA ist eine Authentifizierungsmethode, bei der zwei verschiedene Faktoren verwendet werden, um die Identität einer Person zu bestätigen. In der Regel sind dies:
+Die 2FA ist eine Authentifizierungsmethode, bei der zwei verschiedene Faktoren verwendet werden, um die Identität einer Person zu bestätigen. 
 
-1. **Etwas, das Sie wissen**: Ihr Passwort
-2. **Etwas, das Sie besitzen**: Ihr Smartphone
-3. **Etwas, das Sie sind**: Ihr Fingerabdruck
-4. **Etwas, das Sie tun**: Ihre Stimme
-5. **Etwas, das Sie haben**: Ein Sicherheitsschlüssel
-6. **Etwas, das Sie sind**: Ihr Gesicht
+Hier werden 2 Möglichkeiten angeboten.
+
+* One Time Passwort über E-Mail.
+* One Time Passwort über (Google) Authenticator.
 
 Die 2FA ist eine der besten Möglichkeiten, um Ihr Konto zu schützen, da sie sicherstellt, dass nur Sie auf Ihr Konto zugreifen können, selbst wenn jemand Ihr Passwort kennt.
 
@@ -67,3 +47,8 @@ In REDAXO kann die 2FA z.B. mit dem AddOn YCom umgesetzt werden. Dazu müssen Si
 
 Die 2FA bietet eine zusätzliche Sicherheitsebene für Ihr REDAXO-Konto und schützt es vor unbefugtem Zugriff. Wir empfehlen daher, die 2FA zu aktivieren, um Ihr Konto zu schützen.
 
+## E-Mail Template
+
+Standardmäßig wird eine vorbereitete E-Mail mit festem Text verschickt. 
+
+Es kann aber ein eigenes YForm-Template für die 2FA verwendet. Mit dem Key ```ycom_otp_code_template``` kann ein eigenes Template gesetzt wird. Folgende Werte sind verfügbar: ```name, email, firstname, code```.
