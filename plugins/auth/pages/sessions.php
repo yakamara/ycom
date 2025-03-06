@@ -30,7 +30,7 @@ switch ($func) {
                     'UID' => $ycom_user->getId(),
                 ];
                 rex_ycom_user_session::getInstance()->storeCurrentSession($ycom_user);
-                echo rex_view::success(rex_i18n::rawMsg('ycom_session_added_ready_to_login', rex_getUrl($this->getConfig('article_id_jump_ok'))));
+                echo rex_view::success(rex_i18n::rawMsg('ycom_session_added_ready_to_login', rex_getUrl(rex_ycom_config::get('article_id_jump_ok'))));
 
                 $be_user = rex::getUser();
                 if (null !== $be_user) {

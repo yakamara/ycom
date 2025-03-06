@@ -111,13 +111,12 @@ $content .= '
 		<div class="row abstand">
 			<div class="col-xs-12 col-sm-6">
 				<label for="rex-form-article_denied">' . $this->i18n('ycom_auth_config_id_jump_denied') . '
-				<small>[article_id_jump_denied]</small>
 				</label>
 
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				' . rex_var_link::getWidget(8, 'article_id_jump_denied', (int) $this->getConfig('article_id_jump_denied')) . '
-				<small>' . $this->i18n('ycom_auth_config_id_jump_denied_notice') . '</small>
+				<small>' . $this->i18n('ycom_auth_config_id_jump_denied_notice') . '<br />[article_id_jump_denied]</small>
 			</div>
 		</div>
     </fieldset>
@@ -178,6 +177,7 @@ $content .= '
 			 	<div class="select-style">
 	              	' . $sel_userfields->get() . '
 			  	</div>
+			  	<small>[login_field]</small>
 			</div>
 		</div>
 	</fieldset>
@@ -191,6 +191,7 @@ $content .= '
                 </div>
                 <div class="col-xs-12 col-sm-6">
                 ' . $sel_authrules->get() . '
+                <small>[auth-rule]</small>
                 </div>
             </div>
 
@@ -200,6 +201,7 @@ $content .= '
                 </div>
                 <div class="col-xs-12 col-sm-6">
                 ' . $sel_authcookiettl->get() . '
+                <small>[auth-cookie-ttl]</small>
                 </div>
             </div>
 

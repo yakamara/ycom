@@ -40,7 +40,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 
         $returnTos = [];
         $returnTos[] = rex_request('returnTo', 'string', ''); // wenn returnTo übergeben wurde, diesen nehmen
-        $returnTos[] = rex_getUrl(rex_config::get('ycom/auth', 'article_id_jump_ok'), '', [], '&'); // Auth Ok -> article_id_jump_ok / Current Language will be selected
+        $returnTos[] = rex_getUrl(rex_ycom_config::get('article_id_jump_ok'), '', [], '&'); // Auth Ok -> article_id_jump_ok / Current Language will be selected
         $returnTo = rex_ycom_auth::getReturnTo($returnTos, ('' == $this->getElement(3)) ? [] : explode(',', $this->getElement(3)));
 
         $requestAuthMode = rex_request('rex_ycom_auth_mode', 'string', '');
@@ -71,7 +71,7 @@ class rex_yform_value_ycom_auth_cas extends rex_yform_value_abstract
 
         // ----- logout
         if ('logout' == $requestAuthFunctions) {
-            $logoutUrl = rex_yrewrite::getFullUrlByArticleId(rex_plugin::get('ycom', 'auth')->getConfig('article_id_logout'), '', [], '&');
+            $logoutUrl = rex_yrewrite::getFullUrlByArticleId(rex_ycom_config::get('article_id_logout'), '', [], '&');
             phpCAS::logoutWithRedirectService($logoutUrl);
             exit;
         }

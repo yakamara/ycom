@@ -102,7 +102,7 @@ if (in_array($func, $otpOptions)) {
                 ->save();
             rex_ycom_user_session::getInstance()
                 ->setOTPverified($user);
-            $article_jump_ok = (int) rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_ok');
+            $article_jump_ok = (int) rex_ycom_config::get('article_id_jump_ok');
             rex_response::sendRedirect(rex_getUrl($article_jump_ok, rex_clang::getCurrentId()));
         } else {
             $this->params['warning'][$this->getId()] = $this->params['error_class'];

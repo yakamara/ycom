@@ -41,7 +41,7 @@ if (null !== $myOTP) {
         if ($OTPInstance->verify($myOTP)) {
             $user->resetOTPTries()->save();
             rex_ycom_user_session::getInstance()->setOTPVerified($user);
-            $article_jump_ok = (int) rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_ok');
+            $article_jump_ok = (int) rex_ycom_config::get('article_id_jump_ok');
             rex_response::sendRedirect(rex_getUrl($article_jump_ok, rex_clang::getCurrentId()));
         } else {
             $user->increaseOTPTries()->save();

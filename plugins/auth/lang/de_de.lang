@@ -66,7 +66,7 @@ ycom_auth_config_session_max_overall_duration = Maximale Gesamtsessiondauer in S
 ycom_auth_config_session_duration = Maximale Sessiondauer bei Inaktivität in Sekunden
 ycom_auth_config_extern = Authentifizierung (SAML/CAS/OAUTH2)
 
-ycom_auth_howtoread_configvalues = Werte sind über: rex_config::get('ycom/auth','article_id_login', null); auslesbar
+ycom_auth_howtoread_configvalues = Werte sind über: rex_ycom_config::get('article_id_login', null); auslesbar
 
 ycom_days = {0} Tage
 ycom_user_id = User-Id
@@ -98,3 +98,6 @@ otp_tries = OTP Fehlversuche
 otp_tries_info = Erlaubte Fehlversuche werden im Plugin <a href="index.php?page=ycom/auth/settings">YCom/Auth</a> definiert
 otp_last_try_time = OTP Letzter Versuch
 otp_config = OTP Config
+
+ycom_auth_config_passwordchange = Konfiguration - Passwort ändern
+ycom_auth_config_termsofuse = Konfiguration - Nutzungsbedingungen

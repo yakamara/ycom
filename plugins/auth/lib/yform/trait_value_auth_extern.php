@@ -23,7 +23,7 @@ trait rex_yform_trait_value_auth_extern
     {
         $returnTos = [];
         $returnTos[] = rex_request('returnTo', 'string'); // wenn returnTo übergeben wurde, diesen nehmen
-        $returnTos[] = rex_getUrl(rex_config::get('ycom/auth', 'article_id_jump_ok'), '', [], '&'); // Auth Ok -> article_id_jump_ok / Current Language will be selected
+        $returnTos[] = rex_getUrl(rex_ycom_config::get('article_id_jump_ok'), '', [], '&'); // Auth Ok -> article_id_jump_ok / Current Language will be selected
         return rex_ycom_auth::getReturnTo($returnTos, ('' == $this->getElement(3)) ? [] : explode(',', $this->getElement(3)));
     }
 
@@ -45,7 +45,7 @@ trait rex_yform_trait_value_auth_extern
         }
         if ($this->auth_directLink) {
             rex_response::sendCacheControl();
-            rex_response::sendRedirect(rex_getUrl(rex_config::get('ycom/auth', 'article_id_jump_not_ok')));
+            rex_response::sendRedirect(rex_getUrl(rex_ycom_config::get('article_id_jump_not_ok')));
         }
         return '';
     }

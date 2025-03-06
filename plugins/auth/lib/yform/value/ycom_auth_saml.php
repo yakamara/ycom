@@ -121,7 +121,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                 }
 
                 rex_response::sendCacheControl();
-                rex_redirect(rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_not_ok'));
+                rex_redirect(rex_ycom_config::get('article_id_jump_not_ok'));
 
                 // init Logout processs with returnTo or redirect from idp
             case 'slo':
@@ -168,7 +168,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                 $errors = $auth->getErrors();
                 if (empty($errors)) {
                     // hier wird davon aufgegangen, dass immer ein returnTo gesetzt ist.
-                    // \rex_yrewrite::getFullUrlByArticleId(\rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_logout'));
+                    // \rex_yrewrite::getFullUrlByArticleId(\rex_ycom_config::get('article_id_jump_logout'));
                     rex_response::sendCacheControl();
                     rex_response::sendRedirect($returnTo);
                 } else {
