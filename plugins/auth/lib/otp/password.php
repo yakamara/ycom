@@ -1,10 +1,5 @@
 <?php
 
-use InvalidArgumentException;
-use rex;
-use rex_config;
-use rex_singleton_trait;
-
 final class rex_ycom_otp_password
 {
     use rex_singleton_trait;

@@ -6,7 +6,7 @@ class rex_ycom_injection_passwordchange extends rex_ycom_injection_abtract
     {
         $user = rex_ycom_auth::getUser();
         if ($user) {
-            $article_id_password = (int) rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_password', 0);
+            $article_id_password = (int) rex_ycom_config::get('article_id_jump_password', 0);
             if (0 != $article_id_password && 1 == $user->getValue('new_password_required')) {
                 if ($article_id_password != rex_article::getCurrentId()) {
                     return rex_getUrl($article_id_password, '', [], '&');

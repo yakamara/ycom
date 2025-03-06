@@ -16,15 +16,15 @@ class rex_ycom_media_auth_rules
             'info' => rex_i18n::msg('ycom_media_auth_failed_redirect_login'),
             'action' => [
                 'type' => 'redirect',
-                'article_id' => rex_plugin::get('ycom', 'auth')->getConfig('article_id_login'),
+                'article_id' => rex_ycom_config::get('article_id_login'),
             ],
         ];
         $this->rules['redirect_with_errorpage'] = [
             'info' => rex_i18n::msg('ycom_media_auth_failed_redirect_login_with_error_page'),
             'action' => [
                 'type' => 'redirect',
-                'article_id' => rex_plugin::get('ycom', 'auth')->getConfig('article_id_login'),
-                'error_article_id' => rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_denied'),
+                'article_id' => rex_ycom_config::get('article_id_login'),
+                'error_article_id' => rex_ycom_config::get('article_id_jump_denied'),
             ],
         ];
         $this->rules['header_notfound'] = [

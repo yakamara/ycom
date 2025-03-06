@@ -6,7 +6,7 @@ class rex_ycom_injection_termsofuse extends rex_ycom_injection_abtract
     {
         $user = rex_ycom_auth::getUser();
         if ($user) {
-            $article_id_termsofuse = (int) rex_plugin::get('ycom', 'auth')->getConfig('article_id_jump_termsofuse', 0);
+            $article_id_termsofuse = (int) rex_ycom_config::get('article_id_jump_termsofuse', 0);
             if (0 != $article_id_termsofuse && 1 != $user->getValue('termsofuse_accepted')) {
                 if ($article_id_termsofuse != rex_article::getCurrentId()) {
                     return rex_getUrl($article_id_termsofuse, '', [], '&');

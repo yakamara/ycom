@@ -19,8 +19,8 @@ $nav->show(0, 1, TRUE, TRUE);
 Beispiel für die Entwicklung einer Meta-User-Navigation:
 
 ```php
-$login_article_id = rex_plugin::get('ycom', 'auth')->getConfig('article_id_login');
-$logout_article_id = rex_plugin::get('ycom', 'auth')->getConfig('article_id_logout');
+$login_article_id = rex_ycom_config::get('article_id_login');
+$logout_article_id = rex_ycom_config::get('article_id_logout');
 
 // TODO: please change
 $profile_article_id = 1;

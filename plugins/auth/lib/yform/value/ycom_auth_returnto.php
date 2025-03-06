@@ -17,7 +17,7 @@ class rex_yform_value_ycom_auth_returnto extends rex_yform_value_abstract
         $returnTos[] = (string) $returnTo;
         $returnTos[] = rex_request('returnTo', 'string');
         $returnTos[] = $this->getElement(3);
-        $returnTos[] = rex_getUrl(rex_config::get('ycom/auth', 'article_id_jump_ok'), '', [], '&');
+        $returnTos[] = rex_getUrl(rex_ycom_config::get('article_id_jump_ok'), '', [], '&');
         $allowedDomains = ('' != $this->getElement(2)) ? explode(',', $this->getElement(2)) : [];
         $returnTo = rex_ycom_auth::getReturnTo($returnTos, $allowedDomains);
 

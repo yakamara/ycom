@@ -70,4 +70,4 @@ ycom_auth_config_session_duration = Session duration when inactive in seconds
 
 ycom_auth_config_extern = authentication (SAML/CAS/OAUTH2)
 
-ycom_auth_howtoread_configvalues = Values can be read via: rex_config::get('ycom/auth','article_id_login', null);
+ycom_auth_howtoread_configvalues = Values can be read via: rex_ycom_config::get('article_id_login', null);
