@@ -13,12 +13,12 @@ class rex_yform_value_ycom_user_token extends rex_yform_value_abstract
 
     public function enterObject(): void
     {
-        $this->ycom_user_token_action = (string) $this->getElement(2) ?? '';
+        $this->ycom_user_token_action = (string) $this->getElement(2);
         if (!in_array($this->ycom_user_token_action, self::$ycom_user_token_types)) {
             throw new rex_exception('ycom_user_token: action not defined. must be create or validate');
         }
 
-        $this->ycom_user_token_type = (string) $this->getElement(3) ?? '';
+        $this->ycom_user_token_type = (string) $this->getElement(3);
         if ('' == $this->ycom_user_token_type) {
             throw new rex_exception('ycom_user_token: type not defined');
         }
