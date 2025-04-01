@@ -1,5 +1,7 @@
 ## Passwort ändern
 
+> `activation_key` ist deprecated und wird in Zukunft nicht mehr unterstützt. Bitte Tokens verwenden.
+
 ### Im Backend
 
 Nutzern können vom Administrator jederzeit ein neues Passwort vergeben werden. 

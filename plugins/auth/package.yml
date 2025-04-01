@@ -13,6 +13,8 @@ page:
             title: 'translate:ycom_auth_settings'
         sessions:
             title: 'translate:ycom_current_sessions'
+        tokens:
+            title: 'translate:ycom_current_tokens'
         log:
             title: 'translate:ycom_log'
 
