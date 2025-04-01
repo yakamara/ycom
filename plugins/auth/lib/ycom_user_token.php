@@ -53,7 +53,7 @@ class rex_ycom_user_token
         return $this;
     }
 
-    public function getId(): ?string
+    public function getId(): ?int
     {
         return $this->user_id;
     }
