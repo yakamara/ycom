@@ -19,6 +19,27 @@ rex_sql_table::get(rex::getTable('article'))
     ->ensureColumn(new rex_sql_column('ycom_auth_type', 'int', false, '0'))
     ->alter();
 
+rex_sql_table::get(rex::getTable('ycom_user_token'))
+    ->ensureColumn(new rex_sql_column('hash', 'varchar(255)'))
+    ->ensureColumn(new rex_sql_column('user_id', 'int(10) unsigned', true))
+    ->ensureColumn(new rex_sql_column('email', 'varchar(255)'))
+    ->ensureColumn(new rex_sql_column('type', 'varchar(255)'))
+    ->ensureColumn(new rex_sql_column('selector', 'varchar(255)'))
+    ->ensureColumn(new rex_sql_column('createdate', 'datetime'))
+    ->ensureColumn(new rex_sql_column('expiredate', 'datetime'))
+    ->setPrimaryKey('hash')
+    ->ensureIndex(new rex_sql_index('token', ['selector'], rex_sql_index::UNIQUE))
+    ->ensureForeignKey(
+        new rex_sql_foreign_key(
+            'ycom_user_token_id',
+            rex::getTable('ycom_user'),
+            ['user_id' => 'id'],
+            rex_sql_foreign_key::CASCADE,
+            rex_sql_foreign_key::CASCADE,
+        ),
+    )
+    ->ensure();
+
 rex_sql_table::get(rex::getTable('ycom_user_session'))
     ->ensureColumn(new rex_sql_column('session_id', 'varchar(255)'))
     ->ensureColumn(new rex_sql_column('user_id', 'int(10) unsigned'))

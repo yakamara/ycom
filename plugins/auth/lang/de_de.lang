@@ -69,7 +69,7 @@ ycom_auth_config_extern = Authentifizierung (SAML/CAS/OAUTH2)
 ycom_auth_howtoread_configvalues = Werte sind über: rex_ycom_config::get('article_id_login', null); auslesbar
 
 ycom_days = {0} Tage
-ycom_user_id = User-Id
+ycom_user_id = User-ID
 ycom_current_sessions = Aktuelle Sessions
 ycom_impersonate = Im Frontend automatisch anmelden
 ycom_impersonate_alert = Eine Session für den User (id=___id___) erstellen und sich damit einloggen?
@@ -101,3 +101,14 @@ otp_config = OTP Config
 
 ycom_auth_config_passwordchange = Konfiguration - Passwort ändern
 ycom_auth_config_termsofuse = Konfiguration - Nutzungsbedingungen
+
+ycom_current_tokens = Aktuelle Tokens
+ycom_user_delete_all_tokens_link = Alle Tokens <a href="{0}">löschen</a>
+tokens_deleted = Tokens wurden gelöscht
+ycom_token_type = Type
+ycom_token = Token
+ycom_hash = Hash
+ycom_expiredate = Läuft ab am
+ycom_token_removed = Token wurde entfernt
+ycom_token_caption = Liste aller offenen Tokens
+ycom_docs_tokens = Tokens

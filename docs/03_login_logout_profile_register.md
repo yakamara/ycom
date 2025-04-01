@@ -1,5 +1,7 @@
 # Login/Logout/Profile/Registrierung
 
+> `activation_key` ist deprecated und wird in Zukunft nicht mehr unterstützt. Bitte Tokens verwenden.
+
 ## Login
 
 1. In der Struktur einen Artikel `Login` erstellen
