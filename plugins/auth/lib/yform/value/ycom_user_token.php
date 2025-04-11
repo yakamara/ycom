@@ -95,7 +95,17 @@ class rex_yform_value_ycom_user_token extends rex_yform_value_abstract
                 $this->ycom_user_token->delete();
 
                 if ($user) {
-                    rex_response::sendRedirect(rex_getUrl(rex_ycom_config::get('article_id_login')));
+                    $redirect = false;
+                    foreach ($this->params['fields']['actions'] as $action) {
+                        if (rex_yform_action_redirect::class === $action::class) {
+                            $redirect = true;
+                            break;
+                        }
+                    }
+
+                    if (!$redirect) {
+                        rex_response::sendRedirect(rex_getUrl(rex_ycom_config::get('article_id_login')));
+                    }
                 }
         }
     }
