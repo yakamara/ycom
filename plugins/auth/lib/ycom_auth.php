@@ -275,7 +275,6 @@ class rex_ycom_auth
                     [
                         'EXCEPTION' => $e->getMessage(),
                         'SERVER' => $_SERVER,
-                        'REQUEST' => $_REQUEST,
                     ],
                 );
             }
