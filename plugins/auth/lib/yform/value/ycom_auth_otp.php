@@ -12,7 +12,7 @@ class rex_yform_value_ycom_auth_otp extends rex_yform_value_abstract
             return;
         }
 
-        $otp_article_id = (int) rex_addon::get('ycom')->getConfig('otp_article_id');
+        $otp_article_id = (int) rex_ycom_config::get('otp_article_id');
         if (0 == $otp_article_id) {
             return;
         }
