@@ -10,7 +10,7 @@ class rex_ycom_injection_otp extends rex_ycom_injection_abtract
             return false;
         }
 
-        $otp_article_id = (int) rex_addon::get('ycom')->getConfig('otp_article_id');
+        $otp_article_id = (int) rex_ycom_config::get('otp_article_id', 0);
 
         // 1. User ist eingeloggt
         // 2. OTP Article vorhanden => OTP aktiviert ?
@@ -29,7 +29,7 @@ class rex_ycom_injection_otp extends rex_ycom_injection_abtract
         // - user hat überprüfung und keine OTP Session -> zwingend auf otp-article
         // - OTP ist erzwungen.
         $config = rex_ycom_otp_password_config::forCurrentUser();
-        $otp_auth_enforce = rex_addon::get('ycom')->getConfig('otp_auth_enforce');
+        $otp_auth_enforce = rex_ycom_config::get('otp_auth_enforce');
         $enforcedAll = rex_ycom_otp_password::ENFORCED_ALL == $otp_auth_enforce ? true : false;
         if (!($enforcedAll || $config->enabled)) {
             return false;
@@ -44,7 +44,7 @@ class rex_ycom_injection_otp extends rex_ycom_injection_abtract
 
     public function getSettingsContent(): string
     {
-        $addon = rex_addon::get('ycom');
+        $addon = rex_plugin::get('ycom', 'auth');
 
         $selectEnforce = new rex_select();
         $selectEnforce->setId('otp_auth_enforce');
@@ -155,7 +155,7 @@ class rex_ycom_injection_otp extends rex_ycom_injection_abtract
 
     public function triggerSaveSettings(): void
     {
-        $addon = rex_addon::get('ycom');
+        $addon = rex_plugin::get('ycom', 'auth');
         $addon->setConfig('otp_article_id', rex_request('otp_article_id', 'int'));
         $addon->setConfig('otp_auth_enforce', rex_request('otp_auth_enforce', 'string'));
         $addon->setConfig('otp_auth_option', rex_request('otp_auth_option', 'string'));
