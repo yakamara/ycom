@@ -133,12 +133,14 @@ class rex_ycom_auth
         if (rex_ycom_config::get('article_id_logout') == rex_article::getCurrentId()) {
             // ignore rest - because logout is always ok .
         } else {
-            // dd(self::getInjections());
-
             foreach (self::getInjections() as $injection) {
                 $rewrite = $injection->getRewrite();
-                if ($rewrite && '' != $rewrite) {
+                if (is_string($rewrite) && '' !== $rewrite) {
                     return $rewrite;
+                }
+                if (true === $rewrite) {
+                    // no redirect, but injection page is relevant
+                    break;
                 }
             }
         }

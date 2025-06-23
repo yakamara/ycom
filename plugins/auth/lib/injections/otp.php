@@ -36,7 +36,7 @@ class rex_ycom_injection_otp extends rex_ycom_injection_abtract
         }
 
         if (rex_article::getCurrentId() == $otp_article_id) {
-            return false;
+            return true;
         }
 
         return rex_getUrl($otp_article_id, '', [], '&');

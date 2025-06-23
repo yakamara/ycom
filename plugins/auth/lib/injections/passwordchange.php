@@ -11,6 +11,7 @@ class rex_ycom_injection_passwordchange extends rex_ycom_injection_abtract
                 if ($article_id_password != rex_article::getCurrentId()) {
                     return rex_getUrl($article_id_password, '', [], '&');
                 }
+                return true;
             }
         }
         return false;
