@@ -47,7 +47,7 @@ if ($otp->isEnabled() && $config->enabled) {
         $func = '';
 
         $this->params['warning'][$this->getId()] = $this->params['error_class'];
-        $this->params['warning_messages'][$this->getId()] = '{ ycom_otp_diabled }';
+        $this->params['warning_messages'][$this->getId()] = '{ ycom_otp_disabled }';
     } else {
         echo '
                 <div class="form-check">
