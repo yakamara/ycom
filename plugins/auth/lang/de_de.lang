@@ -73,6 +73,7 @@ ycom_user_id = User-ID
 ycom_current_sessions = Aktuelle Sessions
 ycom_impersonate = Im Frontend automatisch anmelden
 ycom_impersonate_alert = Eine Session für den User (id=___id___) erstellen und sich damit einloggen?
+minutes = Minuten
 
 ycom_session_added_ready_to_login = Session wurde angelegt. Bitte hier einloggen: <a href="{0}" target="_blank" rel="noopener noreferrer">{0}</a>
 ycom_session_could_not_been_added = Session konnte nicht angelegt werden, weil der User inaktiv ist.

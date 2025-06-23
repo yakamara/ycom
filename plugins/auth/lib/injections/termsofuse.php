@@ -11,6 +11,7 @@ class rex_ycom_injection_termsofuse extends rex_ycom_injection_abtract
                 if ($article_id_termsofuse != rex_article::getCurrentId()) {
                     return rex_getUrl($article_id_termsofuse, '', [], '&');
                 }
+                return true;
             }
         }
         return false;
@@ -19,7 +20,6 @@ class rex_ycom_injection_termsofuse extends rex_ycom_injection_abtract
     public function getSettingsContent(): string
     {
         $addon = rex_plugin::get('ycom', 'auth');
-
         return '
         <fieldset>
         <legend>' . $addon->i18n('ycom_auth_config_termsofuse') . '</legend>
