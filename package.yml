@@ -20,7 +20,7 @@ page:
 requires:
     php: '>=8.2'
     packages:
-        yform: '^4.1.1'
+        yform: '>=3.2,<6.0.0-dev'
         yrewrite: '>=2.6'
     redaxo: '^5.17.0'
 
