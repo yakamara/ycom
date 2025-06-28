@@ -1,12 +1,16 @@
 Changelog
 =========
 
-Version 4.4.0 - xx.03.2024
+Version 4.4.0 - 28.06.2025
 --------------------------
 
 ### Neu
 
 * OTP (OneTimePassword / 2FA) ergänzt. Email und (Google) Authenticator
+* rex_ycom_config eingeführt. Config lässt sich nun über den EP `YCOM_CONFIG` steuern. z.B. domainabhängig oder dateibasierend
+* Umbau Registrierung, Passwortvergessen auf Basis einer Tokentabelle.
+* Umbau 2FA, Neues Passwort setzen, Termsof use über Injections. Lässt sich nun entsprechend erweitern
+* YForm Version 5 nun möglich
 
 ### Anpassungen
 
@@ -18,6 +22,9 @@ Version 4.4.0 - xx.03.2024
 * Passwort autocomplete varianten eingebaut und in Doku sinnvoll ergänzt
 * CSP Header anpassungen. Passwortscript -CSP-fähig und relationsfähig gemacht.
 * Fehler bei den AuthRules behoben. Danke https://github.com/nsd0hmasri für den Hinweis
+* Dokuanpassungen
+* Install: Anlegen doppelter Felder wird nun überprüft
+
 
 Version 4.3.0 - 14.03.2024
 --------------------------
