@@ -86,7 +86,7 @@ try {
     rex_sql::factory()
 //        ->setQuery('alter table `' . rex::getTablePrefix().'ycom_user' . '` drop if exists `termofuse_accepted`', [])
         ->setQuery('delete from `' . rex_yform_manager_field::table() . '` where `table_name`="rex_ycom_user" and `type_id`="value" and `type_name`="checkbox" and `name`="termofuse_accepted"', [])
-        ->setQuery('update `rex_config` set `key`="article_id_jump_termsofuse" where `key`="article_id_jump_termofuse" and `namespace`="ycom/auth" AND NOT EXISTS ( SELECT 1 FROM rex_config WHERE `key` = "article_id_jump_termsofuse" AND `namespace` = "ycom/auth" )', [])
+        ->setQuery('UPDATE `rex_config` AS target LEFT JOIN `rex_config` AS existing ON existing.key = "article_id_jump_termsofuse" AND existing.namespace = "ycom/auth" SET target.key = "article_id_jump_termsofuse" WHERE target.key = "article_id_jump_termofuse" AND target.namespace = "ycom/auth" AND existing.key IS NULL', [])
         ->setQuery('delete from `' . rex_yform_manager_field::table() . '` where `table_name`="rex_ycom_user" and `type_id`="value" and `type_name`="generate_key" and `name`="session_key"');
 } catch (rex_sql_exception $e) {
     dump($e);
