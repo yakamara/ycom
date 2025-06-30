@@ -5,9 +5,11 @@
  * @psalm-scope-this rex_addon
  */
 
-rex_ycom_auth::addInjection(new rex_ycom_injection_otp(), 1);
-rex_ycom_auth::addInjection(new rex_ycom_injection_passwordchange(), 4);
-rex_ycom_auth::addInjection(new rex_ycom_injection_termsofuse(), 8);
+if (rex_plugin::get('ycom', 'auth')->isAvailable()) {
+    rex_ycom_auth::addInjection(new rex_ycom_injection_otp(), 1);
+    rex_ycom_auth::addInjection(new rex_ycom_injection_passwordchange(), 4);
+    rex_ycom_auth::addInjection(new rex_ycom_injection_termsofuse(), 8);
+}
 
 if (rex::isBackend()) {
     rex_extension::register('PACKAGES_INCLUDED', static function ($params) {
