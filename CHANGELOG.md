@@ -4,7 +4,7 @@ Changelog
 Version 4.4.1 - 30.06.2025
 --------------------------
 
-- Avoid general error 1093 during plugin update https://github.com/TobiasKrais
+- Avoid general errors during plugin update https://github.com/TobiasKrais
 
 
 Version 4.4.0 - 28.06.2025
