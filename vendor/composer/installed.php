@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'yakamara/ycom',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => 'acd6de958cac39e5d22263a565320e7a249098db',
+        'pretty_version' => 'dev-copilot/fix-519',
+        'version' => 'dev-copilot/fix-519',
+        'reference' => 'c5cd4102d10f3fa35913302a526631533717d108',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -182,9 +182,9 @@
             'dev_requirement' => false,
         ),
         'yakamara/ycom' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'acd6de958cac39e5d22263a565320e7a249098db',
+            'pretty_version' => 'dev-copilot/fix-519',
+            'version' => 'dev-copilot/fix-519',
+            'reference' => 'c5cd4102d10f3fa35913302a526631533717d108',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

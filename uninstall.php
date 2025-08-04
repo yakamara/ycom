@@ -9,6 +9,9 @@ $sql = rex_sql::factory();
 $sql->setQuery('DELETE FROM `' . rex::getTable('yform_table') . '` WHERE table_name = "' . rex::getTable('ycom_user') . '"');
 $sql->setQuery('DELETE FROM `' . rex::getTable('yform_field') . '` WHERE table_name = "' . rex::getTable('ycom_user') . '"');
 $sql->setQuery('DELETE FROM `' . rex::getTable('yform_history') . '` WHERE table_name = "' . rex::getTable('ycom_user') . '"');
+$sql->setQuery('DELETE FROM `' . rex::getTable('yform_table') . '` WHERE table_name = "' . rex::getTable('ycom_user_token') . '"');
+$sql->setQuery('DELETE FROM `' . rex::getTable('yform_field') . '` WHERE table_name = "' . rex::getTable('ycom_user_token') . '"');
+$sql->setQuery('DELETE FROM `' . rex::getTable('yform_history') . '` WHERE table_name = "' . rex::getTable('ycom_user_token') . '"');
 
 rex_sql_table::get(rex::getTable('article'))
     ->removeColumn('ycom_auth_type')
@@ -17,6 +20,9 @@ rex_sql_table::get(rex::getTable('article'))
     ->alter();
 
 rex_sql_table::get(rex::getTable('ycom_user_session'))
+    ->drop();
+
+rex_sql_table::get(rex::getTable('ycom_user_token'))
     ->drop();
 
 rex_sql_table::get(rex::getTable('ycom_user'))
