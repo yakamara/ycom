@@ -132,7 +132,6 @@ class rex_ycom_user extends rex_yform_manager_dataset
 
     /**
      * Get status options with extension point for customization.
-     * 
      * @return array<int, string>
      */
     public static function getStatusOptions(): array
