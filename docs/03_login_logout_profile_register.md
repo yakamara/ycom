@@ -120,6 +120,16 @@ action|ycom_auth_db
 
 ## Registrierung
 
+> **Hinweis zu Status-Werten:** Die Status-Werte sind als Konstanten in der Klasse `rex_ycom_user` definiert. Während in YForm-Formularen die numerischen Werte verwendet werden (z.B. `hidden|status|0`), kann im PHP-Code auf die entsprechenden Konstanten zurückgegriffen werden:
+> - `STATUS_INACTIVE_TERMINATION = -3`
+> - `STATUS_INACTIVE_LOGINS = -2`
+> - `STATUS_INACTIVE = -1`
+> - `STATUS_REQUESTED = 0`
+> - `STATUS_CONFIRMED = 1`
+> - `STATUS_ACTIVE = 2`
+>
+> Siehe auch die [Status-Liste](05_passwords.md#status-liste-eines-ycom-accounts) für weitere Details.
+
 ### Registrierungs-Formular
 
 ```php
