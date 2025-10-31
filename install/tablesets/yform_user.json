@@ -177,7 +177,7 @@
                 "attributes": "",
                 "choice_attributes": "",
                 "choice_label": "",
-                "choices": "translate:ycom_account_inactive_termination=-3,translate:ycom_account_inactive_logins=-2,translate:ycom_account_inactive=-1,translate:ycom_account_requested=0,translate:ycom_account_confirm=1,translate:ycom_account_active=2",
+                "choices": "callable::rex_ycom_user::getStatusOptions",
                 "db_type": "text",
                 "default": "-1",
                 "expanded": "",

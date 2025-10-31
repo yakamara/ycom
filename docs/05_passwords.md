@@ -120,14 +120,45 @@ Der Status kann hier auch 2 sein (`status=2`), wenn man mit selbst angelegten Ac
 
 #### Status Liste eines YCom-Accounts
 
-Interner Name | Übersetzung | Wert
------- | ------ | ------
-ycom_account_inactive_termination | Zugang wurde gekündigt | -3
-ycom_account_inactive_logins | Zugang wurde deaktiviert [Loginfehlversuche] | -2
-ycom_account_inactive | Zugang ist inaktiv | -1
-ycom_account_requested | Zugang wurde angefragt | 0
-ycom_account_confirm | Zugang wurde bestätigt und ist aktiv | 1
-ycom_account_active | Zugang ist aktiv | 2
+Interner Name | Übersetzung | Wert | Konstante
+------ | ------ | ------ | ------
+ycom_account_inactive_termination | Zugang wurde gekündigt | -3 | `rex_ycom_user::STATUS_INACTIVE_TERMINATION`
+ycom_account_inactive_logins | Zugang wurde deaktiviert [Loginfehlversuche] | -2 | `rex_ycom_user::STATUS_INACTIVE_LOGINS`
+ycom_account_inactive | Zugang ist inaktiv | -1 | `rex_ycom_user::STATUS_INACTIVE`
+ycom_account_requested | Zugang wurde angefragt | 0 | `rex_ycom_user::STATUS_REQUESTED`
+ycom_account_confirm | Zugang wurde bestätigt und ist aktiv | 1 | `rex_ycom_user::STATUS_CONFIRMED`
+ycom_account_active | Zugang ist aktiv | 2 | `rex_ycom_user::STATUS_ACTIVE`
+
+##### Status-Konstanten
+
+Seit Version X.X werden die Status-Werte als Konstanten in der Klasse `rex_ycom_user` definiert. Diese können im Code verwendet werden, um die Lesbarkeit zu erhöhen:
+
+```php
+// Statt:
+$data['status'] = 1;
+
+// Verwende:
+$data['status'] = rex_ycom_user::STATUS_CONFIRMED;
+```
+
+##### Status-Optionen erweitern
+
+Die Status-Optionen können über den Extension Point `YCOM_USER_STATUS_OPTIONS` erweitert oder angepasst werden:
+
+```php
+rex_extension::register('YCOM_USER_STATUS_OPTIONS', function (rex_extension_point $ep) {
+    /** @var array<int,string> $statusOptions */
+    $statusOptions = $ep->getSubject();
+    
+    // Eigenen Status hinzufügen
+    $statusOptions[3] = 'translate:ycom_account_premium';
+    
+    // Optional: Sortierung anpassen
+    ksort($statusOptions);
+    
+    return $statusOptions;
+});
+```
 
 #### Weitere Hinweise
 
