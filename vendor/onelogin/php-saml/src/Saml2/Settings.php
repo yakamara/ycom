@@ -661,7 +661,7 @@ class Settings
                 if (!isset($contact['givenName']) || empty($contact['givenName'])
                     || !isset($contact['emailAddress']) || empty($contact['emailAddress'])
                 ) {
-                    $errors[] = 'contact_not_enought_data';
+                    $errors[] = 'contact_not_enough_data';
                     break;
                 }
             }
@@ -673,7 +673,7 @@ class Settings
                     || !isset($organization['displayname']) || empty($organization['displayname'])
                     || !isset($organization['url']) || empty($organization['url'])
                 ) {
-                    $errors[] = 'organization_not_enought_data';
+                    $errors[] = 'organization_not_enough_data';
                     break;
                 }
             }
@@ -879,14 +879,15 @@ class Settings
      * $advancedSettings['security']['wantAssertionsEncrypted'] are enabled.
      * @param int|null      $validUntil    Metadata's valid time
      * @param int|null      $cacheDuration Duration of the cache in seconds
+     * @param bool          $ignoreValidUntil exclude the validUntil tag from metadata
      *
      * @return string  SP metadata (xml)
      * @throws Exception
      * @throws Error
      */
-    public function getSPMetadata($alwaysPublishEncryptionCert = false, $validUntil = null, $cacheDuration = null)
+    public function getSPMetadata($alwaysPublishEncryptionCert = false, $validUntil = null, $cacheDuration = null, $ignoreValidUntil = false)
     {
-        $metadata = Metadata::builder($this->_sp, $this->_security['authnRequestsSigned'], $this->_security['wantAssertionsSigned'], $validUntil, $cacheDuration, $this->getContacts(), $this->getOrganization());
+        $metadata = Metadata::builder($this->_sp, $this->_security['authnRequestsSigned'], $this->_security['wantAssertionsSigned'], $validUntil, $cacheDuration, $this->getContacts(), $this->getOrganization(), [], $ignoreValidUntil);
 
         $certNew = $this->getSPcertNew();
         if (!empty($certNew)) {
@@ -1037,7 +1038,7 @@ class Settings
     }
 
     /**
-     * Formats the Multple IdP certs.
+     * Formats the Multiple IdP certs.
      */
     public function formatIdPCertMulti()
     {

@@ -40,6 +40,7 @@ class Error extends Exception
     const SAML_SINGLE_LOGOUT_NOT_SUPPORTED = 12;
     const PRIVATE_KEY_NOT_FOUND = 13;
     const UNSUPPORTED_SETTINGS_OBJECT = 14;
+    const INVALID_PARAMETER = 15;
 
     /**
      * Constructor

@@ -4,13 +4,22 @@
         "onelogin/php-saml": "^3",
         "apereo/phpcas": "^1",
         "league/oauth2-client": "^2",
-        "psr/log": "^1",
         "spomky-labs/otphp": "^11.0"
     },
     "replace": {
         "psr/container": "*",
         "psr/http-message": "*",
-        "psr/log": "*"
+        "psr/log": "*",
+        "symfony/console": "*",
+        "symfony/deprecation-contracts": "*",
+        "symfony/http-foundation": "*",
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*",
+        "symfony/polyfill-php83": "*",
+        "symfony/service-contracts": "*",
+        "symfony/string": "*",
+        "symfony/yaml": "*"
     },
     "require-dev": {
         "redaxo/php-cs-fixer-config": "^2.0",
