@@ -201,7 +201,7 @@ $content .= '
                 </div>
                 <div class="col-xs-12 col-sm-6">
                 ' . $sel_authcookiettl->get() . '
-                <small>[auth-cookie-ttl]</small>
+                <small>' . $this->i18n('ycom_auth_config_auth_cookie_ttl_notice') . '<br />[auth-cookie-ttl]</small>
                 </div>
             </div>
 

@@ -62,6 +62,7 @@ ycom_auth_config_id_logout = LogOut-Seite
 ycom_auth_config_id_register = Register-Seite
 ycom_auth_config_id_password = Passwort zurücksetzen
 ycom_auth_config_auth_cookie_ttl = Cookie-Laufzeit für `eingeloggt bleiben`
+ycom_auth_config_auth_cookie_ttl_notice = Bei jeder Aktion innerhalb einer Session, wird diese wieder auf die definierte Zeit hochgesetzt. Heisst: Man darf diese Zeit inaktiv sein bevor die Session verfällt
 ycom_auth_config_session_max_overall_duration = Maximale Gesamtsessiondauer in Sekunden (danach läuft die Session immer ab)
 ycom_auth_config_session_duration = Maximale Sessiondauer bei Inaktivität in Sekunden
 ycom_auth_config_extern = Authentifizierung (SAML/CAS/OAUTH2)

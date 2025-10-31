@@ -71,7 +71,7 @@ $list->setColumnFormat('session_id', 'custom', static function () use ($list) {
 
 $list->setColumnFormat('last_activity', 'custom', static function () use ($list) {
     if (session_id() === $list->getValue('session_id')) {
-        return rex_i18n::msg('active_session');
+        return rex_formatter::intlDateTime((string) $list->getValue('last_activity'), IntlDateFormatter::SHORT) . '<br />' . rex_i18n::msg('active_session');
     }
     return rex_formatter::intlDateTime((string) $list->getValue('last_activity'), IntlDateFormatter::SHORT);
 });
