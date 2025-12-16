@@ -33,7 +33,7 @@ class rex_ycom_user_status_test extends TestCase
     {
         // Test that default status options contain all expected entries
         $defaultOptions = rex_ycom_user::DEFAULT_STATUS_OPTIONS;
-        
+
         self::assertIsArray($defaultOptions);
         self::assertArrayHasKey(-3, $defaultOptions);
         self::assertArrayHasKey(-2, $defaultOptions);
@@ -41,7 +41,7 @@ class rex_ycom_user_status_test extends TestCase
         self::assertArrayHasKey(0, $defaultOptions);
         self::assertArrayHasKey(1, $defaultOptions);
         self::assertArrayHasKey(2, $defaultOptions);
-        
+
         // Test that values are translation keys
         self::assertEquals('translate:ycom_account_inactive_termination', $defaultOptions[-3]);
         self::assertEquals('translate:ycom_account_inactive_logins', $defaultOptions[-2]);
@@ -55,10 +55,10 @@ class rex_ycom_user_status_test extends TestCase
     {
         // Test that getStatusOptions returns an array
         $options = rex_ycom_user::getStatusOptions();
-        
+
         self::assertIsArray($options);
         self::assertNotEmpty($options);
-        
+
         // Test that it returns the default options
         self::assertEquals(rex_ycom_user::DEFAULT_STATUS_OPTIONS, $options);
     }

@@ -2,9 +2,6 @@
 
 class rex_ycom_user extends rex_yform_manager_dataset
 {
-    public string $password = '';
-    public int $login_tries = 0;
-
     // Status constants
     public const STATUS_INACTIVE_TERMINATION = -3;
     public const STATUS_INACTIVE_LOGINS = -2;
@@ -22,6 +19,8 @@ class rex_ycom_user extends rex_yform_manager_dataset
         self::STATUS_CONFIRMED => 'translate:ycom_account_confirm',
         self::STATUS_ACTIVE => 'translate:ycom_account_active',
     ];
+    public string $password = '';
+    public int $login_tries = 0;
 
     /**
      * @return rex_ycom_user|null
