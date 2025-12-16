@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 4.4.2 - 16.12.2025
+--------------------------
+
+* Umbau der Statuswerte eines Users. Nun in der Klasse verfügbar. Danke alxndr-w
+* Composer aktualisiert. Security Issues in php-saml und xmlseclibs
+* Cookie Laufzeit nun auf 0 Sekunden/Deaktivierbar möglich
+
 Version 4.4.1 - 30.06.2025
 --------------------------
 
