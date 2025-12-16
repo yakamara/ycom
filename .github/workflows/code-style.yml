@@ -30,7 +30,7 @@ jobs:
             -   name: Install test dependencies
                 env:
                     COMPOSER: composer.json
-                run: composer install --prefer-dist --no-progress
+                run: COMPOSER=.tools/composer-code-style.json composer install --prefer-dist --no-progress
 
             # run php-cs-fixer
             -   name: Run PHP CS Fixer
