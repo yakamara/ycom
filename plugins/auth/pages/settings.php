@@ -68,10 +68,13 @@ $sel_authcookiettl->setName('auth_cookie_ttl');
 $sel_authcookiettl->setAttribute('class', 'form-control selectpicker');
 $sel_authcookiettl->setSelected($this->getConfig('auth_cookie_ttl'));
 
+$sel_authcookiettl->addOption($this->i18n('ycom_days', 0) . ' (' . $this->i18n('inactive') . ')', '0');
 $sel_authcookiettl->addOption($this->i18n('ycom_days', 7), '7');
 $sel_authcookiettl->addOption($this->i18n('ycom_days', 14), '14');
 $sel_authcookiettl->addOption($this->i18n('ycom_days', 30), '30');
 $sel_authcookiettl->addOption($this->i18n('ycom_days', 90), '90');
+$sel_authcookiettl->addOption($this->i18n('ycom_days', 180), '180');
+$sel_authcookiettl->addOption($this->i18n('ycom_days', 360), '360');
 
 $content .= '
 <form action="index.php" method="post" id="ycom_auth_settings">
