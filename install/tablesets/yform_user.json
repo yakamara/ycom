@@ -177,7 +177,7 @@
                 "attributes": "",
                 "choice_attributes": "",
                 "choice_label": "",
-                "choices": "callable::rex_ycom_user::getStatusOptions",
+                "choices": "rex_ycom_user::getStatusOptions",
                 "db_type": "text",
                 "default": "-1",
                 "expanded": "",
