@@ -89,3 +89,5 @@ ycom_user_log_email = E-Mail
 ycom_user_log_type = Type
 ycom_user_log_params = Params
 ycom_user_log_ip = IP
+
+ycom_docs_status_examples = Status Beispiele
