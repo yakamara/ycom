@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 4.4.4 - 17.04.2026
+--------------------------
+
+* composer.json angepasst, damit PHP 8.4 möglich ist. apereo/phpcas (wird nicht weiterentwickelt) -> dergel/phpcas
+* SAML Fehler werden nun besser geloggt
+
+
 Version 4.4.2 - 16.12.2025
 --------------------------
 
