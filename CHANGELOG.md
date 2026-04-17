@@ -4,6 +4,13 @@ Changelog
 Version 4.4.4 - 17.04.2026
 --------------------------
 
+* Fix foreign key constraint violation during ycom addon uninstall Danke alxndr-w
+* Fix status field choice in tableset.json Danke Norbert Micheel
+
+
+Version 4.4.3 - 17.04.2026
+--------------------------
+
 * composer.json angepasst, damit PHP 8.4 möglich ist. apereo/phpcas (wird nicht weiterentwickelt) -> dergel/phpcas
 * SAML Fehler werden nun besser geloggt
 
