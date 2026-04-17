@@ -38,7 +38,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         $settings = $this->auth_loadSettings();
         // load external Metadata if possible
         try {
-            $idpSettings = IdPMetadataParser::parseRemoteXML($settings['idp']['entityId']); /** @phpstan-ignore-line */
+            $idpSettings = IdPMetadataParser::parseRemoteXML($settings['idp']['metadataUrl'] ?? $settings['idp']['entityId']); /** @phpstan-ignore-line */
             $settings = IdPMetadataParser::injectIntoSettings($settings, $idpSettings);
         } catch (Exception $e) {
         }
@@ -96,6 +96,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                     if ($this->params['debug']) {
                         dump($e);
                     }
+                    rex_logger::factory()->log(E_WARNING, 'SAML ACS Error: ' . $e->getMessage());
                     $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.acs }}';
                     return;
                 }
@@ -105,6 +106,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                     if ($this->params['debug']) {
                         dump($errors);
                     }
+                    rex_logger::factory()->log(E_WARNING, 'SAML ACS Error: ' . implode(', ', $errors));
                     $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.acs }}';
                     return;
                 }
@@ -155,8 +157,9 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                     }); // true => keep local session
                 } catch (Throwable $e) {
                     if ($this->params['debug']) {
-                        dump($e);
+                        dump(3, $e);
                     }
+                    rex_logger::factory()->log(E_WARNING, 'SAML SLS Error: ' . $e->getMessage());
                     $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.acs }}';
                     return;
                 }
@@ -175,6 +178,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
                     if ($this->params['debug']) {
                         dump($errors);
                     }
+                    rex_logger::factory()->log(E_WARNING, 'SAML SLS Error: ' . implode(', ', $errors));
                     $this->params['warning_messages'][] = ('' != $this->getElement(2)) ? $this->getElement(2) : '{{ saml.error.sls }}';
                     return;
                 }
