@@ -1,0 +1,104 @@
+ycom_perm = Permissões comunitárias
+
+ycom_page_perm = Página de permissões comunitárias
+
+navigation_ycom = Comunidade
+ycom_title = Comunidade: configurações
+ycom_navi_title = Configurações
+
+ycom_main_title = Informações
+ycom_info = Readme
+ycom_info_title = Informações úteis para trabalhar com o AddOn comunidade
+ycom_manual = Manual / Exemplos
+ycom_manual_title = Manual / Exemplos
+ycom_changelog = Mudar log
+ycom_changelog_title	= Mudar log
+ycom_license = Licença
+ycom_license_title = Licença
+ycom_overview = Visão geral
+ycom_user_management = Gestão de usuário
+ycom_field_management = Editar campos
+
+ycom_user = Usuário
+yform_ycom_user = Usuário de comunidade
+rex_ycom_user = Usuário de comunidade
+
+email = E-mail
+status = Status
+firstname = Primeiro Nome
+session_key = Chave da seção
+last_login_time = Último acesso
+last_action_time = Última ação
+login_failed = Logins falhos
+login_tries = Tentativas de login
+
+ycom_login_tries_info = 10 tentativas falhas de logon causam o bloqueamente do usuário.
+
+ycom_account_inactive = Acesso desativado
+ycom_account_requested = Acesso requisitado
+ycom_account_active = Acesso ativo
+
+ycom_status = Status
+
+ycom_perm_type = Permissões da página
+
+ycom_perm_extends = Adotar categoria mais ampla, caso contrário acessível a todos os usuários
+ycom_perm_only_logged_in = Acesso para usuários loggados
+ycom_perm_only_not_logged_in = Acesso para todos os usuários não loggados
+ycom_perm_all = Acesso para todos os usuários
+
+ycom_this_login_exists_already = Este nome de usuário já existe
+ycom_this_email_exists_already = Este e-mail de usuário já existe
+ycom_please_enter_login = Por favor, insira um nome de usuário
+ycom_please_enter_email = Por favo, insira um endereço de e-mail
+# ----- auth (REDAXO 5: plugin ycom/auth)
+ycom_auth_title = Autentificação
+
+ycom_auth_settings = Configurações
+ycom_auth_description = Explicação
+
+ycom_auth_config 				= Configuração
+ycom_auth_config_save 			= Salvar configuração
+ycom_auth_config_status 			= Status
+ycom_auth_config_security 		= Segurança
+ycom_auth_config_forwarder 		= Seguir para o produto
+ycom_auth_config_login_field		= Campo para login
+
+ycom_auth_config_status_authactive = Autentificação ativa
+ycom_auth_config_status_stayactive = "Permanecer conectado" ativo
+ycom_auth_config_security_hashedpasswd = Senhas criptografadas  (sha1)
+ycom_auth_config_id_jump_ok		= ... ao conectar-se com sucesso
+ycom_auth_config_id_jump_not_ok	= ... ao não se conectar com sucesso
+ycom_auth_config_id_jump_logout	= ... ao se desconectar
+ycom_auth_config_id_jump_denied	= ... ao tentar acessar um produto restrito
+ycom_auth_config_id_jump_activation_ok = ... ao ativar com sucesso
+ycom_auth_config_id_jump_activation_fail = ... quando a ativação não foi bem sucedida
+ycom_auth_config_id_jump_newpassword_ok = ... ao resetar a senha com sucesso
+ycom_auth_config_id_jump_newpassword_fail = ... ao resetar a senha sem sucesso
+
+ycom_auth_settings_updated = A configuração foi salva
+
+ycom_auth_info_title = Explicação
+
+ycom_auth_perm = Permissões
+ycom_auth_update_perm = Atualizar
+ycom_auth_perm_updated = Permissões foram atualizadas
+
+ycom_auth_password_not_updated = Senha não foi atualizada
+ycom_auth_password_updated = Senha foi atualizada
+ycom_auth_password_exists = A senha já é utilizada
+ycom_auth_password_isempty = A senha ainda não é utilizada
+# ----- group (REDAXO 5: plugin ycom/group)
+
+ycom_group_title = Grupos
+ycom_group_name = Grupos
+ycom_group_yform_enter_name = Por favor, insira o nome do grupo
+rex_ycom_group = Grupo comunitário
+
+ycom_group_forallgroups = Para todos, independente do grupo
+ycom_group_inallgroups = Tem que estar em todos os grupos
+ycom_group_inonegroup = Tem que estar em um grupo
+ycom_group_nogroups = Não tem grupos
+
+ycom_group_type = Permissões de grupo
+ycom_groups = Grupos

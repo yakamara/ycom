@@ -1,0 +1,56 @@
+{
+    "name": "yakamara/ycom",
+    "description": "Frontend-Benutzerverwaltung für REDAXO 6: Login, Registrierung, Profil, Gruppen- und Medienrechte",
+    "license": "MIT",
+    "type": "redaxo-addon",
+    "keywords": ["redaxo", "redaxo-addon", "ycom", "login", "frontend-users"],
+    "authors": [
+        {
+            "name": "Jan Kristinus",
+            "homepage": "https://www.yakamara.de"
+        }
+    ],
+    "homepage": "https://github.com/yakamara/ycom",
+    "support": {
+        "issues": "https://github.com/yakamara/ycom/issues"
+    },
+
+    "require": {
+        "php": "^8.5",
+        "league/oauth2-client": "^2.9",
+        "onelogin/php-saml": "^4.3",
+        "redaxo/core": "^6.0@dev",
+        "spomky-labs/otphp": "^11.3",
+        "symfony/string": "^8.1",
+        "yakamara/yform": "@dev",
+        "yakamara/yrewrite": "@dev"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "^12.5 || ^13.1"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Yakamara\\YCom\\": "src/"
+        }
+    },
+
+    "autoload-dev": {
+        "psr-4": {
+            "Yakamara\\YCom\\Tests\\": "tests/"
+        }
+    },
+
+    "extra": {
+        "redaxo": {
+            "addon-class": "Yakamara\\YCom\\YComAddon"
+        }
+    },
+
+    "config": {
+        "sort-packages": true
+    },
+
+    "prefer-stable": true
+}

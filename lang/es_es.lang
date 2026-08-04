@@ -1,0 +1,158 @@
+ycom_perm = Derechos de la comunidad
+
+ycom_page_perm = Derechos de página de comunidad
+
+navigation_ycom = Comunidad
+ycom_title = Comunidad: Configuración
+ycom_navi_title = Ajustes
+
+ycom_main_title = Info
+ycom_info = Léame
+ycom_info_title = Información útil sobre el uso del complemento de la comunidad
+ycom_manual = Instrucciones / Ejemplos
+ycom_manual_title = Instrucciones / Ejemplos
+ycom_changelog = Cambios
+ycom_changelog_title	= Cambios
+ycom_license = Licencia
+ycom_license_title = Licencia
+ycom_overview = Vista general
+ycom_user_management = Administración de usuario
+ycom_field_management = Personalizar campos
+
+ycom_user = Usuario
+yform_ycom_user = Usuarios de la comunidad
+rex_ycom_user = Usuario
+
+email = E-mail
+status = Estado
+firstname = Primer nombre
+session_key = Clave de sesión
+last_login_time = Ultimo acceso exitoso
+last_action_time = Última acción
+termination_time = Fecha de terminación
+login_failed = Inicios de sesión fallidos
+login_tries = Inicia sesión intentos fallidos
+
+ycom_login_tries_info = Los errores permitidos se definen en el <a href="index.php?page=ycom/settings">Community &rsaquo; Einstellungen</a>.
+
+ycom_account_inactive_termination = El acceso fue terminado
+ycom_account_inactive_logins = El acceso ha sido deshabilitado [Error de inicio de sesión]
+ycom_account_inactive = El acceso esta inactivo
+ycom_account_requested = El acceso fue solicitado
+ycom_account_confirm = El acceso ha sido confirmado y está activo
+ycom_account_active = El acceso está activo
+
+ycom_status = Esado
+
+ycom_perm_type = Permisos página
+
+ycom_perm_extends = Desde una categoría superior, de lo contrario, el acceso está disponible para todos los usuarios
+ycom_perm_only_logged_in = Acceso para usuarios conectados
+ycom_perm_only_not_logged_in = Acceso para todos los usuarios no conectados
+ycom_perm_all = Acceso para todos los usuarios
+
+ycom_this_login_exists_already = Este inicio de sesión ya existe
+ycom_this_email_exists_already = Este correo electrónico ya existe
+ycom_please_enter_login = Por favor ingrese el inicio de sesión
+ycom_please_enter_email = Por favor ingrese el correo electrónico
+
+last_password_time = Último cambio de contraseña
+termsofuse_accepted = Términos de uso confirmados
+new_password_required = Se debe establecer una nueva contraseña
+# ----- auth (REDAXO 5: plugin ycom/auth)
+ycom_auth_title = Autenticación
+
+ycom_auth_settings = Ajustes
+ycom_auth_description = Descripción
+
+ycom_auth_config 				= Configuración
+ycom_auth_config_save 			= Guardar configuración
+ycom_auth_config_status 			= Estado
+ycom_auth_config_security 		= Seguridad
+ycom_auth_config_forwarder 		= Reenviar al artículo
+ycom_auth_config_login_field		= botón Acceder
+
+ycom_auth_config_status_authactive = Autenticación activa
+ycom_auth_config_status_stayactive = "Mantenerse conectado" activo
+ycom_auth_config_security_hashedpasswd = Contraseñas cifradas (sha1)
+ycom_auth_config_id_jump_ok		= ... si ha iniciado sesión correctamente
+ycom_auth_config_id_jump_not_ok	= ... si no ha iniciado sesión correctamente
+ycom_auth_config_id_jump_logout	= ...después de desconectarse
+ycom_auth_config_id_jump_denied	= ...al acceder a un artículo bloqueado
+ycom_auth_config_id_jump_denied_notice	= Si no ha iniciado sesión, se lo dirigirá a la página de inicio de sesión. Solo entonces se lo dirigirá al artículo denegado si no tiene derechos sobre este artículo.
+
+ycom_auth_config_id_jump_activation_ok = ...después de la activación exitosa
+ycom_auth_config_id_jump_activation_fail = .. después de la activación fallida
+ycom_auth_config_id_jump_newpassword_ok = ...después de restablecer con éxito la contraseña
+ycom_auth_config_id_jump_newpassword_fail = .. después de un restablecimiento de contraseña fallido
+ycom_auth_config_id_jump_password = ...si se establece una nueva contraseña (el campo new_password_required) se establece [opcional]
+ycom_auth_config_id_jump_termsofuse = ...si los términos de uso no se han confirmado (no se ha establecido el campo Termsofuse_accepted) [opcional]
+
+ycom_auth_settings_updated = Se ha guardado la configuración.
+
+ycom_auth_info_title = Información
+
+ycom_auth_perm = Permisos
+ycom_auth_update_perm = Actualizar
+ycom_auth_perm_updated = Permisos actualizados
+
+ycom_auth_password_not_updated = La contraseña no fue actualizada
+ycom_auth_password_updated = La contraseña fue actualizada
+ycom_auth_password_exists = La contraseña existe
+ycom_auth_password_isempty = La contraseña no existe
+
+ycom_auth_config_auth_rules = Reglas para la autenticación
+ycom_auth_config_login_tries_deactivateafter = El usuario está desactivado después de {0} intentos de inicio de sesión
+ycom_auth_config_login_tries = Intentos máximos de inicio de sesión
+ycom_auth_config_login_tries_unlimited = Intentos ilimitados
+ycom_auth_config_login_tries_pause = El usuario está bloqueado durante {1} minutos después de cada {0} intento de inicio de sesión
+ycom_auth_config_login_tries_always_pause = El usuario está bloqueado durante {1} minutos después de {0} intentos de inicio de sesión
+
+perm_options_ycomArticlePermissions[] = YCom - Derechos de acceso a la página
+
+no_permission_to_edit = No permiso para editar
+
+ycom_validate_password_policy_rules_error = Observe las reglas estándar de al menos 1 letra grande y pequeña, al menos 8 caracteres
+ycom_validate_password_policy_rules = Reglas de contraseña como JSON
+ycom_validate_password_policy_rules_error_message = Mensaje de error
+
+ycom_validate_password_policy_rules_script = Activar contraseña creador
+
+ycom_auth_config_pages = Páginas generales
+ycom_auth_config_id_login = página de login
+ycom_auth_config_id_logout = Página de cierre de sesión
+ycom_auth_config_id_register = Regístrese página
+ycom_auth_config_id_password = Restablecer contraseña
+
+ycom_auth_config_auth_cookie_ttl = Duración de la cookie para `permanecer conectado`
+ycom_days = {0} días
+
+ycom_auth_config_extern = Autenticación (SAML/CAS/OAUTH2)
+
+# ----- group (REDAXO 5: plugin ycom/group)
+
+ycom_group_title = Grupo
+ycom_group_name = Grupo
+ycom_group_yform_enter_name = Por favor ingrese el nombre del grupo.
+rex_ycom_group = Grupo Comunitario
+
+ycom_group_forallgroups = Para todos, no importa qué grupo
+ycom_group_inallgroups = Debe estar en cada grupo
+ycom_group_inonegroup = Debe estar en un grupo
+ycom_group_nogroups = No tiene grupos
+
+ycom_group_type = Los derechos de grupo
+ycom_groups = Grupo
+
+# ----- media_auth (REDAXO 5: plugin ycom/media_auth)
+ycom_media_auth_title = Media
+ycom_media_auth_settings = Ajustes
+ycom_auth_config_media_auth_rules = Regla si no se puede llamar medio
+
+ycom_media_auth_failed_header_notfound = Encabezado `Not Found` senden
+ycom_media_auth_failed_header_perm_denied = Encabezado `Permiso denegado` senden
+ycom_media_auth_failed_redirect_login = Redirigir al inicio de sesión con Redirigir a medio (si no se ha iniciado sesión)
+ycom_media_auth_failed_redirect_login_with_error_page = Reenvío para iniciar sesión con redireccionamiento en media (si no está conectado). Si los errores se reenvían a la página de error (si está conectado)
+ycom_media_auth_failed_header_redirect_notfound = Reenvío a artículo NotFound
+
+ycom_media_auth_settings_updated = Configuraciones se han actualizado

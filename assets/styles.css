@@ -1,0 +1,93 @@
+#ycom_auth_settings fieldset {
+    margin-bottom: 30px;
+}
+
+#ycom_auth_settings legend {
+    font-size: 12px;
+}
+#ycom_auth_settings label {
+    font-weight: normal;
+}
+
+#ycom_auth_settings .abstand {
+    margin-bottom: 10px;
+}
+
+#ycom_auth_settings .select-style {
+    width: 100%;
+    overflow: hidden;
+    background: #E9ECF2 url("data:image/png;base64,R0lGODlhDwAUAIABAAAAAP///yH5BAEAAAEALAAAAAAPABQAAAIXjI+py+0Po5wH2HsXzmw//lHiSJZmUAAAOw==") no-repeat 98% 50%;
+    margin: 0;
+    opacity: 1;
+    border: none;
+
+}
+#ycom_auth_settings select {
+    font-size: 14px;
+    padding: 0 15px 0 15px;
+    width: 100%;
+    border: 1px solid #c3c9d4;
+    outline:0;
+    -webkit-appearance:none;
+    height: 40px;
+    color: #36404f;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance:none;
+    -webkit-border-radius: 0px;
+    border-radius: 3px;
+}
+#ycom_auth_settings .select-style select:focus {
+    outline: none;
+}
+#ycom_auth_settings .select-style select:hover {
+    cursor: pointer;
+    border-color: #000;
+}
+
+
+#ycom_auth_settings input[type=checkbox] {
+    display: none;
+}
+
+#ycom_auth_settings input[type=checkbox] + label:before {
+    font-family: FontAwesome;
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
+    border-radius: 3px;
+    background: #E9ECF2;
+    border: 1px solid #c3c9d4;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#ycom_auth_settings input[type=checkbox] + label:before {
+    padding-left: 2px;
+    color: #c3c9d4;
+    content: "\f00d";
+}
+
+#ycom_auth_settings input[type=checkbox] + label:before {
+
+}
+
+#ycom_auth_settings input[type=checkbox]:checked + label:before {
+    padding-left: 2px;
+    color: #3CB594;
+    content: "\f00c";
+}
+
+#ycom_auth_settings input[type=checkbox]:checked + label:before {
+
+}
+
+#ycom_auth_settings .right {
+    float: right;
+}
+
+#ycom_auth_settings .btn-save {
+    width: 100%;
+}

@@ -1,0 +1,329 @@
+ycom_perm = Community Rechte
+
+ycom_page_perm = Community Seitenrechte
+
+navigation_ycom = Community
+ycom_title = Community
+ycom_navi_title = Einstellungen
+
+ycom_main_title = Info
+ycom_info = Readme
+ycom_info_title = Nützliche Informationen zur Verwendung des Community Addons
+ycom_manual = Anleitung / Beispiele
+ycom_manual_title = Anleitung / Beispiele
+ycom_changelog = Changelog
+ycom_changelog_title	= Changelog
+ycom_license = Lizenz
+ycom_license_title = Lizenz
+ycom_overview = Übersicht
+ycom_user_management = User Verwaltung
+ycom_field_management = Felder anpassen
+
+ycom_user = User
+yform_ycom_user = Community Benutzer
+rex_ycom_user = User
+
+email = E-Mail
+status = Status
+firstname = Vorname
+session_key = Sessionschlüssel
+last_login_time = Letzter erfolgreicher Login
+last_login_try_time = Letzter versuchter Login
+last_action_time = Letzte Aktion
+termination_time = Kündigungszeitpunkt
+login_failed = Fehlgeschlagene Logins
+login_tries = Login Fehlversuche
+
+ycom_login_tries_info = Erlaubte Fehlversuche werden im <a href="index.php?page=ycom/settings">Community &rsaquo; Einstellungen</a> definiert.
+
+ycom_account_inactive_termination = Zugang wurde gekündigt
+ycom_account_inactive_logins = Zugang wurde deaktiviert [Loginfehlversuche]
+ycom_account_inactive = Zugang ist inaktiv
+ycom_account_requested = Zugang wurde angefragt
+ycom_account_confirm = Zugang wurde bestätigt und ist aktiv
+ycom_account_active = Zugang ist aktiv
+
+ycom_status = Status
+
+ycom_perm_type = Seitenberechtigungen
+
+ycom_perm_extends = Aus übergeordneter Kategorie übernehmen ansonsten Zugriff für alle User
+ycom_perm_only_logged_in = Zugriff für eingeloggte User
+ycom_perm_only_not_logged_in = Zugriff für alle nicht eingeloggten User
+ycom_perm_all = Zugriff für alle User
+
+ycom_this_login_exists_already = Dieser Login existiert bereits
+ycom_this_email_exists_already = Diese E-Mail existiert bereits
+ycom_please_enter_login = Bitte das Login eingeben
+ycom_please_enter_email = Bitte die E-mail eingeben
+
+last_password_time = Letzter Passwortwechsel
+termsofuse_accepted = Nutzungsbedingungen bestätigt
+new_password_required = Neues Passwort muss gesetzt werden
+
+ycom_docs_intro = Einrichtung
+ycom_docs_navigations = Navigationen
+ycom_docs_passwords = Passwörter
+ycom_docs_settings = Einstellungen
+ycom_docs_extern_auth = Externe Authentifizierung
+ycom_docs_media_auth = Medienschutz
+ycom_docs_login_logout_profile_register = Login/Logout/Profile/Registrierung
+docs = Dokumentation
+ycom_docs_tricks = Tricks
+ycom_docs_user_groups = User und Gruppen auslesen
+ycom_docs = Dokumentation
+ycom_docs_otp = 2FA (Zwei-Faktor-Authentifizierung)
+
+ycom_log = Log
+ycom_user_log = YCom-User-Log
+ycom_user_log_title = Log-Übersicht
+ycom_user_log_warning_logisinactive = YCom-User-Log ist inaktiv. Wir empfehlen es zu aktivieren. <a href="{0}">aktivieren</a>
+ycom_user_log_warning_logisactive  = YCom-User-Log ist aktiv. <a href="{0}">deaktivieren</a>
+ycom_user_log_activated = YCom-User-Log wurde aktiviert
+ycom_user_log_deactivated = YCom-User-Log wurde deaktiviert
+ycom_user_log_time = Zeitstempel
+ycom_user_log_user_id = User-Id
+ycom_user_log_email = E-Mail
+ycom_user_log_type = Type
+ycom_user_log_params = Params
+ycom_user_log_ip = IP
+
+ycom_docs_status_examples = Status Beispiele
+
+# ----- auth (REDAXO 5: plugin ycom/auth)
+ycom_auth_title = Authentifizierung
+
+ycom_auth_settings = Einstellungen
+ycom_auth_description = Erklärung
+
+ycom_auth_config 				= Konfiguration
+ycom_auth_config_save 			= Konfiguration speichern
+ycom_auth_config_status 			= Status
+ycom_auth_config_security 		= Sicherheit
+ycom_auth_config_forwarder 		= Weiterleitungen zu Artikel
+ycom_auth_config_login_field		= Login-Feld
+
+ycom_auth_config_status_authactive = Authentifizierung aktiviert
+ycom_auth_config_status_stayactive = "Angemeldet bleiben" aktiviert
+ycom_auth_config_security_hashedpasswd = Verschlüsselte Passwörter (sha1)
+ycom_auth_config_id_jump_ok		= ... wenn erfolgreich eingeloggt
+ycom_auth_config_id_jump_not_ok	= ... wenn nicht erfolgreich eingeloggt
+ycom_auth_config_id_jump_logout	= ... nach dem Ausloggen
+ycom_auth_config_id_jump_denied	= ... wenn auf einen gesperrten Artikel zugriffen wird
+ycom_auth_config_id_jump_denied_notice	= Wenn man nicht eingeloggt ist, wird man zunächst auf die Loginseite geleitet. Erst danach wird man auf den denied Artikel geleitet wenn man keine Rechte an diesem Artikel hat.
+
+ycom_auth_config_id_jump_activation_ok = ... nach erfolgreicher Aktivierung
+ycom_auth_config_id_jump_activation_fail = .. nach fehlgeschlagener Aktivierung
+ycom_auth_config_id_jump_newpassword_ok = ... nach erfolgreicher Passwortrücksetzung
+ycom_auth_config_id_jump_newpassword_fail = .. nach fehlgeschlagener Passwortrücksetzung
+ycom_auth_config_id_jump_password = ... wenn neues Passwort setzen (new_password_required-Feld) gesetzt ist [optional]
+ycom_auth_config_id_jump_termsofuse = ... wenn Nutzungsbedingungen noch nicht bestätigt wurden (termsofuse_accepted-Feld nicht gesetzt ist) [optional]
+
+ycom_auth_settings_updated = Konfiguration wurde gespeichert
+
+ycom_auth_info_title = Erklärung
+
+ycom_auth_perm = Zugriffsrechte
+ycom_auth_update_perm = aktualisieren
+ycom_auth_perm_updated = Rechte wurden aktualisiert
+
+ycom_auth_password_not_updated = Passwort wurde nicht aktualisiert
+ycom_auth_password_updated = Passwort wurde aktualisiert
+ycom_auth_password_exists = Passwort existiert
+ycom_auth_password_isempty = Passwort ist nicht vorhanden
+
+ycom_auth_config_auth_rules = Authentifizierungsregel
+ycom_auth_config_login_tries_deactivateafter = User wird nach {0} Login-Versuchen deaktiviert
+ycom_auth_config_login_tries = Maximale Login-Versuche
+ycom_auth_config_login_tries_unlimited = Unendlich viele Versuche
+ycom_auth_config_login_tries_pause = User wird für {1} Minuten nach jeweils {0} Login-Versuchen gesperrt
+ycom_auth_config_login_tries_always_pause = User wird für {1} Minuten nach {0} Login-Versuchen gesperrt
+
+perm_options_ycomArticlePermissions[] = YCom - Seitenrechte einstellen können
+
+no_permission_to_edit = Keine Editierrechte
+
+ycom_validate_password_policy_rules_error = Bitte die Standardregeln beachten mind. 1 Buchstabe groß und klein, mind. 8 Zeichen
+ycom_validate_password_policy_rules = Passwortregeln als JSON
+ycom_validate_password_policy_rules_error_message = Fehlermeldung
+
+ycom_validate_password_policy_rules_script = PasswortCreator aktivieren
+
+ycom_auth_config_pages = Allgemeine Seiten
+ycom_auth_config_id_login = LogIn-Seite
+ycom_auth_config_id_logout = LogOut-Seite
+ycom_auth_config_id_register = Register-Seite
+ycom_auth_config_id_password = Passwort zurücksetzen
+ycom_auth_config_auth_cookie_ttl = Cookie-Laufzeit für `eingeloggt bleiben`
+ycom_auth_config_auth_cookie_ttl_notice = Bei jeder Aktion innerhalb einer Session, wird diese wieder auf die definierte Zeit hochgesetzt. Heisst: Man darf diese Zeit inaktiv sein bevor die Session verfällt
+ycom_auth_config_session_max_overall_duration = Maximale Gesamtsessiondauer in Sekunden (danach läuft die Session immer ab)
+ycom_auth_config_session_duration = Maximale Sessiondauer bei Inaktivität in Sekunden
+ycom_auth_config_extern = Authentifizierung (SAML/CAS/OAUTH2)
+
+ycom_auth_howtoread_configvalues = Werte sind über: rex_ycom_config::get('article_id_login', null); auslesbar
+
+ycom_days = {0} Tage
+ycom_user_id = User-ID
+ycom_current_sessions = Aktuelle Sessions
+ycom_impersonate = Im Frontend automatisch anmelden
+ycom_impersonate_alert = Eine Session für den User (id=___id___) erstellen und sich damit einloggen?
+minutes = Minuten
+
+ycom_session_added_ready_to_login = Session wurde angelegt. Bitte hier einloggen: <a href="{0}" target="_blank" rel="noopener noreferrer">{0}</a>
+ycom_session_could_not_been_added = Session konnte nicht angelegt werden, weil der User inaktiv ist.
+ycom_user_session_delete_all_sessions_link = Alle Sessions <a href="{0}">löschen</a>
+ycom_sessions_deleted = {0} Session/s wurden gelöscht
+
+otp_auth_config = OneTimePassword (OTP) Einstellungen. E-Mail und Authentikator
+otp_article_id = ... zum OTP-Artikel
+otp_auth_enforce = Einschränkungen
+otp_auth_enforce_all = Erzwungen für alle YCom Benutzer
+otp_auth_enforce_disabled = Keine Einschränkungen (Optional für jeden)
+otp_auth_options = Optionen
+otp_auth_option_all = Alle Möglichkeiten erlauben
+otp_auth_option_totp_only = Nur Time-Based One-Time Passwort erlauben
+otp_auth_option_email_only = Nur One-Time Passwort über E-Mail erlauben
+otp_auth_email_period = Zeitintervall bei E-Mail Authentifizierung
+otp_auth_totp_period = Zeitintervall bei Authentikatoren (nicht veränderbar)
+otp_auth_totp_period_info = {0} Sekunden
+otp_auth_logintries = Anzahl der erlaubten Fehlversuche (nicht veränderbar)
+otp_auth_logintries_info = {0} Versuche
+
+otp_tries = OTP Fehlversuche
+otp_tries_info = Erlaubte Fehlversuche werden im <a href="index.php?page=ycom/settings">Community &rsaquo; Einstellungen</a> definiert
+otp_last_try_time = OTP Letzter Versuch
+otp_config = OTP Config
+
+ycom_auth_config_passwordchange = Konfiguration - Passwort ändern
+ycom_auth_config_termsofuse = Konfiguration - Nutzungsbedingungen
+
+ycom_current_tokens = Aktuelle Tokens
+ycom_user_delete_all_tokens_link = Alle Tokens <a href="{0}">löschen</a>
+tokens_deleted = Tokens wurden gelöscht
+ycom_token_type = Type
+ycom_token = Token
+ycom_hash = Hash
+ycom_expiredate = Läuft ab am
+ycom_token_removed = Token wurde entfernt
+ycom_token_caption = Liste aller offenen Tokens
+ycom_docs_tokens = Tokens
+
+# ----- group (REDAXO 5: plugin ycom/group)
+
+ycom_group_title = Gruppen
+ycom_group_name = Gruppen
+ycom_group_yform_enter_name = Bitte geben Sie den Gruppennamen ein.
+rex_ycom_group = Community Group
+
+ycom_group_forallgroups = Für alle, egal welche Gruppe
+ycom_group_inallgroups = Muss in jeder Gruppe sein
+ycom_group_inonegroup = Muss in einer Gruppe sein
+ycom_group_nogroups = Hat keine Gruppen
+
+ycom_group_type = Gruppenrechte
+ycom_groups = Gruppen
+
+# ----- media_auth (REDAXO 5: plugin ycom/media_auth)
+ycom_media_auth_title = Medien
+ycom_media_auth_settings = Einstellungen
+ycom_auth_config_media_auth_rules = Regel wenn Medium nicht aufgerufen werden darf
+
+ycom_media_auth_failed_header_notfound = Header `Not Found` senden
+ycom_media_auth_failed_header_perm_denied = Header `Permission denied` senden
+ycom_media_auth_failed_redirect_login = Weiterleitung zu Login mit Redirect auf Medium (wenn nicht eingeloggt). Bei Fehler 401 Header (wenn eingeloggt)
+ycom_media_auth_failed_redirect_login_with_error_page = Weiterleitung zu Login mit Redirect auf Medium (wenn nicht eingeloggt). Bei Fehler Weiterleitung auf Error-Seite (wenn eingeloggt)
+ycom_media_auth_failed_header_redirect_notfound = Weiterleitung zu NotFound Article
+
+ycom_media_auth_settings_updated = Einstellungen wurden aktualisiert
+
+# ----- Keys, die im REDAXO-5-Addon fehlten
+# Die OTP-Templates gaben dort wörtlich "{ ycom_otp_setup_title }" aus, weil die Keys
+# in keiner lang-Datei definiert waren.
+ycom_otp_setup_title = Zwei-Faktor-Authentifizierung einrichten
+ycom_otp_setup_scan = QR-Code mit der Authenticator-App scannen
+ycom_otp_setup_uri = Oder diesen Schlüssel manuell eintragen
+ycom_otp_setup_code = Zur Bestätigung den angezeigten Code eingeben
+ycom_otp_verify_title = Zwei-Faktor-Authentifizierung
+ycom_otp_verify_code = Bestätigungscode
+ycom_otp_code_error = Der Code ist nicht korrekt. Bitte erneut versuchen.
+ycom_otp_code_error_blocked = Zu viele Fehlversuche. Bitte {0} Sekunden warten.
+ycom_otp_disabled = Die Zwei-Faktor-Authentifizierung wurde deaktiviert.
+ycom_otp_disable_info = Zwei-Faktor-Authentifizierung deaktivieren
+ycom_otp_email_check = Der Code wurde per E-Mail verschickt. Bitte den Posteingang prüfen.
+ycom_otp_email_resend_info = Code erneut senden
+ycom_otp_email_info = Code per E-Mail erhalten
+ycom_otp_totp_info = Authenticator-App verwenden (empfohlen)
+
+ycom_password_generate = Passwort erzeugen
+ycom_error_access_denied = Zugriff verweigert — es ist kein Benutzer angemeldet.
+
+# Media-Auth: in REDAXO 5 gab es diesen Regelzweig im Code, aber weder als Option noch als Text.
+ycom_media_auth_failed_redirect_login_wo_returnto = Weiterleitung zur Login-Seite (ohne Rücksprungziel)
+
+# Backend-Seiten, die diese Keys in REDAXO 5 unübersetzt anzeigten
+ycom_sessions = Sessions
+ycom_tokens = Tokens
+ycom_impersonate = Als dieser User anmelden
+ycom_impersonate_alert = Es wird eine Frontend-Session für diesen User angelegt. Fortfahren?
+ycom_session_could_not_been_added = Für diesen User konnte keine Session angelegt werden, da sein Status nicht aktiv ist.
+ycom_session_added_ready_to_login = Die Session wurde angelegt. <a href="{0}">Zum Frontend wechseln</a>
+ycom_user_session_delete_all_sessions_link = Alle Sessions löschen: <a href="{0}">löschen</a>
+ycom_user_delete_all_tokens_link = Alle Tokens löschen: <a href="{0}">löschen</a>
+sessions_deleted = {0} Sessions wurden gelöscht
+session_removed = Die Session wurde gelöscht
+tokens_deleted = {0} Tokens wurden gelöscht
+token_removed = Das Token wurde gelöscht
+session_caption = Aktive Sessions
+session_id = Session-Id
+ycom_user_id = User-Id
+ip = IP
+user_agent = Browser
+starttime = Beginn
+last_activity = Letzte Aktivität
+active_session = Aktuelle Session
+stay_logged_in = angemeldet bleiben
+ycom_token_caption = Offene Tokens
+ycom_token = Token
+ycom_hash = Hash
+ycom_token_type = Typ
+ycom_expiredate = Gültig bis
+ycom_user_delete_log_msg = Soll das Log wirklich gelöscht werden?
+ycom_user_log_user_ip = IP
+ycom_days = {0} Tage
+inactive = inaktiv
+no_permission_to_edit = Keine Berechtigung zum Bearbeiten
+ycom_auth_perm = Seitenzugriff
+ycom_auth_update_perm = Rechte speichern
+ycom_auth_perm_updated = Die Rechte wurden gespeichert
+ycom_auth_howtoread_configvalues = Die Werte in eckigen Klammern sind die Config-Keys, z. B. für YCom\Config::get('article_id_login').
+ycom_validate_password_policy_rules = Passwortregeln
+ycom_validate_password_policy_rules_error_message = Fehlermeldung bei Regelverstoß
+ycom_validate_password_policy_rules_script = Button zum Erzeugen eines Passworts anzeigen
+ycom_media_auth = Medienschutz
+ycom_media_auth_activate = Medienschutz
+ycom_media_auth_activate_notice = Ist der Medienschutz aktiv, prüft YCom bei jeder Auslieferung über den Media Manager die Rechte der Datei.
+ycom_media_auth_active = aktiv
+createdate = Erstellt am
+
+# ----- Externe Authentifizierung (SAML / OAuth2)
+# In REDAXO 5 standen hier {{ saml_auth }}, {{ oauth.error.code }} usw. im Code — Platzhalter, die
+# nur ein Übersetzungs-AddOn aufgelöst hätte. In keiner Lang-Datei war einer davon definiert.
+ycom_auth_saml_login = Mit SAML anmelden
+ycom_auth_oauth2_login = Mit OAuth2 anmelden
+
+ycom_auth_error_no_email = Der Anmeldedienst hat keine E-Mail-Adresse übermittelt. Ohne diese kann kein Zugang angelegt werden.
+ycom_auth_error_login_failed = Anmeldung nicht möglich. Für diese E-Mail-Adresse existiert ein Zugang, der nicht aktiv ist.
+ycom_auth_error_create_user = Der Zugang konnte nicht angelegt werden.
+ycom_auth_error_login_created_user = Der Zugang wurde angelegt, die Anmeldung ist aber fehlgeschlagen.
+
+ycom_auth_saml_error_acs = Die Antwort des Anmeldedienstes konnte nicht verarbeitet werden.
+ycom_auth_saml_error_sls = Die Abmeldung beim Anmeldedienst ist fehlgeschlagen.
+ycom_auth_saml_error_settings = Die SAML-Konfiguration ist unvollständig.
+ycom_auth_saml_sp_settings_hint = Diese Service-Provider-Daten im Identity Provider hinterlegen:
+
+ycom_auth_oauth2_error_no_code = Der Anmeldedienst hat keinen Autorisierungscode übermittelt.
+ycom_auth_oauth2_error_state = Die Anmeldung konnte nicht überprüft werden. Bitte erneut versuchen.
+ycom_auth_oauth2_error_code = Der Autorisierungscode konnte nicht eingelöst werden.
+ycom_auth_oauth2_error_access_expired = Der Zugriffstoken ist bereits abgelaufen.
+ycom_auth_oauth2_error_settings = Die OAuth2-Konfiguration ist unvollständig.
+ycom_auth_oauth2_redirect_uri_hint = Diese Redirect-URI beim OAuth2-Anbieter hinterlegen und in oauth2.php als redirectUri eintragen:

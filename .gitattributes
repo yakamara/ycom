@@ -1,0 +1,3 @@
+# Exclude development-only files from the distributed package (composer dist / git archive)
+/.gitattributes export-ignore
+/.gitignore     export-ignore
