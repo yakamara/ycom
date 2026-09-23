@@ -102,8 +102,7 @@ class rex_ycom_user_session
 
         rex_sql::factory()
             ->setTable(rex::getTable('ycom_user_session'))
-            ->setWhere('cookie_key IS NOT NULL')
-            ->setWhere(' (UNIX_TIMESTAMP(last_activity)   ) < :last', [
+            ->setWhere('cookie_key IS NOT NULL AND UNIX_TIMESTAMP(last_activity) < :last', [
                 ':last' => (time() - ((int) rex_ycom_config::get('auth_cookie_ttl', 7) * 24 * 60 * 60)),
             ])
             ->delete();
