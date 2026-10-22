@@ -4,7 +4,7 @@
         "onelogin/php-saml": "^3",
         "dergel/phpcas": "^1",
         "league/oauth2-client": "^2",
-        "spomky-labs/otphp": "^11.0"
+        "spomky-labs/otphp": "^11.4"
     },
     "replace": {
         "psr/container": "*",

@@ -63,6 +63,7 @@ ycom_auth_config_id_register = Registreringssida
 ycom_auth_config_id_password = Återställ lösenord
 
 ycom_auth_config_auth_cookie_ttl = Cookie-varaktighet för "förbli inloggad"
+ycom_day = 1 dag
 ycom_days = {0} dagar
 
 ycom_auth_config_extern = autentisering (SAML/CAS/OAUTH2)

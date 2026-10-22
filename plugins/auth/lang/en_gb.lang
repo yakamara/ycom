@@ -63,6 +63,7 @@ ycom_auth_config_id_register = Register page
 ycom_auth_config_id_password = Reset password
 
 ycom_auth_config_auth_cookie_ttl = Cookie lifespan for "remain signed in"
+ycom_day = 1 day
 ycom_days = {0} days
 
 ycom_auth_config_session_max_overall_duration = Session duration overall in seconds
