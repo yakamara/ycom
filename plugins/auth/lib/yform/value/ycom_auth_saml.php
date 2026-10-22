@@ -36,12 +36,7 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         rex_login::startSession();
 
         $settings = $this->auth_loadSettings();
-        // load external Metadata if possible
-        try {
-            $idpSettings = IdPMetadataParser::parseRemoteXML($settings['idp']['metadataUrl'] ?? $settings['idp']['entityId']); /** @phpstan-ignore-line */
-            $settings = IdPMetadataParser::injectIntoSettings($settings, $idpSettings);
-        } catch (Exception $e) {
-        }
+        $settings = $this->auth_injectIdpMetadata($settings);
 
         $returnTo = $this->auth_getReturnTo();
         $this->auth_FormOutput(rex_getUrl('', '', ['rex_ycom_auth_mode' => 'saml', 'rex_ycom_auth_func' => 'sso', 'returnTo' => $returnTo]));
@@ -196,6 +191,45 @@ class rex_yform_value_ycom_auth_saml extends rex_yform_value_abstract
         $Userdata = rex_ycom_auth::getSessionVar('SAML_Userdata', 'array', []);
 
         $this->auth_createOrUpdateYComUser($Userdata, $returnTo);
+    }
+
+    /**
+     * Load external Metadata if possible.
+     *
+     * The URL comes from the project's own config file, so there is nothing to validate here.
+     * Without a `metadataUrl` the entityId is used, which is a plain identifier in many setups -
+     * only try to fetch it when it actually looks like a URL.
+     *
+     * If the response is not valid XML - a HTML error page, a login redirect, an empty body -
+     * libxml would emit its complaints as PHP warnings from inside Utils::loadXML(), which end up
+     * in the page output. Collect them internally instead; the static configuration may well be
+     * complete on its own.
+     *
+     * @param array<string, mixed> $settings
+     *
+     * @return array<string, mixed>
+     */
+    private function auth_injectIdpMetadata(array $settings): array
+    {
+        /** @var string $url */
+        $url = $settings['idp']['metadataUrl'] ?? $settings['idp']['entityId'] ?? '';
+
+        if (1 !== preg_match('@^https?://@i', $url)) {
+            return $settings;
+        }
+
+        $useInternalErrors = libxml_use_internal_errors(true);
+
+        try {
+            $idpSettings = IdPMetadataParser::parseRemoteXML($url);
+
+            return IdPMetadataParser::injectIntoSettings($settings, $idpSettings);
+        } catch (Exception $e) {
+            return $settings;
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($useInternalErrors);
+        }
     }
 
     public function getDescription(): string
