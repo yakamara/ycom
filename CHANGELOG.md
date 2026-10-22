@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 4.4.5 - in Arbeit
+-------------------------
+
+* Anmeldung über das „eingeloggt bleiben“-Cookie setzt nun auch `last_login_time`. Bisher blieb der letzte Login stehen, obwohl die Anmeldung im Log als Login geführt wurde – z. B. bei SAML/OAuth2/CAS, die immer mit „eingeloggt bleiben“ anmelden.
+* Cookie-Laufzeit für „eingeloggt bleiben“ kann nun auch auf 1 Tag gesetzt werden
+
+
 Version 4.4.4 - 17.04.2026
 --------------------------
 
