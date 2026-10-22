@@ -346,6 +346,9 @@ class rex_ycom_auth
                 /** @var rex_ycom_user $me */
                 $me = $loginUsers[0];
 
+                // a login via cookie starts a new session and is logged as login, so it counts as login
+                $me->setValue('last_login_time', rex_sql::datetime(time()));
+
                 rex_ycom_user_session::getInstance()->storeCurrentSession($me, $cookieKey);
 
                 rex_ycom_log::log(

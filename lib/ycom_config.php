@@ -12,7 +12,7 @@ class rex_ycom_config
             return self::$config;
         }
 
-        self::$config = rex_plugin::get('ycom', 'auth')->getConfig() ?? [];
+        self::$config = rex_plugin::get('ycom', 'auth')->getConfig();
         self::$config = rex_extension::registerPoint(new rex_extension_point('YCOM_CONFIG', self::$config));
 
         return self::$config;

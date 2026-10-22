@@ -32,13 +32,15 @@ final class rex_ycom_otp_method_totp implements rex_ycom_otp_method_interface
     public function getProvisioningUri(rex_ycom_user $user): string
     {
         // create a uri with a random secret
-        $otp = TOTP::create(null, self::getPeriod());
+        $otp = TOTP::generate();
 
         // the label rendered in "Google Authenticator" or similar app
         $label = $user->getValue('login') . '@' . rex::getServerName() . ' (' . $_SERVER['HTTP_HOST'] . ')';
         $label = str_replace(':', '_', $label); // colon is forbidden
-        $otp->setLabel($label);
-        $otp->setIssuer(str_replace(':', '_', $user->getValue('login')));
+        $otp = $otp
+            ->withParameter('period', self::getPeriod())
+            ->withLabel($label)
+            ->withIssuer(str_replace(':', '_', $user->getValue('login')));
 
         return $otp->getProvisioningUri();
     }

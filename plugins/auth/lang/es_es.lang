@@ -63,6 +63,7 @@ ycom_auth_config_id_register = Regístrese página
 ycom_auth_config_id_password = Restablecer contraseña
 
 ycom_auth_config_auth_cookie_ttl = Duración de la cookie para `permanecer conectado`
+ycom_day = 1 día
 ycom_days = {0} días
 
 ycom_auth_config_extern = Autenticación (SAML/CAS/OAUTH2)
