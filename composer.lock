@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46fe771c869f70e7404bf2429d77facb",
+    "content-hash": "aef9ed84d506e4b91e34549032e61fd4",
     "packages": [
         {
             "name": "dergel/phpcas",

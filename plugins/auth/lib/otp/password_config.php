@@ -69,7 +69,7 @@ final class rex_ycom_otp_password_config
         $method = new rex_ycom_otp_method_totp();
 
         $default = new self($user);
-        $default->method = $method instanceof rex_ycom_otp_method_email ? 'email' : 'totp';
+        $default->method = 'totp';
         $default->provisioningUri = $method->getProvisioningUri($user);
 
         return $default;

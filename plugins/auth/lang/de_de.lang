@@ -69,6 +69,7 @@ ycom_auth_config_extern = Authentifizierung (SAML/CAS/OAUTH2)
 
 ycom_auth_howtoread_configvalues = Werte sind über: rex_ycom_config::get('article_id_login', null); auslesbar
 
+ycom_day = 1 Tag
 ycom_days = {0} Tage
 ycom_user_id = User-ID
 ycom_current_sessions = Aktuelle Sessions

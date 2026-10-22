@@ -69,6 +69,7 @@ $sel_authcookiettl->setAttribute('class', 'form-control selectpicker');
 $sel_authcookiettl->setSelected($this->getConfig('auth_cookie_ttl'));
 
 $sel_authcookiettl->addOption($this->i18n('ycom_days', 0) . ' (' . $this->i18n('inactive') . ')', '0');
+$sel_authcookiettl->addOption($this->i18n('ycom_day'), '1');
 $sel_authcookiettl->addOption($this->i18n('ycom_days', 7), '7');
 $sel_authcookiettl->addOption($this->i18n('ycom_days', 14), '14');
 $sel_authcookiettl->addOption($this->i18n('ycom_days', 30), '30');
