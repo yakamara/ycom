@@ -24,7 +24,7 @@ rex_sql_table::get(rex::getTable('article'))
 rex_sql_table::get(rex::getTable('ycom_user_session'))
     ->drop();
 
-if (rex_sql_table::exists(rex::getTable('ycom_user_token'))) {
+if (rex_sql_table::get(rex::getTable('ycom_user_token'))->exists()) {
     rex_sql_table::get(rex::getTable('ycom_user_token'))->drop();
 }
 
