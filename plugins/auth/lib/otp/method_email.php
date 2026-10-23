@@ -42,7 +42,7 @@ final class rex_ycom_otp_method_email implements rex_ycom_otp_method_interface
 
     public static function getPeriod(): int
     {
-        return (int) rex_addon::get('2factor_auth')->getConfig('email_period', 300);
+        return (int) rex_ycom_config::get('otp_auth_email_period', 300);
     }
 
     public static function getloginTries(): int
