@@ -13,8 +13,11 @@ class rex_ycom_media_auth extends rex_yform_manager_dataset
     public static function checkPerm(rex_media_manager $media_manager): bool
     {
         // check if original media_path
+        // effects like image_format change the media filename, so use the filename of the source path
         $media = $media_manager->getMedia();
-        if (rex_path::media($media->getMediaFilename()) != $media_manager->getMedia()->getMediaPath()) {
+        $mediaPath = (string) $media->getMediaPath();
+        $filename = rex_path::basename($mediaPath);
+        if (rex_path::media($filename) != $mediaPath) {
             return true;
         }
 
@@ -24,7 +27,7 @@ class rex_ycom_media_auth extends rex_yform_manager_dataset
         }
 
         // is rex_media
-        $rex_media = rex_media::get($media->getMediaFilename());
+        $rex_media = rex_media::get($filename);
         if (!$rex_media) {
             return false;
         }
