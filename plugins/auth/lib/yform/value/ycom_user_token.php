@@ -26,6 +26,10 @@ class rex_yform_value_ycom_user_token extends rex_yform_value_abstract
         switch ($this->ycom_user_token_action) {
             case 'create':
                 // Wenn actions durchgelaufen sind, dann Token erstellen
+                $duration = (int) $this->getElement(5);
+                if ($duration > 0) {
+                    $this->ycom_user_token_duration = $duration;
+                }
                 break;
             case 'validate':
                 if (!$this->params['send']) {
@@ -112,7 +116,7 @@ class rex_yform_value_ycom_user_token extends rex_yform_value_abstract
 
     public function getDescription(): string
     {
-        return 'ycom_user_token|create|[type]|[email_template]
+        return 'ycom_user_token|create|[type]|[email_template]|[duration in seconds, default 86400]
                 ycom_user_token|validate|[type]|[login/only_update]|[error_message]';
     }
 }

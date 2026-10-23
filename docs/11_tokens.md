@@ -2,6 +2,12 @@
 
 Über Tokens werden E-Mail und Bestätgigungen geprüft, wie z.B. bei der Registrierung oder beim Passwort zurücksetzen. Man kann aber auch bestimmte Userinformationen sich nochmal über eine E-Mail überprüfen lassen und einen Direktlogin erzeugen. Ein Token ist für eine Aktion gültig und wird nach der Aktion gelöscht. 
 
+Ein Token ist standardmäßig 24 Stunden gültig. Die Gültigkeit lässt sich beim Erzeugen in Sekunden als weiterer Parameter angeben, z. B. eine Stunde:
+
+```php
+ycom_user_token|token|create|login|email|3600
+```
+
 ## A) Beispiel: Direktlogin
 
 Man möchte auf der Webseite ein Login über eine E-Mail-Adresse ermöglichen. Dazu wird ein Token generiert, das an die E-Mail-Adresse gesendet wird. Der Benutzer kann sich dann über den Link direkt einloggen.
