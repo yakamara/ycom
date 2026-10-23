@@ -7,6 +7,9 @@ Version 4.4.5 - in Arbeit
 * Anmeldung über das „eingeloggt bleiben“-Cookie setzt nun auch `last_login_time`. Bisher blieb der letzte Login stehen, obwohl die Anmeldung im Log als Login geführt wurde – z. B. bei SAML/OAuth2/CAS, die immer mit „eingeloggt bleiben“ anmelden.
 * Cookie-Laufzeit für „eingeloggt bleiben“ kann nun auch auf 1 Tag gesetzt werden
 * Update importiert das Tableset der neuen Version. Bisher wurde das der installierten (alten) Version gelesen, dadurch blieb nach dem Update auf 4.4.4 im Statusfeld `callable::rex_ycom_user::getStatusOptions` stehen und jedes Speichern eines Users leerte dessen Status (#538)
+* Beim Aufräumen abgelaufener „eingeloggt bleiben“-Sessions wurden auch normale Sessions gelöscht. Mit Cookie-Laufzeit 0 war man dadurch direkt nach dem Login wieder abgemeldet (#549)
+* Deinstallation brach mit „Non-static method rex_sql_table::exists() cannot be called statically“ ab (#543)
+* Composer aktualisiert. Security Issues in spomky-labs/otphp (11.4.3), guzzlehttp/guzzle (7.15.2) und guzzlehttp/psr7 (2.13.0)
 
 
 Version 4.4.4 - 17.04.2026
