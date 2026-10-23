@@ -44,7 +44,12 @@ if (rex::isFrontend()) {
     $attributes['autocomplete'] = 'new-password';
 }
 
-$attributes = $this->getAttributeElements($attributes, ['autocomplete', 'pattern', 'required', 'disabled', 'readonly']);
+// minlength, maxlength and passwordrules, so password managers generate matching passwords
+if (count($rules) > 0) {
+    $attributes = array_merge($attributes, (new rex_password_policy($rules))->getHtmlAttributes());
+}
+
+$attributes = $this->getAttributeElements($attributes, ['autocomplete', 'pattern', 'required', 'disabled', 'readonly', 'minlength', 'maxlength', 'passwordrules']);
 
 $span = '';
 $input_group_start = '';
