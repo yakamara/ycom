@@ -21,6 +21,8 @@ class rex_ycom_stay_logged_in_test extends TestCase
 
     protected function tearDown(): void
     {
+        rex_ycom_auth::$me = null;
+
         if (null !== $this->user) {
             rex_sql::factory()->setQuery('DELETE FROM ' . rex::getTable('ycom_user_session') . ' WHERE user_id = ?', [$this->user->getId()]);
             $this->user->delete();

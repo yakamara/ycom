@@ -12,6 +12,7 @@ class rex_ycom_user_token_duration_test extends TestCase
     protected function setUp(): void
     {
         $this->email = 'token-duration-' . bin2hex(random_bytes(4)) . '@example.org';
+        rex_ycom_auth::$me = null;
     }
 
     protected function tearDown(): void
