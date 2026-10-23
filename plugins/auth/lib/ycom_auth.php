@@ -251,9 +251,9 @@ class rex_ycom_auth
                     // session fixation
                     rex_login::regenerateSessionId();
 
-                    // stay logged in if selected
+                    // stay logged in if selected and not deactivated (cookie ttl 0)
                     $cookieKey = null;
-                    if ($params['loginStay']) {
+                    if ($params['loginStay'] && (int) rex_ycom_config::get('auth_cookie_ttl', 7) > 0) {
                         $cookieKey = base64_encode(random_bytes(64));
                         self::setStayLoggedInCookie($cookieKey);
                     }

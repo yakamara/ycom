@@ -43,7 +43,7 @@ final class rex_ycom_otp_password
      */
     public function enforce($enforce): void
     {
-        rex_config::set('ycom', 'otp_auth_enforce', $enforce);
+        rex_plugin::get('ycom', 'auth')->setConfig('otp_auth_enforce', $enforce);
     }
 
     /**
@@ -51,7 +51,7 @@ final class rex_ycom_otp_password
      */
     public function isEnforced()
     {
-        return rex_config::get('ycom', 'otp_auth_enforce', self::ENFORCED_DISABLED);
+        return rex_ycom_config::get('otp_auth_enforce', self::ENFORCED_DISABLED);
     }
 
     /**
@@ -59,12 +59,12 @@ final class rex_ycom_otp_password
      */
     public function getAuthOption()
     {
-        return rex_config::get('ycom', 'otp_auth_option', self::OPTION_ALL);
+        return rex_ycom_config::get('otp_auth_option', self::OPTION_ALL);
     }
 
     public function setAuthOption(string $option): void
     {
-        rex_config::set('ycom', 'otp_auth_option', $option);
+        rex_plugin::get('ycom', 'auth')->setConfig('otp_auth_option', $option);
     }
 
     /**
