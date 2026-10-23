@@ -10,6 +10,11 @@ Version 4.4.5 - in Arbeit
 * Beim Aufräumen abgelaufener „eingeloggt bleiben“-Sessions wurden auch normale Sessions gelöscht. Mit Cookie-Laufzeit 0 war man dadurch direkt nach dem Login wieder abgemeldet (#549)
 * Deinstallation brach mit „Non-static method rex_sql_table::exists() cannot be called statically“ ab (#543)
 * Composer aktualisiert. Security Issues in spomky-labs/otphp (11.4.3), guzzlehttp/guzzle (7.15.2) und guzzlehttp/psr7 (2.13.0)
+* Media-Auth: Geschützte Bilder waren über Media-Manager-Typen mit Formatumwandlung (z. B. nach WEBP) ohne Login abrufbar (#499). Danke gharlan und isospin
+* „Eingeloggt bleiben“ wird bei Cookie-Laufzeit 0 ignoriert. Bisher war man damit, und bei jedem SAML/OAuth2/CAS-Login, direkt wieder abgemeldet (#527)
+* OTP: Die Einstellungen „OTP-Option“ und „Gültigkeit E-Mail-Code“ wirkten nicht, weil sie an anderer Stelle gelesen wurden (#535, #536)
+* `ycom_auth_password` gibt die Passwortregeln als `minlength`, `maxlength` und `passwordrules` aus, damit Passwort-Manager passende Passwörter erzeugen (#444)
+* `ycom_user_token`: Gültigkeit beim Erzeugen in Sekunden einstellbar, z. B. `ycom_user_token|token|create|login|email|3600` (#522)
 
 
 Version 4.4.4 - 17.04.2026
