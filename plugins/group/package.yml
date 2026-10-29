@@ -1,6 +1,7 @@
 package: ycom/group
 version: '4.4.2'
 author: Yakamara Media GmbH & Co. KG
+license: MIT License
 title: 'Group'
 nav_icon: fa-minus
 description: 'translate:ycom_group_plugin'
